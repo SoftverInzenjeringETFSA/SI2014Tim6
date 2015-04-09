@@ -7,5 +7,3 @@
 * Halilović Almin
 * Hodžić Elmir
 * Jakić Irma
-
-bla
