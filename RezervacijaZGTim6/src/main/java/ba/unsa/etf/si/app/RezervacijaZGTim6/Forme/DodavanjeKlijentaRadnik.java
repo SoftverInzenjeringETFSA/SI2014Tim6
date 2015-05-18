@@ -48,6 +48,7 @@ public class DodavanjeKlijentaRadnik {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -74,41 +75,27 @@ public class DodavanjeKlijentaRadnik {
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(134)
-					.addComponent(lblDodavanjeKlijenta)
-					.addContainerGap(144, Short.MAX_VALUE))
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(btnDodajKlijenta))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap(75, Short.MAX_VALUE)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_1, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-								.addComponent(label)
-								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-									.addGap(76)
-									.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-									.addGap(22)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-											.addGroup(groupLayout.createSequentialGroup()
-												.addGap(35)
-												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-											.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-												.addGap(35)
-												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(35)
-											.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))))))
-					.addGap(61))
+						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblDodavanjeKlijenta, Alignment.TRAILING)
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addContainerGap(67, Short.MAX_VALUE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addComponent(label_1)
+									.addComponent(label)
+									.addComponent(label_2))
+								.addGap(22)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+									.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+					.addContainerGap(148, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -127,11 +114,11 @@ public class DodavanjeKlijentaRadnik {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_2))
-					.addGap(7)
-					.addComponent(checkBox)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(checkBox)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnDodajKlijenta)
-					.addGap(59))
+					.addGap(64))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}

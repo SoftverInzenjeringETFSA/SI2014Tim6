@@ -62,6 +62,7 @@ public class Izvjestaji {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 624, 427);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -90,7 +91,7 @@ public class Izvjestaji {
 			}
 		});
 		
-		JButton btnGenerisi = new JButton("Generisi");
+		JButton btnGenerisi = new JButton("Generiši");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -148,7 +149,7 @@ public class Izvjestaji {
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
 		
-		JButton btnIzvjestaji = new JButton("Izvjestaji");
+		JButton btnIzvjestaji = new JButton("Izvještaji");
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
 		frame.getContentPane().setLayout(groupLayout);
