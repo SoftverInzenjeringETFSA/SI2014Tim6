@@ -54,6 +54,7 @@ public class OkupiranSto{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 451, 303);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -61,18 +62,22 @@ public class OkupiranSto{
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblKlijentKlijentic = new JLabel("Klijent Klijentic");
+		lblKlijentKlijentic.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblTermin = new JLabel("Zauzet od:");
 		lblTermin.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel label = new JLabel("15:00 12/12/2012");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.ORANGE);
 		
-		JLabel lblDoIstekaRezervacije = new JLabel("Proteklo vremena");
+		JLabel lblDoIstekaRezervacije = new JLabel("Proteklo vremena:");
+		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
 		JButton btnOtkaiReyervaciju = new JButton("Oslobo\u0111en sto");
+		btnOtkaiReyervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnOtkaiReyervaciju.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -93,25 +98,28 @@ public class OkupiranSto{
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblTermin)
-						.addComponent(lblKlijent))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblKlijentKlijentic)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(262, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblTermin)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblKlijent)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblKlijentKlijentic)))
+					.addContainerGap(241, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(118, Short.MAX_VALUE)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
-					.addGap(113))
+					.addContainerGap(131, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 58, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnOtkaiReyervaciju)
+							.addGap(45))
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
+					.addGap(100))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(172, Short.MAX_VALUE)
+					.addContainerGap(178, Short.MAX_VALUE)
 					.addComponent(lblDoIstekaRezervacije)
-					.addGap(163))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(165, Short.MAX_VALUE)
-					.addComponent(btnOtkaiReyervaciju)
-					.addGap(151))
+					.addGap(142))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -124,13 +132,13 @@ public class OkupiranSto{
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTermin, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
-					.addGap(18)
+					.addGap(34)
 					.addComponent(lblDoIstekaRezervacije)
-					.addGap(11)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(11)
 					.addComponent(btnOtkaiReyervaciju)
-					.addContainerGap(74, Short.MAX_VALUE))
+					.addContainerGap(63, Short.MAX_VALUE))
 		);
 		
 		JLabel lbldh = new JLabel("1d : 12h : 30m : 45s");

@@ -62,6 +62,7 @@ public class RadniciDodavanje {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 624, 427);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -72,65 +73,69 @@ public class RadniciDodavanje {
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_3.setColumns(10);
 		
 		JLabel lblIme = new JLabel("Ime:");
+		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
+		lblPrezime.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton btnSpasi = new JButton("Spasi ");
+		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewLabel)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addComponent(lblNewLabel))
+							.addComponent(lblPassword)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(38)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblPassword)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-										.addComponent(lblIme)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-									.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-										.addComponent(lblPrezime)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-									.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-										.addComponent(lblUsername)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
-								.addComponent(btnSpasi))))
-					.addGap(23))
+							.addComponent(lblIme)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblPrezime)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblUsername)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnSpasi))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(22)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(lblNewLabel)
-					.addGap(49)
+					.addGap(96)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblIme))
@@ -140,15 +145,15 @@ public class RadniciDodavanje {
 						.addComponent(lblPrezime))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUsername))
+						.addComponent(lblUsername)
+						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPassword))
 					.addGap(18)
 					.addComponent(btnSpasi)
-					.addContainerGap(154, Short.MAX_VALUE))
+					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		

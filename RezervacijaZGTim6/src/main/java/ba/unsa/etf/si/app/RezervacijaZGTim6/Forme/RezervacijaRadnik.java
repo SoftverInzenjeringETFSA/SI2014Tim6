@@ -60,6 +60,7 @@ public class RezervacijaRadnik {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 624, 427);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -72,9 +73,11 @@ public class RezervacijaRadnik {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel lblPromjeniDan = new JLabel("Promjeni dan:");
+		JLabel lblPromjeniDan = new JLabel("Promijeni dan:");
+		lblPromjeniDan.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JList list = new JList();
+		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -109,42 +112,55 @@ public class RezervacijaRadnik {
 		);
 		
 		JButton btnS1 = new JButton("2");
+		btnS1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS1.setBackground(new Color(173, 255, 47));
 		
 		JButton btnS2 = new JButton("2");
+		btnS2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS2.setBackground(new Color(173, 255, 47));
 		
 		JButton btnS3 = new JButton("4");
+		btnS3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS3.setBackground(Color.ORANGE);
 		
 		JButton btnS4 = new JButton("2");
+		btnS4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS4.setBackground(new Color(173, 255, 47));
 		
 		JButton btnS5 = new JButton("4");
+		btnS5.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS5.setBackground(new Color(255, 0, 0));
 		
 		JButton btnS6 = new JButton("6");
+		btnS6.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS6.setBackground(Color.ORANGE);
 		
 		JButton btnS7 = new JButton("2");
+		btnS7.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS7.setBackground(new Color(173, 255, 47));
 		
 		JButton btnS8 = new JButton("2");
+		btnS8.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS8.setBackground(Color.RED);
 		
 		JButton btnS11 = new JButton("6");
+		btnS11.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS11.setBackground(Color.ORANGE);
 		
 		JButton btnS9 = new JButton("2");
+		btnS9.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS9.setBackground(Color.RED);
 		
 		JButton btnS10 = new JButton("2");
+		btnS10.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS10.setBackground(Color.ORANGE);
 		
 		JButton btnS12 = new JButton("6");
+		btnS12.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS12.setBackground(Color.RED);
 		
 		JButton btnS13 = new JButton("6");
+		btnS13.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS13.setBackground(Color.ORANGE);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
