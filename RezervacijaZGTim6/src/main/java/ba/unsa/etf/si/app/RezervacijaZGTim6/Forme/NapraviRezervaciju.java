@@ -63,6 +63,7 @@ public class NapraviRezervaciju {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 624, 427);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -85,41 +86,46 @@ public class NapraviRezervaciju {
 		textField_2.setColumns(10);
 		
 		JLabel lblH = new JLabel("h :");
+		lblH.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblMin = new JLabel("min");
+		lblMin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JButton btnDodajRezervaciju = new JButton("Dodaj Rezervaciju");
+		JButton btnDodajRezervaciju = new JButton("Dodaj rezervaciju");
+		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JButton btnDodajKlijenta = new JButton("Dodaj klijenta");
+		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnDodajKlijenta.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGap(5)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(lblVrijeme)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(lblH)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblNewLabel)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblVrijeme)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-										.addGap(5)
-										.addComponent(lblH)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(lblMin, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-									.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-								.addGap(274))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(btnDodajRezervaciju)
-								.addPreferredGap(ComponentPlacement.RELATED)))
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 454, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblMin, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblNewLabel)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnDodajKlijenta, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+								.addComponent(panel_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(btnDodajRezervaciju))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -135,13 +141,15 @@ public class NapraviRezervaciju {
 						.addComponent(lblH)
 						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblMin))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+					.addGap(23)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnDodajKlijenta))
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
 					.addComponent(btnDodajRezervaciju)
-					.addContainerGap(27, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		table = new JTable();
@@ -163,67 +171,55 @@ public class NapraviRezervaciju {
 		));
 		
 		JLabel lblIme = new JLabel("Ime: ");
+		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
 		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
+		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JButton btnPretrazi = new JButton("Pretrazi");
-		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
-		
-		JLabel label = new JLabel("Dodaj klijenta");
+		JButton btnPretrazi = new JButton("Pretraži");
+		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(315)
-					.addComponent(button, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(label, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-					.addGap(31))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 454, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(20, Short.MAX_VALUE))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(chckbxVipKlijenti)
-					.addPreferredGap(ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-					.addComponent(btnPretrazi)
-					.addGap(23))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblIme)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_1)
-					.addContainerGap(289, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(165)
+							.addComponent(lblNewLabel_1))
+						.addComponent(table, GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblIme)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel_1.createSequentialGroup()
+								.addGap(6)
+								.addComponent(chckbxVipKlijenti)
+								.addGap(6)
+								.addComponent(btnPretrazi))))
+					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblIme, Alignment.TRAILING)
-								.addComponent(lblNewLabel_1, Alignment.TRAILING))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(chckbxVipKlijenti))
+				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+					.addContainerGap(25, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblIme)
+						.addComponent(chckbxVipKlijenti)
 						.addComponent(btnPretrazi))
+					.addGap(18)
+					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(null);

@@ -45,6 +45,7 @@ public class RezervisanSto {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 451, 303);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -52,45 +53,48 @@ public class RezervisanSto {
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblKlijentKlijentic = new JLabel("Klijent Klijentic");
+		lblKlijentKlijentic.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblTermin = new JLabel("Termin:");
 		lblTermin.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel label = new JLabel("15:00 12/12/2012");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 0, 0));
 		
-		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije");
+		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije:");
+		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
 		JButton btnOtkaiReyervaciju = new JButton("Otka\u017Ei rezervaciju");
+		btnOtkaiReyervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblTermin)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblKlijent)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblKlijentKlijentic)))
-					.addContainerGap(138, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(118, Short.MAX_VALUE)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
-					.addGap(113))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(172, Short.MAX_VALUE)
-					.addComponent(lblDoIstekaRezervacije)
-					.addGap(163))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(165, Short.MAX_VALUE)
-					.addComponent(btnOtkaiReyervaciju)
-					.addGap(151))
+					.addContainerGap(218, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(123, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnOtkaiReyervaciju)
+							.addGap(38))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblDoIstekaRezervacije)
+							.addGap(37)))
+					.addGap(118))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -103,31 +107,31 @@ public class RezervisanSto {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTermin, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
-					.addGap(18)
+					.addGap(34)
 					.addComponent(lblDoIstekaRezervacije)
 					.addGap(11)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnOtkaiReyervaciju)
-					.addContainerGap(74, Short.MAX_VALUE))
+					.addContainerGap(64, Short.MAX_VALUE))
 		);
 		
 		JLabel lbldh = new JLabel("1d : 12h : 30m : 45s");
 		lbldh.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(22, Short.MAX_VALUE)
 					.addComponent(lbldh)
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addContainerGap(16, Short.MAX_VALUE)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(16)
 					.addComponent(lbldh)
-					.addContainerGap())
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		frame.getContentPane().setLayout(groupLayout);
