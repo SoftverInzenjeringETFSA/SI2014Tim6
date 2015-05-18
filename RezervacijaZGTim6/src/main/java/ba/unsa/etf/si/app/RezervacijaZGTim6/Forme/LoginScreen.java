@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 import java.awt.Font;
 
 
@@ -41,6 +44,7 @@ public class LoginScreen {
 	public LoginScreen() {
 		initialize();
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.

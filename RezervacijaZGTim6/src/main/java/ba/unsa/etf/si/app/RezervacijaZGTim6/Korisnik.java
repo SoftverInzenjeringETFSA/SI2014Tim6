@@ -16,6 +16,13 @@ public class Korisnik implements Serializable
 	
 	//Konstruktori
 	public Korisnik() {}
+	
+	public Korisnik(String user, String pass) throws Exception 
+	{
+		setHashSifre(Password.getSaltedHash(pass));
+		setKorisnickoIme(user);
+	}
+	
 	public Korisnik(long idradnika, String korisnickoime, String hashsifre, Integer stepenpristupa) 
 	{
 		setIdRadnika(idradnika);
