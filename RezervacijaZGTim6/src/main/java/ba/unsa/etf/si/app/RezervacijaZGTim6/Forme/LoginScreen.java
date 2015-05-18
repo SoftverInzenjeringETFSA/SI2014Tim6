@@ -51,6 +51,7 @@ public class LoginScreen {
 	 */
 	private void initialize() {
 		frmPrijavaKorisnika = new JFrame();
+		frmPrijavaKorisnika.setResizable(false);
 		frmPrijavaKorisnika.setTitle("Prijava korisnika");
 		frmPrijavaKorisnika.setBounds(100, 100, 515, 356);
 		frmPrijavaKorisnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +68,7 @@ public class LoginScreen {
 		txtUsername.setText("username");
 		txtUsername.setColumns(10);
 		
-		JLabel lblUZmajevomGnijezdu = new JLabel("U ZMAJEVOM GNIJEZDU");
+		JLabel lblUZmajevomGnijezdu = new JLabel("ZMAJEVO GNIJEZDO");
 		lblUZmajevomGnijezdu.setFont(new Font("Castellar", Font.BOLD, 22));
 		GroupLayout groupLayout = new GroupLayout(frmPrijavaKorisnika.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -75,24 +76,24 @@ public class LoginScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(83)
-							.addComponent(lblUZmajevomGnijezdu, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(171)
 							.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(125)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(txtUsername, 219, 219, 219)
-								.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(83, Short.MAX_VALUE))
+								.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(112)
+							.addComponent(lblUZmajevomGnijezdu)))
+					.addContainerGap(121, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(24)
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(38)
 					.addComponent(lblUZmajevomGnijezdu)
-					.addGap(63)
+					.addGap(49)
 					.addComponent(txtUsername, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
