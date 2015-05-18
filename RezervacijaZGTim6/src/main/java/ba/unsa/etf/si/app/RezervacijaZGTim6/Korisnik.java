@@ -2,6 +2,10 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+
 public class Korisnik implements Serializable
 {
 	private static final long serialVersionUID = -2723446500566528020L;
@@ -12,9 +16,8 @@ public class Korisnik implements Serializable
 	
 	//Konstruktori
 	public Korisnik() {}
-	public Korisnik(long id, long idradnika, String korisnickoime, String hashsifre, Integer stepenpristupa) 
+	public Korisnik(long idradnika, String korisnickoime, String hashsifre, Integer stepenpristupa) 
 	{
-		setID(id);
 		setIdRadnika(idradnika);
 		setHashSifre(hashsifre);
 		setKorisnickoIme(korisnickoime);
@@ -35,5 +38,35 @@ public class Korisnik implements Serializable
 	public void setHashSifre(String hashSifre) {  HashSifre = hashSifre;  }
 	public void setKorisnickoIme(String korisnickoIme) {  KorisnickoIme = korisnickoIme;  }
 	public void setStepenPristupa(Integer stepenPristupa) {  StepenPristupa = stepenPristupa;  }
-
+	
+	//DB operations
+	public void dodajKorisnika() throws Exception 
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		Long id = (Long) session.save(this);
+		setID(id);
+		t.commit();
+		session.close();
+	}
+		
+	public void ocitajKorisnka(long id) throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Korisnik temp = (Korisnik) session.get(Korisnik.class, id);
+		ID = temp.ID;
+		IdRadnika = temp.IdRadnika;
+		KorisnickoIme = temp.KorisnickoIme;
+		HashSifre = temp.KorisnickoIme;
+		StepenPristupa = temp.StepenPristupa;
+		session.close();
+	}
+	@Override
+	public String toString() {
+		return "Korisnik [ID=" + ID + ", IdRadnika=" + IdRadnika
+				+ ", KorisnickoIme=" + KorisnickoIme + ", HashSifre="
+				+ HashSifre + ", StepenPristupa=" + StepenPristupa + "]";
+	}
+	
 }

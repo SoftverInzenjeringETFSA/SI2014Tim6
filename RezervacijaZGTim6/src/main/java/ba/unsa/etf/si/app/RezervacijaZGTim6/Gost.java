@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 public class Gost implements Serializable 
 {
 	private static final long serialVersionUID = -2723446500566528020L;
@@ -14,10 +17,10 @@ public class Gost implements Serializable
 	
 	//Konstruktor bez parametara potreban zbog Serializable
 	public Gost() {}
-	public Gost(long id,String ime,String prezime,String brojTelefona) throws Exception 
+	
+	public Gost(String ime,String prezime,String brojTelefona) throws Exception 
 	{
 		setBrojTelefona(brojTelefona);
-		setID(id);
 		setIme(ime);
 		setPrezime(prezime);
 	}
@@ -41,4 +44,34 @@ public class Gost implements Serializable
 		BrojTelefona = brojTelefona;  
 	}
 	public void setVIP(Boolean vIP) {  VIP = vIP;  }	
+	
+	//DB operations
+	public void dodajGosta() throws Exception 
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		Long id = (Long) session.save(this);
+		setID(id);
+		t.commit();
+		session.close();
+	}
+	
+	public void ocitajGosta(long id) throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Gost temp = (Gost) session.get(Gost.class, id);
+		ID = temp.ID;
+		Ime = temp.Ime;
+		Prezime = temp.Prezime; 
+		BrojTelefona = temp.BrojTelefona;
+		session.close();
+	}
+	
+	@Override
+	public String toString() {
+		return "Gost [ID=" + ID + ", Ime=" + Ime + ", Prezime=" + Prezime
+				+ ", BrojTelefona=" + BrojTelefona + ", VIP=" + VIP + "]";
+	}
+	
 }

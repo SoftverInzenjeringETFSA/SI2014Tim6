@@ -1,7 +1,10 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class Rezervacija implements Serializable
 {
@@ -48,4 +51,39 @@ public class Rezervacija implements Serializable
 		if(trajanjeRezervacijeMinute > 1440) throw new Exception("Nemoguce izvrsiti rezervaciju za vise od 24 sata!");
 		TrajanjeRezervacijeMinute = trajanjeRezervacijeMinute;  
 	}
+	
+	//DB operations
+	public void dodajRezervaciju() throws Exception 
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		Long id = (Long) session.save(this);
+		this.setID(id);
+		t.commit();
+		session.close();
+	}
+	
+	public void ocitajRezervaciju(long id) throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Rezervacija temp = (Rezervacija) session.get(Rezervacija.class, id);
+		ID = temp.ID;
+		IdGosta = temp.IdGosta;
+		IdRadnika = temp.IdRadnika;
+		BrojGostiju = temp.BrojGostiju;
+		StatusRezervacije = temp.StatusRezervacije;
+		DatumIVrijemeRezervacije = temp.DatumIVrijemeRezervacije;
+		TrajanjeRezervacijeMinute = temp.TrajanjeRezervacijeMinute;
+	}
+	@Override
+	public String toString() {
+		return "Rezervacija [ID=" + ID + ", IdGosta=" + IdGosta
+				+ ", IdRadnika=" + IdRadnika + ", BrojGostiju=" + BrojGostiju
+				+ ", StatusRezervacije=" + StatusRezervacije
+				+ ", DatumIVrijemeRezervacije=" + DatumIVrijemeRezervacije
+				+ ", TrajanjeRezervacijeMinute=" + TrajanjeRezervacijeMinute
+				+ "]";
+	}
+	
 }

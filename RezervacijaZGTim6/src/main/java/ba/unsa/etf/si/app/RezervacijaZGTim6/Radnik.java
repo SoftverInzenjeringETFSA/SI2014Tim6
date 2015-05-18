@@ -1,9 +1,12 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class Radnik implements Serializable
 {
@@ -55,4 +58,30 @@ public class Radnik implements Serializable
 	public void setNadredjeni(long nadredjeni) {  Nadredjeni = nadredjeni;}	
 	public void setNazivPosla(String nazivPosla) {  NazivPosla = nazivPosla;  }
 	public void setDatumZaposlenja(Date datumZaposlenja) {  DatumZaposlenja = datumZaposlenja;  }
+	
+	//DB operations
+	public void dodajRadnika() throws Exception 
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		Long id = (Long) session.save(this);
+		this.setId(id);
+		t.commit();
+		session.close();
+	}
+	
+	public void ocitajRadnika(long id) throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Radnik temp = (Radnik) session.get(Radnik.class, id);
+		ID = temp.ID;
+		Ime = temp.Ime;
+		Prezime = temp.Prezime; 
+		DatumZaposlenja = temp.DatumZaposlenja;
+		JMBG = temp.JMBG;
+		NazivPosla = temp.NazivPosla;
+		OpisPosla = temp.OpisPosla;
+		Nadredjeni = temp.Nadredjeni;
+	}
 }

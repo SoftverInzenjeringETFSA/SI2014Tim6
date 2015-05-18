@@ -1,15 +1,16 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Restoran
 {	
 	private static volatile Restoran restoran = null;
-	Vector<Gost> gosti;
-	Vector<Rezervacija> rezervacije;
-	Vector<Sto> stolovi;
-	Vector<Korisnik> korisnici;
+	ArrayList<Gost> gosti;
+	ArrayList<Rezervacija> rezervacije;
+	ArrayList<Sto> stolovi;
+	ArrayList<Korisnik> korisnici;
 	
 	private Restoran() {}
 	

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 18, 2015 1:55:01 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.app.RezervacijaZGTim6.ZauzetiSto" table="ZAUZETISTO">
+        <id name="ID" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="IdRezervacije" type="long">
+            <column name="IDREZERVACIJE" />
+        </property>
+        <property name="IdStola" type="long">
+            <column name="IDSTOLA" />
+        </property>
+    </class>
+</hibernate-mapping>

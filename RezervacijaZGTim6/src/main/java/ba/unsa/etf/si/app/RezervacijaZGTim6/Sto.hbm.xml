@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 18, 2015 1:55:01 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.app.RezervacijaZGTim6.Sto" table="STO">
+        <id name="ID" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="OznakaStola" type="java.lang.String">
+            <column name="OZNAKASTOLA" />
+        </property>
+        <property name="Kapacitet" type="java.lang.Integer">
+            <column name="KAPACITET" />
+        </property>
+        <property name="OpisMjesta" type="java.lang.String">
+            <column name="OPISMJESTA" />
+        </property>
+        <property name="ZaPusace" type="java.lang.Boolean">
+            <column name="ZAPUSACE" />
+        </property>
+        <property name="VIP" type="java.lang.Boolean">
+            <column name="VIP" />
+        </property>
+    </class>
+</hibernate-mapping>
