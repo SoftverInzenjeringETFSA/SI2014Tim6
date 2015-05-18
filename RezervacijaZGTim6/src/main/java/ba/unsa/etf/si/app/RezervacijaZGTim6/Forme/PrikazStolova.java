@@ -72,9 +72,20 @@ public class PrikazStolova {
 				public void actionPerformed(ActionEvent e)
 				{
 					JButton button = (JButton)e.getSource();
+					Color background= button.getBackground();
 					int number= Integer.parseInt(button.getText());
-					button.setBackground(Color.green);
-					panel.revalidate();
+					//button.setBackground(Color.green);
+					if(background==Color.red)
+					{
+						
+					 OkupiranSto sto= new OkupiranSto();
+						sto.showWindow(number,button, panel);
+					}
+					else if(background==Color.green)
+					{
+						
+					}
+					//panel.revalidate();
 				}
 				
 			});

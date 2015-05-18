@@ -2,20 +2,29 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
 
 import java.awt.EventQueue;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
+
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 
-public class OkupiranSto {
+public class OkupiranSto{
 
 	private JFrame frame;
+	private JButton prikazStolovaButton;
+	private JPanel prikazStolovaPanel;
 
 	/**
 	 * Launch the application.
@@ -46,7 +55,7 @@ public class OkupiranSto {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 451, 303);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -64,6 +73,20 @@ public class OkupiranSto {
 		JLabel lblDoIstekaRezervacije = new JLabel("Proteklo vremena");
 		
 		JButton btnOtkaiReyervaciju = new JButton("Oslobo\u0111en sto");
+		btnOtkaiReyervaciju.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				prikazStolovaButton.setBackground(Color.green);
+				prikazStolovaButton.revalidate();
+				prikazStolovaButton.repaint();
+				frame.dispose();
+				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
+				
+			}
+			
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -130,5 +153,23 @@ public class OkupiranSto {
 		panel.setLayout(gl_panel);
 		frame.getContentPane().setLayout(groupLayout);
 	}
+	
+	public void showWindow(int tableNumber,JButton button, JPanel panel)
+	{
+		System.out.println("Stol "+tableNumber);
+		this.prikazStolovaButton=button;
+		this.prikazStolovaPanel=panel;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					initialize();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	
+	}	
 
 }
