@@ -25,7 +25,7 @@ public class RezervisanSto {
 			public void run() {
 				try {
 					RezervisanSto window = new RezervisanSto();
-					window.frame.setVisible(true);
+					window.getRezervisanSto().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,10 +44,10 @@ public class RezervisanSto {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 451, 303);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setRezervisanSto(new JFrame());
+		getRezervisanSto().setResizable(false);
+		getRezervisanSto().setBounds(100, 100, 451, 303);
+		getRezervisanSto().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -69,7 +69,7 @@ public class RezervisanSto {
 		
 		JButton btnOtkaiReyervaciju = new JButton("Otka\u017Ei rezervaciju");
 		btnOtkaiReyervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getRezervisanSto().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -134,7 +134,15 @@ public class RezervisanSto {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
-		frame.getContentPane().setLayout(groupLayout);
+		getRezervisanSto().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getRezervisanSto() {
+		return frame;
+	}
+
+	public void setRezervisanSto(JFrame frame) {
+		this.frame = frame;
 	}
 
 }

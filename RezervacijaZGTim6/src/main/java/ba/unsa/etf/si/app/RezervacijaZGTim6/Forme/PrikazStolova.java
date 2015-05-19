@@ -24,7 +24,7 @@ public class PrikazStolova {
 			public void run() {
 				try {
 					PrikazStolova window = new PrikazStolova();
-					window.getFrame().setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,12 +43,12 @@ public class PrikazStolova {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setFrame(new JFrame());
-		getFrame().setBounds(300, 50, 450, 630);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame();
+		frame.setBounds(300, 50, 450, 630);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-		getFrame().getContentPane().add(panel,"Center");
+		frame.getContentPane().add(panel,"Center");
 		
 		
 		fillButtons();
@@ -96,14 +96,6 @@ public class PrikazStolova {
 		panel.revalidate();
 		panel.repaint();
 		
-	}
-
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
 	}
 	
 	

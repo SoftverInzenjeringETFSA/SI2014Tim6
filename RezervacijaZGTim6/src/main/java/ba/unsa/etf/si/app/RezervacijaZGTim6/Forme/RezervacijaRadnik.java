@@ -5,26 +5,36 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.SystemColor;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
+
 import java.awt.List;
+
 import javax.swing.JList;
 
 
@@ -40,7 +50,7 @@ public class RezervacijaRadnik {
 			public void run() {
 				try {
 					RezervacijaRadnik window = new RezervacijaRadnik();
-					window.frame.setVisible(true);
+					window.getRezervacijaRadnik().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,10 +69,10 @@ public class RezervacijaRadnik {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 624, 427);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setRezervacijaRadnik(new JFrame());
+		getRezervacijaRadnik().setResizable(false);
+		getRezervacijaRadnik().setBounds(100, 100, 624, 427);
+		getRezervacijaRadnik().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -78,7 +88,7 @@ public class RezervacijaRadnik {
 		
 		JList list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getRezervacijaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -120,6 +130,12 @@ public class RezervacijaRadnik {
 		btnS2.setBackground(new Color(173, 255, 47));
 		
 		JButton btnS3 = new JButton("4");
+		btnS3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OkupiranSto f = new OkupiranSto();
+				f.getOkupiranSto().setVisible(true);
+			}
+		});
 		btnS3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS3.setBackground(Color.ORANGE);
 		
@@ -156,6 +172,12 @@ public class RezervacijaRadnik {
 		btnS10.setBackground(Color.ORANGE);
 		
 		JButton btnS12 = new JButton("6");
+		btnS12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RezervisanSto f = new RezervisanSto();
+				f.getRezervisanSto().setVisible(true);
+			}
+		});
 		btnS12.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnS12.setBackground(Color.RED);
 		
@@ -229,17 +251,42 @@ public class RezervacijaRadnik {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
+		btnOdjava.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				LoginScreen f = new LoginScreen();
+				f.getFrmPrijavaKorisnika().setVisible(true);
+			}
+		});
+		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(22, 328, 89, 23);
+		btnOdjava.setBounds(10, 335, 119, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRezervacije = new JButton("Rezervacije");
+		btnRezervacije.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				NapraviRezervaciju f = new NapraviRezervaciju();
+				f.getNapraviRezervaciju().setVisible(true);
+			}
+		});
+		btnRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRezervacije.setBounds(0, 0, 139, 34);
 		panel.add(btnRezervacije);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
-		frame.getContentPane().setLayout(groupLayout);
+		getRezervacijaRadnik().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getRezervacijaRadnik() {
+		return frame;
+	}
+
+	public void setRezervacijaRadnik(JFrame frame) {
+		this.frame = frame;
 	}
 }

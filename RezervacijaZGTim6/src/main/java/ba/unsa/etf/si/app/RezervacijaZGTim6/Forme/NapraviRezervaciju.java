@@ -4,23 +4,31 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.SystemColor;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
@@ -43,7 +51,7 @@ public class NapraviRezervaciju {
 			public void run() {
 				try {
 					NapraviRezervaciju window = new NapraviRezervaciju();
-					window.frame.setVisible(true);
+					window.getNapraviRezervaciju().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,10 +70,10 @@ public class NapraviRezervaciju {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 624, 427);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setNapraviRezervaciju(new JFrame());
+		getNapraviRezervaciju().setResizable(false);
+		getNapraviRezervaciju().setBounds(100, 100, 624, 427);
+		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -95,12 +103,25 @@ public class NapraviRezervaciju {
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JButton btnDodajRezervaciju = new JButton("Dodaj rezervaciju");
+		btnDodajRezervaciju.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getNapraviRezervaciju().dispose();
+				RezervacijaRadnik f = new RezervacijaRadnik();
+				f.getRezervacijaRadnik().setVisible(true);
+			}
+		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton btnDodajKlijenta = new JButton("Dodaj klijenta");
+		btnDodajKlijenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik();
+				f.getDodavanjeKlijentaRadnik().setVisible(true);
+			}
+		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDodajKlijenta.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -225,17 +246,35 @@ public class NapraviRezervaciju {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
+		btnOdjava.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				LoginScreen f = new LoginScreen();
+				f.getFrmPrijavaKorisnika().setVisible(true);
+			}
+		});
+		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(22, 328, 89, 23);
+		btnOdjava.setBounds(10, 336, 119, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Rezervacije");
+		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 33, 139, 34);
 		panel.add(btnKlijenti);
-		frame.getContentPane().setLayout(groupLayout);
+		getNapraviRezervaciju().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getNapraviRezervaciju() {
+		return frame;
+	}
+
+	public void setNapraviRezervaciju(JFrame frame) {
+		this.frame = frame;
 	}
 }

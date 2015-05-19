@@ -4,23 +4,31 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.SystemColor;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
@@ -40,7 +48,7 @@ public class Klijenti {
 			public void run() {
 				try {
 					Klijenti window = new Klijenti();
-					window.frame.setVisible(true);
+					window.getKlijenti().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,10 +67,10 @@ public class Klijenti {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 624, 427);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setKlijenti(new JFrame());
+		getKlijenti().setResizable(false);
+		getKlijenti().setBounds(100, 100, 624, 427);
+		getKlijenti().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -116,7 +124,7 @@ public class Klijenti {
 		
 		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
 		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getKlijenti().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -172,13 +180,20 @@ public class Klijenti {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
-		btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnOdjava.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				LoginScreen f = new LoginScreen();
+				f.getFrmPrijavaKorisnika().setVisible(true);
+			}
+		});
+		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
 		btnOdjava.setBounds(22, 328, 89, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
-		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 0, 139, 34);
 		panel.add(btnKlijenti);
 		
@@ -187,15 +202,37 @@ public class Klijenti {
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
-		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnIzvjestaji.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Izvjestaji f = new Izvjestaji();
+				f.getIzvjestaji().setVisible(true);
+			}
+		});
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
 		
 		JButton btnRadnici = new JButton("Radnici");
-		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnRadnici.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Radnici f = new Radnici();
+				f.getRadnici().setVisible(true);
+			}
+		});
+		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
-		frame.getContentPane().setLayout(groupLayout);
+		getKlijenti().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getKlijenti() {
+		return frame;
+	}
+
+	public void setKlijenti(JFrame frame) {
+		this.frame = frame;
 	}
 
 }

@@ -11,6 +11,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class DodavanjeKlijentaRadnik {
@@ -28,7 +30,7 @@ public class DodavanjeKlijentaRadnik {
 			public void run() {
 				try {
 					DodavanjeKlijentaRadnik window = new DodavanjeKlijentaRadnik();
-					window.frame.setVisible(true);
+					window.getDodavanjeKlijentaRadnik().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,10 +49,10 @@ public class DodavanjeKlijentaRadnik {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDodavanjeKlijentaRadnik(new JFrame());
+		getDodavanjeKlijentaRadnik().setResizable(false);
+		getDodavanjeKlijentaRadnik().setBounds(100, 100, 450, 300);
+		getDodavanjeKlijentaRadnik().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -70,15 +72,17 @@ public class DodavanjeKlijentaRadnik {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		
-		JCheckBox checkBox = new JCheckBox("VIP klijent");
-		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
 		JButton btnDodajKlijenta = new JButton("Dodaj Klijenta");
+		btnDodajKlijenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje Klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -86,10 +90,10 @@ public class DodavanjeKlijentaRadnik {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(btnDodajKlijenta))
-						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblDodavanjeKlijenta, Alignment.TRAILING)
-							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-								.addContainerGap(67, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblDodavanjeKlijenta)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addContainerGap(66, Short.MAX_VALUE)
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 									.addComponent(label_1)
 									.addComponent(label)
@@ -98,16 +102,15 @@ public class DodavanjeKlijentaRadnik {
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-									.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-					.addContainerGap(148, Short.MAX_VALUE))
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(147, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(22)
 					.addComponent(lblDodavanjeKlijenta)
-					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
@@ -119,12 +122,18 @@ public class DodavanjeKlijentaRadnik {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_2))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(checkBox)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(33)
 					.addComponent(btnDodajKlijenta)
-					.addGap(64))
+					.addGap(65))
 		);
-		frame.getContentPane().setLayout(groupLayout);
+		getDodavanjeKlijentaRadnik().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getDodavanjeKlijentaRadnik() {
+		return frame;
+	}
+
+	public void setDodavanjeKlijentaRadnik(JFrame frame) {
+		this.frame = frame;
 	}
 }

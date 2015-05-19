@@ -34,7 +34,7 @@ public class OkupiranSto{
 			public void run() {
 				try {
 					OkupiranSto window = new OkupiranSto();
-					window.frame.setVisible(true);
+					window.getOkupiranSto().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,10 +53,10 @@ public class OkupiranSto{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 451, 303);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setOkupiranSto(new JFrame());
+		getOkupiranSto().setResizable(false);
+		getOkupiranSto().setBounds(100, 100, 451, 303);
+		getOkupiranSto().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -82,17 +82,19 @@ public class OkupiranSto{
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				
+				/*
 				prikazStolovaButton.setBackground(Color.green);
 				prikazStolovaButton.revalidate();
 				prikazStolovaButton.repaint();
-				frame.dispose();
+				getOkupiranSto().dispose();
 				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
+				 * */
+				 
 				
 			}
 			
 		});
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getOkupiranSto().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -101,25 +103,24 @@ public class OkupiranSto{
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblTermin)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblKlijent)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblKlijentKlijentic)))
-					.addContainerGap(241, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(131, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 58, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnOtkaiReyervaciju)
-							.addGap(45))
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
-					.addGap(100))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(178, Short.MAX_VALUE)
+					.addContainerGap(220, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(162)
 					.addComponent(lblDoIstekaRezervacije)
-					.addGap(142))
+					.addContainerGap(163, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(121, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
+					.addGap(120))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(172, Short.MAX_VALUE)
+					.addComponent(btnOtkaiReyervaciju)
+					.addGap(160))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -132,13 +133,13 @@ public class OkupiranSto{
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTermin, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
-					.addGap(34)
+					.addGap(49)
 					.addComponent(lblDoIstekaRezervacije)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnOtkaiReyervaciju)
-					.addContainerGap(63, Short.MAX_VALUE))
+					.addContainerGap(54, Short.MAX_VALUE))
 		);
 		
 		JLabel lbldh = new JLabel("1d : 12h : 30m : 45s");
@@ -159,7 +160,7 @@ public class OkupiranSto{
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
-		frame.getContentPane().setLayout(groupLayout);
+		getOkupiranSto().getContentPane().setLayout(groupLayout);
 	}
 	
 	public void showWindow(int tableNumber,JButton button, JPanel panel)
@@ -171,13 +172,21 @@ public class OkupiranSto{
 			public void run() {
 				try {
 					initialize();
-					frame.setVisible(true);
+					getOkupiranSto().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	
+	}
+
+	public JFrame getOkupiranSto() {
+		return frame;
+	}
+
+	public void setOkupiranSto(JFrame frame) {
+		this.frame = frame;
 	}	
 
 }

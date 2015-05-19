@@ -5,23 +5,31 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.SystemColor;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
@@ -42,7 +50,7 @@ public class Izvjestaji {
 			public void run() {
 				try {
 					Izvjestaji window = new Izvjestaji();
-					window.frame.setVisible(true);
+					window.getIzvjestaji().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,10 +69,10 @@ public class Izvjestaji {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 624, 427);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIzvjestaji(new JFrame());
+		getIzvjestaji().setResizable(false);
+		getIzvjestaji().setBounds(100, 100, 624, 427);
+		getIzvjestaji().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -75,7 +83,7 @@ public class Izvjestaji {
 		JLabel lblGenerisatiPo = new JLabel("Generisati po:");
 		lblGenerisatiPo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JRadioButton rdbtnSvimKlijentima = new JRadioButton("Svim klijentima");
+		JRadioButton rdbtnSvimKlijentima = new JRadioButton("Klijentima");
 		rdbtnSvimKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
@@ -98,7 +106,7 @@ public class Izvjestaji {
 		
 		JButton btnGenerisi = new JButton("Generiši");
 		btnGenerisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getIzvjestaji().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -143,25 +151,59 @@ public class Izvjestaji {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
-		btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnOdjava.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				LoginScreen f = new LoginScreen();
+				f.getFrmPrijavaKorisnika().setVisible(true);
+			}
+		});
+		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
 		btnOdjava.setBounds(22, 328, 89, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
-		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnRadnici.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Radnici f = new Radnici();
+				f.getRadnici().setVisible(true);
+			}
+		});
+		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
-		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnKlijenti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Klijenti f = new Klijenti();
+				f.getKlijenti().setVisible(true);
+			}
+		});
+		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
-		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnIzvjestaji.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
-		frame.getContentPane().setLayout(groupLayout);
+		getIzvjestaji().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getIzvjestaji() {
+		return frame;
+	}
+
+	public void setIzvjestaji(JFrame frame) {
+		this.frame = frame;
 	}
 }
