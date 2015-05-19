@@ -83,5 +83,7 @@ public class Radnik implements Serializable
 		NazivPosla = temp.NazivPosla;
 		OpisPosla = temp.OpisPosla;
 		Nadredjeni = temp.Nadredjeni;
+		session.close();
+		//System.out.println(this.toString());
 	}
 }

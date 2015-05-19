@@ -2,8 +2,10 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.mapping.List;
 
 
 public class Korisnik implements Serializable
@@ -67,6 +69,27 @@ public class Korisnik implements Serializable
 		KorisnickoIme = temp.KorisnickoIme;
 		HashSifre = temp.KorisnickoIme;
 		StepenPristupa = temp.StepenPristupa;
+		session.close();
+	}
+	
+	public void ocitajKorisnka(String user) throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM Korisnik K WHERE K.KorisnickoIme = :user";
+		Query query = session.createQuery(hql);
+		query.setParameter("user", user);
+		Korisnik temp = (Korisnik)query.uniqueResult();
+		
+		if(temp != null)
+		{
+			ID = temp.ID;
+			IdRadnika = temp.IdRadnika;
+			KorisnickoIme = temp.KorisnickoIme;
+			HashSifre = temp.HashSifre;
+			StepenPristupa = temp.StepenPristupa;
+		}
+		
 		session.close();
 	}
 	@Override

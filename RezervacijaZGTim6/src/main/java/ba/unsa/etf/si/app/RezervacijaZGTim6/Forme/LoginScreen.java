@@ -1,12 +1,14 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
 
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
@@ -14,6 +16,8 @@ import javax.swing.JLabel;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class LoginScreen {
@@ -21,6 +25,7 @@ public class LoginScreen {
 	private JFrame frmPrijavaKorisnika;
 	private JTextField txtPassword;
 	private JTextField txtUsername;
+	private Restoran handler;
 
 	/**
 	 * Launch the application.
@@ -30,7 +35,7 @@ public class LoginScreen {
 			public void run() {
 				try {
 					LoginScreen window = new LoginScreen();
-					window.frmPrijavaKorisnika.setVisible(true);
+					window.getFrmPrijavaKorisnika().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,17 +50,46 @@ public class LoginScreen {
 		initialize();
 	}
 	
+	public LoginScreen(Restoran r) {
+		initialize();
+		handler = r;
+	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmPrijavaKorisnika = new JFrame();
-		frmPrijavaKorisnika.setTitle("Prijava korisnika");
-		frmPrijavaKorisnika.setBounds(100, 100, 515, 356);
-		frmPrijavaKorisnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFrmPrijavaKorisnika(new JFrame());
+		getFrmPrijavaKorisnika().setTitle("Prijava korisnika");
+		getFrmPrijavaKorisnika().setBounds(100, 100, 515, 356);
+		getFrmPrijavaKorisnika().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnLogIn = new JButton("Prijavi se ");
+		
+		btnLogIn.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent event) {
+				 boolean dobri_podaci = false;
+				 try 
+				 {
+					dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), txtPassword.getText());
+				 } catch (Exception e) 
+				 {
+					e.printStackTrace();
+				 }
+				 
+				 if(dobri_podaci)
+				 {
+					 //Glavni prozor u zavisnosti od stepena pristupa
+				 }
+				 else
+				 {
+					 //Iskoci error
+				 }
+				 
+		}
+		});
+
 		
 		txtPassword = new JTextField();
 		txtPassword.setFont(new Font("Calibri", Font.PLAIN, 11));
@@ -69,7 +103,7 @@ public class LoginScreen {
 		
 		JLabel lblUZmajevomGnijezdu = new JLabel("U ZMAJEVOM GNIJEZDU");
 		lblUZmajevomGnijezdu.setFont(new Font("Castellar", Font.BOLD, 22));
-		GroupLayout groupLayout = new GroupLayout(frmPrijavaKorisnika.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getFrmPrijavaKorisnika().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -100,6 +134,14 @@ public class LoginScreen {
 					.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(63, Short.MAX_VALUE))
 		);
-		frmPrijavaKorisnika.getContentPane().setLayout(groupLayout);
+		getFrmPrijavaKorisnika().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getFrmPrijavaKorisnika() {
+		return frmPrijavaKorisnika;
+	}
+
+	public void setFrmPrijavaKorisnika(JFrame frmPrijavaKorisnika) {
+		this.frmPrijavaKorisnika = frmPrijavaKorisnika;
 	}
 }

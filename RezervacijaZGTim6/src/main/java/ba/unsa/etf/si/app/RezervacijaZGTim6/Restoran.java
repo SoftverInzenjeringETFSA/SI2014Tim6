@@ -10,7 +10,7 @@ public class Restoran
 	ArrayList<Gost> gosti;
 	ArrayList<Rezervacija> rezervacije;
 	ArrayList<Sto> stolovi;
-	ArrayList<Korisnik> korisnici;
+	Korisnik korisnik;
 	
 	private Restoran() {}
 	
@@ -24,28 +24,20 @@ public class Restoran
 	
 	public boolean PrijavaKorisnika(String username, String password) throws Exception
 	{
-		Korisnik k = new Korisnik();
-		//Get from database korisnik with username username
-		String hash_u_bazi = null;
-		if(Password.check(password, hash_u_bazi)) 
-		{
-			//Pull trriger for log in DB
-			//set parameters for korisnik
-			k.setStepenPristupa(null);//obavezno polje
-			korisnici.add(k);
-			return true;
-		}
-		return false;
+		korisnik = new Korisnik();
+		korisnik.ocitajKorisnka(username);
+		if(korisnik.KorisnickoIme == null) return false;
+		else return Password.check(password, korisnik.getHashSifre());
 	}
 	
 	
 	public boolean OdjavaKorisnika(Korisnik k) throws Exception
 	{
-		if(korisnici.contains(k)) 
+	/*	if(korisnici.contains(k)) 
 		{
 			korisnici.remove(k);
 			return true;
-		}
+		}*/
 		return false;
 	}
 	

@@ -42,7 +42,7 @@ public class RadniciDodavanje {
 			public void run() {
 				try {
 					RadniciDodavanje window = new RadniciDodavanje();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,10 +61,10 @@ public class RadniciDodavanje {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 624, 427);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFrame(new JFrame());
+		getFrame().setResizable(false);
+		getFrame().setBounds(100, 100, 624, 427);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -102,7 +102,7 @@ public class RadniciDodavanje {
 		
 		JButton btnSpasi = new JButton("Spasi ");
 		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getFrame().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -173,7 +173,15 @@ public class RadniciDodavanje {
 		JButton btnIzvjestaji = new JButton("Izvjestaji");
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
-		frame.getContentPane().setLayout(groupLayout);
+		getFrame().getContentPane().setLayout(groupLayout);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 
 }
