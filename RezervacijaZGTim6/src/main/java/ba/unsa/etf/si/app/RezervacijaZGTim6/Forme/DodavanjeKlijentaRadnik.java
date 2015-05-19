@@ -56,20 +56,25 @@ public class DodavanjeKlijentaRadnik {
 		textField.setColumns(10);
 		
 		JLabel label = new JLabel("Ime:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel label_1 = new JLabel("Prezime:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		
 		JLabel label_2 = new JLabel("Broj telefona:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		
 		JCheckBox checkBox = new JCheckBox("VIP klijent");
+		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton btnDodajKlijenta = new JButton("Dodaj Klijenta");
+		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje Klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));

@@ -82,14 +82,19 @@ public class KlijentiDodavanje {
 		textField_2.setColumns(10);
 		
 		JLabel lblIme = new JLabel("Ime:");
+		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
+		lblPrezime.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblUsername = new JLabel("Broj telefona:");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton btnSpasi = new JButton("Spasi ");
+		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JCheckBox chckbxVipKlijent = new JCheckBox("VIP klijent");
+		chckbxVipKlijent.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -145,19 +150,23 @@ public class KlijentiDodavanje {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
+		btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
 		btnOdjava.setBounds(22, 328, 89, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
+		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
 		frame.getContentPane().setLayout(groupLayout);

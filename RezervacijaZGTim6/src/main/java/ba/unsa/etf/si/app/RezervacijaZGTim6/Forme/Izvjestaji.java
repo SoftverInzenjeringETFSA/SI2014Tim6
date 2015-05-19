@@ -73,14 +73,19 @@ public class Izvjestaji {
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		JLabel lblGenerisatiPo = new JLabel("Generisati po:");
+		lblGenerisatiPo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JRadioButton rdbtnSvimKlijentima = new JRadioButton("Svim klijentima");
+		rdbtnSvimKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
+		rdbtnVipKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblZaMjesec = new JLabel("Za mjesec:");
+		lblZaMjesec.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JList list = new JList();
+		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		list.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Januar", "Februar", "Mart", "April", "Maj", "Juni ", "Juli ", "August", "Septembar", "Oktorab", "Novembar", "Decembar"};
 			public int getSize() {
@@ -92,6 +97,7 @@ public class Izvjestaji {
 		});
 		
 		JButton btnGenerisi = new JButton("Generiši");
+		btnGenerisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -137,19 +143,23 @@ public class Izvjestaji {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
+		btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
 		btnOdjava.setBounds(22, 328, 89, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
+		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
 		frame.getContentPane().setLayout(groupLayout);

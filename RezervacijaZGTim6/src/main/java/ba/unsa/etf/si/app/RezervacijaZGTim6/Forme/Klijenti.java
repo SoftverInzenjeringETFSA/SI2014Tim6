@@ -71,14 +71,17 @@ public class Klijenti {
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		JButton btnDodaj = new JButton("Dodaj klijenta");
+		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDodaj.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
 		
 		JLabel lblIme = new JLabel("Ime: ");
+		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
 		
 		JButton btnPretrazi = new JButton("Pretraži");
+		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
@@ -102,14 +105,17 @@ public class Klijenti {
 		));
 		
 		JButton btnIzmjeni = new JButton("Izmijeni");
+		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
 		JButton btnObrisi = new JButton("Obriši");
+		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
+		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -117,38 +123,34 @@ public class Klijenti {
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnPretrazi)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnPretrazi)
-							.addContainerGap())
+							.addComponent(lblIme)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_1)
+							.addPreferredGap(ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+							.addComponent(chckbxVipKlijenti))
+						.addComponent(table, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblIme)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblNewLabel_1)
-									.addPreferredGap(ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-									.addComponent(chckbxVipKlijenti))
-								.addComponent(table, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
-								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addGap(180)
-									.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-									.addGap(9)
-									.addComponent(btnIzmjeni)))
-							.addContainerGap())))
+							.addComponent(lblNewLabel)
+							.addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+							.addGap(9)
+							.addComponent(btnIzmjeni)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(22)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(lblNewLabel))
 					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -170,11 +172,13 @@ public class Klijenti {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
+		btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
 		btnOdjava.setBounds(22, 328, 89, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnKlijenti.setBounds(0, 0, 139, 34);
 		panel.add(btnKlijenti);
 		
@@ -183,10 +187,12 @@ public class Klijenti {
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
 		
 		JButton btnRadnici = new JButton("Radnici");
+		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		frame.getContentPane().setLayout(groupLayout);

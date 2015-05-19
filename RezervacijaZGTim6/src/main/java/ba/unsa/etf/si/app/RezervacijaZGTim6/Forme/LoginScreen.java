@@ -57,14 +57,15 @@ public class LoginScreen {
 		frmPrijavaKorisnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnLogIn = new JButton("Prijavi se ");
+		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		txtPassword = new JTextField();
-		txtPassword.setFont(new Font("Calibri", Font.PLAIN, 11));
+		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtPassword.setText("password");
 		txtPassword.setColumns(10);
 		
 		txtUsername = new JTextField();
-		txtUsername.setFont(new Font("Calibri", Font.PLAIN, 11));
+		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtUsername.setText("username");
 		txtUsername.setColumns(10);
 		
