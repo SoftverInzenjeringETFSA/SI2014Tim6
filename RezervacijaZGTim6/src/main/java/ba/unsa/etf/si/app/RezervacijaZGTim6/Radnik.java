@@ -86,4 +86,13 @@ public class Radnik implements Serializable
 		session.close();
 		//System.out.println(this.toString());
 	}
+	
+	@Override
+	public String toString() {
+		return "Radnik [ID=" + ID + ", Ime=" + Ime + ", Prezime=" + Prezime
+				+ ", DatumZaposlenja=" + DatumZaposlenja + ", JMBG=" + JMBG
+				+ ", NazivPosla=" + NazivPosla + ", OpisPosla=" + OpisPosla
+				+ ", Nadredjeni=" + Nadredjeni + "]";
+	}
+	
 }
