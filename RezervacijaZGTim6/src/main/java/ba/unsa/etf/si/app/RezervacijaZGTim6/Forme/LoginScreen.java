@@ -9,6 +9,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
@@ -23,7 +24,7 @@ import java.awt.event.ActionListener;
 public class LoginScreen {
 
 	private JFrame frmPrijavaKorisnika;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private JTextField txtUsername;
 	private Restoran handler;
 
@@ -80,7 +81,9 @@ public class LoginScreen {
 				 boolean dobri_podaci = false;
 				 try 
 				 {
-					dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), txtPassword.getText());
+					char[] pass = txtPassword.getPassword();
+					String passString = new String(pass);
+					dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), passString);
 				 } catch (Exception e) 
 				 {
 					e.printStackTrace();
@@ -99,7 +102,7 @@ public class LoginScreen {
 		});
 
 		
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField();
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtPassword.setText("password");
 		txtPassword.setColumns(10);

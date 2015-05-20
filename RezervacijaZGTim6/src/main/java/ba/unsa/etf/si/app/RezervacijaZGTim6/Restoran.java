@@ -30,23 +30,16 @@ public class Restoran
 		else return Password.check(password, korisnik.getHashSifre());
 	}
 	
-	
-	public boolean OdjavaKorisnika(Korisnik k) throws Exception
+	public boolean OdjavaKorisnika()
 	{
-	/*	if(korisnici.contains(k)) 
-		{
-			korisnici.remove(k);
-			return true;
-		}*/
-		return false;
+		korisnik = new Korisnik();
+		return true;
 	}
 	
-	
-	public void DodajGosta(String ime, String prezime, String telefon)
+	public void DodajGosta(String ime, String prezime, String telefon) throws Exception
 	{
-		Gost g = new Gost();//TODO napravi konstruktor sa tri parametra
-		//Upisi u bazu podataka
-		//refresh spisak gostiju
+		Gost g = new Gost(ime, prezime, telefon);
+		g.dodajGosta();
 		gosti.add(g);
 	}
 	
