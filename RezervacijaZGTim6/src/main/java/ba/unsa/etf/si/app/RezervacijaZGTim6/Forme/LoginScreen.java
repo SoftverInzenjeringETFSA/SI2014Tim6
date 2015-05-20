@@ -60,18 +60,17 @@ public class LoginScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-<<<<<<< HEAD
+
 		setFrmPrijavaKorisnika(new JFrame());
 		getFrmPrijavaKorisnika().setTitle("Prijava korisnika");
 		getFrmPrijavaKorisnika().setBounds(100, 100, 515, 356);
 		getFrmPrijavaKorisnika().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-=======
 		frmPrijavaKorisnika = new JFrame();
 		frmPrijavaKorisnika.setResizable(false);
 		frmPrijavaKorisnika.setTitle("Prijava korisnika");
 		frmPrijavaKorisnika.setBounds(100, 100, 515, 356);
 		frmPrijavaKorisnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
->>>>>>> origin/master
+
 		
 		JButton btnLogIn = new JButton("Prijavi se ");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 13));
