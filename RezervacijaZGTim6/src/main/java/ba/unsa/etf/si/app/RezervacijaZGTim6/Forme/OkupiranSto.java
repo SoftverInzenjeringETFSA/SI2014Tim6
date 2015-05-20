@@ -82,13 +82,13 @@ public class OkupiranSto{
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				/*
+				
 				prikazStolovaButton.setBackground(Color.green);
 				prikazStolovaButton.revalidate();
 				prikazStolovaButton.repaint();
 				getOkupiranSto().dispose();
 				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
-				 * */
+				 
 				 
 				
 			}
