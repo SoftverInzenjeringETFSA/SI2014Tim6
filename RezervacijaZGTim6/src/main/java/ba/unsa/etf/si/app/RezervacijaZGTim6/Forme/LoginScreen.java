@@ -91,7 +91,23 @@ public class LoginScreen {
 				 
 				 if(dobri_podaci)
 				 {
-					 //Glavni prozor u zavisnosti od stepena pristupa
+					 if(handler.getPristup() == 1) //otvori formu sefa
+					 {
+						 frmPrijavaKorisnika.dispose();
+						 Radnici f = new Radnici();
+						 f.getRadnici().setVisible(true);
+							
+					 }
+					 else if(handler.getPristup()==2)//otvori formu radnika
+					 {
+						 frmPrijavaKorisnika.dispose();
+						 NapraviRezervaciju f = new NapraviRezervaciju();
+						 f.getNapraviRezervaciju().setVisible(true); 
+					 }
+					 else //error cudna greska
+					 {
+						 
+					 }
 				 }
 				 else
 				 {

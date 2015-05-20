@@ -36,6 +36,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.JTextArea;
 
 
 public class Izvjestaji {
@@ -125,11 +126,11 @@ public class Izvjestaji {
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 									.addComponent(btnGenerisi)
 									.addComponent(list, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(306, Short.MAX_VALUE))
+					.addContainerGap(156, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(22)
 					.addComponent(lblNewLabel)
@@ -146,7 +147,7 @@ public class Izvjestaji {
 						.addComponent(list))
 					.addGap(26)
 					.addComponent(btnGenerisi)
-					.addContainerGap(63, Short.MAX_VALUE))
+					.addContainerGap(45, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		

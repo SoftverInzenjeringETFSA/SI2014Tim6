@@ -64,4 +64,10 @@ public class Restoran
 		//}
 		return false;
 	}
+	
+	public Integer getPristup()
+	{
+		if(korisnik.KorisnickoIme == null) return -1;
+		else return korisnik.getStepenPristupa();
+	}
 }
