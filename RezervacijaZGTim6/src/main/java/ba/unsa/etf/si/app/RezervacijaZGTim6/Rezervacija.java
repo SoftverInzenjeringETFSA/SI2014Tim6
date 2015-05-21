@@ -71,15 +71,13 @@ public class Rezervacija implements Serializable
 		session.close();
 	}
 	
-	/*public void ocitajKorisnka(String user) throws Exception 
+	public void listaRezervacijaDatum(java.util.Date datum) throws Exception 
 	{
-		Date d = new Date();
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		String hql = "FROM Rezervacija R WHERE R.DatumRezervacije = ";//'" + sdf.format() + "'";
+		String hql = "FROM Rezervacija R WHERE R.DatumRezervacije = '" + sdf.format(datum) + "'";
 		Query query = session.createQuery(hql);
-		query.setParameter("user", user);
 		Korisnik temp = (Korisnik)query.uniqueResult();
 		
 		if(temp != null)
@@ -89,7 +87,7 @@ public class Rezervacija implements Serializable
 		}
 		
 		session.close();
-	}*/
+	}
 	
 	public void ocitajRezervaciju(long id) throws Exception 
 	{	
