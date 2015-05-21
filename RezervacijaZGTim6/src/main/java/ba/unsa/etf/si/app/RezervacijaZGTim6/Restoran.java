@@ -8,10 +8,9 @@ import java.util.Vector;
 public class Restoran
 {	
 	private static volatile Restoran restoran = null;
-	ArrayList<Gost> gosti;//treba new Gosti
+	ArrayList<Gost> gosti;
 	ArrayList<Rezervacija> rezervacije;
 	ArrayList<Sto> stolovi;
-	ArrayList<ZauzetiSto> rezervisanistolovi;
 	Korisnik korisnik;
 	
 	private Restoran() 
@@ -19,9 +18,18 @@ public class Restoran
 		gosti = new ArrayList<Gost>();
 		gosti = Gost.listaGostiju();
 		rezervacije = new ArrayList<Rezervacija>();
+		try {
+			rezervacije = Rezervacija.listaRezervacijaDatum(new java.util.Date());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		stolovi = new ArrayList<Sto>();
 		stolovi = Sto.listaStolova();
-		rezervisanistolovi = new ArrayList<ZauzetiSto>();
+		/*for (Iterator iterator1 = rezervacije.iterator(); iterator1.hasNext();)
+        {
+         x  System.out.println(iterator1.next()); 
+        }*/
 	}
 	
 	//Singleton
@@ -53,21 +61,39 @@ public class Restoran
 		gosti.add(g);
 	}
 	
-	public boolean NapraviRezervaciju(Date datumvrijeme, Integer trajanje, Sto s, Gost g, Korisnik k)
+	public ArrayList<Rezervacija> ListaRezervacija(java.util.Date datum, Integer sati, Integer minute) throws Exception
 	{
-		if(SlobodanSto(s, datumvrijeme))
-		{
-			Rezervacija r = new Rezervacija();
-			rezervacije.add(r);
-		}
-		return false;
+		rezervacije = Rezervacija.listaRezervacijaDatum(datum);
+		ArrayList<Rezervacija> uOpsegu = new ArrayList<Rezervacija>();
+		
+		datum.setHours(sati);
+		datum.setMinutes(minute);
+		datum.setSeconds(0);
+		
+		for (Iterator iterator1 = rezervacije.iterator(); iterator1.hasNext();)
+        {
+           Rezervacija r = (Rezervacija)iterator1.next(); 
+           java.util.Date od_ = new java.util.Date();
+           java.util.Date _do = new java.util.Date();
+           od_ = datum;
+           _do = datum;
+           
+			od_.setHours(r.getVrijemeRezervacije().getHours());
+			od_.setMinutes(r.getVrijemeRezervacije().getMinutes());
+			od_.setSeconds(0);
+			
+			_do.setHours(r.getVrijemeRezervacije().getHours() + r.getTrajanjeRezervacijeMinute()/60);
+			_do.setMinutes(r.getVrijemeRezervacije().getMinutes()+ r.getTrajanjeRezervacijeMinute()%60);
+			_do.setSeconds(0);
+           
+           if(od_.before(datum) && _do.after(datum))
+           {
+        	   uOpsegu.add(r);
+           }
+        }	
+		return uOpsegu;
 	}
 
-	private boolean SlobodanSto(Sto s, Date datumvrijeme)
-	{
-		
-		return false;
-	}
 	
 	public Integer getPristup()
 	{
