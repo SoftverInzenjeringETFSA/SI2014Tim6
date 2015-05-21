@@ -43,12 +43,14 @@ import java.awt.List;
 
 import javax.swing.JList;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 public class RezervacijaRadnik {
 
 	private JFrame frame;
 	private JPanel panel_1;
-
+	private Restoran handler;
 	/**
 	 * Launch the application.
 	 */
@@ -71,6 +73,12 @@ public class RezervacijaRadnik {
 	public RezervacijaRadnik() {
 		initialize();
 	}
+	
+	public RezervacijaRadnik(Restoran r) {
+		initialize();
+		handler = r;
+	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -225,7 +233,15 @@ public class RezervacijaRadnik {
 					else if(background==Color.green)
 					{
 						
+					   NapraviRezervaciju r = new NapraviRezervaciju();
+					   r.showWindow(number, button, panel_1);
 					}
+					else if(background==Color.orange)
+					{
+						
+						
+					}
+					
 					
 				}
 				
@@ -265,8 +281,14 @@ public class RezervacijaRadnik {
 					else if(background==Color.green)
 					{
 						
+					   NapraviRezervaciju r = new NapraviRezervaciju();
+					   r.showWindow(number, button, panel_1);
 					}
-					//panel.revalidate();
+					else if(background==Color.orange)
+					{
+						
+						
+					}
 				}
 				
 			});

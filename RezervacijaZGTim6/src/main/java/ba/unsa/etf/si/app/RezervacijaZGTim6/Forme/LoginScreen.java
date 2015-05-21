@@ -101,8 +101,8 @@ public class LoginScreen {
 					 else if(handler.getPristup()==2)//otvori formu radnika
 					 {
 						 frmPrijavaKorisnika.dispose();
-						 NapraviRezervaciju f = new NapraviRezervaciju(handler);
-						 f.getNapraviRezervaciju().setVisible(true); 
+						 RezervacijaRadnik f = new RezervacijaRadnik(handler);
+						 f.getRezervacijaRadnik().setVisible(true); 
 					 }
 					 else //error cudna greska
 					 {

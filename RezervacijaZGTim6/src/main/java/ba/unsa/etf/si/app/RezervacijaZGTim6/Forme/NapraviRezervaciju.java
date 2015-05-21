@@ -45,6 +45,8 @@ public class NapraviRezervaciju {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private Restoran handler;
+	private JButton prikazStolovaButton;
+	private JPanel prikazStolovaPanel;
 
 	/**
 	 * Launch the application.
@@ -114,8 +116,11 @@ public class NapraviRezervaciju {
 		btnDodajRezervaciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getNapraviRezervaciju().dispose();
-				RezervacijaRadnik f = new RezervacijaRadnik();
-				f.getRezervacijaRadnik().setVisible(true);
+			    
+				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
+				//referenci za button i panel promijenit boju stola koji je kliknut
+				
+				
 			}
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -207,7 +212,7 @@ public class NapraviRezervaciju {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
+		//lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
 		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
 		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -285,4 +290,24 @@ public class NapraviRezervaciju {
 	public void setNapraviRezervaciju(JFrame frame) {
 		this.frame = frame;
 	}
+	
+	public void showWindow(int tableNumber,JButton button, JPanel panel)
+	{
+		System.out.println("Stol "+tableNumber);
+		this.prikazStolovaButton=button;
+		this.prikazStolovaPanel=panel;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					initialize();
+					getNapraviRezervaciju().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	
+	}
+	
+	
 }
