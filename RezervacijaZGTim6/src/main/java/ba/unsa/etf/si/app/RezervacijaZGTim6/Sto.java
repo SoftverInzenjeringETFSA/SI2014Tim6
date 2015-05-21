@@ -76,7 +76,7 @@ public class Sto implements Serializable
 	}
 	
 	/* Method to list all the employees detail */
-   public static ArrayList<Sto> listaStolova( ){
+   public static ArrayList<Sto> listaStolova(){
       Session session = HibernateUtil.getSessionFactory().openSession();
       ArrayList<Sto> lista = new ArrayList<Sto>();
       Transaction tx = null;

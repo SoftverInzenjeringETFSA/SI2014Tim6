@@ -1,7 +1,8 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.awt.EventQueue;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import org.hibernate.Transaction;
@@ -35,7 +36,6 @@ public static void main(String[] args)
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-
 	
 }
 

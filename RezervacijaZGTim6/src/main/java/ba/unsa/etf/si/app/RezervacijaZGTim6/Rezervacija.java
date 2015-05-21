@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,11 +18,11 @@ public class Rezervacija implements Serializable
 	long ID;
 	long IdGosta;
 	long IdRadnika;
+	long IdStola;
 	Integer BrojGostiju;
 	String StatusRezervacije;
 	Date DatumRezervacije;
 	Time VrijemeRezervacije;
-	
 	Integer TrajanjeRezervacijeMinute;
 	
 	//Konstruktori
@@ -71,22 +74,27 @@ public class Rezervacija implements Serializable
 		session.close();
 	}
 	
-	public void listaRezervacijaDatum(java.util.Date datum) throws Exception 
+	public static ArrayList<Rezervacija> listaRezervacijaDatum(java.util.Date datum) throws Exception 
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Transaction tx = session.beginTransaction();
 		
+		ArrayList<Rezervacija> lista = new ArrayList<Rezervacija>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 		String hql = "FROM Rezervacija R WHERE R.DatumRezervacije = '" + sdf.format(datum) + "'";
 		Query query = session.createQuery(hql);
-		Korisnik temp = (Korisnik)query.uniqueResult();
+		List rezultati = query.list();
 		
-		if(temp != null)
-		{
-			ID = temp.ID;
-			IdRadnika = temp.IdRadnika;
-		}
+		for (Iterator iterator1 = rezultati.iterator(); iterator1.hasNext();)
+        {
+           Rezervacija r = (Rezervacija)iterator1.next(); 
+           lista.add(r);
+        }
 		
+        tx.commit();
 		session.close();
+		return lista;
 	}
 	
 	public void ocitajRezervaciju(long id) throws Exception 
@@ -101,6 +109,16 @@ public class Rezervacija implements Serializable
 		DatumRezervacije = temp.DatumRezervacije;
 		VrijemeRezervacije = temp.VrijemeRezervacije;
 		TrajanjeRezervacijeMinute = temp.TrajanjeRezervacijeMinute;
+	}
+	@Override
+	public String toString() {
+		return "Rezervacija [ID=" + ID + ", IdGosta=" + IdGosta
+				+ ", IdRadnika=" + IdRadnika + ", BrojGostiju=" + BrojGostiju
+				+ ", StatusRezervacije=" + StatusRezervacije
+				+ ", DatumRezervacije=" + DatumRezervacije
+				+ ", VrijemeRezervacije=" + VrijemeRezervacije
+				+ ", TrajanjeRezervacijeMinute=" + TrajanjeRezervacijeMinute
+				+ "]";
 	}
 
 	
