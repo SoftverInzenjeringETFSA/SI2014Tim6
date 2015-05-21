@@ -130,9 +130,6 @@ public class Izvjestaji {
 							.addGap(18)
 							.addComponent(lblNewLabel))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(31)
-							.addComponent(btnGenerisi))
-						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(rdbtnVipKlijentima)
@@ -151,8 +148,9 @@ public class Izvjestaji {
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))))))
-					.addContainerGap(122, Short.MAX_VALUE))
+										.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnGenerisi, Alignment.TRAILING))))))
+					.addContainerGap(150, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -181,9 +179,9 @@ public class Izvjestaji {
 							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)
 							.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+					.addGap(26)
 					.addComponent(btnGenerisi)
-					.addGap(26))
+					.addContainerGap(149, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		
