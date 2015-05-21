@@ -1,6 +1,5 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.*;
@@ -56,11 +55,12 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
 		
 	}
 
-	//protected abstract boolean validationCriteria(JComponent c);
+	protected abstract Boolean ValidacijaDefinition(JComponent c);
 	protected abstract Boolean ValidacijaPolje(String polje);
 	protected abstract Boolean ValidacijaTekst(String tekst);
-    //protected abstract Boolean ValidacijaImePrezime(String imePrezime);
-    //protected abstract Boolean ValidacijaTelefon(String mail);
+    protected abstract Boolean ValidacijaIme(String ime);
+    protected abstract Boolean ValidacijaPrezime(String prezime);
+    protected abstract Boolean ValidacijaTelefon(String mail);
     protected abstract Boolean ValidacijaJMBG(String JMBG);
     
     protected void initComponents() {
@@ -72,9 +72,8 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
         popup.setFocusableWindowState(false);
     }
     
-    /*public boolean verify(JComponent c) {		
-        if (!validationCriteria(c)) {
-        	
+    public boolean verify(JComponent c) {		
+        if (!ValidacijaDefinition(c)) {
             c.setBackground(Color.RED);
             popup.setSize(0, 0);
             popup.setLocationRelativeTo(c);
@@ -88,17 +87,5 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
         
         c.setBackground(Color.WHITE);
         return true;
-    }*/
-	
-    protected void setMessage(String message) {
-       messageLabel.setText(message);
     }
-	
-    public void keyPressed(KeyEvent e) {
-        popup.setVisible(false);
-    }
-	
-    public void keyTyped(KeyEvent e) {}
-	
-    public void keyReleased(KeyEvent e) {}
 }

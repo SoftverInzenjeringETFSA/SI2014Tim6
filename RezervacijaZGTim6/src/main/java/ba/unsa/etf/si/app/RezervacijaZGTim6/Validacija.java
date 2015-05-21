@@ -2,15 +2,16 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-//import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import java.util.regex.Matcher;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.Component;
+
 public class Validacija extends AbstractValidacija {
-	
+
 	public Validacija(JFrame frame, Component component, String message) {
 	    // TODO Auto-generated constructor stub
 	    super(frame, component, message);
@@ -23,11 +24,6 @@ public class Validacija extends AbstractValidacija {
 	public Validacija(JFrame parent, JComponent c, String message) {
 		super(parent, c, message);
 	}	
-   
-    public boolean validationCriteria(JComponent c, String tip) {
-		if(tip.equals("JMBG")) return ValidacijaJMBG( ((JTextField)c).getText());
-	    return ValidacijaTekst( ((JTextField)c).getText());
-	}
 	
 	/*public boolean textboxEmpty(JTextField t)
 	{
@@ -47,36 +43,49 @@ public class Validacija extends AbstractValidacija {
 			return true;
 	}*/
 	
-	// Validacija polja
 	public Boolean ValidacijaPolje(String polje)
 	{
 		return !polje.isEmpty();
 	}
 	
-	// Validacija teksta
-	public static final Pattern validTekst= Pattern.compile("/^[a-z ,.'-]+$/i", Pattern.CASE_INSENSITIVE);
-	public Boolean ValidacijaTekst(String tekst)
-	{
-		if(!ValidacijaPolje(tekst)) return false;
-		Matcher matcher = validTekst.matcher(tekst);
-        return matcher.find();
+	public Boolean ValidacijaTekst(String tekst) {
+        return tekst.matches("/^[a-z ,.'-]+$/i");
 	}
 	
-	// Validacija telefon
+	public Boolean ValidacijaIme(String ime) {
+		return ime.matches("^[A-Z]{1}[a-z]{2,}$");
+	}
+	
+	public Boolean ValidacijaPrezime(String prezime) {
+		return prezime.matches("^[A-Z]{1}[a-z]{2,}$");
+	}
+	
 	// ToDo - Pattern za telefon promijeniti zbog '\'
-	public static final Pattern validanTelefon = Pattern.compile("(0\\d{2})\\d{3}-\\d{3}");
+	public Boolean ValidacijaTelefon(String telefon) {
+		return telefon.matches("(0\\d{2})\\d{3}-\\d{3}");
+	}
 	
-	/*public Boolean ValidacijaTelefon(String telefon)
-	{
-		Matcher matcher = validanTelefon.matcher(telefon);
-        return matcher.find();
-	}*/
-	
-	public Boolean ValidacijaJMBG(String jmbg) { return true; } // poslije impl
+	public Boolean ValidacijaJMBG(String jmbg) { 
+		List<Integer> jmbgList = new ArrayList<Integer>();
+		for(char ch : jmbg.toCharArray()) {
+		    jmbgList.add( Integer.valueOf(String.valueOf(ch)));
+		}
+		if (jmbgList.size()!= 13)
+            return false;
+		else {
+			Double eval = 0.0;
+            for (int i = 0; i < 6; i++)
+            {
+                eval += (7 - i) * (jmbgList.get(i) + jmbgList.get(i + 6));
+            }
+            return jmbgList.get(12) == 11 - eval % 11;
+		}
+	}
 
 	@Override
 	public boolean verify(JComponent input) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }
