@@ -43,11 +43,13 @@ import javax.swing.UIManager;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.swing.JList;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -229,11 +231,15 @@ public class RezervacijaRadnik {
 		//Ispod je hardcoded primjer
 		
 		Date d =(Date)spinner.getValue();
-		ArrayList<Rezervacija> rezervacije;
-	
-		try{
-	   rezervacije = handler.ListaRezervacija(dateChooser.getDate(),(Integer)d.getHours(), (Integer)d.getMinutes());
-		
+		ArrayList<Rezervacija> rezervacije=new ArrayList<Rezervacija>();
+		ArrayList<Sto> stolovi= new ArrayList<Sto>();
+	    Integer numberOfTables;
+		try
+		{
+	   
+			rezervacije = handler.ListaRezervacija(dateChooser.getDate(),(Integer)d.getHours(), (Integer)d.getMinutes());
+		    stolovi= handler.DajStolove();
+			
 		}catch(Exception e)
 		{
 		  System.out.println(e.getMessage());	
@@ -242,13 +248,27 @@ public class RezervacijaRadnik {
 		
 		panel_1.removeAll(); // da ukloni postojece stolove, ako ih ima
 		
+		
+		
+		
 		JPanel panelOrdinaryTables= new JPanel();
 		panelOrdinaryTables.setLayout(new FlowLayout());
 		panelOrdinaryTables.setBackground(Color.LIGHT_GRAY);
-		for(int i=0;i<50;i++)
+		
+		JPanel panelVipTables= new JPanel();
+		panelVipTables.setLayout(new FlowLayout());
+		panelVipTables.setBackground(Color.LIGHT_GRAY);
+		
+		System.out.println(" "+ stolovi.size());
+		
+		for(Iterator i =stolovi.iterator();i.hasNext();)
 		{
-			JButton b = new JButton("" +(i+1));
+			Sto s = (Sto)i.next();
+			JButton b = new JButton("" +(s.getID()));
 			b.setBackground(Color.red);
+		
+			
+					
 			b.setPreferredSize(new Dimension(70, 60));
 			b.addActionListener(new ActionListener()
 			{
@@ -292,10 +312,7 @@ public class RezervacijaRadnik {
 		panel_1.add(panelOrdinaryTables);
 		
 		
-		JPanel panelVipTables= new JPanel();
-		panelVipTables.setLayout(new FlowLayout());
-		panelVipTables.setBackground(Color.LIGHT_GRAY);
-		//panel_1.add(panel2);
+		
 		
 		for(int i=0;i<10;i++)
 		{
