@@ -4,11 +4,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-
 import java.util.regex.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 
 public class Validacija extends AbstractValidacija {
 
@@ -86,6 +86,27 @@ public class Validacija extends AbstractValidacija {
 	public boolean verify(JComponent input) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Boolean ValidacijaDefinition(JComponent c) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
