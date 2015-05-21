@@ -50,6 +50,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
 
 import javax.swing.JSpinner;
@@ -67,6 +68,9 @@ public class NapraviRezervaciju {
 	private JLabel reservationText;
 	private Integer clickedTableNumber; // broj kliknutog stola na formi RezervacijaRadnik
     private GroupLayout groupLayout; // glavni grupni layout
+    private JDateChooser date;
+    private Integer hours;
+    private Integer minutes;
 	/**
 	 * Launch the application.
 	 */
@@ -130,6 +134,10 @@ public class NapraviRezervaciju {
 			    
 				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
 				//referenci za button i panel promijenit boju stola koji je kliknut
+				
+				
+				
+				
 				prikazStolovaButton.setBackground(Color.red);
 				prikazStolovaPanel.revalidate();
 				prikazStolovaPanel.repaint();
@@ -147,11 +155,6 @@ public class NapraviRezervaciju {
 			}
 		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnDodajKlijenta.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
-		//spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
-	//	JSpinner timeSpinner = new JSpinner(model);
-		//JComponent editor = new JSpinner.DateEditor(spinner, "HH:mm:ss");
-		//spinner.setEditor(editor);
 		
 		Format timeFormat = new SimpleDateFormat("HH:mm:ss");
 	
@@ -312,13 +315,15 @@ public class NapraviRezervaciju {
 		this.frame = frame;
 	}
 	
-	public void showWindow(int tableNumber,JButton button, JPanel panel)
+	public void showWindow(int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
 		this.prikazStolovaPanel=panel;
+		this.date=date;
+		this.hours=sati;
 		clickedTableNumber=tableNumber;
-		
+		this.minutes=minute;
 	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

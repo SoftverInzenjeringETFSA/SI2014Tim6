@@ -15,6 +15,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 
 import java.awt.CardLayout;
@@ -40,11 +41,17 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
 import java.awt.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JList;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
+
 import com.toedter.calendar.JDateChooser;
+
+import javax.swing.JSpinner;
 
 
 public class RezervacijaRadnik {
@@ -52,6 +59,8 @@ public class RezervacijaRadnik {
 	private JFrame frame;
 	private JPanel panel_1;
 	private Restoran handler;
+	private JSpinner spinner;
+	JDateChooser dateChooser;
 	/**
 	 * Launch the application.
 	 */
@@ -114,47 +123,64 @@ public class RezervacijaRadnik {
 			}
 		});
 		
-		JDateChooser dateChooser = new JDateChooser();
-		GroupLayout groupLayout = new GroupLayout(getRezervacijaRadnik().getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 777, Short.MAX_VALUE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblPromjeniDan)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
-									.addComponent(btnOsvjei)
-									.addGap(10)))))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblPromjeniDan)
-									.addComponent(btnOsvjei))
-								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
+		 dateChooser = new JDateChooser();
+		 dateChooser.getJCalendar().setMinSelectableDate(new Date());
+		 dateChooser.setDate(new Date());
+		 spinner = new JSpinner( new SpinnerDateModel() );
+		 JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
+		 spinner.setEditor(timeEditor);
+		 spinner.setValue(new Date()); // will only show the current time
+		 
+		 
+		 JLabel lblhhmm = new JLabel("(HH:mm)");
+		
+		 GroupLayout groupLayout = new GroupLayout(getRezervacijaRadnik().getContentPane());
+		 groupLayout.setHorizontalGroup(
+		 	groupLayout.createParallelGroup(Alignment.LEADING)
+		 		.addGroup(groupLayout.createSequentialGroup()
+		 			.addContainerGap()
+		 			.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+		 			.addGap(18)
+		 			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		 				.addComponent(lblNewLabel)
+		 				.addGroup(groupLayout.createSequentialGroup()
+		 					.addPreferredGap(ComponentPlacement.RELATED)
+		 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 777, Short.MAX_VALUE)
+		 						.addGroup(groupLayout.createSequentialGroup()
+		 							.addComponent(lblPromjeniDan)
+		 							.addPreferredGap(ComponentPlacement.RELATED)
+		 							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+		 							.addGap(18)
+		 							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		 							.addPreferredGap(ComponentPlacement.RELATED)
+		 							.addComponent(lblhhmm)
+		 							.addPreferredGap(ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+		 							.addComponent(btnOsvjei)
+		 							.addGap(10)))))
+		 			.addContainerGap())
+		 );
+		 groupLayout.setVerticalGroup(
+		 	groupLayout.createParallelGroup(Alignment.TRAILING)
+		 		.addGroup(groupLayout.createSequentialGroup()
+		 			.addContainerGap()
+		 			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+		 				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+		 				.addGroup(groupLayout.createSequentialGroup()
+		 					.addComponent(lblNewLabel)
+		 					.addGap(18)
+		 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+		 							.addComponent(lblPromjeniDan)
+		 							.addComponent(btnOsvjei))
+		 						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+		 							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		 							.addComponent(lblhhmm)))
+		 					.addGap(18)
+		 					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)))
+		 			.addContainerGap())
+		 );
 	
 		panel_1.setLayout(new BoxLayout(panel_1,BoxLayout.Y_AXIS));
 		panel.setLayout(null);
@@ -202,6 +228,18 @@ public class RezervacijaRadnik {
 		// je redni broj stola, a boja se postavlja ovisno od trenutnog stanja stola
 		//Ispod je hardcoded primjer
 		
+		Date d =(Date)spinner.getValue();
+		ArrayList<Rezervacija> rezervacije;
+	
+		try{
+	   rezervacije = handler.ListaRezervacija(dateChooser.getDate(),(Integer)d.getHours(), (Integer)d.getMinutes());
+		
+		}catch(Exception e)
+		{
+		  System.out.println(e.getMessage());	
+		}
+		
+		
 		panel_1.removeAll(); // da ukloni postojece stolove, ako ih ima
 		
 		JPanel panelOrdinaryTables= new JPanel();
@@ -228,9 +266,12 @@ public class RezervacijaRadnik {
 					}
 					else if(background==Color.green)
 					{
+						Date d= (Date)spinner.getValue();
+						int sati = (Integer)d.getHours();
+						int minute= (Integer)d.getMinutes();
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju();
-					   r.showWindow(number, button, panel_1);
+					   r.showWindow(number, button, panel_1,dateChooser,sati,minute);
 					}
 					else if(background==Color.orange)
 					{
@@ -268,6 +309,7 @@ public class RezervacijaRadnik {
 					JButton button = (JButton)e.getSource();
 					Color background= button.getBackground();
 					int number= Integer.parseInt(button.getText());
+					
 					//button.setBackground(Color.green);
 					if(background==Color.red)
 					{
@@ -279,7 +321,11 @@ public class RezervacijaRadnik {
 					{
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju();
-					   r.showWindow(number, button, panel_1);
+					   Date d= (Date)spinner.getValue();
+						int sati = (Integer)d.getHours();
+						int minute= (Integer)d.getMinutes();
+							
+					   r.showWindow(number, button, panel_1,dateChooser,sati,minute);
 					}
 					else if(background==Color.orange)
 					{
