@@ -1,8 +1,7 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
 
-
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Validacija;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -64,10 +63,12 @@ public class Radnici {
 	 */
 	public Radnici() {
 		initialize();
+		textField.setInputVerifier(new Validacija(frame, textField, "Ime mora biti dugo bar 3 slova, prvo slovo veliko\n"," "));
 	}
 	
 	public Radnici(Restoran r) {
 		initialize();
+		textField.setInputVerifier(new Validacija(frame, textField, "Ime mora biti dugo bar 3 slova, prvo slovo veliko\n"," "));
 		handler = r;
 	}
 

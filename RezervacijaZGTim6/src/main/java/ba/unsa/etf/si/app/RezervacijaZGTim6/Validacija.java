@@ -4,7 +4,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import java.util.regex.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Component;
@@ -13,7 +12,6 @@ import java.awt.event.KeyEvent;
 public class Validacija extends AbstractValidacija {
 
 	public Validacija(JFrame frame, Component component, String message) {
-	    // TODO Auto-generated constructor stub
 	    super(frame, component, message);
     }	
 	
@@ -23,9 +21,14 @@ public class Validacija extends AbstractValidacija {
 	
 	public Validacija(JFrame parent, JComponent c, String message) {
 		super(parent, c, message);
-	}	
+	}
 	
-	/*public boolean textboxEmpty(JTextField t)
+	public Validacija(JFrame parent, JComponent c, String message, String dodatno){
+		  super(parent, c, message, dodatno);
+	  }
+	
+	/* Adna
+	public boolean textboxEmpty(JTextField t)
 	{
 		if (t.getText().equals(""))
 			return false;
@@ -68,7 +71,7 @@ public class Validacija extends AbstractValidacija {
 	public Boolean ValidacijaJMBG(String jmbg) { 
 		List<Integer> jmbgList = new ArrayList<Integer>();
 		for(char ch : jmbg.toCharArray()) {
-		    jmbgList.add( Integer.valueOf(String.valueOf(ch)));
+		    jmbgList.add(Integer.valueOf(String.valueOf(ch)));
 		}
 		if (jmbgList.size()!= 13)
             return false;
@@ -103,10 +106,9 @@ public class Validacija extends AbstractValidacija {
 		
 	}
 
-	@Override
-	protected Boolean ValidacijaDefinition(JComponent c) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Boolean ValidacijaDefinition(JComponent c, String tekst) {
+		if(tekst.equals("JMBG")) return ValidacijaJMBG(((JTextField)c).getText());
+	    return ValidacijaTekst(((JTextField)c).getText());
 	}
 	
 }

@@ -13,6 +13,7 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
     private Color color;
     private Point point;
     private Dimension dimension;
+    protected String dodatno;
 	
     private AbstractValidacija() {
         color = new Color(255, 224, 255);
@@ -52,11 +53,18 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
 	    component.addKeyListener(this);
 	    messageLabel = new JLabel(message + " ");
 	    image = new JLabel(new ImageIcon("exception_16x16.png"));
-		
 	}
-
-	protected abstract Boolean ValidacijaDefinition(JComponent c);
-	protected abstract Boolean ValidacijaPolje(String polje);
+	
+	protected AbstractValidacija(JFrame parent, JComponent c, String message, String dodatno) {
+        this(c, message);
+        this.parent = parent;
+        popup = new JDialog(parent);
+        this.dodatno = dodatno;
+        initComponents();
+    }
+	
+	//protected abstract Validacija ValidacijaDefinition(JComponent c);
+	//protected abstract Boolean ValidacijaPolje(String polje);
 	protected abstract Boolean ValidacijaTekst(String tekst);
     protected abstract Boolean ValidacijaIme(String ime);
     protected abstract Boolean ValidacijaPrezime(String prezime);
@@ -72,8 +80,10 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
         popup.setFocusableWindowState(false);
     }
     
-    public boolean verify(JComponent c) {		
-        if (!ValidacijaDefinition(c)) {
+    /* Anesa popraviti
+    public boolean verify(JComponent c) {	
+    	Validacija validacija = ValidacijaDefinition(c);
+        if (validacija.getErrorType() == Validacija.NO_ERROR) {
             c.setBackground(Color.RED);
             popup.setSize(0, 0);
             popup.setLocationRelativeTo(c);
@@ -87,5 +97,5 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
         
         c.setBackground(Color.WHITE);
         return true;
-    }
+    }*/
 }
