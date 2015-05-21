@@ -18,7 +18,8 @@ public static void main(String[] args)
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try 
+				{
 					LoginScreen window = new LoginScreen(ZmajevoGnijezdo);
 					window.getFrmPrijavaKorisnika().setVisible(true);
 				} catch (Exception e) {

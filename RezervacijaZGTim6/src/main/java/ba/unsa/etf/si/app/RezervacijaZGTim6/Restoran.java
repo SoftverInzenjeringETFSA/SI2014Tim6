@@ -2,6 +2,7 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 public class Restoran
@@ -10,9 +11,18 @@ public class Restoran
 	ArrayList<Gost> gosti;//treba new Gosti
 	ArrayList<Rezervacija> rezervacije;
 	ArrayList<Sto> stolovi;
+	ArrayList<ZauzetiSto> rezervisanistolovi;
 	Korisnik korisnik;
 	
-	private Restoran() {}
+	private Restoran() 
+	{
+		gosti = new ArrayList<Gost>();
+		gosti = Gost.listaGostiju();
+		rezervacije = new ArrayList<Rezervacija>();
+		stolovi = new ArrayList<Sto>();
+		stolovi = Sto.listaStolova();
+		rezervisanistolovi = new ArrayList<ZauzetiSto>();
+	}
 	
 	//Singleton
 	public static Restoran getInstance()
@@ -55,13 +65,7 @@ public class Restoran
 
 	private boolean SlobodanSto(Sto s, Date datumvrijeme)
 	{
-		//nece biti ovako imacemo klasu rezervisani stolovi;
-		//for(Rezervacija r : rezervacije)
-		//{
-			//Date d1 = r.getDatumIVrijemeRezervacije();
-			//Dodaj minute rezervacije
-			//Date d2 = r.getDatumIVrijemeRezervacije();
-		//}
+		
 		return false;
 	}
 	

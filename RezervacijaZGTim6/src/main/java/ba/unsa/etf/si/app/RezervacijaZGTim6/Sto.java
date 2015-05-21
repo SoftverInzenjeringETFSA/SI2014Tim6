@@ -1,9 +1,14 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class Sto implements Serializable
 {
@@ -70,6 +75,29 @@ public class Sto implements Serializable
 		session.close();
 	}
 	
+	/* Method to list all the employees detail */
+   public static ArrayList<Sto> listaStolova( ){
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      ArrayList<Sto> lista = new ArrayList<Sto>();
+      Transaction tx = null;
+      
+      try{
+         tx = session.beginTransaction();
+         List stolovi = session.createQuery("FROM Sto").list(); 
+         for (Iterator iterator1 = stolovi.iterator(); iterator1.hasNext();)
+         {
+            Sto sto = (Sto)iterator1.next(); 
+            lista.add(sto);
+         }
+         tx.commit();
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+      }finally {
+         session.close(); 
+      }
+      return lista;
+   }
 	@Override
 	public String toString() {
 		return "Sto [ID=" + ID + ", OznakaStola=" + OznakaStola

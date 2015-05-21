@@ -1,9 +1,13 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -67,6 +71,30 @@ public class Gost implements Serializable
 		BrojTelefona = temp.BrojTelefona;
 		session.close();
 	}
+	
+	public static ArrayList<Gost> listaGostiju()
+	{
+	      Session session = HibernateUtil.getSessionFactory().openSession();
+	      ArrayList<Gost> lista = new ArrayList<Gost>();
+	      Transaction tx = null;
+	      
+	      try{
+	         tx = session.beginTransaction();
+	         List gosti = session.createQuery("FROM Gost").list(); 
+	         for (Iterator iterator1 = gosti.iterator(); iterator1.hasNext();)
+	         {
+	            Gost gost = (Gost)iterator1.next(); 
+	            lista.add(gost);
+	         }
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	         }
+	      return lista;
+	 }
 	
 	@Override
 	public String toString() {

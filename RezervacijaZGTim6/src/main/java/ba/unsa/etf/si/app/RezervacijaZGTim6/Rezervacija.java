@@ -2,7 +2,10 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -14,19 +17,22 @@ public class Rezervacija implements Serializable
 	long IdRadnika;
 	Integer BrojGostiju;
 	String StatusRezervacije;
-	Date DatumIVrijemeRezervacije;
+	Date DatumRezervacije;
+	Time VrijemeRezervacije;
+	
 	Integer TrajanjeRezervacijeMinute;
 	
 	//Konstruktori
 	public Rezervacija() {}
-	public Rezervacija(long id, long idgosta, long idradnika, Integer brojgostiju, String status, Date datumivrijeme, Integer trajanje) throws Exception
+	public Rezervacija(long id, long idgosta, long idradnika, Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
 	{
 		setID(id);
 		setIdGosta(idgosta);
 		setIdRadnika(idradnika);
 		setBrojGostiju(brojgostiju);
+		setDatumRezervacije(datum);
+		setVrijemeRezervacije(vrijeme);
 		setStatusRezervacije(status);
-		setDatumIVrijemeRezervacije(datumivrijeme);
 		setTrajanjeRezervacijeMinute(trajanje);
 	}
 	
@@ -35,8 +41,9 @@ public class Rezervacija implements Serializable
 	public long getIdGosta() {  return IdGosta;  }
 	public long getIdRadnika() {  return IdRadnika;  }
 	public Integer getBrojGostiju() {  return BrojGostiju;  }
+	public Date getDatumRezervacije() {  return DatumRezervacije;  }
+	public Time getVrijemeRezervacije() {  return VrijemeRezervacije;  }
 	public String getStatusRezervacije() {  return StatusRezervacije;  }
-	public Date getDatumIVrijemeRezervacije() {  return DatumIVrijemeRezervacije;  }
 	public Integer getTrajanjeRezervacijeMinute() {  return TrajanjeRezervacijeMinute;  }
 	
 	//Seteri
@@ -44,8 +51,9 @@ public class Rezervacija implements Serializable
 	public void setIdGosta(long idGosta) {  IdGosta = idGosta;  }
 	public void setIdRadnika(long idRadnika) {  IdRadnika = idRadnika;  }
 	public void setBrojGostiju(Integer brojGostiju) {  BrojGostiju = brojGostiju;  }
+	public void setDatumRezervacije(Date datumRezervacije) {  DatumRezervacije = datumRezervacije;  }
 	public void setStatusRezervacije(String statusRezervacije) {  StatusRezervacije = statusRezervacije;  }
-	public void setDatumIVrijemeRezervacije(Date datumIVrijemeRezervacije) {  DatumIVrijemeRezervacije = datumIVrijemeRezervacije;  }
+	public void setVrijemeRezervacije(Time vrijemeRezervacije) {  VrijemeRezervacije = vrijemeRezervacije;  }
 	public void setTrajanjeRezervacijeMinute(Integer trajanjeRezervacijeMinute) throws Exception
 	{
 		if(trajanjeRezervacijeMinute > 1440) throw new Exception("Nemoguce izvrsiti rezervaciju za vise od 24 sata!");
@@ -63,9 +71,28 @@ public class Rezervacija implements Serializable
 		session.close();
 	}
 	
-	public void ocitajRezervaciju(long id) throws Exception 
+	/*public void ocitajKorisnka(String user) throws Exception 
 	{
+		Date d = new Date();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		String hql = "FROM Rezervacija R WHERE R.DatumRezervacije = ";//'" + sdf.format() + "'";
+		Query query = session.createQuery(hql);
+		query.setParameter("user", user);
+		Korisnik temp = (Korisnik)query.uniqueResult();
+		
+		if(temp != null)
+		{
+			ID = temp.ID;
+			IdRadnika = temp.IdRadnika;
+		}
+		
+		session.close();
+	}*/
+	
+	public void ocitajRezervaciju(long id) throws Exception 
+	{	
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Rezervacija temp = (Rezervacija) session.get(Rezervacija.class, id);
 		ID = temp.ID;
@@ -73,17 +100,10 @@ public class Rezervacija implements Serializable
 		IdRadnika = temp.IdRadnika;
 		BrojGostiju = temp.BrojGostiju;
 		StatusRezervacije = temp.StatusRezervacije;
-		DatumIVrijemeRezervacije = temp.DatumIVrijemeRezervacije;
+		DatumRezervacije = temp.DatumRezervacije;
+		VrijemeRezervacije = temp.VrijemeRezervacije;
 		TrajanjeRezervacijeMinute = temp.TrajanjeRezervacijeMinute;
 	}
-	@Override
-	public String toString() {
-		return "Rezervacija [ID=" + ID + ", IdGosta=" + IdGosta
-				+ ", IdRadnika=" + IdRadnika + ", BrojGostiju=" + BrojGostiju
-				+ ", StatusRezervacije=" + StatusRezervacije
-				+ ", DatumIVrijemeRezervacije=" + DatumIVrijemeRezervacije
-				+ ", TrajanjeRezervacijeMinute=" + TrajanjeRezervacijeMinute
-				+ "]";
-	}
+
 	
 }
