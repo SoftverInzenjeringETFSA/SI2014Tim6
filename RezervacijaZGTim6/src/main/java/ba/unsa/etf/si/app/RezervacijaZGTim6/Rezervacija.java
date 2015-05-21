@@ -27,10 +27,24 @@ public class Rezervacija implements Serializable
 	
 	//Konstruktori
 	public Rezervacija() {}
-	public Rezervacija(long id, long idgosta, long idradnika, Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
+	
+	public Rezervacija(long id, long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
 	{
 		setID(id);
 		setIdGosta(idgosta);
+		setIdStola(idstola);
+		setIdRadnika(idradnika);
+		setBrojGostiju(brojgostiju);
+		setDatumRezervacije(datum);
+		setVrijemeRezervacije(vrijeme);
+		setStatusRezervacije(status);
+		setTrajanjeRezervacijeMinute(trajanje);
+	}
+	
+	public Rezervacija(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
+	{
+		setIdGosta(idgosta);
+		setIdStola(idstola);
 		setIdRadnika(idradnika);
 		setBrojGostiju(brojgostiju);
 		setDatumRezervacije(datum);
@@ -41,6 +55,7 @@ public class Rezervacija implements Serializable
 	
 	//Geteri
 	public long getID() {  return ID;  }
+	public long getIdStola() {  return IdStola;  }
 	public long getIdGosta() {  return IdGosta;  }
 	public long getIdRadnika() {  return IdRadnika;  }
 	public Integer getBrojGostiju() {  return BrojGostiju;  }
@@ -48,9 +63,10 @@ public class Rezervacija implements Serializable
 	public Time getVrijemeRezervacije() {  return VrijemeRezervacije;  }
 	public String getStatusRezervacije() {  return StatusRezervacije;  }
 	public Integer getTrajanjeRezervacijeMinute() {  return TrajanjeRezervacijeMinute;  }
-	
+
 	//Seteri
 	public void setID(long iD) {  ID = iD;  }
+	public void setIdStola(long idStola) {  IdStola = idStola;  }
 	public void setIdGosta(long idGosta) {  IdGosta = idGosta;  }
 	public void setIdRadnika(long idRadnika) {  IdRadnika = idRadnika;  }
 	public void setBrojGostiju(Integer brojGostiju) {  BrojGostiju = brojGostiju;  }

@@ -97,6 +97,36 @@ public class NapraviRezervaciju {
 	public NapraviRezervaciju(Restoran r) {
 		initialize();
 		handler = r;
+
+	}
+	
+	private void PopuniTabeluKorisnika()
+	{
+		String col[] = {"Pos","Team","P", "W", "L", "D", "MP", "GF", "GA", "GD"};
+
+		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+		                                            // The 0 argument is number rows.
+
+		JTable table = new JTable(tableModel);
+/*
+		for (int i = 0; i < originalLeagueList.size(); i++){
+			   int position = originalLeagueList.get(i).getPosition();
+			   String name = originalLeagueList.get(i).getName();
+			   int points = originalLeagueList.get(i).getPoinst();
+			   int wins = originalLeagueList.get(i).getWins();
+			   int defeats = originalLeagueList.get(i).getDefeats();
+			   int draws = originalLeagueList.get(i).getDraws();
+			   int totalMatches = originalLeagueList.get(i).getTotalMathces();
+			   int goalF = originalLeagueList.get(i).getGoalF();
+			   int goalA = originalLeagueList.get(i).getGoalA();
+			   in ttgoalD = originalLeagueList.get(i).getTtgoalD();
+
+			   Object[] data = {position, name, points, wins, defeats, draws, 
+			                               totalMatches, goalF, goalA, ttgoalD};
+
+			   tableModel.add(data);
+
+			}*/
 	}
 
 	/**

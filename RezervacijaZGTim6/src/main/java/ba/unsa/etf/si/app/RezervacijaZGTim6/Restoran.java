@@ -1,6 +1,7 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
@@ -54,11 +55,30 @@ public class Restoran
 		return true;
 	}
 	
+	public ArrayList<Gost> DajGoste()
+	{
+		return gosti;
+	}
+	
+	public ArrayList<Sto> DajStolove()
+	{
+		return stolovi;
+	}
+	
 	public void DodajGosta(String ime, String prezime, String telefon) throws Exception
 	{
 		Gost g = new Gost(ime, prezime, telefon);
 		g.dodajGosta();
 		gosti.add(g);
+	}
+	
+	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
+	{
+		Sto s = new Sto();
+		s.ocitajSto(idstola);
+		Rezervacija r = new Rezervacija(idgosta, idradnika,idstola, s.getKapacitet(), status, datum, vrijeme, trajanje);
+		r.dodajRezervaciju();
+		rezervacije.add(r);	
 	}
 	
 	public ArrayList<Rezervacija> ListaRezervacija(java.util.Date datum, Integer sati, Integer minute) throws Exception
