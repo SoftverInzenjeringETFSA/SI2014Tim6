@@ -29,6 +29,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.util.Properties;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
@@ -38,10 +39,23 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 
+import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
+
+import net.sourceforge.jdatepicker.JDatePicker;
+import net.sourceforge.jdatepicker.impl.DateComponentFormatter;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.toedter.calendar.JDateChooser;
+
 
 public class Izvjestaji {
 
 	private JFrame frame;
+	private JDatePicker datum;
 
 	/**
 	 * Launch the application.
@@ -78,6 +92,7 @@ public class Izvjestaji {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		
+				
 		JLabel lblNewLabel = new JLabel("Izvje\u0161taji");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
@@ -90,43 +105,55 @@ public class Izvjestaji {
 		JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
 		rdbtnVipKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel lblZaMjesec = new JLabel("Za mjesec:");
+		JLabel lblZaMjesec = new JLabel("Za period:");
 		lblZaMjesec.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		JList list = new JList();
-		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Januar", "Februar", "Mart", "April", "Maj", "Juni ", "Juli ", "August", "Septembar", "Oktorab", "Novembar", "Decembar"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		
 		JButton btnGenerisi = new JButton("Generiši");
 		btnGenerisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel("Od:");
+		lblNewJgoodiesLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JLabel lblNewJgoodiesLabel_1 = DefaultComponentFactory.getInstance().createLabel("Do:");
+		lblNewJgoodiesLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JDateChooser dateChooser = new JDateChooser();
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
 		GroupLayout groupLayout = new GroupLayout(getIzvjestaji().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblGenerisatiPo)
-								.addComponent(rdbtnSvimKlijentima)
-								.addComponent(rdbtnVipKlijentima))
-							.addGap(70)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblZaMjesec)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addComponent(btnGenerisi)
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(156, Short.MAX_VALUE))
+								.addComponent(lblNewLabel)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblGenerisatiPo)
+										.addComponent(rdbtnSvimKlijentima)
+										.addComponent(rdbtnVipKlijentima))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(90)
+											.addComponent(lblZaMjesec))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(82)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(lblNewJgoodiesLabel)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(lblNewJgoodiesLabel_1)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnGenerisi)))
+					.addContainerGap(138, GroupLayout.PREFERRED_SIZE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -139,15 +166,20 @@ public class Izvjestaji {
 						.addComponent(lblGenerisatiPo)
 						.addComponent(lblZaMjesec))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(rdbtnSvimKlijentima)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(rdbtnVipKlijentima))
-						.addComponent(list))
-					.addGap(26)
+						.addComponent(lblNewJgoodiesLabel)
+						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewJgoodiesLabel_1)
+						.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(33)
 					.addComponent(btnGenerisi)
-					.addContainerGap(45, Short.MAX_VALUE))
+					.addContainerGap(177, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		
@@ -161,7 +193,7 @@ public class Izvjestaji {
 		});
 		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(22, 328, 89, 23);
+		btnOdjava.setBounds(22, 328, 107, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
