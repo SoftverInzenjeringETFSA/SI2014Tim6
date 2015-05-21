@@ -29,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import java.awt.SystemColor;
 
@@ -44,6 +45,7 @@ import java.sql.Time;
 
 
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -136,17 +138,23 @@ public class NapraviRezervaciju {
 		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDodajKlijenta.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
-		
-		
-		SpinnerModel model = new SpinnerDateModel();
-		JSpinner spinner = new JSpinner(model);
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		//spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 	//	JSpinner timeSpinner = new JSpinner(model);
-		JComponent editor = new JSpinner.DateEditor(spinner, "HH:mm:ss");
-		spinner.setEditor(editor);
+		//JComponent editor = new JSpinner.DateEditor(spinner, "HH:mm:ss");
+		//spinner.setEditor(editor);
 		
 		Format timeFormat = new SimpleDateFormat("HH:mm:ss");
-		//spinner.setValue("11:11:11");
+	
+		MaskFormatter mF= new MaskFormatter();
+		try {
+			 mF = new MaskFormatter("##:##:##");
+			mF.setPlaceholderCharacter('_');
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField(mF);
 		
 		GroupLayout groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -165,21 +173,21 @@ public class NapraviRezervaciju {
 								.addComponent(btnDodajRezervaciju)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblVrijeme)
-									.addGap(18)
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
 							.addContainerGap())
 						.addComponent(lblNewLabel)))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVrijeme)
-						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(23)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
@@ -188,7 +196,7 @@ public class NapraviRezervaciju {
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnDodajRezervaciju)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		
 		table = new JTable();
