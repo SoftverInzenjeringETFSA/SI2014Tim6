@@ -4,6 +4,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 //import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ public class Validacija extends AbstractValidacija {
 	    return ValidacijaTekst( ((JTextField)c).getText());
 	}
 	
-	public boolean textboxEmpty(JTextField t)
+	/*public boolean textboxEmpty(JTextField t)
 	{
 		if (t.getText().equals(""))
 			return false;
@@ -44,8 +45,24 @@ public class Validacija extends AbstractValidacija {
 		}
 		else
 			return true;
+	}*/
+	
+	// Validacija polja
+	public Boolean ValidacijaPolje(String polje)
+	{
+		return !polje.isEmpty();
 	}
 	
+	// Validacija teksta
+	public static final Pattern validTekst= Pattern.compile("/^[a-z ,.'-]+$/i", Pattern.CASE_INSENSITIVE);
+	public Boolean ValidacijaTekst(String tekst)
+	{
+		if(!ValidacijaPolje(tekst)) return false;
+		Matcher matcher = validTekst.matcher(tekst);
+        return matcher.find();
+	}
+	
+	// Validacija telefon
 	// ToDo - Pattern za telefon promijeniti zbog '\'
 	public static final Pattern validanTelefon = Pattern.compile("(0\\d{2})\\d{3}-\\d{3}");
 	
@@ -56,7 +73,6 @@ public class Validacija extends AbstractValidacija {
 	}*/
 	
 	public Boolean ValidacijaJMBG(String jmbg) { return true; } // poslije impl
-	public Boolean ValidacijaTekst(String tekst) { return true; } // poslije impl
 
 	@Override
 	public boolean verify(JComponent input) {

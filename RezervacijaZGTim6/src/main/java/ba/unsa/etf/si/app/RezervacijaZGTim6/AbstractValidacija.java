@@ -12,8 +12,8 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
     private JLabel messageLabel;
     private JLabel image;
     private Color color;
-    //private Point point;
-    //private Dimension dimension;
+    private Point point;
+    private Dimension dimension;
 	
     private AbstractValidacija() {
         color = new Color(255, 224, 255);
@@ -57,7 +57,8 @@ public abstract class AbstractValidacija extends InputVerifier implements KeyLis
 	}
 
 	//protected abstract boolean validationCriteria(JComponent c);
-	//protected abstract Boolean ValidacijaTekst(String tekst);
+	protected abstract Boolean ValidacijaPolje(String polje);
+	protected abstract Boolean ValidacijaTekst(String tekst);
     //protected abstract Boolean ValidacijaImePrezime(String imePrezime);
     //protected abstract Boolean ValidacijaTelefon(String mail);
     protected abstract Boolean ValidacijaJMBG(String JMBG);
