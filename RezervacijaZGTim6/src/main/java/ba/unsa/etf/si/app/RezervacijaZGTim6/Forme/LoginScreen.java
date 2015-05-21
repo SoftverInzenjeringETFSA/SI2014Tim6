@@ -15,10 +15,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class LoginScreen {
@@ -100,6 +103,7 @@ public class LoginScreen {
 					 }
 					 else if(handler.getPristup()==2)//otvori formu radnika
 					 {
+						 
 						 frmPrijavaKorisnika.dispose();
 						 RezervacijaRadnik f = new RezervacijaRadnik(handler);
 						 f.getRezervacijaRadnik().setVisible(true); 

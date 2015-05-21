@@ -27,6 +27,7 @@ public class Restoran
 		}
 		stolovi = new ArrayList<Sto>();
 		stolovi = Sto.listaStolova();
+		
 		/*for (Iterator iterator1 = rezervacije.iterator(); iterator1.hasNext();)
         {
          x  System.out.println(iterator1.next()); 

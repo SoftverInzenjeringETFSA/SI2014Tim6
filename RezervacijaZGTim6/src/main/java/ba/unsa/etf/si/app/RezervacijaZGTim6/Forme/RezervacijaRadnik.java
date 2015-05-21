@@ -87,8 +87,8 @@ public class RezervacijaRadnik {
 	}
 	
 	public RezervacijaRadnik(Restoran r) {
-		initialize();
 		handler = r;
+		initialize();
 	}
 	
 
@@ -231,13 +231,13 @@ public class RezervacijaRadnik {
 		//Ispod je hardcoded primjer
 		
 		Date d =(Date)spinner.getValue();
-		ArrayList<Rezervacija> rezervacije=new ArrayList<Rezervacija>();
-		ArrayList<Sto> stolovi= new ArrayList<Sto>();
+		//ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
+		ArrayList<Sto> stolovi = new ArrayList<Sto>();
 	    Integer numberOfTables;
 		try
 		{
 	   
-			rezervacije = handler.ListaRezervacija(dateChooser.getDate(),(Integer)d.getHours(), (Integer)d.getMinutes());
+	//		rezervacije = handler.ListaRezervacija(dateChooser.getDate(),(Integer)d.getHours(), (Integer)d.getMinutes());
 		    stolovi= handler.DajStolove();
 			
 		}catch(Exception e)
@@ -245,6 +245,8 @@ public class RezervacijaRadnik {
 		  System.out.println(e.getMessage());	
 		}
 		
+		for(Iterator i =stolovi.iterator();i.hasNext();)
+			System.out.println(i.next());
 		
 		panel_1.removeAll(); // da ukloni postojece stolove, ako ih ima
 		

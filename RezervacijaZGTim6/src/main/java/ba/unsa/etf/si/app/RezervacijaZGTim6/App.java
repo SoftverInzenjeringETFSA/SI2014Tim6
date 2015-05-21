@@ -2,7 +2,9 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.awt.EventQueue;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import org.hibernate.Transaction;
@@ -15,6 +17,7 @@ public class App {
 public static void main(String[] args)
 {
 	final Restoran ZmajevoGnijezdo = Restoran.getInstance();
+
 	try {
 		
 		EventQueue.invokeLater(new Runnable() {
