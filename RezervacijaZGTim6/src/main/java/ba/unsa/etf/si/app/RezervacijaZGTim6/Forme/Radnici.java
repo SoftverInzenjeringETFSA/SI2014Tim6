@@ -33,12 +33,15 @@ import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 public class Radnici {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
+	private Restoran handler;
 
 	/**
 	 * Launch the application.
@@ -61,6 +64,11 @@ public class Radnici {
 	 */
 	public Radnici() {
 		initialize();
+	}
+	
+	public Radnici(Restoran r) {
+		initialize();
+		handler = r;
 	}
 
 	/**

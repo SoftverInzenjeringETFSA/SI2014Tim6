@@ -1,4 +1,4 @@
-package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
+	package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
 
 import java.awt.EventQueue;
 
@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,7 +24,7 @@ public class DodavanjeKlijentaRadnik {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-
+	private Restoran handler;
 	/**
 	 * Launch the application.
 	 */
@@ -43,6 +46,11 @@ public class DodavanjeKlijentaRadnik {
 	 */
 	public DodavanjeKlijentaRadnik() {
 		initialize();
+	}
+	
+	public DodavanjeKlijentaRadnik(Restoran r) {
+		initialize();
+		handler = r;
 	}
 
 	/**
@@ -75,6 +83,12 @@ public class DodavanjeKlijentaRadnik {
 		JButton btnDodajKlijenta = new JButton("Dodaj Klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					handler.DodajGosta(textField.getText(), textField_1.getText(), textField_2.getText());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				frame.dispose();
 			}
 		});

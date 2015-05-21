@@ -34,6 +34,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 public class KlijentiDodavanje {
 
@@ -41,6 +43,7 @@ public class KlijentiDodavanje {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private Restoran handler;
 
 	/**
 	 * Launch the application.
@@ -63,6 +66,11 @@ public class KlijentiDodavanje {
 	 */
 	public KlijentiDodavanje() {
 		initialize();
+	}
+	
+	public KlijentiDodavanje(Restoran r) {
+		initialize();
+		handler = r;
 	}
 
 	/**

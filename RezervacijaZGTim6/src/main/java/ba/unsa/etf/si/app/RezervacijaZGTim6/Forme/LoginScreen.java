@@ -94,14 +94,14 @@ public class LoginScreen {
 					 if(handler.getPristup() == 1) //otvori formu sefa
 					 {
 						 frmPrijavaKorisnika.dispose();
-						 Radnici f = new Radnici();
+						 Radnici f = new Radnici(handler);
 						 f.getRadnici().setVisible(true);
 							
 					 }
 					 else if(handler.getPristup()==2)//otvori formu radnika
 					 {
 						 frmPrijavaKorisnika.dispose();
-						 NapraviRezervaciju f = new NapraviRezervaciju();
+						 NapraviRezervaciju f = new NapraviRezervaciju(handler);
 						 f.getNapraviRezervaciju().setVisible(true); 
 					 }
 					 else //error cudna greska

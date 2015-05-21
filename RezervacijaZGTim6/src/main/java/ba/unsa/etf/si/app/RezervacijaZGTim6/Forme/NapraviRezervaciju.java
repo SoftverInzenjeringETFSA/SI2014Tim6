@@ -34,6 +34,8 @@ import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 public class NapraviRezervaciju {
 
@@ -42,6 +44,7 @@ public class NapraviRezervaciju {
 	private JTable table;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private Restoran handler;
 
 	/**
 	 * Launch the application.
@@ -64,6 +67,11 @@ public class NapraviRezervaciju {
 	 */
 	public NapraviRezervaciju() {
 		initialize();
+	}
+	
+	public NapraviRezervaciju(Restoran r) {
+		initialize();
+		handler = r;
 	}
 
 	/**
@@ -115,7 +123,7 @@ public class NapraviRezervaciju {
 		JButton btnDodajKlijenta = new JButton("Dodaj klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik();
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
 			}
 		});

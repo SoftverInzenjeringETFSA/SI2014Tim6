@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Restoran
 {	
 	private static volatile Restoran restoran = null;
-	ArrayList<Gost> gosti;
+	ArrayList<Gost> gosti;//treba new Gosti
 	ArrayList<Rezervacija> rezervacije;
 	ArrayList<Sto> stolovi;
 	Korisnik korisnik;
@@ -17,7 +17,7 @@ public class Restoran
 	//Singleton
 	public static Restoran getInstance()
 	{
-		if(restoran == null) restoran = new Restoran();
+		if(restoran == null)  restoran = new Restoran();
 		return restoran;
 	}
 	
