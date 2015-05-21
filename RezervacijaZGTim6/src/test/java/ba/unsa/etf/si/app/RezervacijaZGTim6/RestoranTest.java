@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 public class RestoranTest extends TestCase {
 
 	public void testGetInstance() {
-		assertNotNull(Restoran.getInstance());
+		fail("Not yet implemented");
 	}
 	
 
