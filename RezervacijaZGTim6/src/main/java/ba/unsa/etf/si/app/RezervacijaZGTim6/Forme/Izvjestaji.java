@@ -41,23 +41,21 @@ import javax.swing.JTextArea;
 
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
 
-import net.sourceforge.jdatepicker.JDatePicker;
-import net.sourceforge.jdatepicker.impl.DateComponentFormatter;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JDateChooser;
-import net.sourceforge.jdatepicker.util.JDatePickerUtil;
-import com.toedter.calendar.JCalendar;
+
 
 
 public class Izvjestaji {
 
 	private JFrame frame;
-	private JDatePicker datum;
+	
+	/**
+	 * @wbp.nonvisual location=428,169
+	 */
+	
 
 	/**
 	 * Launch the application.
@@ -129,67 +127,66 @@ public class Izvjestaji {
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(49)
+									.addComponent(lblGenerisatiPo)
+									.addGap(23))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(rdbtnVipKlijentima)
+										.addComponent(rdbtnSvimKlijentima))
+									.addPreferredGap(ComponentPlacement.RELATED)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(95)
+									.addComponent(lblZaMjesec))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(82)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblNewLabel)
-												.addComponent(lblGenerisatiPo))
-											.addGap(139))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblNewJgoodiesLabel_1)
-												.addComponent(lblNewJgoodiesLabel))
-											.addGap(18)))
-									.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblNewJgoodiesLabel_1)
+										.addComponent(lblNewJgoodiesLabel))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-										.addComponent(btnGenerisi, Alignment.TRAILING))
-									.addContainerGap(92, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblZaMjesec)
-									.addGap(196))))
+										.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(rdbtnVipKlijentima)
-								.addComponent(rdbtnSvimKlijentima))
-							.addGap(358))))
+							.addGap(31)
+							.addComponent(btnGenerisi)))
+					.addContainerGap(122, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGap(22)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(65)
-							.addComponent(lblZaMjesec))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(31)
 							.addComponent(lblNewLabel)
-							.addGap(29)
-							.addComponent(lblGenerisatiPo)))
+							.addGap(18)
+							.addComponent(lblGenerisatiPo))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblZaMjesec)
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(15)
+							.addGap(27)
 							.addComponent(rdbtnSvimKlijentima)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGap(26)
 							.addComponent(rdbtnVipKlijentima))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewJgoodiesLabel))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewJgoodiesLabel_1)
-								.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewJgoodiesLabel)
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(31)
-							.addComponent(btnGenerisi)))
-					.addGap(185))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewJgoodiesLabel_1)
+								.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+					.addPreferredGap(ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+					.addComponent(btnGenerisi)
+					.addGap(26))
 		);
 		panel.setLayout(null);
 		
