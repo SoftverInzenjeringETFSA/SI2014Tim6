@@ -88,7 +88,7 @@ public class RezervacijaRadnik {
 		setRezervacijaRadnik(new JFrame());
 		getRezervacijaRadnik().setResizable(false);
 		getRezervacijaRadnik().setBounds(100, 100, 624, 427);
-		getRezervacijaRadnik().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getRezervacijaRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	    frame.setBounds(300, 50, 950, 630);
 		
@@ -155,15 +155,7 @@ public class RezervacijaRadnik {
 							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
-		/*GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 451, Short.MAX_VALUE)
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 299, Short.MAX_VALUE)
-		);*/
+	
 		panel_1.setLayout(new BoxLayout(panel_1,BoxLayout.Y_AXIS));
 		panel.setLayout(null);
 		
@@ -231,7 +223,7 @@ public class RezervacijaRadnik {
 					if(background==Color.red)
 					{
 						
-					 OkupiranSto sto= new OkupiranSto();
+					 RezervisanSto sto= new RezervisanSto();
 						sto.showWindow(number,button, panel_1);
 					}
 					else if(background==Color.green)
@@ -242,7 +234,8 @@ public class RezervacijaRadnik {
 					}
 					else if(background==Color.orange)
 					{
-						
+						OkupiranSto sto = new OkupiranSto();
+						sto.showWindow(number, button,panel_1);
 						
 					}
 					

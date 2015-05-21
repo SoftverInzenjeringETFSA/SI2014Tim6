@@ -60,7 +60,7 @@ public class DodavanjeKlijentaRadnik {
 		setDodavanjeKlijentaRadnik(new JFrame());
 		getDodavanjeKlijentaRadnik().setResizable(false);
 		getDodavanjeKlijentaRadnik().setBounds(100, 100, 450, 300);
-		getDodavanjeKlijentaRadnik().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getDodavanjeKlijentaRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		textField = new JTextField();
 		textField.setColumns(10);

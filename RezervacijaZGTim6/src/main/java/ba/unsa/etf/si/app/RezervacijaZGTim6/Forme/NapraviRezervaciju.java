@@ -17,6 +17,7 @@ import javax.swing.SpinnerModel;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Color;
 
@@ -63,7 +64,9 @@ public class NapraviRezervaciju {
 	private Restoran handler;
 	private JButton prikazStolovaButton;
 	private JPanel prikazStolovaPanel;
-
+	private JLabel reservationText;
+	private Integer clickedTableNumber; // broj kliknutog stola na formi RezervacijaRadnik
+    private GroupLayout groupLayout; // glavni grupni layout
 	/**
 	 * Launch the application.
 	 */
@@ -104,8 +107,12 @@ public class NapraviRezervaciju {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel lblNewLabel = new JLabel("Napravi rezervaciju");
-		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
+		if(clickedTableNumber==null)
+		 reservationText = new JLabel("Napravi rezervaciju");
+		else
+			reservationText=new JLabel("Napravi rezervaciju za stol "+ clickedTableNumber);
+		
+		reservationText.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -123,6 +130,9 @@ public class NapraviRezervaciju {
 			    
 				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
 				//referenci za button i panel promijenit boju stola koji je kliknut
+				prikazStolovaButton.setBackground(Color.red);
+				prikazStolovaPanel.revalidate();
+				prikazStolovaPanel.repaint();
 				
 				
 			}
@@ -156,7 +166,7 @@ public class NapraviRezervaciju {
 		
 		JFormattedTextField formattedTextField = new JFormattedTextField(mF);
 		
-		GroupLayout groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
+		 groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -164,26 +174,24 @@ public class NapraviRezervaciju {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
-									.addComponent(btnDodajKlijenta, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnDodajRezervaciju)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblVrijeme)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
-							.addContainerGap())
-						.addComponent(lblNewLabel)))
+							.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+							.addComponent(btnDodajKlijenta, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnDodajRezervaciju)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblVrijeme)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+						.addComponent(reservationText, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel)
+					.addComponent(reservationText)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVrijeme)
@@ -309,6 +317,9 @@ public class NapraviRezervaciju {
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
 		this.prikazStolovaPanel=panel;
+		clickedTableNumber=tableNumber;
+		
+	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
