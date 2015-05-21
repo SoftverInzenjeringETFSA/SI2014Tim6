@@ -44,6 +44,7 @@ import java.awt.List;
 import javax.swing.JList;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import com.toedter.calendar.JDateChooser;
 
 
 public class RezervacijaRadnik {
@@ -103,9 +104,6 @@ public class RezervacijaRadnik {
 		JLabel lblPromjeniDan = new JLabel("Promijeni dan:");
 		lblPromjeniDan.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JList list = new JList();
-		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
 		JButton btnOsvjei = new JButton("Osvježi");
 		btnOsvjei.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -115,10 +113,13 @@ public class RezervacijaRadnik {
 				
 			}
 		});
+		
+		JDateChooser dateChooser = new JDateChooser();
 		GroupLayout groupLayout = new GroupLayout(getRezervacijaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -130,25 +131,28 @@ public class RezervacijaRadnik {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblPromjeniDan)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
+									.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
 									.addComponent(btnOsvjei)
 									.addGap(10)))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPromjeniDan)
-						.addComponent(list, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnOsvjei))
-					.addGap(18)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblPromjeniDan)
+									.addComponent(btnOsvjei))
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		/*GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -174,7 +178,7 @@ public class RezervacijaRadnik {
 		});
 		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(10, 335, 119, 23);
+		btnOdjava.setBounds(10, 533, 119, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRezervacije = new JButton("Rezervacije");
