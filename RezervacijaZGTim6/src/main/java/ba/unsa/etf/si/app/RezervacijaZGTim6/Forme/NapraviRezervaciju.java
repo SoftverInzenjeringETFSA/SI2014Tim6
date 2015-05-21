@@ -102,7 +102,7 @@ public class NapraviRezervaciju {
 		setNapraviRezervaciju(new JFrame());
 		getNapraviRezervaciju().setResizable(false);
 		getNapraviRezervaciju().setBounds(100, 100, 624, 427);
-		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);

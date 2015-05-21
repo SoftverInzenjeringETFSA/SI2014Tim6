@@ -272,7 +272,7 @@ public class RezervacijaRadnik {
 					if(background==Color.red)
 					{
 						
-					 OkupiranSto sto= new OkupiranSto();
+					 RezervisanSto sto= new RezervisanSto();
 						sto.showWindow(number,button, panel_1);
 					}
 					else if(background==Color.green)
@@ -283,9 +283,12 @@ public class RezervacijaRadnik {
 					}
 					else if(background==Color.orange)
 					{
-						
+						OkupiranSto sto = new OkupiranSto();
+						sto.showWindow(number, button,panel_1);
 						
 					}
+					
+					
 				}
 				
 			});
