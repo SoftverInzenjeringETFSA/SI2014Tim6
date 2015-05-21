@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -96,6 +97,16 @@ public class RezervacijaRadnik {
 		
 		JList list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JButton btnOsvjei = new JButton("Osvježi");
+		btnOsvjei.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				loadButtons();
+				
+				
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(getRezervacijaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -107,25 +118,29 @@ public class RezervacijaRadnik {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 451, Short.MAX_VALUE)
+								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 777, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblPromjeniDan)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))))
+									.addComponent(list, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
+									.addComponent(btnOsvjei)
+									.addGap(10)))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPromjeniDan)
-						.addComponent(list, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+						.addComponent(list, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnOsvjei))
 					.addGap(18)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		/*GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -137,7 +152,7 @@ public class RezervacijaRadnik {
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 299, Short.MAX_VALUE)
 		);*/
-		panel_1.setLayout(new FlowLayout());
+		panel_1.setLayout(new BoxLayout(panel_1,BoxLayout.Y_AXIS));
 		panel.setLayout(null);
 		
 		
@@ -183,11 +198,16 @@ public class RezervacijaRadnik {
 		// je redni broj stola, a boja se postavlja ovisno od trenutnog stanja stola
 		//Ispod je hardcoded primjer
 		
+		panel_1.removeAll(); // da ukloni postojece stolove, ako ih ima
+		
+		JPanel panelOrdinaryTables= new JPanel();
+		panelOrdinaryTables.setLayout(new FlowLayout());
+		panelOrdinaryTables.setBackground(Color.LIGHT_GRAY);
 		for(int i=0;i<50;i++)
 		{
 			JButton b = new JButton("" +(i+1));
 			b.setBackground(Color.red);
-			b.setPreferredSize(new Dimension(60, 60));
+			b.setPreferredSize(new Dimension(70, 60));
 			b.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -206,26 +226,28 @@ public class RezervacijaRadnik {
 					{
 						
 					}
-					//panel.revalidate();
+					
 				}
 				
 			});
-			panel_1.add(b);
+			panelOrdinaryTables.add(b);
 			
 		}
-		panel_1.revalidate();
-		panel_1.repaint();
+		panelOrdinaryTables.setBorder(BorderFactory.createEmptyBorder(10, 10, 200, 10));
 		
-		JPanel panel2= new JPanel();
-		panel2.setLayout(new BoxLayout(panel2,BoxLayout.X_AXIS));
-			
+		panel_1.add(panelOrdinaryTables);
+		
+		
+		JPanel panelVipTables= new JPanel();
+		panelVipTables.setLayout(new FlowLayout());
+		panelVipTables.setBackground(Color.LIGHT_GRAY);
 		//panel_1.add(panel2);
 		
 		for(int i=0;i<10;i++)
 		{
 			JButton b = new JButton("" +(i+1));
 			b.setBackground(Color.red);
-			b.setPreferredSize(new Dimension(60, 60));
+			b.setPreferredSize(new Dimension(70, 60));
 			b.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -248,8 +270,10 @@ public class RezervacijaRadnik {
 				}
 				
 			});
-			panel_1.add(b);
+			panelVipTables.add(b);
 		}
+		
+		panel_1.add(panelVipTables);
 		
 		panel_1.revalidate();
 		panel_1.repaint();
