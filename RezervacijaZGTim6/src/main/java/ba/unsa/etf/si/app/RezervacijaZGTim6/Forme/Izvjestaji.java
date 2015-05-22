@@ -29,6 +29,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.swing.border.BevelBorder;
@@ -41,6 +43,9 @@ import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
+
+
+
 
 
 
@@ -110,12 +115,89 @@ public class Izvjestaji {
 		JLabel lblZaMjesec = new JLabel("Za period:");
 		lblZaMjesec.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+		final JDateChooser dateChooser = new JDateChooser();
+		
+		final JDateChooser dateChooser_1 = new JDateChooser();
+		
+		final JLabel lblDatumOd = new JLabel("");
+		
+		ImageIcon errImg = new ImageIcon("Slike/error.png");
+		
+		JLabel lbl_Od = new JLabel("", errImg, JLabel.CENTER);
+		final JPanel pnlOd = new JPanel();
+		pnlOd.add( lbl_Od, BorderLayout.WEST );
+		pnlOd.setVisible(false);
+		
+		JLabel lbl_Do = new JLabel("", errImg, JLabel.CENTER);
+		final JPanel pnlDo = new JPanel();
+		pnlDo.add( lbl_Do, BorderLayout.WEST );
+		pnlDo.setVisible(false);
+		final Date date = new Date();
+		
 		JButton btnGenerisi = new JButton("Generiši");
+		btnGenerisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				java.sql.Date sqldate = null, sqldate_1 = null, 
+						MIN_DATUM = java.sql.Date.valueOf("2015-01-01"),
+						TODAY_DATE = java.sql.Date.valueOf(date.toString());
+				
+				
+				java.util.Date d = dateChooser.getDate();
+				if (d == null) {
+					pnlOd.setVisible(true);
+				    System.out.println("No date specified!");
+				} else {
+					pnlOd.setVisible(false);
+					sqldate = new java.sql.Date(d.getTime());
+				}
+				
+				java.util.Date dt = dateChooser_1.getDate();
+				if (dt == null) {
+					pnlDo.setVisible(true);
+				    System.out.println("No date specified!");
+				} else {
+					pnlDo.setVisible(false);
+					sqldate_1 = new java.sql.Date(dt.getTime());
+				}
+				
+				if(sqldate_1.after(TODAY_DATE))
+					pnlDo.setVisible(true);
+				else
+				{
+					if(sqldate_1.before(sqldate))
+					{
+						pnlDo.setVisible(true);
+						lblDatumOd.setText("Greška prijatelju.");
+					}
+					else if (!sqldate_1.before(sqldate))
+					{
+						pnlDo.setVisible(false);
+					}
+					
+					if(sqldate.before(MIN_DATUM))
+					{
+						pnlOd.setVisible(true);
+					}
+					else if (sqldate_1.before(MIN_DATUM))
+					{
+						pnlDo.setVisible(true);
+					}
+					else if (!sqldate.before(MIN_DATUM))
+					{
+						pnlOd.setVisible(false);
+					}
+					else if (!sqldate_1.before(MIN_DATUM))
+						pnlDo.setVisible(false);
+				}
+				
+				
+					
+				
+			}
+		});
 		btnGenerisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JDateChooser dateChooser = new JDateChooser();
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
 		
 		//validacija radioButtona-ButtonGroup
 
@@ -131,37 +213,48 @@ public class Izvjestaji {
 		
 		JLabel lblDo = new JLabel("Do:");
 		lblDo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		
+		
 		GroupLayout groupLayout = new GroupLayout(getIzvjestaji().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addComponent(lblNewLabel))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(rdbtnVipKlijentima)
-								.addComponent(rdbtnSvimKlijentima)
-								.addComponent(lblGenerisatiPo))
+								.addComponent(lblNewLabel)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(rdbtnVipKlijentima)
+										.addComponent(rdbtnSvimKlijentima)
+										.addComponent(lblGenerisatiPo))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(95)
+											.addComponent(lblZaMjesec))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(57)
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblOd)
+												.addComponent(lblDo))
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnGenerisi, Alignment.TRAILING))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(pnlOd, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))))))
+							.addContainerGap(121, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(95)
-									.addComponent(lblZaMjesec))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(57)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblOd)
-										.addComponent(lblDo))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnGenerisi, Alignment.TRAILING))))))
-					.addContainerGap(150, Short.MAX_VALUE))
+							.addComponent(lblDatumOd)
+							.addGap(210))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -187,12 +280,18 @@ public class Izvjestaji {
 								.addComponent(rdbtnVipKlijentima)
 								.addComponent(lblDo)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(pnlOd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(dateChooser, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addGap(31)
-							.addComponent(dateChooser_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 					.addGap(26)
 					.addComponent(btnGenerisi)
-					.addContainerGap(149, Short.MAX_VALUE))
+					.addGap(47)
+					.addComponent(lblDatumOd)
+					.addContainerGap(102, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		
