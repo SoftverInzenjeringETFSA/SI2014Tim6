@@ -20,7 +20,7 @@ public static void main(String[] args)
 
 	try {
 		
-		/*	EventQueue.invokeLater(new Runnable() {
+	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try 
 				{
@@ -30,7 +30,7 @@ public static void main(String[] args)
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
 	
 	} 
 	catch (Exception e) 
