@@ -324,21 +324,27 @@ public class NapraviRezervaciju {
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
+		/*
 		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
 		btnOdjava.setBounds(10, 336, 119, 23);
 		panel.add(btnOdjava);
+		
 		
 		JButton btnRadnici = new JButton("Rezervacije");
 		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		
+		
+		
 		JButton btnKlijenti = new JButton("Klijenti");
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 33, 139, 34);
 		panel.add(btnKlijenti);
+		*/
 		getNapraviRezervaciju().getContentPane().setLayout(groupLayout);
+		
 	}
 
 	public JFrame getNapraviRezervaciju() {
