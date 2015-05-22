@@ -202,11 +202,10 @@ public class RezervacijaRadnik {
 		panel.add(btnOdjava);
 		
 		JButton btnRezervacije = new JButton("Rezervacije");
+		btnRezervacije.setEnabled(false);
 		btnRezervacije.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				NapraviRezervaciju f = new NapraviRezervaciju();
-				f.getNapraviRezervaciju().setVisible(true);
+				
 			}
 		});
 		btnRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -214,6 +213,13 @@ public class RezervacijaRadnik {
 		panel.add(btnRezervacije);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				NapraviRezervaciju f = new NapraviRezervaciju();
+				f.getNapraviRezervaciju().setVisible(true);
+			}
+		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
@@ -244,13 +250,16 @@ public class RezervacijaRadnik {
 		{
 		  System.out.println(e.getMessage());	
 		}
-		
-		for(Iterator i =stolovi.iterator();i.hasNext();)
+		JLabel label1 = new JLabel("Obični stolovi");
+		JLabel label2 = new JLabel("VIP stolovi");
+		label1.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
+		label2.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
+		for(Iterator i =rezervacije.iterator();i.hasNext();)
 			System.out.println(i.next());
 		
 		panel_1.removeAll(); // da ukloni postojece stolove, ako ih ima
 		
-		
+
 		JPanel panelOrdinaryTables= new JPanel();
 		panelOrdinaryTables.setLayout(new FlowLayout());
 		panelOrdinaryTables.setBackground(Color.LIGHT_GRAY);
@@ -259,6 +268,7 @@ public class RezervacijaRadnik {
 		panelVipTables.setLayout(new FlowLayout());
 		panelVipTables.setBackground(Color.LIGHT_GRAY);
 				
+		
 		for(Iterator i =stolovi.iterator();i.hasNext();)
 		{
 			Sto s = (Sto)i.next();
@@ -321,10 +331,12 @@ public class RezervacijaRadnik {
 			else panelOrdinaryTables.add(b);
 					
 		}
-		panelOrdinaryTables.setBorder(BorderFactory.createEmptyBorder(10, 10, 200, 10));
+		panelOrdinaryTables.setBorder(BorderFactory.createEmptyBorder(10, 10, 250, 10));
+
 		
+		panel_1.add(label1);
 		panel_1.add(panelOrdinaryTables);
-		
+		panel_1.add(label2);
 		panel_1.add(panelVipTables);
 		
 		panel_1.revalidate();

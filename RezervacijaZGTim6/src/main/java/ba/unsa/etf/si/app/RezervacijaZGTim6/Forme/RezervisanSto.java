@@ -92,6 +92,9 @@ public class RezervisanSto {
 				
 			}});
 		
+		JButton btnOkupiranStol = new JButton("Okupiran stol");
+		btnOkupiranStol.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
 		
 		GroupLayout groupLayout = new GroupLayout(getRezervisanSto().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -113,11 +116,13 @@ public class RezervisanSto {
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnOtkaiReyervaciju)
-							.addGap(38))
-						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblDoIstekaRezervacije)
-							.addGap(37)))
+							.addGap(37))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnOkupiranStol, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnOtkaiReyervaciju))
+							.addGap(38)))
 					.addGap(118))
 		);
 		groupLayout.setVerticalGroup(
@@ -137,7 +142,9 @@ public class RezervisanSto {
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnOtkaiReyervaciju)
-					.addContainerGap(64, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnOkupiranStol, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		
 		JLabel lbldh = new JLabel("1d : 12h : 30m : 45s");
@@ -186,6 +193,4 @@ public class RezervisanSto {
 		});
 	
 	}
-	
-
 }
