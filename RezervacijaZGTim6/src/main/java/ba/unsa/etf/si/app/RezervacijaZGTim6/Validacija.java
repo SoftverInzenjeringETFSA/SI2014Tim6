@@ -46,7 +46,10 @@ public class Validacija extends AbstractValidacija {
 			return true;
 	}*/
 	
-	public Boolean ValidacijaPolje(String polje)
+	/*PREPISANO TREBA RADITI PONOVO
+	 * public Boolean ValidacijaPolje(String polje)
+	 * 
+	 
 	{
 		return !polje.isEmpty();
 	}
@@ -54,7 +57,7 @@ public class Validacija extends AbstractValidacija {
 	public Boolean ValidacijaTekst(String tekst) {
         return tekst.matches("/^[a-z ,.'-]+$/i");
 	}
-	
+	*/
 	public Boolean ValidacijaIme(String ime) {
 		return ime.matches("^[A-Z]{1}[a-z]{2,}$");
 	}
@@ -67,7 +70,7 @@ public class Validacija extends AbstractValidacija {
 	public Boolean ValidacijaTelefon(String telefon) {
 		return telefon.matches("(0\\d{2})\\d{3}-\\d{3}");
 	}
-	
+	/* PONOVO PREPISANO
 	public Boolean ValidacijaJMBG(String jmbg) { 
 		List<Integer> jmbgList = new ArrayList<Integer>();
 		for(char ch : jmbg.toCharArray()) {
@@ -111,4 +114,4 @@ public class Validacija extends AbstractValidacija {
 	    return ValidacijaTekst(((JTextField)c).getText());
 	}
 	
-}
+}*/

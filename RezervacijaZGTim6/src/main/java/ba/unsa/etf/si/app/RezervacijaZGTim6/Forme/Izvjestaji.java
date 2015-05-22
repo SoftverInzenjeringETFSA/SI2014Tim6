@@ -32,6 +32,7 @@ import java.awt.SystemColor;
 import java.util.Properties;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.ButtonGroup;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -40,6 +41,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
+
 
 
 
@@ -115,6 +117,15 @@ public class Izvjestaji {
 		
 		JDateChooser dateChooser_1 = new JDateChooser();
 		
+		//validacija radioButtona-ButtonGroup
+
+			ButtonGroup bg1 = new ButtonGroup( );
+
+			bg1.add(rdbtnVipKlijentima);
+			bg1.add(rdbtnSvimKlijentima);
+		
+
+				
 		JLabel lblOd = new JLabel("Od:");
 		lblOd.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
