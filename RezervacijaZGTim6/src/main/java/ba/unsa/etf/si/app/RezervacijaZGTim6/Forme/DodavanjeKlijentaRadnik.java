@@ -96,28 +96,33 @@ public class DodavanjeKlijentaRadnik {
 		
 		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje Klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		JLabel lblklijentIme = new JLabel("New label");
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(btnDodajKlijenta))
-						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addComponent(lblDodavanjeKlijenta)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addContainerGap(66, Short.MAX_VALUE)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addComponent(label_1)
-									.addComponent(label)
-									.addComponent(label_2))
-								.addGap(22)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(147, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap(66, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblDodavanjeKlijenta)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(label_1)
+										.addComponent(label)
+										.addComponent(label_2))
+									.addGap(22)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblklijentIme)
+					.addContainerGap(97, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -127,7 +132,8 @@ public class DodavanjeKlijentaRadnik {
 					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label))
+						.addComponent(label)
+						.addComponent(lblklijentIme))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
