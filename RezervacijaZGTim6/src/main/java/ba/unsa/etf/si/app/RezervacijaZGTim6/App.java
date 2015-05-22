@@ -16,11 +16,15 @@ public class App {
 	
 public static void main(String[] args)
 {
-	final Restoran ZmajevoGnijezdo = Restoran.getInstance();
 
 	try {
+		final Restoran ZmajevoGnijezdo = Restoran.getInstance();
 		
+<<<<<<< HEAD
 	EventQueue.invokeLater(new Runnable() {
+=======
+			EventQueue.invokeLater(new Runnable() {
+>>>>>>> 4b3f6c7b0bc6340c09432a482c3088f3477eb62c
 			public void run() {
 				try 
 				{
@@ -31,7 +35,12 @@ public static void main(String[] args)
 				}
 			}
 		});
+<<<<<<< HEAD
 	
+=======
+
+		
+>>>>>>> 4b3f6c7b0bc6340c09432a482c3088f3477eb62c
 	} 
 	catch (Exception e) 
 	{

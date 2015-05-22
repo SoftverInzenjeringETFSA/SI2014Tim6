@@ -14,28 +14,19 @@ public class Restoran
 	ArrayList<Sto> stolovi;
 	Korisnik korisnik;
 	
-	private Restoran() 
+	private Restoran() throws Exception
 	{
 		gosti = new ArrayList<Gost>();
 		gosti = Gost.listaGostiju();
 		rezervacije = new ArrayList<Rezervacija>();
-		try {
-			rezervacije = Rezervacija.listaRezervacijaDatum(new java.util.Date());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		rezervacije = Rezervacija.listaRezervacijaDatum(new java.util.Date());
 		stolovi = new ArrayList<Sto>();
 		stolovi = Sto.listaStolova();
 		
-		/*for (Iterator iterator1 = rezervacije.iterator(); iterator1.hasNext();)
-        {
-         x  System.out.println(iterator1.next()); 
-        }*/
 	}
 	
 	//Singleton
-	public static Restoran getInstance()
+	public static Restoran getInstance() throws Exception
 	{
 		if(restoran == null)  restoran = new Restoran();
 		return restoran;
@@ -90,24 +81,31 @@ public class Restoran
 		datum.setHours(sati);
 		datum.setMinutes(minute);
 		datum.setSeconds(0);
-		
+
+		java.util.Date od_ = new java.util.Date();
+        java.util.Date _do = new java.util.Date();
+        od_ = datum;
+        _do = (java.util.Date)od_.clone();
+		_do.setHours(sati + 3);
+
 		for (Iterator iterator1 = rezervacije.iterator(); iterator1.hasNext();)
         {
-           Rezervacija r = (Rezervacija)iterator1.next(); 
-           java.util.Date od_ = new java.util.Date();
-           java.util.Date _do = new java.util.Date();
-           od_ = datum;
-           _do = datum;
-           
-			od_.setHours(r.getVrijemeRezervacije().getHours());
-			od_.setMinutes(r.getVrijemeRezervacije().getMinutes());
-			od_.setSeconds(0);
 			
-			_do.setHours(r.getVrijemeRezervacije().getHours() + r.getTrajanjeRezervacijeMinute()/60);
-			_do.setMinutes(r.getVrijemeRezervacije().getMinutes()+ r.getTrajanjeRezervacijeMinute()%60);
-			_do.setSeconds(0);
+           Rezervacija r = (Rezervacija)iterator1.next(); 
+        
+           java.util.Date od_r = new java.util.Date();
+           java.util.Date r_do = new java.util.Date();
            
-           if(od_.before(datum) && _do.after(datum))
+           od_r = (java.util.Date)datum.clone();
+           od_r.setHours(r.getVrijemeRezervacije().getHours());
+           od_r.setMinutes(r.getVrijemeRezervacije().getMinutes());
+           
+           r_do = (java.util.Date)datum.clone();
+           r_do.setHours(r.getVrijemeRezervacije().getHours() + r.getTrajanjeRezervacijeMinute() / 60);
+           r_do.setMinutes(r.getVrijemeRezervacije().getMinutes() + r.getTrajanjeRezervacijeMinute() % 60);
+           
+           
+           if((od_r.before(od_) && r_do.after(od_)) || (od_r.after(od_) && od_r.before(_do)))
            {
         	   uOpsegu.add(r);
            }
