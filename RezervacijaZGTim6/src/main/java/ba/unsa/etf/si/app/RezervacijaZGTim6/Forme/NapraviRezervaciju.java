@@ -151,8 +151,10 @@ public class NapraviRezervaciju {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		
+		/*
 		JLabel lblVrijeme = new JLabel("Vrijeme:");
 		lblVrijeme.setFont(new Font("Tahoma", Font.BOLD, 14));
+		*/
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -186,6 +188,7 @@ public class NapraviRezervaciju {
 		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+		/*
 		Format timeFormat = new SimpleDateFormat("HH:mm:ss");
 	
 		MaskFormatter mF= new MaskFormatter();
@@ -198,6 +201,7 @@ public class NapraviRezervaciju {
 		}
 		
 		JFormattedTextField formattedTextField = new JFormattedTextField(mF);
+		*/
 		
 		 groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -213,9 +217,9 @@ public class NapraviRezervaciju {
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDodajRezervaciju)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblVrijeme)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+							//.addComponent(lblVrijeme)
+							.addPreferredGap(ComponentPlacement.UNRELATED))
+							//.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
 						.addComponent(reservationText, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
@@ -227,10 +231,10 @@ public class NapraviRezervaciju {
 					.addComponent(reservationText)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblVrijeme)
-						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						//.addComponent(lblVrijeme)
+						//.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(23)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE))
 						.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDodajKlijenta))
 					.addPreferredGap(ComponentPlacement.RELATED)

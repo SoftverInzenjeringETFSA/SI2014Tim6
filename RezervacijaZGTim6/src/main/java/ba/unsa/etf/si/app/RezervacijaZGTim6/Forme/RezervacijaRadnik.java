@@ -202,11 +202,10 @@ public class RezervacijaRadnik {
 		panel.add(btnOdjava);
 		
 		JButton btnRezervacije = new JButton("Rezervacije");
+		btnRezervacije.setEnabled(false);
 		btnRezervacije.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				NapraviRezervaciju f = new NapraviRezervaciju();
-				f.getNapraviRezervaciju().setVisible(true);
+				
 			}
 		});
 		btnRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -214,6 +213,13 @@ public class RezervacijaRadnik {
 		panel.add(btnRezervacije);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				NapraviRezervaciju f = new NapraviRezervaciju();
+				f.getNapraviRezervaciju().setVisible(true);
+			}
+		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
