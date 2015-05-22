@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 
 public class LoginScreen {
@@ -155,6 +156,8 @@ public class LoginScreen {
 		
 		labelaUsername.setFont(new Font("Stencil", Font.PLAIN, 11));
 		
+		JPanel panel = new JPanel();
+		
 		GroupLayout groupLayout = new GroupLayout(getFrmPrijavaKorisnika().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -168,7 +171,9 @@ public class LoginScreen {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(txtUsername, 219, 219, 219)
-									.addGap(62)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(panel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
 									.addComponent(labelaUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
@@ -185,16 +190,18 @@ public class LoginScreen {
 					.addGap(38)
 					.addComponent(lblUZmajevomGnijezdu)
 					.addGap(49)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtUsername, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(labelaUsername, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+							.addComponent(labelaUsername, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(labelaPassword))
 					.addGap(18)
 					.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(63, Short.MAX_VALUE))
+					.addContainerGap(62, Short.MAX_VALUE))
 		);
 		getFrmPrijavaKorisnika().getContentPane().setLayout(groupLayout);
 	}
