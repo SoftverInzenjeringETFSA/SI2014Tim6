@@ -273,7 +273,7 @@ public class RezervacijaRadnik {
 					if(r.getStatusRezervacije().equals("REZERVISANO"))
 						details="REZERVISANO";
 					else if(r.getStatusRezervacije().equals("OKUPIRANO"))
-					details="OKUPIRANO";
+						details="OKUPIRANO";
 				}
 				
 			}

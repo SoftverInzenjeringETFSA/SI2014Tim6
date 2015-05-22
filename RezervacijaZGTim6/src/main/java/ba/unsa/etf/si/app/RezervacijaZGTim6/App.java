@@ -16,11 +16,11 @@ public class App {
 	
 public static void main(String[] args)
 {
-	final Restoran ZmajevoGnijezdo = Restoran.getInstance();
 
 	try {
+		final Restoran ZmajevoGnijezdo = Restoran.getInstance();
 		
-		/*	EventQueue.invokeLater(new Runnable() {
+			EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try 
 				{
@@ -30,8 +30,9 @@ public static void main(String[] args)
 					e.printStackTrace();
 				}
 			}
-		});*/
-	
+		});
+
+		
 	} 
 	catch (Exception e) 
 	{
