@@ -153,8 +153,21 @@ public class NapraviRezervaciju {
 		
 		reservationText.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
+		JButton btnDodajKl = new JButton("Dodaj klijenta");
+		btnDodajKl.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
+				f.getDodavanjeKlijentaRadnik().setVisible(true);
+			}
+		});
+		btnDodajKl.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
+		
+		JPanel pnlButton = new JPanel();
+
+		JPanel pnlSpace = new JPanel();
 		
 		/*
 		JLabel lblVrijeme = new JLabel("Vrijeme:");
@@ -184,6 +197,9 @@ public class NapraviRezervaciju {
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+	
+		
+		/*
 		JButton btnDodajKlijenta = new JButton("Dodaj klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -192,6 +208,11 @@ public class NapraviRezervaciju {
 			}
 		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		//btnDodajKlijenta.setLayout(null);
+		//btnDodajKlijenta.setBounds(100, 100, 120, 0);
+		
+		
+		
 		//btnDodajKlijenta.setBorder(BorderFactory.createEmptyBorder(100, 10, 5, 5));
 		
 		/*
@@ -218,9 +239,12 @@ public class NapraviRezervaciju {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
-							.addComponent(btnDodajKlijenta, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+							.addComponent(pnlSpace, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
+							.addComponent(pnlButton, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE))
+							//.addComponent(btnDodajKlijenta, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
+						
 						.addComponent(btnDodajRezervaciju)
 						.addGroup(groupLayout.createSequentialGroup()
 							//.addComponent(lblVrijeme)
@@ -242,10 +266,13 @@ public class NapraviRezervaciju {
 					.addGap(23)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE))
 						.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDodajKlijenta))
+						.addComponent(pnlSpace, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(pnlButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						//.addComponent(btnDodajKlijenta))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
+					
 					.addComponent(btnDodajRezervaciju)
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
@@ -284,6 +311,8 @@ public class NapraviRezervaciju {
 		JButton btnPretrazi = new JButton("Pretraži");
 		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		GroupLayout button_panel = new GroupLayout(pnlButton);
+		GroupLayout space_panel = new GroupLayout(pnlSpace);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
@@ -321,6 +350,10 @@ public class NapraviRezervaciju {
 		);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(null);
+		pnlButton.setLayout(null);
+		pnlSpace.setLayout(null);
+		btnDodajKl.setBounds(0, 0, 120, 30);
+		pnlButton.add(btnDodajKl);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
 		btnOdjava.addActionListener(new ActionListener() {
@@ -348,6 +381,7 @@ public class NapraviRezervaciju {
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 33, 139, 34);
 		panel.add(btnKlijenti);*/
+		
 		
 		getNapraviRezervaciju().getContentPane().setLayout(groupLayout);
 		
