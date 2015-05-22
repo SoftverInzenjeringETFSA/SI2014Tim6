@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2015 11:52:36 AM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated May 22, 2015 2:14:00 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija" table="REZERVACIJA">
         <id name="ID" type="long">
@@ -13,6 +13,9 @@
         </property>
         <property name="IdRadnika" type="long">
             <column name="IDRADNIKA" />
+        </property>
+        <property name="IdStola" type="long">
+            <column name="IDSTOLA" />
         </property>
         <property name="BrojGostiju" type="java.lang.Integer">
             <column name="BROJGOSTIJU" />
