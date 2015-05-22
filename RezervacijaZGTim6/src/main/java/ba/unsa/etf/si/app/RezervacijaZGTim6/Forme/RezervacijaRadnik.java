@@ -132,6 +132,12 @@ public class RezervacijaRadnik {
 		 JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
 		 spinner.setEditor(timeEditor);
 		 spinner.setValue(new Date()); // will only show the current time
+		
+		 if ( spinner.getEditor() instanceof JSpinner.DefaultEditor ) {
+			   JSpinner.DefaultEditor editor = ( JSpinner.DefaultEditor ) spinner.getEditor();
+			   editor.getTextField().setEnabled( true );
+			   editor.getTextField().setEditable( false );
+			}
 		 
 		 
 		 JLabel lblhhmm = new JLabel("(HH:mm)");
@@ -202,10 +208,11 @@ public class RezervacijaRadnik {
 		panel.add(btnOdjava);
 		
 		JButton btnRezervacije = new JButton("Rezervacije");
-		btnRezervacije.setEnabled(false);
 		btnRezervacije.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				frame.dispose();
+				NapraviRezervaciju f = new NapraviRezervaciju();
+				f.getNapraviRezervaciju().setVisible(true);
 			}
 		});
 		btnRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -213,13 +220,6 @@ public class RezervacijaRadnik {
 		panel.add(btnRezervacije);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
-		btnKlijenti.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				NapraviRezervaciju f = new NapraviRezervaciju();
-				f.getNapraviRezervaciju().setVisible(true);
-			}
-		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
@@ -314,7 +314,10 @@ public class RezervacijaRadnik {
 						int minute= (Integer)d.getMinutes();
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju();
-					   r.showWindow(number, button, panel_1,dateChooser,sati,minute);
+					   if(number>50)
+					   r.showWindow(number, button, panel_1,dateChooser,sati,minute,true);
+					   else 
+						   r.showWindow(number, button, panel_1, dateChooser, sati, minute,false);
 					}
 					else if(background==Color.orange)
 					{
