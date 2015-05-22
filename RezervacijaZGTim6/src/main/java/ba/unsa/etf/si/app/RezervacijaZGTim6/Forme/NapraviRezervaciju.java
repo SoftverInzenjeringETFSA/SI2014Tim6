@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.SpinnerDateModel;
@@ -139,8 +140,11 @@ public class NapraviRezervaciju {
 		getNapraviRezervaciju().setBounds(100, 100, 624, 427);
 		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
+		//panel.setBackground(Color.LIGHT_GRAY);
+		// stavili smo default boju
+		
 		
 		if(clickedTableNumber==null)
 		 reservationText = new JLabel("Napravi rezervaciju");
@@ -188,6 +192,7 @@ public class NapraviRezervaciju {
 			}
 		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnDodajKlijenta.setBorder(BorderFactory.createEmptyBorder(10, 10, 50, 50));
 		
 		/*
 		Format timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -208,7 +213,7 @@ public class NapraviRezervaciju {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -342,16 +347,18 @@ public class NapraviRezervaciju {
 		JButton btnKlijenti = new JButton("Klijenti");
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 33, 139, 34);
-		panel.add(btnKlijenti);
-		*/
+		panel.add(btnKlijenti);*/
+		
 		getNapraviRezervaciju().getContentPane().setLayout(groupLayout);
+		
 		
 	}
 
 	public JFrame getNapraviRezervaciju() {
 		return frame;
 	}
-
+	
+	
 	public void setNapraviRezervaciju(JFrame frame) {
 		this.frame = frame;
 	}
