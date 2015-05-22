@@ -210,11 +210,10 @@ public class RezervacijaRadnik {
 		panel.add(btnOdjava);
 		
 		JButton btnRezervacije = new JButton("Rezervacije");
+		btnRezervacije.setEnabled(false);
 		btnRezervacije.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				NapraviRezervaciju f = new NapraviRezervaciju();
-				f.getNapraviRezervaciju().setVisible(true);
+				
 			}
 		});
 		btnRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -222,6 +221,13 @@ public class RezervacijaRadnik {
 		panel.add(btnRezervacije);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				NapraviRezervaciju f = new NapraviRezervaciju();
+				f.getNapraviRezervaciju().setVisible(true);
+			}
+		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
@@ -315,7 +321,7 @@ public class RezervacijaRadnik {
 						int sati = (Integer)d.getHours();
 						int minute= (Integer)d.getMinutes();
 						
-					   NapraviRezervaciju r = new NapraviRezervaciju();
+					   NapraviRezervaciju r = new NapraviRezervaciju(handler);
 					   r.showWindow(number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
 						   
 					}

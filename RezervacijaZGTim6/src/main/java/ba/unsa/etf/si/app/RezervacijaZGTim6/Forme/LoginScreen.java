@@ -1,6 +1,7 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
 
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -25,7 +26,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.Color;
+
 import javax.swing.JPanel;
+import java.awt.LayoutManager;
 
 
 public class LoginScreen {
@@ -63,7 +66,6 @@ public class LoginScreen {
 	public LoginScreen(Restoran r) {
 		handler = r;
 		initialize();
-
 	}
 	
 
@@ -82,7 +84,7 @@ public class LoginScreen {
 		frmPrijavaKorisnika.setBounds(100, 100, 515, 356);
 		frmPrijavaKorisnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-
+		//ImageIcon icon = new ImageIcon("Slike/error.png"); 
 		
 		JButton btnLogIn = new JButton("Prijavi se ");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -157,9 +159,23 @@ public class LoginScreen {
 		
 		labelaUsername.setFont(new Font("Times New Roman", Font.PLAIN, 11));
 		
+<<<<<<< HEAD
 		JPanel panel = new JPanel();
 	
 		labelaPassword.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+=======
+		ImageIcon errImg = new ImageIcon("Slike/error.png");
+		
+		JLabel lblUsr = new JLabel("", errImg, JLabel.CENTER);
+		JPanel pnlUsername = new JPanel();
+		pnlUsername.add( lblUsr, BorderLayout.WEST );
+		
+		JLabel lblPsw = new JLabel("", errImg, JLabel.CENTER);
+		JPanel pnlPassword = new JPanel();
+		pnlPassword.add( lblPsw, BorderLayout.WEST );
+		
+		
+>>>>>>> bc3ab1e90951db65faba977b6d5e4f184f94158e
 		
 		GroupLayout groupLayout = new GroupLayout(getFrmPrijavaKorisnika().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -171,9 +187,10 @@ public class LoginScreen {
 							.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(125)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(txtUsername, 219, 219, 219)
+<<<<<<< HEAD
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addComponent(panel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
 								.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))
@@ -185,13 +202,32 @@ public class LoginScreen {
 							.addGap(112)
 							.addComponent(lblUZmajevomGnijezdu)))
 					.addContainerGap())
+=======
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(pnlPassword, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(40)
+									.addComponent(labelaUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(labelaPassword)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(112)
+							.addComponent(lblUZmajevomGnijezdu)))
+					.addContainerGap(67, Short.MAX_VALUE))
+>>>>>>> bc3ab1e90951db65faba977b6d5e4f184f94158e
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(38)
 					.addComponent(lblUZmajevomGnijezdu)
 					.addGap(49)
+<<<<<<< HEAD
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(labelaUsername, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
 						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
@@ -203,6 +239,24 @@ public class LoginScreen {
 					.addGap(18)
 					.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addGap(62))
+=======
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+							.addComponent(labelaUsername, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+					.addGap(23)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(57))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(198, Short.MAX_VALUE)
+					.addComponent(labelaPassword)
+					.addGap(119))
+>>>>>>> bc3ab1e90951db65faba977b6d5e4f184f94158e
 		);
 		getFrmPrijavaKorisnika().getContentPane().setLayout(groupLayout);
 	}

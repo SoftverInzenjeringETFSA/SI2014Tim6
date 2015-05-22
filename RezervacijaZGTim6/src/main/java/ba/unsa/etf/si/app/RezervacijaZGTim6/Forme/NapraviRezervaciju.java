@@ -42,6 +42,7 @@ import javax.swing.JRadioButton;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 
 import java.sql.Time;
 
@@ -50,7 +51,9 @@ import java.sql.Time;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
@@ -98,20 +101,17 @@ public class NapraviRezervaciju {
 	}
 	
 	public NapraviRezervaciju(Restoran r) {
-		initialize();
 		handler = r;
-
+		initialize();
 	}
 	
 	private void PopuniTabeluKorisnika()
 	{
 		String col[] = {"Pos","Team","P", "W", "L", "D", "MP", "GF", "GA", "GD"};
 
-		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-		                                            // The 0 argument is number rows.
-
-		JTable table = new JTable(tableModel);
-/*
+		
+		
+/*	
 		for (int i = 0; i < originalLeagueList.size(); i++){
 			   int position = originalLeagueList.get(i).getPosition();
 			   String name = originalLeagueList.get(i).getName();
@@ -140,7 +140,6 @@ public class NapraviRezervaciju {
 		getNapraviRezervaciju().setResizable(false);
 		getNapraviRezervaciju().setBounds(100, 100, 624, 427);
 		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
 		
 		JPanel panel = new JPanel();
 		//panel.setBackground(Color.LIGHT_GRAY);
@@ -282,19 +281,29 @@ public class NapraviRezervaciju {
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.LIGHT_GRAY);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column"
-			}
-		));
+		
+		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
+				"ID", "Ime", "Prezime", "IsVip"
+			}, 0);
+		ArrayList<Gost> gosti;
+		gosti=handler.DajGoste();
+		
+		
+		for (Iterator iterator1 = gosti.iterator(); iterator1.hasNext();)
+        {
+           Gost g = (Gost)iterator1.next(); 
+           long idGosta = g.getID();
+           String Ime = g.getIme();
+           String Prezime = g.getPrezime();
+           Boolean IsVip = g.getVIP();
+           
+           Object[] data = {idGosta, Ime, Prezime, IsVip};
+           System.out.println(data);
+           tableModel.addRow(data);
+        }
+		
+		table.setModel(tableModel);
+		
 		
 		JLabel lblIme = new JLabel("Ime: ");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
