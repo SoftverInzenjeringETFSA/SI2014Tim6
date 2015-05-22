@@ -192,7 +192,7 @@ public class NapraviRezervaciju {
 			}
 		});
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnDodajKlijenta.setBorder(BorderFactory.createEmptyBorder(10, 10, 50, 50));
+		//btnDodajKlijenta.setBorder(BorderFactory.createEmptyBorder(100, 10, 5, 5));
 		
 		/*
 		Format timeFormat = new SimpleDateFormat("HH:mm:ss");
