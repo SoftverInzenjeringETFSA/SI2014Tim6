@@ -321,7 +321,7 @@ public class RezervacijaRadnik {
 						int sati = (Integer)d.getHours();
 						int minute= (Integer)d.getMinutes();
 						
-					   NapraviRezervaciju r = new NapraviRezervaciju();
+					   NapraviRezervaciju r = new NapraviRezervaciju(handler);
 					   r.showWindow(number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
 						   
 					}

@@ -66,7 +66,6 @@ public class LoginScreen {
 	public LoginScreen(Restoran r) {
 		handler = r;
 		initialize();
-
 	}
 	
 
