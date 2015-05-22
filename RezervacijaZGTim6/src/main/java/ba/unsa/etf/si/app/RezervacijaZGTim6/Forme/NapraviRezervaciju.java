@@ -71,6 +71,7 @@ public class NapraviRezervaciju {
     private JDateChooser date;
     private Integer hours;
     private Integer minutes;
+    private boolean isVipTable;
 	/**
 	 * Launch the application.
 	 */
@@ -355,7 +356,7 @@ public class NapraviRezervaciju {
 		this.frame = frame;
 	}
 	
-	public void showWindow(int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute)
+	public void showWindow(int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,boolean isVipTable)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
@@ -364,6 +365,7 @@ public class NapraviRezervaciju {
 		this.hours=sati;
 		clickedTableNumber=tableNumber;
 		this.minutes=minute;
+		this.isVipTable=isVipTable;
 	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
