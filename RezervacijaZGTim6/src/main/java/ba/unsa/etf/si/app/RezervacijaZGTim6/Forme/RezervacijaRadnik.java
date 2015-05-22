@@ -292,7 +292,7 @@ public class RezervacijaRadnik {
 			else if(details.equals("REZERVISANO")) b.setBackground(Color.red); // stol je rezervisan
 			else b.setBackground(Color.orange); // stol je okupiran
 			
-			
+			b.setToolTipText("Broj mjesta: "+s.getKapacitet());
 			b.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
