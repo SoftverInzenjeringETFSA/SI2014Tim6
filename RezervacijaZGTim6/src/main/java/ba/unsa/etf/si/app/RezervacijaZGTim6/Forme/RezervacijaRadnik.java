@@ -250,13 +250,16 @@ public class RezervacijaRadnik {
 		{
 		  System.out.println(e.getMessage());	
 		}
-		
-		for(Iterator i =stolovi.iterator();i.hasNext();)
+		JLabel label1 = new JLabel("Obični stolovi");
+		JLabel label2 = new JLabel("VIP stolovi");
+		label1.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
+		label2.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
+		for(Iterator i =rezervacije.iterator();i.hasNext();)
 			System.out.println(i.next());
 		
 		panel_1.removeAll(); // da ukloni postojece stolove, ako ih ima
 		
-		
+
 		JPanel panelOrdinaryTables= new JPanel();
 		panelOrdinaryTables.setLayout(new FlowLayout());
 		panelOrdinaryTables.setBackground(Color.LIGHT_GRAY);
@@ -265,6 +268,7 @@ public class RezervacijaRadnik {
 		panelVipTables.setLayout(new FlowLayout());
 		panelVipTables.setBackground(Color.LIGHT_GRAY);
 				
+		
 		for(Iterator i =stolovi.iterator();i.hasNext();)
 		{
 			Sto s = (Sto)i.next();
@@ -327,10 +331,12 @@ public class RezervacijaRadnik {
 			else panelOrdinaryTables.add(b);
 					
 		}
-		panelOrdinaryTables.setBorder(BorderFactory.createEmptyBorder(10, 10, 200, 10));
+		panelOrdinaryTables.setBorder(BorderFactory.createEmptyBorder(10, 10, 250, 10));
+
 		
+		panel_1.add(label1);
 		panel_1.add(panelOrdinaryTables);
-		
+		panel_1.add(label2);
 		panel_1.add(panelVipTables);
 		
 		panel_1.revalidate();
