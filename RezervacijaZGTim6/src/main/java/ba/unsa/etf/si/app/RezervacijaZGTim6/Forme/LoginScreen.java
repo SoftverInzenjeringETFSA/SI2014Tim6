@@ -29,6 +29,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import java.awt.LayoutManager;
+import javax.swing.SwingConstants;
 
 
 public class LoginScreen {
@@ -37,8 +38,11 @@ public class LoginScreen {
 	private JPasswordField txtPassword;
 	private JTextField txtUsername;
 	private Restoran handler;
-	private JLabel labelaUsername = new JLabel();
-	private JLabel labelaPassword = new JLabel("");
+	JPanel pnlUsername = new JPanel();
+	JPanel pnlPassword = new JPanel();
+	ImageIcon errImg = new ImageIcon("Slike/error.png");
+	JLabel lblUsr = new JLabel("", errImg, SwingConstants.LEFT);
+	JLabel lblPsw = new JLabel("", errImg, SwingConstants.LEFT);
 
 	/**
 	 * Launch the application.
@@ -84,7 +88,6 @@ public class LoginScreen {
 		frmPrijavaKorisnika.setBounds(100, 100, 515, 356);
 		frmPrijavaKorisnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//ImageIcon icon = new ImageIcon("Slike/error.png"); 
 		
 		JButton btnLogIn = new JButton("Prijavi se ");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -92,24 +95,40 @@ public class LoginScreen {
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				
-				if (txtUsername.getText().isEmpty()){
-					//ImageIcon error = new ImageIcon(getClass().getClassLoader().getResource("/error.png")); 
-					//labelaUsername.setIcon(error);
-					labelaUsername.setText("Greska");
-				} else labelaUsername.setText("");
-				
-				if (txtPassword.getPassword().equals("")) labelaPassword.setText("Greska");
-				
+				if (txtUsername.getText().isEmpty()) {
+					lblUsr.setText("Popunite polje!");
+					pnlUsername.setVisible(true);
+				} else if (!ValidacijaUserPass(txtUsername.getText())) {
+					lblUsr.setText("Nedozvoljen format!");
+					pnlUsername.setVisible(true);
+				}
+				else { 
+					lblUsr.setText("");
+					pnlUsername.setVisible(false);
+				}
 				
 				 boolean dobri_podaci = false;
 				 try 
 				 {
 					char[] pass = txtPassword.getPassword();
 					String passString = new String(pass);
+					
+					if(passString.equals("")) {
+						lblPsw.setText("Popunite polje!");
+						pnlPassword.setVisible(true);
+					} else if (!ValidacijaUserPass(passString)) {
+						lblPsw.setText("Nedozvoljen format!");
+						pnlPassword.setVisible(true);
+					} else {
+						lblPsw.setText("");
+						pnlPassword.setVisible(false);
+					}
+					
 					dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), passString);
-				 } catch (Exception e) 
-				 {
-					e.printStackTrace();
+					
+				 } catch (Exception e) {
+
+					 e.printStackTrace();
 				 }
 				 
 				 if(dobri_podaci)
@@ -130,7 +149,7 @@ public class LoginScreen {
 					 }
 					 else //error cudna greska
 					 {
-						 
+
 					 }
 				 }
 				 else
@@ -154,33 +173,29 @@ public class LoginScreen {
 		
 		JLabel lblUZmajevomGnijezdu = new JLabel("ZMAJEVO GNIJEZDO");
 		lblUZmajevomGnijezdu.setFont(new Font("Castellar", Font.BOLD, 22));
-		labelaUsername.setForeground(Color.RED);
+		lblUsr.setForeground(Color.RED);
 		
-		labelaUsername.setFont(new Font("Stencil", Font.PLAIN, 11));
-		
-		ImageIcon errImg = new ImageIcon("Slike/error.png");
-		
-		JLabel lblUsr = new JLabel("", errImg, JLabel.CENTER);
-		JPanel pnlUsername = new JPanel();
 		pnlUsername.add( lblUsr, BorderLayout.WEST );
+		pnlUsername.setVisible(false);
+		lblPsw.setForeground(Color.RED);
 		
-		JLabel lblPsw = new JLabel("", errImg, JLabel.CENTER);
-		JPanel pnlPassword = new JPanel();
 		pnlPassword.add( lblPsw, BorderLayout.WEST );
-		
-		
+		pnlPassword.setVisible(false);
 		
 		GroupLayout groupLayout = new GroupLayout(getFrmPrijavaKorisnika().getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(171)
 							.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(112)
+							.addComponent(lblUZmajevomGnijezdu))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(125)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(txtUsername, 219, 219, 219)
 									.addPreferredGap(ComponentPlacement.RELATED)
@@ -188,40 +203,25 @@ public class LoginScreen {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(pnlPassword, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(40)
-									.addComponent(labelaUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addComponent(labelaPassword)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(112)
-							.addComponent(lblUZmajevomGnijezdu)))
-					.addContainerGap(67, Short.MAX_VALUE))
+									.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(38)
 					.addComponent(lblUZmajevomGnijezdu)
 					.addGap(49)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-							.addComponent(labelaUsername, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
-					.addGap(23)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+						.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+					.addGap(9)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+						.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
 					.addGap(18)
 					.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addGap(57))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(198, Short.MAX_VALUE)
-					.addComponent(labelaPassword)
-					.addGap(119))
 		);
 		getFrmPrijavaKorisnika().getContentPane().setLayout(groupLayout);
 	}
@@ -233,4 +233,9 @@ public class LoginScreen {
 	public void setFrmPrijavaKorisnika(JFrame frmPrijavaKorisnika) {
 		this.frmPrijavaKorisnika = frmPrijavaKorisnika;
 	}
+	
+	public Boolean ValidacijaUserPass(String user) {
+		if (user.length() < 3) return false;
+        return user.matches("^[a-zA-Z0-9]+$");
+    }
 }
