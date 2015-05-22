@@ -291,7 +291,7 @@ public class NapraviRezervaciju {
 				{null, null, null},
 			},
 			new String[] {
-				"New column", "New column", "New column"
+				"New column", "New column", "New column", "New column"
 			}
 		));
 		
