@@ -41,6 +41,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 
 import java.sql.Time;
 
@@ -72,7 +73,7 @@ public class NapraviRezervaciju {
     private JDateChooser date;
     private Integer hours;
     private Integer minutes;
-    private boolean isVipTable;
+    private Sto sto;
 	/**
 	 * Launch the application.
 	 */
@@ -397,7 +398,7 @@ public class NapraviRezervaciju {
 		this.frame = frame;
 	}
 	
-	public void showWindow(int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,boolean isVipTable)
+	public void showWindow(int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,Sto sto)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
@@ -406,7 +407,7 @@ public class NapraviRezervaciju {
 		this.hours=sati;
 		clickedTableNumber=tableNumber;
 		this.minutes=minute;
-		this.isVipTable=isVipTable;
+		this.sto=sto;
 	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

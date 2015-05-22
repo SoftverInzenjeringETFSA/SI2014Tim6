@@ -63,6 +63,8 @@ public class RezervacijaRadnik {
 	private Restoran handler;
 	private JSpinner spinner;
 	JDateChooser dateChooser;
+	private ArrayList<Sto> stolovi;
+	private ArrayList<Rezervacija> rezervacije;
 	/**
 	 * Launch the application.
 	 */
@@ -237,8 +239,8 @@ public class RezervacijaRadnik {
 		//Ispod je hardcoded primjer
 		
 		Date d =(Date)spinner.getValue();
-		ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
-		ArrayList<Sto> stolovi = new ArrayList<Sto>();
+		rezervacije = new ArrayList<Rezervacija>();
+		stolovi = new ArrayList<Sto>();
 	    Integer numberOfTables;
 		try
 		{
@@ -314,10 +316,8 @@ public class RezervacijaRadnik {
 						int minute= (Integer)d.getMinutes();
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju();
-					   if(number>50)
-					   r.showWindow(number, button, panel_1,dateChooser,sati,minute,true);
-					   else 
-						   r.showWindow(number, button, panel_1, dateChooser, sati, minute,false);
+					   r.showWindow(number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
+						   
 					}
 					else if(background==Color.orange)
 					{
