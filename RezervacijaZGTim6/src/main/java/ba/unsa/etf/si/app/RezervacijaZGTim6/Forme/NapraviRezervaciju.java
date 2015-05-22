@@ -104,33 +104,7 @@ public class NapraviRezervaciju {
 		handler = r;
 		initialize();
 	}
-	
-	private void PopuniTabeluKorisnika()
-	{
-		String col[] = {"Pos","Team","P", "W", "L", "D", "MP", "GF", "GA", "GD"};
 
-		
-		
-/*	
-		for (int i = 0; i < originalLeagueList.size(); i++){
-			   int position = originalLeagueList.get(i).getPosition();
-			   String name = originalLeagueList.get(i).getName();
-			   int points = originalLeagueList.get(i).getPoinst();
-			   int wins = originalLeagueList.get(i).getWins();
-			   int defeats = originalLeagueList.get(i).getDefeats();
-			   int draws = originalLeagueList.get(i).getDraws();
-			   int totalMatches = originalLeagueList.get(i).getTotalMathces();
-			   int goalF = originalLeagueList.get(i).getGoalF();
-			   int goalA = originalLeagueList.get(i).getGoalA();
-			   in ttgoalD = originalLeagueList.get(i).getTtgoalD();
-
-			   Object[] data = {position, name, points, wins, defeats, draws, 
-			                               totalMatches, goalF, goalA, ttgoalD};
-
-			   tableModel.add(data);
-
-			}*/
-	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -169,10 +143,6 @@ public class NapraviRezervaciju {
 
 		JPanel pnlSpace = new JPanel();
 		
-		/*
-		JLabel lblVrijeme = new JLabel("Vrijeme:");
-		lblVrijeme.setFont(new Font("Tahoma", Font.BOLD, 14));
-		*/
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -187,7 +157,6 @@ public class NapraviRezervaciju {
 				
 				
 				
-				
 				prikazStolovaButton.setBackground(Color.red);
 				prikazStolovaPanel.revalidate();
 				prikazStolovaPanel.repaint();
@@ -198,37 +167,6 @@ public class NapraviRezervaciju {
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 	
-		
-		/*
-		JButton btnDodajKlijenta = new JButton("Dodaj klijenta");
-		btnDodajKlijenta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
-				f.getDodavanjeKlijentaRadnik().setVisible(true);
-			}
-		});
-		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		//btnDodajKlijenta.setLayout(null);
-		//btnDodajKlijenta.setBounds(100, 100, 120, 0);
-		
-		
-		
-		//btnDodajKlijenta.setBorder(BorderFactory.createEmptyBorder(100, 10, 5, 5));
-		
-		/*
-		Format timeFormat = new SimpleDateFormat("HH:mm:ss");
-	
-		MaskFormatter mF= new MaskFormatter();
-		try {
-			 mF = new MaskFormatter("##:##:##");
-			mF.setPlaceholderCharacter('_');
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		JFormattedTextField formattedTextField = new JFormattedTextField(mF);
-		*/
 		
 		 groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -242,14 +180,11 @@ public class NapraviRezervaciju {
 							.addComponent(pnlSpace, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
 							.addComponent(pnlButton, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE))
-							//.addComponent(btnDodajKlijenta, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
 						
 						.addComponent(btnDodajRezervaciju)
 						.addGroup(groupLayout.createSequentialGroup()
-							//.addComponent(lblVrijeme)
 							.addPreferredGap(ComponentPlacement.UNRELATED))
-							//.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
 						.addComponent(reservationText, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
@@ -261,14 +196,11 @@ public class NapraviRezervaciju {
 					.addComponent(reservationText)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						//.addComponent(lblVrijeme)
-						//.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(23)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE))
 						.addComponent(lblKlijent, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 						.addComponent(pnlSpace, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addComponent(pnlButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-						//.addComponent(btnDodajKlijenta))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -313,7 +245,6 @@ public class NapraviRezervaciju {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		//lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
 		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
 		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -373,24 +304,6 @@ public class NapraviRezervaciju {
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
-		/*
-		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(10, 336, 119, 23);
-		panel.add(btnOdjava);
-		
-		
-		JButton btnRadnici = new JButton("Rezervacije");
-		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnRadnici.setBounds(0, 0, 139, 34);
-		panel.add(btnRadnici);
-		
-		
-		
-		JButton btnKlijenti = new JButton("Klijenti");
-		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnKlijenti.setBounds(0, 33, 139, 34);
-		panel.add(btnKlijenti);*/
 		
 		
 		getNapraviRezervaciju().getContentPane().setLayout(groupLayout);
