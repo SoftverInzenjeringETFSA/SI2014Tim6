@@ -66,11 +66,12 @@ public class PregledKlijenataRadnik {
 	 * Create the application.
 	 */
 	public PregledKlijenataRadnik() {
-		initialize();
+		//initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @wbp.parser.entryPoint
 	 */
 	private void initialize() {
 		setPregledKlijenataRadnik(new JFrame());
@@ -113,7 +114,7 @@ public class PregledKlijenataRadnik {
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.LIGHT_GRAY);
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime", "VIP"
+				"Ime", "Prezime"
 			}, 0){
 			private static final long serialVersionUID = 1L;
 
@@ -129,18 +130,11 @@ public class PregledKlijenataRadnik {
 		
 		for (Iterator iterator1 = gosti.iterator(); iterator1.hasNext();)
         {
-           Gost g = (Gost)iterator1.next(); 
-           long idGosta = g.getID();
+           Gost g = (Gost)iterator1.next();
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
-           Boolean IsVip = g.getVIP();
-           String Vip;
-           if (IsVip){
-        	   Vip="DA";
-           }
-           else{ Vip="NE"; }
            
-           Object[] data = {idGosta, Ime, Prezime, Vip};
+           Object[] data = {Ime, Prezime};
            System.out.println(data);
            tableModel.addRow(data);
         }

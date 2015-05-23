@@ -245,7 +245,7 @@ public class NapraviRezervaciju {
 		table.setForeground(Color.BLACK);
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime", "VIP"
+				"ID", "Ime", "Prezime", "Br. telefona", "VIP"
 			}, 0){
 			private static final long serialVersionUID = 1L;
 
@@ -265,6 +265,7 @@ public class NapraviRezervaciju {
            long idGosta = g.getID();
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
+           String BrTel = g.getBrojTelefona(); 
            Boolean IsVip = g.getVIP();
            String Vip;
            if (IsVip){
@@ -272,7 +273,7 @@ public class NapraviRezervaciju {
            }
            else{ Vip="NE"; }
            
-           Object[] data = {idGosta, Ime, Prezime, Vip};
+           Object[] data = {idGosta, Ime, Prezime, BrTel, Vip};
            System.out.println(data);
            tableModel.addRow(data);
         }
