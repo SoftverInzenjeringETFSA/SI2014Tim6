@@ -227,7 +227,7 @@ public class RezervacijaRadnik {
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PregledKlijenataRadnik f = new PregledKlijenataRadnik();
-				f.getPregledKlijenataRadnik().setVisible(true);
+				f.showWindow(handler);
 			}
 		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
