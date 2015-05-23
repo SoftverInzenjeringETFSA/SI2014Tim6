@@ -109,12 +109,8 @@ public class RezervisanSto {
 		try {
 			
 			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
-<<<<<<< HEAD
+
 			
-			
-=======
-			/*
->>>>>>> origin/master
 			for(Iterator j= rezervacije.iterator(); j.hasNext();)
 			{
 				Rezervacija r =(Rezervacija)j.next();
@@ -155,7 +151,7 @@ public class RezervisanSto {
 				  */  
 				}
 			}
-			*/
+			
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
