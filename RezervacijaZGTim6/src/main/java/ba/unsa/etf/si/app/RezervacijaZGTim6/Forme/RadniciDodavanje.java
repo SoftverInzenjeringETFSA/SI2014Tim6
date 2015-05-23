@@ -26,6 +26,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
@@ -41,7 +42,18 @@ public class RadniciDodavanje {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
+	ImageIcon alImg = new ImageIcon("Slike/alert.png");
+	
+	JLabel lblIme_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
+	JLabel lblPrezime_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
+	JLabel lblUsr = new JLabel("", alImg, SwingConstants.LEFT);
+	JLabel lblPsw = new JLabel("", alImg, SwingConstants.LEFT);
+	JPanel pnlIme = new JPanel();
+	JPanel pnlPrezime = new JPanel();
+	JPanel pnlUsername = new JPanel();
+	JPanel pnlPassword = new JPanel();
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -109,7 +121,84 @@ public class RadniciDodavanje {
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton btnSpasi = new JButton("Spasi ");
+		btnSpasi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// validacija
+				if (textField.getText().isEmpty()) {
+					lblIme_Validacija.setText("Popunite polje!");
+					pnlIme.setVisible(true);
+				} else if (!ValidacijaImePrezime(textField.getText())) {
+					lblIme_Validacija.setText("Nedozvoljen format!");
+					pnlIme.setVisible(true);
+				}
+				else { 
+					lblIme_Validacija.setText("");
+					pnlIme.setVisible(false);
+				}
+				
+				if (textField_1.getText().isEmpty()) {
+					lblPrezime_Validacija.setText("Popunite polje!");
+					pnlPrezime.setVisible(true);
+				} else if (!ValidacijaImePrezime(textField_1.getText())) {
+					lblPrezime_Validacija.setText("Nedozvoljen format!");
+					pnlPrezime.setVisible(true);
+				}
+				else { 
+					lblPrezime_Validacija.setText("");
+					pnlPrezime.setVisible(false);
+				}
+				
+				if(textField_2.getText().isEmpty()) {
+					lblUsr.setText("Popunite polje!");
+					pnlUsername.setVisible(true);
+				} else if (!ValidacijaUserPass(textField_2.getText())) {
+					lblUsr.setText("Nedozvoljen format!");
+					pnlUsername.setVisible(true);
+				} else {
+					lblUsr.setText("");
+					pnlUsername.setVisible(false);
+				}
+				
+				if(textField_3.getText().isEmpty()) {
+					lblPsw.setText("Popunite polje!");
+					pnlPassword.setVisible(true);
+				} else if (!ValidacijaUserPass(textField_3.getText())) {
+					lblPsw.setText("Nedozvoljen format!");
+					pnlPassword.setVisible(true);
+				} else {
+					lblPsw.setText("");
+					pnlPassword.setVisible(false);
+				}
+				
+				boolean dobri_podaci = false;
+				
+				try {
+					if(dobri_podaci) {
+						
+						//logika za unos radnika
+					}
+					
+				} catch (Exception f) {
+					f.printStackTrace();
+				}
+				
+			}
+		});
 		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		pnlIme.add( lblIme_Validacija, BorderLayout.WEST );
+		pnlIme.setVisible(false);
+		
+		pnlPrezime.add( lblPrezime_Validacija, BorderLayout.WEST );
+		pnlPrezime.setVisible(false);
+		
+		pnlPassword.add( lblPsw, BorderLayout.WEST );
+		pnlPassword.setVisible(false);
+		
+		pnlUsername.add( lblUsr, BorderLayout.WEST );
+		pnlUsername.setVisible(false);
+		
 		GroupLayout groupLayout = new GroupLayout(getRadniciDodavanje().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -135,34 +224,62 @@ public class RadniciDodavanje {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnSpasi))
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+					.addGap(18))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel)
 					.addGap(96)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblIme))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblIme)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPrezime))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblPrezime)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUsername)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblUsername)
+							.addComponent(textField_2)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPassword))
-					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblPassword)))
+					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
 					.addComponent(btnSpasi)
-					.addContainerGap(128, Short.MAX_VALUE))
+					.addContainerGap(116, Short.MAX_VALUE))
 		);
+		lblUsr.setForeground(Color.ORANGE);
+		
+		pnlUsername.add(lblUsr);
+		pnlPrezime.add(lblPrezime_Validacija);
+		
+		lblPrezime_Validacija.setForeground(Color.ORANGE);
+		pnlIme.add(lblIme_Validacija);
+		
+		lblIme_Validacija.setForeground(Color.ORANGE);
+		lblPsw.setForeground(Color.ORANGE);
+		
+		pnlPassword.add(lblPsw);
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
@@ -219,5 +336,15 @@ public class RadniciDodavanje {
 	public void setRadniciDodavanje(JFrame frame) {
 		this.frame = frame;
 	}
+	
+	public Boolean ValidacijaImePrezime(String user) {
+		if (user.length() < 3) return false;
+        return user.matches("^[a-zA-Z ]+");
+    }
+	
+	public Boolean ValidacijaUserPass(String user) {
+		if (user.length() < 3) return false;
+        return user.matches("^[a-zA-Z0-9]+$");
+    }
 
 }
