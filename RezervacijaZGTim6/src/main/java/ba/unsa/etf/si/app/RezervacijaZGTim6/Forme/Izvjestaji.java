@@ -434,7 +434,7 @@ public class Izvjestaji {
 		});
 		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(22, 328, 107, 23);
+		btnOdjava.setBounds(10, 328, 119, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");

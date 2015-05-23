@@ -300,6 +300,7 @@ public class RadniciDodavanje {
 		panel.setLayout(null);
 		
 		JButton btnOdjava = new JButton("Odjavi se");
+		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -308,10 +309,11 @@ public class RadniciDodavanje {
 			}
 		});
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(22, 328, 89, 23);
+		btnOdjava.setBounds(10, 329, 119, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
+		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRadnici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -323,6 +325,7 @@ public class RadniciDodavanje {
 		panel.add(btnRadnici);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -334,6 +337,7 @@ public class RadniciDodavanje {
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvjestaji");
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();

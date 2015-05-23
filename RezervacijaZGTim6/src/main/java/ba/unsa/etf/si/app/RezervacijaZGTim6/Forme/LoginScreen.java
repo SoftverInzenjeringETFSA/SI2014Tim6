@@ -92,7 +92,7 @@ public class LoginScreen {
 		
 		
 		JButton btnLogIn = new JButton("Prijavi se ");
-		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnLogIn.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -330,7 +330,7 @@ public class LoginScreen {
 		txtUsername.setColumns(10);
 		
 		JLabel lblUZmajevomGnijezdu = new JLabel("ZMAJEVO GNIJEZDO");
-		lblUZmajevomGnijezdu.setFont(new Font("Castellar", Font.BOLD, 22));
+		lblUZmajevomGnijezdu.setFont(new Font("Castellar", Font.BOLD, 23));
 		lblUsr.setForeground(Color.RED);
 		
 		pnlUsername.add( lblUsr, BorderLayout.WEST );

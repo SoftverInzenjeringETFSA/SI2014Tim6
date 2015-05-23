@@ -210,7 +210,7 @@ public class KlijentiDodavanje {
                 
                 if (validna_forma) {
                     System.out.println("Validna forma");
-                    //frame.dispose();
+                    frame.dispose();
                 } else
                     System.out.println("Nevalidna forma");               
             }
@@ -309,9 +309,9 @@ public class KlijentiDodavanje {
                 f.getFrmPrijavaKorisnika().setVisible(true);
             }
         });
-        btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
         btnOdjava.setBackground(UIManager.getColor("Button.background"));
-        btnOdjava.setBounds(22, 328, 89, 23);
+        btnOdjava.setBounds(10, 328, 119, 23);
         panel.add(btnOdjava);
         
         JButton btnRadnici = new JButton("Radnici");

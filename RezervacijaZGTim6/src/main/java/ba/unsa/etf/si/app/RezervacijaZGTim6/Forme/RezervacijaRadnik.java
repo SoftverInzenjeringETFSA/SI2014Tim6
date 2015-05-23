@@ -121,6 +121,7 @@ public class RezervacijaRadnik {
 		lblPromjeniDan.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton btnOsvjei = new JButton("Osvježi");
+		btnOsvjei.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnOsvjei.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -134,6 +135,7 @@ public class RezervacijaRadnik {
 		 dateChooser.getJCalendar().setMinSelectableDate(new Date());
 		 dateChooser.setDate(new Date());
 		 spinner = new JSpinner( new SpinnerDateModel() );
+		 spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		 JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
 		 spinner.setEditor(timeEditor);
 		 spinner.setValue(new Date()); // will only show the current time
@@ -146,6 +148,7 @@ public class RezervacijaRadnik {
 		 
 		 
 		 JLabel lblhhmm = new JLabel("(HH:mm)");
+		 lblhhmm.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		 GroupLayout groupLayout = new GroupLayout(getRezervacijaRadnik().getContentPane());
 		 groupLayout.setHorizontalGroup(
@@ -168,7 +171,7 @@ public class RezervacijaRadnik {
 		 							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		 							.addPreferredGap(ComponentPlacement.RELATED)
 		 							.addComponent(lblhhmm)
-		 							.addPreferredGap(ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+		 							.addPreferredGap(ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
 		 							.addComponent(btnOsvjei)
 		 							.addGap(10)))))
 		 			.addContainerGap())
@@ -182,16 +185,16 @@ public class RezervacijaRadnik {
 		 				.addGroup(groupLayout.createSequentialGroup()
 		 					.addComponent(lblNewLabel)
 		 					.addGap(18)
-		 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 		 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 		 							.addComponent(lblPromjeniDan)
-		 							.addComponent(btnOsvjei))
-		 						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		 							.addComponent(btnOsvjei, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 		 							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		 							.addComponent(lblhhmm)))
+		 							.addComponent(lblhhmm))
+		 						.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		 					.addGap(18)
-		 					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)))
+		 					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)))
 		 			.addContainerGap())
 		 );
 	
