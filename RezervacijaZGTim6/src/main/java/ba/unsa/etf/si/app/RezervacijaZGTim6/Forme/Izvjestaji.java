@@ -127,7 +127,7 @@ public class Izvjestaji {
 		
 		final JLabel lblDatumOd = new JLabel("");
 		
-		ImageIcon errImg = new ImageIcon("Slike/error.png");
+		ImageIcon errImg = new ImageIcon("Slike/alert.png");
 		
 		final JLabel lbl_Od = new JLabel("", errImg, SwingConstants.LEFT);
 		lbl_Od.setForeground(Color.RED);
