@@ -111,65 +111,80 @@ public class DodavanjeKlijentaRadnik {
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean validna_forma = true;
 				// validacija
 				if (textField.getText().isEmpty()) {
 					lblIme.setText("Popunite polje!");
 					pnlIme.setVisible(true);
+					validna_forma = false;
 				} else if (!ValidacijaImePrezime(textField.getText())) {
 					lblIme.setText("Nedozvoljen format!");
 					pnlIme.setVisible(true);
+					validna_forma = false;
 				}
 				else { 
 					lblIme.setText("");
 					pnlIme.setVisible(false);
+					validna_forma = true;
 				}
 				
 				if (textField_1.getText().isEmpty()) {
 					lblPrezime.setText("Popunite polje!");
 					pnlPrezime.setVisible(true);
+					validna_forma = false;
 				} else if (!ValidacijaImePrezime(textField_1.getText())) {
 					lblPrezime.setText("Nedozvoljen format!");
 					pnlPrezime.setVisible(true);
+					validna_forma = false;
 				}
 				else { 
 					lblPrezime.setText("");
 					pnlPrezime.setVisible(false);
+					validna_forma = true;
 				}
 				
 				if(formattedTelephone.getText().equals("___/___-___"))
 				{
 					lblTel.setText("Popunite polje!");
 					pnlTel.setVisible(true);
+					validna_forma = false;
 				}
 				else
 				{
 					lblTel.setText("");
 					pnlTel.setVisible(false);
+					validna_forma = true;
 				}
 				
 				
 				try {
-					handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
+					if(validna_forma) {
+						handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
+				if (validna_forma) {
+					System.out.println("Validna forma");
+					frame.dispose();
+				} else
+					System.out.println("Nevalidna forma");
 				// zakomentarisano zbog testa validacije
-				// frame.dispose();
 			}
 		});
 		
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		lblIme.setForeground(Color.ORANGE);
+		lblIme.setForeground(Color.RED);
 		pnlIme.add( lblIme, BorderLayout.WEST );
 		pnlIme.setVisible(false);
 		
-		lblPrezime.setForeground(Color.ORANGE);
+		lblPrezime.setForeground(Color.RED);
 		pnlPrezime.add( lblPrezime, BorderLayout.WEST );
 		pnlPrezime.setVisible(false);
 		
-		lblTel.setForeground(Color.ORANGE);
+		lblTel.setForeground(Color.RED);
 		pnlTel.add(lblTel, BorderLayout.WEST);
 		pnlTel.setVisible(false);
 		
