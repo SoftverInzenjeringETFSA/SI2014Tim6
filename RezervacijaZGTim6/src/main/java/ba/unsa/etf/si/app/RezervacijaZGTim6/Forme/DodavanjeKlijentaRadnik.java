@@ -47,7 +47,9 @@ public class DodavanjeKlijentaRadnik {
 	JPanel pnlIme = new JPanel();
 	JPanel pnlPrezime = new JPanel();
 	JPanel pnlTel = new JPanel();
+	boolean izmjenaGosta = false;
 	
+	private Gost gost;
 	private Restoran handler;
 	/**
 	 * Launch the application.
@@ -76,8 +78,11 @@ public class DodavanjeKlijentaRadnik {
 		initialize();
 		handler = r;
 	}
-	public DodavanjeKlijentaRadnik(Gost g){
-		
+	public DodavanjeKlijentaRadnik(Gost g, Restoran r){
+		izmjenaGosta=true;
+		gost=g;
+		handler=r;
+		initialize();
 	}
 
 	/**
@@ -163,10 +168,37 @@ public class DodavanjeKlijentaRadnik {
 					validna_forma = true;
 				}
 				
-				
 				try {
 					if(validna_forma) {
-						handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
+						if(izmjenaGosta){
+							try {
+								Gost g;
+								ArrayList<Gost> gosti= handler.DajGoste();
+								
+								for(Iterator j= gosti.iterator(); j.hasNext();)
+								{
+									g = (Gost)j.next();
+									if(g.getID()==gost.getID())
+									{
+										gost.setIme(textField.getText());
+										gost.setPrezime(textField_1.getText());
+									}
+								}
+								gost.updateGosta(gost.getID(), gost);
+								
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+						}
+						else{
+							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
+						}
+					}
+					else if(validna_forma && izmjenaGosta){
+						
+					}
+					else{
+						System.out.println("nisam dodo!");
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -263,25 +295,7 @@ public class DodavanjeKlijentaRadnik {
 		);
 		getDodavanjeKlijentaRadnik().getContentPane().setLayout(groupLayout);
 		
-		/*try {
-			
-			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
-			
-			
-			for(Iterator j= rezervacije.iterator(); j.hasNext();)
-			{
-				Rezervacija r =(Rezervacija)j.next();
-				if(r.getIdStola()==clickedTable.getID())
-				{
-					
-				}
-			}
-			
-			
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+		
 		  
 	}
 

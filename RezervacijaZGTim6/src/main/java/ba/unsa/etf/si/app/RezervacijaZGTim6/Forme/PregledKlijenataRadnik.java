@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
@@ -35,6 +36,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import org.hibernate.HibernateException;
+
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
@@ -45,6 +48,7 @@ public class PregledKlijenataRadnik {
 	private JTextField textField;
 	private JTable table;
 	private Restoran handler;
+	private DodavanjeKlijentaRadnik k;
 
 	/**
 	 * Launch the application.
@@ -109,10 +113,15 @@ public class PregledKlijenataRadnik {
 		JLabel lblNewLabel_1 = new JLabel("");
 		
 		
+		
 		table = new JTable();
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.LIGHT_GRAY);
+		JScrollPane scrollPane = new JScrollPane( table );
+		
+		frame.add(scrollPane);
+		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
 				"Ime", "Prezime"
 			}, 0){
@@ -133,8 +142,9 @@ public class PregledKlijenataRadnik {
            Gost g = (Gost)iterator1.next();
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
+           long Id = g.getID();
            
-           Object[] data = {Ime, Prezime};
+           Object[] data = {Id, Ime, Prezime};
            System.out.println(data);
            tableModel.addRow(data);
         }
@@ -145,6 +155,20 @@ public class PregledKlijenataRadnik {
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+			
+				System.out.println(idGosta);
+				Gost g = new Gost();
+				try
+				{
+					g.ocitajGosta(idGosta);
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				k = new DodavanjeKlijentaRadnik(g, handler);
+				System.out.println("Stigo!");
+				k.getDodavanjeKlijentaRadnik().setVisible(true);
 			}
 		});
 		
