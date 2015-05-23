@@ -173,9 +173,9 @@ public class KlijentiDodavanje {
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
-		btnOdjava.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(22, 328, 89, 23);
+		btnOdjava.setBounds(10, 339, 107, 23);
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
@@ -186,7 +186,7 @@ public class KlijentiDodavanje {
 				f.getRadnici().setVisible(true);
 			}
 		});
-		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.setBounds(0, 0, 139, 34);
 		panel.add(btnRadnici);
 		
@@ -198,7 +198,7 @@ public class KlijentiDodavanje {
 				f.getKlijenti().setVisible(true);
 			}
 		});
-		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
 		
@@ -210,7 +210,7 @@ public class KlijentiDodavanje {
 				f.getIzvjestaji().setVisible(true);
 			}
 		});
-		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnIzvjestaji.setBounds(0, 68, 139, 34);
 		panel.add(btnIzvjestaji);
 		getKlijentiDodavanje().getContentPane().setLayout(groupLayout);
