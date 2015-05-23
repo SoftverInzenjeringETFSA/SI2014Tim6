@@ -12,8 +12,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
@@ -31,6 +33,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
 import java.awt.SystemColor;
@@ -76,6 +80,8 @@ public class NapraviRezervaciju {
     private Integer hours;
     private Integer minutes;
     private Sto sto;
+    private TableRowSorter<TableModel> rowSorter;
+    
 	/**
 	 * Launch the application.
 	 */
@@ -111,7 +117,7 @@ public class NapraviRezervaciju {
 	private void initialize() {
 		setNapraviRezervaciju(new JFrame());
 		getNapraviRezervaciju().setResizable(false);
-		getNapraviRezervaciju().setBounds(100, 100, 624, 427);
+		getNapraviRezervaciju().setBounds(100, 100, 624, 440);
 		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -178,9 +184,14 @@ public class NapraviRezervaciju {
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-	
+		JLabel lblTrajanje = new JLabel("Trajanje: ");
+		lblTrajanje.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		 groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
+		SpinnerModel sm = new SpinnerNumberModel(1,1,5,1);
+		JSpinner spinner = new JSpinner(sm);
+		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -193,7 +204,8 @@ public class NapraviRezervaciju {
 							.addComponent(pnlButton, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE))
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
-						
+						.addComponent(spinner, 5, 50, 150)
+						.addComponent(lblTrajanje)
 						.addComponent(btnDodajRezervaciju)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED))
@@ -216,18 +228,20 @@ public class NapraviRezervaciju {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					
+					.addComponent(lblTrajanje)
+					.addComponent(spinner, 5, 50, 150)
+					.addGap(15)
 					.addComponent(btnDodajRezervaciju)
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
-		
+		//RAD SA TABELOM I PRETRAGA KORISNIKA
 		table = new JTable();
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.BLACK);
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime", "IsVip"
+				"ID", "Ime", "Prezime", "VIP"
 			}, 0);
 		ArrayList<Gost> gosti;
 		gosti=handler.DajGoste();
@@ -240,8 +254,13 @@ public class NapraviRezervaciju {
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
            Boolean IsVip = g.getVIP();
+           String Vip;
+           if (IsVip){
+        	   Vip="DA";
+           }
+           else{ Vip="NE"; }
            
-           Object[] data = {idGosta, Ime, Prezime, IsVip};
+           Object[] data = {idGosta, Ime, Prezime, Vip};
            System.out.println(data);
            tableModel.addRow(data);
         }
@@ -249,8 +268,10 @@ public class NapraviRezervaciju {
 		table.setModel(tableModel);
 		
 		
-		JLabel lblIme = new JLabel("Ime: ");
+		JLabel lblIme = new JLabel("Pretraga: ");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -258,11 +279,26 @@ public class NapraviRezervaciju {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		
-		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
-		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		
+		rowSorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(rowSorter);
 		
 		JButton btnPretrazi = new JButton("Pretraži");
 		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		btnPretrazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String text = textField.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+			}
+		});
+		//KRAJ RADA SA TABELOM I PRETRAGOM KORISNIKA
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		GroupLayout button_panel = new GroupLayout(pnlButton);
 		GroupLayout space_panel = new GroupLayout(pnlSpace);
@@ -281,8 +317,6 @@ public class NapraviRezervaciju {
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 							.addGroup(gl_panel_1.createSequentialGroup()
 								.addGap(6)
-								.addComponent(chckbxVipKlijenti)
-								.addGap(6)
 								.addComponent(btnPretrazi))))
 					.addContainerGap())
 		);
@@ -293,7 +327,6 @@ public class NapraviRezervaciju {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblIme)
-						.addComponent(chckbxVipKlijenti)
 						.addComponent(btnPretrazi))
 					.addGap(18)
 					.addComponent(lblNewLabel_1)

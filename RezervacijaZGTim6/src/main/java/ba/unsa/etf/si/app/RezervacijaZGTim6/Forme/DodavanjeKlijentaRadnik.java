@@ -253,14 +253,9 @@ public class DodavanjeKlijentaRadnik {
 		this.frame = frame;
 	}
 	
-
-	
 	public Boolean ValidacijaImePrezime(String user) {
 		if (user.length() < 3) return false;
         return user.matches("^[a-zA-Z ]+");
     }
 	
-	public Boolean ValidacijaTelefon(String telefon) {
-        return telefon.matches("(\\d{2})[/]\\d{3}-\\d{3}");
-    }
 }
