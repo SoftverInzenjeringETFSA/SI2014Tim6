@@ -214,7 +214,7 @@ public class NapraviRezervaciju {
 		table = new JTable();
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setForeground(Color.LIGHT_GRAY);
+		table.setForeground(Color.BLACK);
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
 				"ID", "Ime", "Prezime", "IsVip"
