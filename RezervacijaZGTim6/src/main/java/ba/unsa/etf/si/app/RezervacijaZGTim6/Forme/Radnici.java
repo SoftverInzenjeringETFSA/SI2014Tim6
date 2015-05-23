@@ -55,7 +55,12 @@ public class Radnici {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	
+	
+	
+	
+	
+	/*public static void main(String[] args) {
 		try {
 			final Restoran ZmajevoGnijezdo = Restoran.getInstance();
 		
@@ -74,8 +79,9 @@ public class Radnici {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	}
+	}*/
 
+	
 	/**
 	 * Create the application.
 	 */
@@ -84,8 +90,8 @@ public class Radnici {
 	}
 	
 	public Radnici(Restoran r) {
-		initialize();
 		handler = r;
+		initialize();
 	}
 
 	/**
@@ -150,6 +156,7 @@ public class Radnici {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					AzurirajRadnika f = new AzurirajRadnika(handler, (Radnik)list.getSelectedValue(), model);
 					f.getFrame().setVisible(true);
 					button_1.setEnabled(false);
 				} catch (Exception e1) {
