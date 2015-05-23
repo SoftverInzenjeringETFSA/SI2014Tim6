@@ -102,7 +102,7 @@ public class NapraviRezervaciju {
 	 * Create the application.
 	 */
 	public NapraviRezervaciju() {
-		initialize();
+		//initialize();
 	}
 	
 	public NapraviRezervaciju(Restoran r) {
@@ -386,7 +386,7 @@ public class NapraviRezervaciju {
 		this.frame = frame;
 	}
 	
-	public void showWindow(int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,Sto sto)
+	public void showWindow(Restoran r,int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,Sto sto)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
@@ -396,6 +396,7 @@ public class NapraviRezervaciju {
 		clickedTableNumber=tableNumber;
 		this.minutes=minute;
 		this.sto=sto;
+		this.handler = r;
 	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

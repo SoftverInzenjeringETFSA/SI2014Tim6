@@ -335,7 +335,7 @@ public class RezervacijaRadnik {
 						int minute= (Integer)d.getMinutes();
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju(handler);
-					   r.showWindow(number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
+					   r.showWindow(handler, number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
 						   
 					}
 					else if(background==Color.orange)
