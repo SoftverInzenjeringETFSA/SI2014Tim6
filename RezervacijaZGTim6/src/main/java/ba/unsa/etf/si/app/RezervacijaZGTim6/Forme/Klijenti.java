@@ -22,16 +22,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 
 
 public class Klijenti {
@@ -120,6 +126,19 @@ public class Klijenti {
 			}
 		));
 		
+/*DefaultListModel<Gost> model = new DefaultListModel<Gost>();
+		
+		ArrayList<Gost> radnici = new ArrayList<Gost>();
+		radnici = handler.DajGoste();
+		
+		
+		for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
+        {
+			Gost g= (Gost)iterator1.next();
+   			model.addElement(g);
+        }	
+
+		JList list = new JList(model);*/
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
