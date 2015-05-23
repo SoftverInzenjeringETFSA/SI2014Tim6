@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Color;
+import java.awt.Image;
 
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -41,6 +42,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
 import java.awt.List;
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -300,7 +303,14 @@ public class RezervacijaRadnik {
 			else if(details.equals("REZERVISANO")) b.setBackground(Color.red); // stol je rezervisan
 			else b.setBackground(Color.orange); // stol je okupiran
 			
-			b.setToolTipText("Broj mjesta: "+s.getKapacitet());
+			String html =
+		            "<html><body>" +
+		            "<p>Broj mjesta: " + s.getKapacitet() + "</p>";
+		            	
+			if(s.getZaPusace())
+			b.setToolTipText(html +"<p> Stol za pušače </p> </body> </html>" );
+			else 
+				b.setToolTipText(html + "<p>Stol za nepušače </p> </body> </html>");
 			b.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -312,8 +322,11 @@ public class RezervacijaRadnik {
 					if(background==Color.red)
 					{
 						
+						Date d= (Date)spinner.getValue();
+						int sati = (Integer)d.getHours();
+						int minute= (Integer)d.getMinutes();
 					 RezervisanSto sto= new RezervisanSto();
-					 sto.showWindow(number,button, panel_1);
+					 sto.showWindow(handler,number,button, panel_1,dateChooser,sati,minute,stolovi.get(number-1));
 					}
 					else if(background==Color.green)
 					{

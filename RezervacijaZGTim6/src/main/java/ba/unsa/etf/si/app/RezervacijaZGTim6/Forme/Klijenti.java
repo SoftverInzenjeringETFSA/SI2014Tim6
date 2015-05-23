@@ -81,8 +81,8 @@ public class Klijenti {
 		JButton btnDodaj = new JButton("Dodaj klijenta");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik();
-				f.getDodavanjeKlijentaRadnik().setVisible(true);
+				KlijentiDodavanje f = new KlijentiDodavanje();
+				f.getKlijentiDodavanje().setVisible(true);
 				
 				
 			}
