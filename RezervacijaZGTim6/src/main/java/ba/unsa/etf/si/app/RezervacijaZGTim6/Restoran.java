@@ -73,7 +73,7 @@ public class Restoran
 	{
 		Radnik r = new Radnik(ime, prezime, datumZaposlenja, jmbg, nazivPosla, opisPosla, id);
 		r.dodajRadnika();
-		
+		radnici.add(r);
 	}
 	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception

@@ -170,6 +170,7 @@ public class NapraviRezervaciju {
 					if(trajanje == 0) trajanje = 180;
 					if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
 						handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
+						
 						prikazStolovaButton.setBackground(Color.red);
 						prikazStolovaPanel.revalidate();
 						prikazStolovaPanel.repaint();
