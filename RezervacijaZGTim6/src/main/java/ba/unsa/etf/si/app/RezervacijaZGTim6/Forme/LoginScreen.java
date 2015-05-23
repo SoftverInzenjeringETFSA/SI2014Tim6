@@ -45,6 +45,8 @@ public class LoginScreen {
 	ImageIcon errImg = new ImageIcon("Slike/error.png");
 	JLabel lblUsr = new JLabel("", errImg, SwingConstants.LEFT);
 	JLabel lblPsw = new JLabel("", errImg, SwingConstants.LEFT);
+	private final JLabel lblUsername = new JLabel("Username:");
+	private final JLabel lblPassword = new JLabel("Password:");
 
 	/**
 	 * Launch the application.
@@ -82,7 +84,7 @@ public class LoginScreen {
 
 		setFrmPrijavaKorisnika(new JFrame());
 		getFrmPrijavaKorisnika().setTitle("Prijava korisnika");
-		getFrmPrijavaKorisnika().setBounds(100, 100, 515, 356);
+		getFrmPrijavaKorisnika().setBounds(100, 100, 522, 356);
 		getFrmPrijavaKorisnika().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrijavaKorisnika = new JFrame();
 		frmPrijavaKorisnika.setResizable(false);
@@ -246,7 +248,6 @@ public class LoginScreen {
 			}
 		});
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtPassword.setText("password");
 		txtPassword.setColumns(10);
 		
 		txtUsername = new JTextField();
@@ -326,7 +327,6 @@ public class LoginScreen {
 			}
 		});
 		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtUsername.setText("username");
 		txtUsername.setColumns(10);
 		
 		JLabel lblUZmajevomGnijezdu = new JLabel("ZMAJEVO GNIJEZDO");
@@ -352,16 +352,18 @@ public class LoginScreen {
 							.addGap(112)
 							.addComponent(lblUZmajevomGnijezdu))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(125)
+							.addGap(49)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(txtUsername, 219, 219, 219)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))))
+								.addComponent(lblUsername)
+								.addComponent(lblPassword))
+							.addGap(30)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtPassword)
+								.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -372,11 +374,15 @@ public class LoginScreen {
 					.addGap(49)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-						.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+							.addComponent(lblUsername)))
 					.addGap(9)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-						.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+							.addComponent(lblPassword)))
 					.addGap(18)
 					.addComponent(btnLogIn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addGap(57))
