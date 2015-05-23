@@ -15,17 +15,34 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 
+import com.toedter.calendar.JDateChooser;
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 public class RezervisanSto {
 
 	private JFrame frame;
 	private JButton prikazStolovaButton;
 	private JPanel prikazStolovaPanel;
-
-	/**
+    private Restoran handler;
+    private Sto clickedTable;
+    private Rezervacija reservation;
+	private JDateChooser dateChooser;
+    private int sati;
+    private int minute;
+    
+    
+    
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -45,8 +62,15 @@ public class RezervisanSto {
 	 * Create the application.
 	 */
 	public RezervisanSto() {
+		//initialize();
+	}
+	
+	public RezervisanSto(Restoran r)
+	{
+		handler=r;
 		initialize();
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -71,8 +95,42 @@ public class RezervisanSto {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 0, 0));
+		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: ");
+	    
 		
-		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije:");
+		try {
+			
+			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
+			
+			for(Iterator j= rezervacije.iterator(); j.hasNext();)
+			{
+				Rezervacija r =(Rezervacija)j.next();
+				if(r.getIdStola()==clickedTable.getID())
+				{
+					Time t = r.getVrijemeRezervacije();
+					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
+					
+					Date d = new Date();
+				    Date d1 = r.getDatumRezervacije();
+				    d1.setHours(t.getHours());
+				    d1.setMinutes(t.getMinutes());
+				    
+				    System.out.println("Vrijeme u bazi : sati: "+d1.getHours()+", minute: "+d1.getMinutes());
+					System.out.println("Trenutno vrijeme: sati: "+d.getHours()+", minute: "+d.getMinutes());
+					lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d1.getTime()-d.getTime()));
+				    System.out.println("Do isteka rezervacije "+ r.getVrijemeRezervacije());			
+					
+				}
+			}
+			
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
 		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
 		JButton btnOtkaiReyervaciju = new JButton("Otka\u017Ei rezervaciju");
@@ -94,6 +152,22 @@ public class RezervisanSto {
 		
 		JButton btnOkupiranStol = new JButton("Okupiran stol");
 		btnOkupiranStol.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		btnOkupiranStol.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				prikazStolovaButton.setBackground(Color.orange);
+				prikazStolovaButton.revalidate();
+				prikazStolovaButton.repaint();
+				getRezervisanSto().dispose();
+				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
+				 
+				 
+				
+			}});
+		
 		
 		
 		GroupLayout groupLayout = new GroupLayout(getRezervisanSto().getContentPane());
@@ -176,11 +250,16 @@ public class RezervisanSto {
 		this.frame = frame;
 	}
 	
-	public void showWindow(int tableNumber,JButton button, JPanel panel)
+	public void showWindow(Restoran r,int tableNumber,JButton button, JPanel panel,JDateChooser dateChooser,int sati,int minute, Sto s)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
+		this.handler=r;
 		this.prikazStolovaPanel=panel;
+		this.dateChooser=dateChooser;
+		this.sati=sati;
+		this.minute=minute;
+		this.clickedTable=s;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
