@@ -250,6 +250,81 @@ public class LoginScreen {
 		txtPassword.setColumns(10);
 		
 		txtUsername = new JTextField();
+		txtUsername.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					// validacija
+					if (txtUsername.getText().isEmpty()) {
+						lblUsr.setText("Popunite polje!");
+						pnlUsername.setVisible(true);
+					} else if (!ValidacijaUserPass(txtUsername.getText())) {
+						lblUsr.setText("Nedozvoljen format!");
+						pnlUsername.setVisible(true);
+					}
+					else { 
+						lblUsr.setText("");
+						pnlUsername.setVisible(false);
+					}
+					
+					boolean dobri_podaci = false;
+					 try 
+					 {
+						char[] pass = txtPassword.getPassword();
+						String passString = new String(pass);
+						
+						// validacija
+						if(passString.equals("")) {
+							lblPsw.setText("Popunite polje!");
+							pnlPassword.setVisible(true);
+						} else if (!ValidacijaUserPass(passString)) {
+							lblPsw.setText("Nedozvoljen format!");
+							pnlPassword.setVisible(true);
+						} else if(!handler.PrijavaKorisnika(txtUsername.getText(), passString)){
+							lblPsw.setText("<html>Neispravni username<br>ili password.<br></html>");
+							pnlPassword.setVisible(true);
+						} else {
+							lblPsw.setText("");
+							pnlPassword.setVisible(false);
+						}
+						
+						dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), passString);
+						
+					 } catch (Exception e) {
+
+						 e.printStackTrace();
+					 }
+					 
+					 if(dobri_podaci)
+					 {
+						 if(handler.getPristup() == 1) //otvori formu sefa
+						 {
+							 frmPrijavaKorisnika.dispose();
+							 Radnici f = new Radnici(handler);
+							 f.getRadnici().setVisible(true);
+								
+						 }
+						 else if(handler.getPristup()==2)//otvori formu radnika
+						 {
+							 
+							 frmPrijavaKorisnika.dispose();
+							 RezervacijaRadnik f = new RezervacijaRadnik(handler);
+							 f.getRezervacijaRadnik().setVisible(true); 
+						 }
+						 else //error cudna greska
+						 {
+
+						 }
+					 }
+					 else
+					 {
+						 //Iskoci error
+					 }
+			       
+			    }
+				
+			}
+		});
 		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtUsername.setText("username");
 		txtUsername.setColumns(10);
