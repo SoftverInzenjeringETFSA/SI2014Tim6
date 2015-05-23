@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
@@ -49,8 +50,6 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 
 import java.sql.Time;
-
-
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,6 +80,7 @@ public class NapraviRezervaciju {
     private Integer minutes;
     private Sto sto;
     private TableRowSorter<TableModel> rowSorter;
+    private JSpinner spinner;
     
 	/**
 	 * Launch the application.
@@ -162,22 +162,25 @@ public class NapraviRezervaciju {
 				
 				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
 				Time vrijeme = new Time(hours, minutes, 0);
-				Integer trajanje = 0; //(Integer) spinner.getValue()
+				Integer trajanje = (Integer)spinner.getValue();
 				Long ms = date.getDate().getTime();
 				java.sql.Date sqldate = new java.sql.Date(ms);
 				
 				try {
-					if(idGosta != 0 && trajanje != 0 && trajanje < 1440)
-						handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje);
+					if(trajanje == 0) trajanje = 180;
+					if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
+						handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
+						prikazStolovaButton.setBackground(Color.red);
+						prikazStolovaPanel.revalidate();
+						prikazStolovaPanel.repaint();
+					}
 				} catch (NumberFormatException e1) {
 					e1.printStackTrace();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
-				prikazStolovaButton.setBackground(Color.red);
-				prikazStolovaPanel.revalidate();
-				prikazStolovaPanel.repaint();
+				
 				
 				
 			}
@@ -188,7 +191,7 @@ public class NapraviRezervaciju {
 		lblTrajanje.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		SpinnerModel sm = new SpinnerNumberModel(1,1,5,1);
-		JSpinner spinner = new JSpinner(sm);
+		spinner = new JSpinner(sm);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
@@ -242,7 +245,15 @@ public class NapraviRezervaciju {
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
 				"ID", "Ime", "Prezime", "VIP"
-			}, 0);
+			}, 0){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
 		ArrayList<Gost> gosti;
 		gosti=handler.DajGoste();
 		
@@ -266,7 +277,7 @@ public class NapraviRezervaciju {
         }
 		
 		table.setModel(tableModel);
-		
+		//JScrollPane scrollPane = new JScrollPane(table);
 		
 		JLabel lblIme = new JLabel("Pretraga: ");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -298,7 +309,16 @@ public class NapraviRezervaciju {
                 }
 			}
 		});
+		
+		
+		
+		
 		//KRAJ RADA SA TABELOM I PRETRAGOM KORISNIKA
+		
+		
+		
+		
+		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		GroupLayout button_panel = new GroupLayout(pnlButton);
 		GroupLayout space_panel = new GroupLayout(pnlSpace);

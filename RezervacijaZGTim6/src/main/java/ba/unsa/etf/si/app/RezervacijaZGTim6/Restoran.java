@@ -12,6 +12,7 @@ public class Restoran
 	ArrayList<Gost> gosti;
 	ArrayList<Rezervacija> rezervacije;
 	ArrayList<Sto> stolovi;
+	ArrayList<Radnik> radnici;
 	Korisnik korisnik;
 	
 	private Restoran() throws Exception
@@ -22,7 +23,7 @@ public class Restoran
 		rezervacije = Rezervacija.listaRezervacijaDatum(new java.util.Date());
 		stolovi = new ArrayList<Sto>();
 		stolovi = Sto.listaStolova();
-		
+		radnici = new ArrayList<Radnik>();
 	}
 	
 	//Singleton
@@ -66,6 +67,13 @@ public class Restoran
 		Gost g = new Gost(ime, prezime, telefon);
 		g.dodajGosta();
 		gosti.add(g);
+	}
+	
+	public void DodajRadnika(String ime, String prezime, Date datumZaposlenja, String jmbg, String nazivPosla, String opisPosla, long id) throws Exception
+	{
+		Radnik r = new Radnik(ime, prezime, datumZaposlenja, jmbg, nazivPosla, opisPosla, id);
+		r.dodajRadnika();
+		
 	}
 	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception

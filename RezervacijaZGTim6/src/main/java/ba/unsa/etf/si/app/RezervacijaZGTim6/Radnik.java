@@ -31,6 +31,17 @@ public class Radnik implements Serializable
 		setOpisPosla(opisposla);
 		setNadredjeni(nadredjeni);
 	}
+	
+	public Radnik(String ime, String prezime, Date datumzaposlenja, String jmbg, String nazivposla, String opisposla, long nadredjeni) throws Exception
+	{
+		setJMBG(jmbg);
+		setIme(ime);
+		setPrezime(prezime);
+		setDatumZaposlenja(datumzaposlenja);
+		setNazivPosla(nazivposla);
+		setOpisPosla(opisposla);
+		setNadredjeni(nadredjeni);
+	}
 
 	//Geteri
 	public long getId() {  return ID;  }
