@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 
@@ -31,6 +32,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
 import java.awt.SystemColor;
@@ -77,6 +80,8 @@ public class NapraviRezervaciju {
     private Integer hours;
     private Integer minutes;
     private Sto sto;
+    private TableRowSorter<TableModel> rowSorter;
+    
 	/**
 	 * Launch the application.
 	 */
@@ -251,8 +256,24 @@ public class NapraviRezervaciju {
 		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
 		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+		rowSorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(rowSorter);
+		
 		JButton btnPretrazi = new JButton("Pretraži");
 		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		btnPretrazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String text = textField.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+			}
+		});
+		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		GroupLayout button_panel = new GroupLayout(pnlButton);
 		GroupLayout space_panel = new GroupLayout(pnlSpace);
