@@ -79,6 +79,14 @@ public class Klijenti {
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		JButton btnDodaj = new JButton("Dodaj klijenta");
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik();
+				f.getDodavanjeKlijentaRadnik().setVisible(true);
+				
+				
+			}
+		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDodaj.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
 		
