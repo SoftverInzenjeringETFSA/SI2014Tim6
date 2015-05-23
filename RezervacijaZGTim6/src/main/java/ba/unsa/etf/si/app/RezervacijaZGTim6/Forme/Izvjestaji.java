@@ -29,7 +29,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
@@ -50,8 +52,11 @@ import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache
 
 
 
+
+
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JDateChooser;
+
 import javax.swing.SwingConstants;
 
 
@@ -143,11 +148,14 @@ public class Izvjestaji {
 		btnGenerisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-			    Date date = new Date();
+			    //Date date = new Date();
+			    final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			    Calendar now = Calendar.getInstance();
+	            
 				java.sql.Date sqldate = null;
 				java.sql.Date sqldate_1 = null;
 				java.sql.Date MIN_DATUM = java.sql.Date.valueOf("2015-01-01");
-				// TODAY_DATE = java.sql.Date.valueOf(date.toString());
+				java.sql.Date TODAY_DATE = java.sql.Date.valueOf(dateFormat.format(now.getTime()));
 						
 				java.util.Date d = dateChooser.getDate();
 				java.util.Date dt = dateChooser_1.getDate();
@@ -177,6 +185,19 @@ public class Izvjestaji {
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
 					}
+					
+					
+					if (sqldate_1.after(TODAY_DATE))
+					{
+						pnlDo.setVisible(true);
+						lbl_Do.setText("Budući datum");
+					}
+					else
+					{
+						pnlDo.setVisible(false);
+						lbl_Do.setText("");
+					}	
+					
 				}
 				else if (d != null && dt == null)
 				{
@@ -196,6 +217,19 @@ public class Izvjestaji {
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
 					}
+					
+					
+					if (sqldate.after(TODAY_DATE))
+					{
+						pnlOd.setVisible(true);
+						lbl_Od.setText("Budući datum");
+					}
+					else
+					{
+						pnlOd.setVisible(false);
+						lbl_Od.setText("");
+					}
+					
 				}
 				else
 				{
@@ -227,14 +261,39 @@ public class Izvjestaji {
 					}
 					else
 					{
-						if(sqldate_1.before(sqldate))
+						if (sqldate.after(TODAY_DATE) && sqldate_1.after(TODAY_DATE))
 						{
+							pnlOd.setVisible(true);
+							lbl_Od.setText("Budući datum");
 							pnlDo.setVisible(true);
-							lbl_Do.setText("Nevalidan opseg");
+							lbl_Do.setText("Budući datum");
+						}
+						else if (sqldate.after(TODAY_DATE))
+						{
+							pnlDo.setVisible(false);
+							lbl_Do.setText("");
+							pnlOd.setVisible(true);
+							lbl_Od.setText("Budući datum");
+						}
+						else if (sqldate_1.after(TODAY_DATE))
+						{
+							pnlOd.setVisible(false);
+							lbl_Od.setText("");
+							pnlDo.setVisible(true);
+							lbl_Do.setText("Budući datum");
 						}
 						else
 						{
-							pnlDo.setVisible(false);
+							if(sqldate_1.before(sqldate))
+							{
+								pnlDo.setVisible(true);
+								lbl_Do.setText("Nevalidan opseg");
+							}
+							else
+							{
+								pnlDo.setVisible(false);
+							}
+						
 						}
 					}
 				}
