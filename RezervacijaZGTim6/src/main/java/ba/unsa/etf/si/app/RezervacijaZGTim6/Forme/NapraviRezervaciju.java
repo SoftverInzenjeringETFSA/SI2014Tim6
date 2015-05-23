@@ -215,14 +215,14 @@ public class NapraviRezervaciju {
 					.addComponent(btnDodajRezervaciju)
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
-		
+		//RAD SA TABELOM I PRETRAGA KORISNIKA
 		table = new JTable();
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.BLACK);
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime", "IsVip"
+				"ID", "Ime", "Prezime", "VIP"
 			}, 0);
 		ArrayList<Gost> gosti;
 		gosti=handler.DajGoste();
@@ -235,8 +235,13 @@ public class NapraviRezervaciju {
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
            Boolean IsVip = g.getVIP();
+           String Vip;
+           if (IsVip){
+        	   Vip="DA";
+           }
+           else{ Vip="NE"; }
            
-           Object[] data = {idGosta, Ime, Prezime, IsVip};
+           Object[] data = {idGosta, Ime, Prezime, Vip};
            System.out.println(data);
            tableModel.addRow(data);
         }
@@ -253,8 +258,8 @@ public class NapraviRezervaciju {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		
-		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
-		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		//JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
+		//chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		rowSorter = new TableRowSorter<TableModel>(table.getModel());
 		table.setRowSorter(rowSorter);
@@ -273,7 +278,7 @@ public class NapraviRezervaciju {
                 }
 			}
 		});
-		
+		//KRAJ RADA SA TABELOM I PRETRAGOM KORISNIKA
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		GroupLayout button_panel = new GroupLayout(pnlButton);
 		GroupLayout space_panel = new GroupLayout(pnlSpace);
@@ -292,7 +297,7 @@ public class NapraviRezervaciju {
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 							.addGroup(gl_panel_1.createSequentialGroup()
 								.addGap(6)
-								.addComponent(chckbxVipKlijenti)
+								//.addComponent(chckbxVipKlijenti)
 								.addGap(6)
 								.addComponent(btnPretrazi))))
 					.addContainerGap())
@@ -304,7 +309,7 @@ public class NapraviRezervaciju {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblIme)
-						.addComponent(chckbxVipKlijenti)
+						//.addComponent(chckbxVipKlijenti)
 						.addComponent(btnPretrazi))
 					.addGap(18)
 					.addComponent(lblNewLabel_1)
