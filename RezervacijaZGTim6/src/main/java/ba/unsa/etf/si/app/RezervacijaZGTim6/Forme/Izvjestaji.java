@@ -144,10 +144,11 @@ public class Izvjestaji {
 		pnlDo.setVisible(false);
 		
 		
+		
 		JButton btnGenerisi = new JButton("Generiši");
 		btnGenerisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				boolean validna_forma = true;
 			    //Date date = new Date();
 			    final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			    Calendar now = Calendar.getInstance();
@@ -166,6 +167,7 @@ public class Izvjestaji {
 					lbl_Od.setText("Popunite prazna mjesta");
 					pnlDo.setVisible(true);
 					lbl_Do.setText("Popunite prazna mjesta");
+					validna_forma = false;
 				}
 				else if (d == null && dt != null)
 				{
@@ -174,16 +176,19 @@ public class Izvjestaji {
 					
 					pnlOd.setVisible(true);
 					lbl_Od.setText("Popunite prazna mjesta");
+					validna_forma = false;
 					
 					if (sqldate_1.before(MIN_DATUM))
 					{
 						pnlDo.setVisible(true);
 						lbl_Do.setText("Nevalidna godina");
+						validna_forma = false;
 					}
 					else
 					{
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
+						validna_forma = true;
 					}
 					
 					
@@ -191,11 +196,13 @@ public class Izvjestaji {
 					{
 						pnlDo.setVisible(true);
 						lbl_Do.setText("Budući datum");
+						validna_forma = false;
 					}
 					else
 					{
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
+						validna_forma = true;
 					}	
 					
 				}
@@ -206,16 +213,19 @@ public class Izvjestaji {
 					
 					pnlDo.setVisible(true);
 					lbl_Do.setText("Popunite prazna mjesta");
+					validna_forma = false;
 					
 					if (sqldate.before(MIN_DATUM))
 					{
 						pnlOd.setVisible(true);
 						lbl_Od.setText("Nevalidna godina");
+						validna_forma = false;
 					}
 					else
 					{
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
+						validna_forma = true;
 					}
 					
 					
@@ -223,11 +233,13 @@ public class Izvjestaji {
 					{
 						pnlOd.setVisible(true);
 						lbl_Od.setText("Budući datum");
+						validna_forma = false;
 					}
 					else
 					{
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
+						validna_forma = true;
 					}
 					
 				}
@@ -244,6 +256,7 @@ public class Izvjestaji {
 						lbl_Od.setText("Nevalidna godina");
 						pnlDo.setVisible(true);
 						lbl_Do.setText("Nevalidna godina");
+						validna_forma = false;
 					}
 					else if (sqldate.before(MIN_DATUM) && sqldate_1.after(MIN_DATUM))
 					{
@@ -251,6 +264,7 @@ public class Izvjestaji {
 						lbl_Do.setText("");
 						pnlOd.setVisible(true);
 						lbl_Od.setText("Nevalidna godina");
+						validna_forma = false;
 					}
 					else if (sqldate.after(MIN_DATUM) && sqldate_1.before(MIN_DATUM))
 					{
@@ -258,6 +272,7 @@ public class Izvjestaji {
 						lbl_Od.setText("");
 						pnlDo.setVisible(true);
 						lbl_Do.setText("Nevalidna godina");
+						validna_forma = false;
 					}
 					else
 					{
@@ -267,6 +282,7 @@ public class Izvjestaji {
 							lbl_Od.setText("Budući datum");
 							pnlDo.setVisible(true);
 							lbl_Do.setText("Budući datum");
+							validna_forma = false;
 						}
 						else if (sqldate.after(TODAY_DATE))
 						{
@@ -274,6 +290,7 @@ public class Izvjestaji {
 							lbl_Do.setText("");
 							pnlOd.setVisible(true);
 							lbl_Od.setText("Budući datum");
+							validna_forma = false;
 						}
 						else if (sqldate_1.after(TODAY_DATE))
 						{
@@ -281,6 +298,7 @@ public class Izvjestaji {
 							lbl_Od.setText("");
 							pnlDo.setVisible(true);
 							lbl_Do.setText("Budući datum");
+							validna_forma = false;
 						}
 						else
 						{
@@ -288,15 +306,22 @@ public class Izvjestaji {
 							{
 								pnlDo.setVisible(true);
 								lbl_Do.setText("Nevalidan opseg");
+								validna_forma = false;
 							}
 							else
 							{
 								pnlDo.setVisible(false);
+								validna_forma = true;
 							}
 						
 						}
 					}
 				}
+				
+				if (validna_forma)
+					System.out.println("Validna forma");
+				else
+					System.out.println("Nevalidna forma");
 			}
 		});
 		btnGenerisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
