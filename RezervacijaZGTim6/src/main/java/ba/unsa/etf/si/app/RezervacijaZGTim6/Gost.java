@@ -27,6 +27,7 @@ public class Gost implements Serializable
 		setBrojTelefona(brojTelefona);
 		setIme(ime);
 		setPrezime(prezime);
+		setVIP(false);
 	}
 	
 	//Geteri

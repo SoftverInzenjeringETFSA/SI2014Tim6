@@ -62,6 +62,11 @@ public class Restoran
 		return stolovi;
 	}
 	
+	public ArrayList<Radnik> DajRadnike()
+	{
+		return radnici;
+	}
+	
 	public void DodajGosta(String ime, String prezime, String telefon) throws Exception
 	{
 		Gost g = new Gost(ime, prezime, telefon);
