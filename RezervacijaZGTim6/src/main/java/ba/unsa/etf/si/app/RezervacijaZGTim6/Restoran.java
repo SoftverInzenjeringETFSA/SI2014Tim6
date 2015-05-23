@@ -32,6 +32,10 @@ public class Restoran
 		return restoran;
 	}
 	
+	public Korisnik getKorisnik()
+	{
+		return korisnik;
+	}
 	
 	public boolean PrijavaKorisnika(String username, String password) throws Exception
 	{

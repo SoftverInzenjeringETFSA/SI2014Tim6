@@ -47,7 +47,6 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import java.sql.Time;
 
 
-
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -155,9 +154,20 @@ public class NapraviRezervaciju {
 				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
 				//referenci za button i panel promijenit boju stola koji je kliknut
 				
+				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+				Time vrijeme = new Time(hours, minutes, 0);
+				Integer trajanje = 0; //(Integer) spinner.getValue()
+				Long ms = date.getDate().getTime();
+				java.sql.Date sqldate = new java.sql.Date(ms);
 				
-				
-				//handler.NapraviRezervaciju(table.getValueAt(table.getSelectedRow(), 0), ); //proslijedi parametre
+				try {
+					if(idGosta != 0 && trajanje != 0 && trajanje < 1440)
+						handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje);
+				} catch (NumberFormatException e1) {
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				
 				prikazStolovaButton.setBackground(Color.red);
 				prikazStolovaPanel.revalidate();
