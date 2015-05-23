@@ -157,6 +157,8 @@ public class NapraviRezervaciju {
 				
 				
 				
+				//handler.NapraviRezervaciju(table.getValueAt(table.getSelectedRow(), 0), ); //proslijedi parametre
+				
 				prikazStolovaButton.setBackground(Color.red);
 				prikazStolovaPanel.revalidate();
 				prikazStolovaPanel.repaint();
