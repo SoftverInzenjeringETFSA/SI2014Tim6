@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,8 +24,16 @@ import java.util.Iterator;
 
 import javax.swing.JButton;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 import com.toedter.calendar.JDateChooser;
 
+import freemarker.core.ParseException;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
@@ -117,38 +126,81 @@ public class RezervisanSto {
 				if(r.getIdStola()==clickedTable.getID())
 				{
 					clickedReservation=r;
-				/*	Calendar currentTime= Calendar.getInstance();
+					//Time t = r.getVrijemeRezervacije();
+					//t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
+					
+					//System.out.println("Vrijeme t: "+ t.getHours()+"h, "+t.getMinutes()+"m.");
+					
+				   /* Calendar currentTime= Calendar.getInstance();
 					Calendar databaseTime= Calendar.getInstance();
 			     		
 					Time t = r.getVrijemeRezervacije();
 					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-					//System.out.println("Vrijeme t: "+t.getHours() +"h, "+ t.getMinutes()+"m");
 					
-					Date d = new Date();
+					System.out.println("Vrijeme t: "+ t.getHours()+"h, "+t.getMinutes()+"m.");
+					
 				    Date d1 = r.getDatumRezervacije();
-				    //System.out.println("Vrijeme d1: "+ d1.getHours()+"h, "+d1.getMinutes()+"m.");
+				    Calendar databaseDate = Calendar.getInstance();
+				    databaseDate.setTime(d1);
+				    databaseTime.setTime(t);
+				    
+				    databaseDate.set(Calendar.HOUR_OF_DAY, databaseTime.get(Calendar.HOUR_OF_DAY));
+				    databaseDate.set(Calendar.MINUTE, databaseTime.get(Calendar.MINUTE));
 				    
 				    
-				    databaseTime.setTime(d1);
-				    databaseTime.set(Calendar.HOUR_OF_DAY,t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-				    databaseTime.set(Calendar.MINUTE,t.getMinutes());
+				    System.out.println("Baza vrijeme: "+ databaseDate.HOUR_OF_DAY+" sati, "+ databaseDate.MINUTE+" minuta");
 				    
-				    System.out.println("Baza vrijeme: "+ databaseTime.HOUR_OF_DAY+" sati, "+ databaseTime.MINUTE+"minuta");
-				    
-				  //  System.out.println("Vrijeme u bazi : sati: "+t.getHours()+", minute: "+t.getMinutes());
-					System.out.println("Trenutno vrijeme: sati: "+d.getHours()+", minute: "+d.getMinutes());
+					System.out.println("Trenutno vrijeme: sati: "+currentTime.HOUR_OF_DAY+", minute: "+currentTime.MINUTE);
+					*/
+					Date date = new Date(System.currentTimeMillis()); // Prints 2013-03-08
+					Time time = new Time(System.currentTimeMillis()); // Prints 15:40:33
+                    
+					Date date1= new java.util.Date(r.getDatumRezervacije().getTime());
+					Time time1=r.getVrijemeRezervacije();
+					time1.setHours(time1.getHours()+r.getTrajanjeRezervacijeMinute()/60);
 					
-					Date d3= new Date();
-					d3.setTime(databaseTime.getTimeInMillis()-d.getTime());
+					String myDate = date + " " + time;
 					
-					Calendar differenceTime = Calendar.getInstance();
-					differenceTime.setTime(d3);
 					
-				    System.out.println("Do isteka rezervacije "+ (d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+d3.getMinutes()+"m.");			
-				    lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
-					lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
+                    String myDate1= date1+" "+time1;
+                    System.out.println(myDate + " trenutno");
+                    System.out.println(myDate1 + " baza");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					java.util.Date utilDate = new java.util.Date();
+					//java.util.Date utilDate1 = new java.util.Date(r.getDatumRezervacije().getTime());
+					java.util.Date utilDate1 = new java.util.Date();
+					//utilDate1.setHours(r.getVrijemeRezervacije().getHours()+2);
+					//utilDate1.setMinutes(r.getVrijemeRezervacije().getMinutes());
+					try {
+					    utilDate = sdf.parse(myDate); 
+					    utilDate1 = sdf.parse(myDate1); 
+					    
+					} catch (Exception pe) {
+					   // TODO something.
+					}
+                      Date d= new Date();
+					DateTime dateTimeNow = new DateTime(d); 
+					DateTime dateTimeDatabase = new DateTime(utilDate1);
+					System.out.println("Iz baze: "+dateTimeDatabase.toString());
+					Period p= new Period(dateTimeNow,dateTimeDatabase);
+					PeriodFormatter daysHoursMinutes = new PeriodFormatterBuilder()
+				    .appendDays()
+				    .appendSuffix(" day", " dana")
+				    .appendSeparator(" i ")
+				    .appendMinutes()
+				    .appendSuffix(" minute", " minuta")
+				    .appendSeparator(" i ")
+				    .appendSeconds()
+				    .appendSuffix(" second", " sekundi")
+				    .toFormatter();
+					
+					System.out.println("Do isteka rezervacije "+daysHoursMinutes.print(p.normalizedStandard()));			
+					   
+				   // System.out.println("Do isteka rezervacije "+ (d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+d3.getMinutes()+"m.");			
+				   // lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
+					//lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
 				    
-				  */  
+				   
 				}
 			}
 			
@@ -196,11 +248,21 @@ public class RezervisanSto {
 			public void actionPerformed(ActionEvent e)
 			{
 				
-				prikazStolovaButton.setBackground(Color.orange);
-				prikazStolovaButton.revalidate();
-				prikazStolovaButton.repaint();
+				clickedReservation.setStatusRezervacije("OKUPIRANO");
+				try {
+					ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
+					clickedReservation.setStatusRezervacije("OKUPIRANO");
+					clickedReservation.promijeniStatusRezervacije(clickedReservation.getID(), "OKUPIRANO");
+					prikazStolovaButton.setBackground(Color.orange);
+					prikazStolovaButton.revalidate();
+					prikazStolovaButton.repaint();
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				getRezervisanSto().dispose();
-				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
 				 
 				 
 				

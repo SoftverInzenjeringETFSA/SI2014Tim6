@@ -71,7 +71,7 @@ public class Gost implements Serializable
 			temp.setPrezime(g.getPrezime());
 			session.update(temp);
 			tx.commit();
-			System.out.println("Gost "+ id+ " promijenjen na "+ temp.getIme()+ " " + temp.getPrezime());
+			System.out.println("Gost "+ id + " promijenjen na "+ temp.getIme()+ " " + temp.getPrezime());
 		}
 		catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
