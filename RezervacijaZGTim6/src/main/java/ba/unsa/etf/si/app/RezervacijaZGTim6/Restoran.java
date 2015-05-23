@@ -137,8 +137,4 @@ public class Restoran
 		else return korisnik.getStepenPristupa();
 	}
 	
-	
-	
-	
-	
 }
