@@ -101,7 +101,7 @@ public class RezervacijaRadnik {
 		setRezervacijaRadnik(new JFrame());
 		getRezervacijaRadnik().setResizable(false);
 		getRezervacijaRadnik().setBounds(100, 100, 624, 427);
-		getRezervacijaRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getRezervacijaRadnik().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	    frame.setBounds(300, 50, 950, 630);
 		
