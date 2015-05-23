@@ -28,10 +28,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
 public class PregledKlijenataRadnik {
@@ -39,6 +44,7 @@ public class PregledKlijenataRadnik {
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
+	private Restoran handler;
 
 	/**
 	 * Launch the application.
@@ -106,19 +112,40 @@ public class PregledKlijenataRadnik {
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.LIGHT_GRAY);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
-			}
-		));
+		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
+				"ID", "Ime", "Prezime", "VIP"
+			}, 0){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		ArrayList<Gost> gosti;
+		gosti=handler.DajGoste();
+		
+		
+		for (Iterator iterator1 = gosti.iterator(); iterator1.hasNext();)
+        {
+           Gost g = (Gost)iterator1.next(); 
+           long idGosta = g.getID();
+           String Ime = g.getIme();
+           String Prezime = g.getPrezime();
+           Boolean IsVip = g.getVIP();
+           String Vip;
+           if (IsVip){
+        	   Vip="DA";
+           }
+           else{ Vip="NE"; }
+           
+           Object[] data = {idGosta, Ime, Prezime, Vip};
+           System.out.println(data);
+           tableModel.addRow(data);
+        }
+		
+		table.setModel(tableModel);
 		
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -197,6 +224,22 @@ public class PregledKlijenataRadnik {
 
 	public void setPregledKlijenataRadnik(JFrame frame) {
 		this.frame = frame;
+	}
+
+	public void showWindow(Restoran handler) {
+		
+		this.handler=handler;
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					initialize();
+					getPregledKlijenataRadnik().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }

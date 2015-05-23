@@ -227,7 +227,7 @@ public class RezervacijaRadnik {
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PregledKlijenataRadnik f = new PregledKlijenataRadnik();
-				f.getPregledKlijenataRadnik().setVisible(true);
+				f.showWindow(handler);
 			}
 		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -334,7 +334,7 @@ public class RezervacijaRadnik {
 						int minute= (Integer)d.getMinutes();
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju(handler);
-					   r.showWindow(number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
+					   r.showWindow(handler, number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
 						   
 					}
 					else if(background==Color.orange)
