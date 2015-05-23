@@ -180,11 +180,12 @@ public class DodavanjeKlijentaRadnik {
 									g = (Gost)j.next();
 									if(g.getID()==gost.getID())
 									{
-										gost.setIme(textField.getText());
-										gost.setPrezime(textField_1.getText());
+										g.setIme(textField.getText());
+										g.setPrezime(textField_1.getText());
+										gost.updateGosta(g.getID(), g);
 									}
 								}
-								gost.updateGosta(gost.getID(), gost);
+								
 								
 							} catch (Exception e1) {
 								e1.printStackTrace();
