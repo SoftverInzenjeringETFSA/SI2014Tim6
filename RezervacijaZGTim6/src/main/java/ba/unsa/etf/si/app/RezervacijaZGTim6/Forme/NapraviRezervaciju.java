@@ -249,8 +249,11 @@ public class NapraviRezervaciju {
 		table.setModel(tableModel);
 		
 		
-		JLabel lblIme = new JLabel("Ime: ");
+		JLabel lblIme = new JLabel("Pretraga: ");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JLabel lblTrajanje = new JLabel("Trajanje: ");
+		lblTrajanje.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -258,8 +261,11 @@ public class NapraviRezervaciju {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		
-		//JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
-		//chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		JSpinner spinner = new JSpinner(new SpinnerDateModel());
+		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH");
+		spinner.setEditor(timeEditor);
+		spinner.setValue(new Date()); // will only show the current time
+		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		rowSorter = new TableRowSorter<TableModel>(table.getModel());
 		table.setRowSorter(rowSorter);
@@ -297,9 +303,10 @@ public class NapraviRezervaciju {
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 							.addGroup(gl_panel_1.createSequentialGroup()
 								.addGap(6)
-								//.addComponent(chckbxVipKlijenti)
+								.addComponent(btnPretrazi)
 								.addGap(6)
-								.addComponent(btnPretrazi))))
+							.addComponent(lblTrajanje)
+								.addComponent(spinner))))
 					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
@@ -309,7 +316,8 @@ public class NapraviRezervaciju {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblIme)
-						//.addComponent(chckbxVipKlijenti)
+						.addComponent(spinner)
+						.addComponent(lblTrajanje)
 						.addComponent(btnPretrazi))
 					.addGap(18)
 					.addComponent(lblNewLabel_1)
