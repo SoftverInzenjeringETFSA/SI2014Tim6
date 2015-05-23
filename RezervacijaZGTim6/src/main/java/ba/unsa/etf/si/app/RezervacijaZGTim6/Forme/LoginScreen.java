@@ -122,7 +122,6 @@ public class LoginScreen {
 						lblPsw.setText("Nedozvoljen format!");
 						pnlPassword.setVisible(true);
 					} else if(!handler.PrijavaKorisnika(txtUsername.getText(), passString)){
-						lblPsw.setText("Neispravni username ili password. Molimo pokusajte ponovo!");
 						pnlPassword.setVisible(true);
 					} else {
 						lblPsw.setText("");
