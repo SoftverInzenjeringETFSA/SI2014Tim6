@@ -60,7 +60,28 @@ public class Gost implements Serializable
 		t.commit();
 		session.close();
 	}
-	
+	public void updateGosta(long id, Gost g) throws Exception 
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx =null;
+		try{
+			tx= session.beginTransaction();
+			Gost temp = (Gost) session.get(Gost.class, id);
+			temp.setIme(g.getIme());
+			temp.setPrezime(g.getPrezime());
+			session.update(temp);
+			tx.commit();
+			System.out.println("Gost "+ id+ " promijenjen na "+ temp.getIme()+ " " + temp.getPrezime());
+		}
+		catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	    }
+		finally 
+		{
+	         session.close(); 
+	    }
+	}
 	public void ocitajGosta(long id) throws Exception 
 	{
 		
