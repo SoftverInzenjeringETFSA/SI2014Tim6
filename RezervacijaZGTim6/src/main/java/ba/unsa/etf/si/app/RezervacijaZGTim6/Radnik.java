@@ -2,13 +2,9 @@ package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -102,57 +98,12 @@ public class Radnik implements Serializable
 		//System.out.println(this.toString());
 	}
 	
-	public void obrisiRadnika() throws Exception 
-	{
-		
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction t = session.beginTransaction();
-		System.out.println(getId());
-		session.delete(this);
-		t.commit();
-		session.close();
-		//System.out.println(this.toString());
-	}
-	
-	public void azurirajRadnika() throws Exception 
-	{
-		
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction t = session.beginTransaction();
-		System.out.println(getId());
-		session.update(this);
-		t.commit();
-		session.close();
-		//System.out.println(this.toString());
-	}
-	
-	public static ArrayList<Radnik> listaRadnika()
-	{
-	      Session session = HibernateUtil.getSessionFactory().openSession();
-	      ArrayList<Radnik> lista = new ArrayList<Radnik>();
-	      Transaction tx = null;
-	      
-	      try{
-	         tx = session.beginTransaction();
-	         List radnici= session.createQuery("FROM Radnik").list(); 
-	         for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
-	         {
-	            Radnik radnik = (Radnik)iterator1.next(); 
-	            lista.add(radnik);
-	         }
-	         tx.commit();
-	      }catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }finally {
-	         session.close(); 
-	         }
-	      return lista;
-	 }
-	
 	@Override
 	public String toString() {
-		return Ime + " " + Prezime + " " + NazivPosla + " "  + OpisPosla;
+		return "Radnik [ID=" + ID + ", Ime=" + Ime + ", Prezime=" + Prezime
+				+ ", DatumZaposlenja=" + DatumZaposlenja + ", JMBG=" + JMBG
+				+ ", NazivPosla=" + NazivPosla + ", OpisPosla=" + OpisPosla
+				+ ", Nadredjeni=" + Nadredjeni + "]";
 	}
 	
 }
