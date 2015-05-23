@@ -124,51 +124,64 @@ public class RadniciDodavanje {
 		btnSpasi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean validna_forma = true;
 				// validacija
 				if (textField.getText().isEmpty()) {
 					lblIme_Validacija.setText("Popunite polje!");
 					pnlIme.setVisible(true);
+					validna_forma = false;
 				} else if (!ValidacijaImePrezime(textField.getText())) {
 					lblIme_Validacija.setText("Nedozvoljen format!");
 					pnlIme.setVisible(true);
+					validna_forma = false;
 				}
 				else { 
 					lblIme_Validacija.setText("");
 					pnlIme.setVisible(false);
+					validna_forma = true;
 				}
 				
 				if (textField_1.getText().isEmpty()) {
 					lblPrezime_Validacija.setText("Popunite polje!");
 					pnlPrezime.setVisible(true);
+					validna_forma = false;
 				} else if (!ValidacijaImePrezime(textField_1.getText())) {
 					lblPrezime_Validacija.setText("Nedozvoljen format!");
 					pnlPrezime.setVisible(true);
+					validna_forma = false;
 				}
 				else { 
 					lblPrezime_Validacija.setText("");
 					pnlPrezime.setVisible(false);
+					validna_forma = true;
 				}
 				
 				if(textField_2.getText().isEmpty()) {
 					lblUsr.setText("Popunite polje!");
 					pnlUsername.setVisible(true);
+					validna_forma = false;
 				} else if (!ValidacijaUserPass(textField_2.getText())) {
 					lblUsr.setText("Nedozvoljen format!");
 					pnlUsername.setVisible(true);
+					validna_forma = false;
 				} else {
 					lblUsr.setText("");
 					pnlUsername.setVisible(false);
+					validna_forma = true;
 				}
 				
 				if(textField_3.getText().isEmpty()) {
 					lblPsw.setText("Popunite polje!");
 					pnlPassword.setVisible(true);
+					validna_forma = false;
 				} else if (!ValidacijaUserPass(textField_3.getText())) {
 					lblPsw.setText("Nedozvoljen format!");
 					pnlPassword.setVisible(true);
+					validna_forma = false;
 				} else {
 					lblPsw.setText("");
 					pnlPassword.setVisible(false);
+					validna_forma = true;
 				}
 				
 				boolean dobri_podaci = false;
@@ -183,6 +196,10 @@ public class RadniciDodavanje {
 					f.printStackTrace();
 				}
 				
+				if (validna_forma)
+					System.out.println("Validna forma");
+				else
+					System.out.println("Nevalidna forma");
 			}
 		});
 		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -268,16 +285,16 @@ public class RadniciDodavanje {
 					.addComponent(btnSpasi)
 					.addContainerGap(116, Short.MAX_VALUE))
 		);
-		lblUsr.setForeground(Color.ORANGE);
+		lblUsr.setForeground(Color.RED);
 		
 		pnlUsername.add(lblUsr);
 		pnlPrezime.add(lblPrezime_Validacija);
 		
-		lblPrezime_Validacija.setForeground(Color.ORANGE);
+		lblPrezime_Validacija.setForeground(Color.RED);
 		pnlIme.add(lblIme_Validacija);
 		
-		lblIme_Validacija.setForeground(Color.ORANGE);
-		lblPsw.setForeground(Color.ORANGE);
+		lblIme_Validacija.setForeground(Color.RED);
+		lblPsw.setForeground(Color.RED);
 		
 		pnlPassword.add(lblPsw);
 		panel.setLayout(null);
