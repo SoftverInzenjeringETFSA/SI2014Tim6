@@ -95,6 +95,7 @@ public class LoginScreen {
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				
+				// validacija
 				if (txtUsername.getText().isEmpty()) {
 					lblUsr.setText("Popunite polje!");
 					pnlUsername.setVisible(true);
@@ -107,12 +108,13 @@ public class LoginScreen {
 					pnlUsername.setVisible(false);
 				}
 				
-				 boolean dobri_podaci = false;
+				boolean dobri_podaci = false;
 				 try 
 				 {
 					char[] pass = txtPassword.getPassword();
 					String passString = new String(pass);
 					
+					// validacija
 					if(passString.equals("")) {
 						lblPsw.setText("Popunite polje!");
 						pnlPassword.setVisible(true);
