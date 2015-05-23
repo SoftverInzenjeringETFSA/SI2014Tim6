@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Color;
+import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -26,7 +27,10 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.SystemColor;
 import java.util.ArrayList;
@@ -49,6 +53,7 @@ public class PregledKlijenataRadnik {
 	private JTable table;
 	private Restoran handler;
 	private DodavanjeKlijentaRadnik k;
+	private TableRowSorter<TableModel> rowSorter;
 
 	/**
 	 * Launch the application.
@@ -80,22 +85,20 @@ public class PregledKlijenataRadnik {
 	private void initialize() {
 		setPregledKlijenataRadnik(new JFrame());
 		getPregledKlijenataRadnik().setResizable(false);
-		getPregledKlijenataRadnik().setBounds(100, 100, 624, 427);
+		getPregledKlijenataRadnik().setBounds(100, 100, 473, 390);
 		getPregledKlijenataRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
+		//JPanel panel = new JPanel();
+		//panel.setBackground(Color.LIGHT_GRAY);
 		
 		JLabel lblNewLabel = new JLabel("Pregled klijenata");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
-		JButton btnDodaj = new JButton("Dodaj klijenta");
+		JButton btnDodaj = new JButton("Dodaj novog klijenta");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik();
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
-				
-				
 			}
 		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -107,23 +110,11 @@ public class PregledKlijenataRadnik {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JButton btnPretrazi = new JButton("Pretraži");
-		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		
-		
-		
-		table = new JTable();
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
-		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setForeground(Color.LIGHT_GRAY);
-		JScrollPane scrollPane = new JScrollPane( table );
-		
-		frame.add(scrollPane);
-		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
-				"Ime", "Prezime"
+				"ID", "Ime", "Prezime"
 			}, 0){
 			private static final long serialVersionUID = 1L;
 
@@ -149,7 +140,43 @@ public class PregledKlijenataRadnik {
            tableModel.addRow(data);
         }
 		
+		table = new JTable();
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
+		table.setBackground(SystemColor.inactiveCaptionBorder);
+		table.setForeground(Color.BLACK);
+		
+		
+		
 		table.setModel(tableModel);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		rowSorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(rowSorter);
+		
+		JButton btnPretrazi = new JButton("Pretraži");
+		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		btnPretrazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String text = textField.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+			}
+		});
+		
+		/*int rowIndex = 20;
+		int columnIndex = 0;
+		boolean includeSpacing = true;
+		 
+		Rectangle cellRect = table.getCellRect(rowIndex, columnIndex, includeSpacing);
+		 
+		table.scrollRectToVisible(cellRect);*/
 		
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -172,65 +199,59 @@ public class PregledKlijenataRadnik {
 			}
 		});
 		
-		JButton btnObrisi = new JButton("Obriši");
-		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JCheckBox chckbxPregledKlijenataRadnik = new JCheckBox("VIP klijenti");
-		chckbxPregledKlijenataRadnik.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		//JCheckBox chckbxPregledKlijenataRadnik = new JCheckBox("VIP klijenti");
+		//chckbxPregledKlijenataRadnik.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(getPregledKlijenataRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnPretrazi)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblIme)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_1)
-							.addPreferredGap(ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-							.addComponent(chckbxPregledKlijenataRadnik))
-						.addComponent(table, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(155)
+									.addComponent(lblNewLabel_1))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(lblIme)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblNewLabel))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnPretrazi))
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432))
+							.addContainerGap(14, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel)
-							.addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
 							.addGap(9)
-							.addComponent(btnIzmjeni)))
-					.addContainerGap())
+							.addComponent(btnIzmjeni)
+							.addPreferredGap(ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+							.addGap(26))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(22)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel))
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblIme)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnPretrazi))
-						.addComponent(chckbxPregledKlijenataRadnik)
-						.addComponent(lblNewLabel_1))
-					.addGap(28)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblNewLabel)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblIme)
+						.addComponent(btnPretrazi))
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnIzmjeni)
-						.addComponent(btnObrisi))
-					.addContainerGap(93, Short.MAX_VALUE))
+						.addComponent(btnDodaj))
+					.addContainerGap(16, Short.MAX_VALUE))
 		);
-		panel.setLayout(null);
+		//panel.setLayout(null);
 		
 		JButton btnradnici = new JButton("Radnici");
 		getPregledKlijenataRadnik().getContentPane().setLayout(groupLayout);

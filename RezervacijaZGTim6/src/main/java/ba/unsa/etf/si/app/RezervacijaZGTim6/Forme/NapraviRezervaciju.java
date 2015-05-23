@@ -239,10 +239,6 @@ public class NapraviRezervaciju {
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		//RAD SA TABELOM I PRETRAGA KORISNIKA
-		table = new JTable();
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
-		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setForeground(Color.BLACK);
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
 				"ID", "Ime", "Prezime", "Br. telefona", "VIP"
@@ -274,12 +270,18 @@ public class NapraviRezervaciju {
            else{ Vip="NE"; }
            
            Object[] data = {idGosta, Ime, Prezime, BrTel, Vip};
-           System.out.println(data);
            tableModel.addRow(data);
         }
 		
+		table = new JTable();
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
+		table.setBackground(SystemColor.inactiveCaptionBorder);
+		table.setForeground(Color.BLACK);
+		
 		table.setModel(tableModel);
-		//JScrollPane scrollPane = new JScrollPane(table);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
 		JLabel lblIme = new JLabel("Pretraga: ");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -331,7 +333,7 @@ public class NapraviRezervaciju {
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(165)
 							.addComponent(lblNewLabel_1))
-						.addComponent(table, GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblIme)
@@ -353,7 +355,7 @@ public class NapraviRezervaciju {
 					.addGap(18)
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		panel_1.setLayout(gl_panel_1);
