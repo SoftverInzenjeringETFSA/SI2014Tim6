@@ -24,6 +24,7 @@ public class Restoran
 		stolovi = new ArrayList<Sto>();
 		stolovi = Sto.listaStolova();
 		radnici = new ArrayList<Radnik>();
+		radnici = Radnik.listaRadnika();
 	}
 	
 	//Singleton
@@ -79,6 +80,17 @@ public class Restoran
 		Radnik r = new Radnik(ime, prezime, datumZaposlenja, jmbg, nazivPosla, opisPosla, id);
 		r.dodajRadnika();
 		radnici.add(r);
+	}
+	
+	public void obrisiRadnika(Radnik r) throws Exception
+	{
+		r.obrisiRadnika();
+		radnici.remove(r);
+	}
+	
+	public void azurirajRadnika(Radnik r) throws Exception
+	{
+		r.azurirajRadnika();;
 	}
 	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception

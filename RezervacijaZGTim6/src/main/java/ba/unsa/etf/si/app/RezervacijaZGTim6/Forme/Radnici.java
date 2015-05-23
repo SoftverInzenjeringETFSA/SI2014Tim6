@@ -1,11 +1,13 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6.Forme;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -27,34 +29,51 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Radnik;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 
 public class Radnici {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTable table;
 	private Restoran handler;
-
+	JList list;
+	JButton button;
+	JButton button_1;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			final Restoran ZmajevoGnijezdo = Restoran.getInstance();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Radnici window = new Radnici();
+					Radnici window = new Radnici(ZmajevoGnijezdo);
 					window.getRadnici().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	/**
@@ -81,116 +100,112 @@ public class Radnici {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel lblNewLabel = new JLabel("Pregled radnika");
-		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
-		
-		JButton btnDodaj = new JButton("Dodaj radnika");
-		btnDodaj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getRadnici().dispose();
-				RadniciDodavanje f = new RadniciDodavanje();
-				f.getRadniciDodavanje().setVisible(true);
-			}
-		});
-		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnDodaj.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011244_678092-sign-add-16.png"));
-		
-		JLabel lblIme = new JLabel("Ime: ");
-		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField.setColumns(10);
-		
-		JButton btnPretrazi = new JButton("Pretraži");
-		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
-		table = new JTable();
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
-		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setForeground(Color.LIGHT_GRAY);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
-			}
-		));
+		JScrollPane scrollPane = new JScrollPane();
+		final DefaultListModel<Radnik> model = new DefaultListModel<Radnik>();
 		
-		JButton btnIzmjeni = new JButton("Izmijeni");
-		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnIzmjeni.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		ArrayList<Radnik> radnici = new ArrayList<Radnik>();
+		radnici = handler.DajRadnike();
+		
+		
+		for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
+        {
+			Radnik r= (Radnik)iterator1.next();
+   			model.addElement(r);
+        }	
+
+		list = new JList(model);
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				button.setEnabled(true);
+				button_1.setEnabled(true);
 			}
+});
+		
+		scrollPane.setViewportView(list);
+		panel.setLayout(null);
+		
+	
+		button = new JButton("Obriši");
+		button.setEnabled(false);
+		button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					handler.obrisiRadnika((Radnik)list.getSelectedValue());
+					model.removeElement((Radnik)list.getSelectedValue());
+					button.setEnabled(false);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}			}
 		});
 		
-		JButton btnObrisi = new JButton("Obriši");
-		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		button_1 = new JButton("Izmijeni");
+		button_1.setEnabled(false);
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					f.getFrame().setVisible(true);
+					button_1.setEnabled(false);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}			}
+		});
+		
+		JButton button_2 = new JButton("Dodaj klijenta");
+		button_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
 		GroupLayout groupLayout = new GroupLayout(getRadnici().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_1)
-								.addComponent(lblNewLabel, Alignment.LEADING))
-							.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(45)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addGap(9)
-										.addComponent(btnIzmjeni))
-									.addComponent(table, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblIme)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnPretrazi)))
-							.addGap(39))))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(button, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_1)
+										.addGap(49)))
+								.addGap(20))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+								.addContainerGap()))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(12)
+					.addGap(28)
+					.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(57)
+					.addComponent(lblNewLabel_1)
+					.addGap(97)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(74)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_1)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblIme)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnPretrazi))
-							.addGap(2)))
-					.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnIzmjeni)
-						.addComponent(btnObrisi))
-					.addGap(57))
+						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(48, Short.MAX_VALUE))
 		);
-		panel.setLayout(null);
+			
 		
 		JButton btnOdjava = new JButton("Odjavi se");
 		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
