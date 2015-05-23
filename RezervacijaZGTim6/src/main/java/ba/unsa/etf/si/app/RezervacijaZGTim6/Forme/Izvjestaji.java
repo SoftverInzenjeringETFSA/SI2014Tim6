@@ -52,6 +52,7 @@ import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache
 
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.SwingConstants;
 
 
 
@@ -123,76 +124,120 @@ public class Izvjestaji {
 		
 		ImageIcon errImg = new ImageIcon("Slike/error.png");
 		
-		JLabel lbl_Od = new JLabel("", errImg, JLabel.CENTER);
+		final JLabel lbl_Od = new JLabel("", errImg, SwingConstants.LEFT);
+		lbl_Od.setForeground(Color.RED);
+		lbl_Od.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		final JPanel pnlOd = new JPanel();
 		pnlOd.add( lbl_Od, BorderLayout.WEST );
 		pnlOd.setVisible(false);
 		
-		JLabel lbl_Do = new JLabel("", errImg, JLabel.CENTER);
+		final JLabel lbl_Do = new JLabel("", errImg, SwingConstants.LEFT);
+		lbl_Do.setForeground(Color.RED);
+		lbl_Do.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		final JPanel pnlDo = new JPanel();
 		pnlDo.add( lbl_Do, BorderLayout.WEST );
 		pnlDo.setVisible(false);
-		final Date date = new Date();
+		
 		
 		JButton btnGenerisi = new JButton("Generiši");
 		btnGenerisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				java.sql.Date sqldate = null, sqldate_1 = null, 
-						MIN_DATUM = java.sql.Date.valueOf("2015-01-01"),
-						TODAY_DATE = java.sql.Date.valueOf(date.toString());
 				
-				
+			    Date date = new Date();
+				java.sql.Date sqldate = null;
+				java.sql.Date sqldate_1 = null;
+				java.sql.Date MIN_DATUM = java.sql.Date.valueOf("2015-01-01");
+				// TODAY_DATE = java.sql.Date.valueOf(date.toString());
+						
 				java.util.Date d = dateChooser.getDate();
-				if (d == null) {
-					pnlOd.setVisible(true);
-				    System.out.println("No date specified!");
-				} else {
-					pnlOd.setVisible(false);
-					sqldate = new java.sql.Date(d.getTime());
-				}
-				
 				java.util.Date dt = dateChooser_1.getDate();
-				if (dt == null) {
+				
+				if (d == null && dt == null)
+				{
+					pnlOd.setVisible(true);
+					lbl_Od.setText("Popunite prazna mjesta");
 					pnlDo.setVisible(true);
-				    System.out.println("No date specified!");
-				} else {
+					lbl_Do.setText("Popunite prazna mjesta");
+				}
+				else if (d == null && dt != null)
+				{
 					pnlDo.setVisible(false);
 					sqldate_1 = new java.sql.Date(dt.getTime());
-				}
-				
-				if(sqldate_1.after(TODAY_DATE))
-					pnlDo.setVisible(true);
-				else
-				{
-					if(sqldate_1.before(sqldate))
+					
+					pnlOd.setVisible(true);
+					lbl_Od.setText("Popunite prazna mjesta");
+					
+					if (sqldate_1.before(MIN_DATUM))
 					{
 						pnlDo.setVisible(true);
-						lblDatumOd.setText("Greška prijatelju.");
+						lbl_Do.setText("Nevalidna godina");
 					}
-					else if (!sqldate_1.before(sqldate))
+					else
 					{
 						pnlDo.setVisible(false);
+						lbl_Do.setText("");
 					}
+				}
+				else if (d != null && dt == null)
+				{
+					pnlOd.setVisible(false);
+					sqldate = new java.sql.Date(d.getTime());
 					
-					if(sqldate.before(MIN_DATUM))
+					pnlDo.setVisible(true);
+					lbl_Do.setText("Popunite prazna mjesta");
+					
+					if (sqldate.before(MIN_DATUM))
 					{
 						pnlOd.setVisible(true);
+						lbl_Od.setText("Nevalidna godina");
 					}
-					else if (sqldate_1.before(MIN_DATUM))
-					{
-						pnlDo.setVisible(true);
-					}
-					else if (!sqldate.before(MIN_DATUM))
+					else
 					{
 						pnlOd.setVisible(false);
+						lbl_Od.setText("");
 					}
-					else if (!sqldate_1.before(MIN_DATUM))
-						pnlDo.setVisible(false);
 				}
-				
-				
+				else
+				{
+					pnlOd.setVisible(false);
+					sqldate = new java.sql.Date(d.getTime());
+					pnlDo.setVisible(false);
+					sqldate_1 = new java.sql.Date(dt.getTime());
 					
-				
+					if (sqldate.before(MIN_DATUM) && sqldate_1.before(MIN_DATUM))
+					{
+						pnlOd.setVisible(true);
+						lbl_Od.setText("Nevalidna godina");
+						pnlDo.setVisible(true);
+						lbl_Do.setText("Nevalidna godina");
+					}
+					else if (sqldate.before(MIN_DATUM) && sqldate_1.after(MIN_DATUM))
+					{
+						pnlDo.setVisible(false);
+						lbl_Do.setText("");
+						pnlOd.setVisible(true);
+						lbl_Od.setText("Nevalidna godina");
+					}
+					else if (sqldate.after(MIN_DATUM) && sqldate_1.before(MIN_DATUM))
+					{
+						pnlOd.setVisible(false);
+						lbl_Od.setText("");
+						pnlDo.setVisible(true);
+						lbl_Do.setText("Nevalidna godina");
+					}
+					else
+					{
+						if(sqldate_1.before(sqldate))
+						{
+							pnlDo.setVisible(true);
+							lbl_Do.setText("Nevalidan opseg");
+						}
+						else
+						{
+							pnlDo.setVisible(false);
+						}
+					}
+				}
 			}
 		});
 		btnGenerisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -343,6 +388,7 @@ public class Izvjestaji {
 		panel.add(btnIzvjestaji);
 		getIzvjestaji().getContentPane().setLayout(groupLayout);
 	}
+	
 
 	public JFrame getIzvjestaji() {
 		return frame;
