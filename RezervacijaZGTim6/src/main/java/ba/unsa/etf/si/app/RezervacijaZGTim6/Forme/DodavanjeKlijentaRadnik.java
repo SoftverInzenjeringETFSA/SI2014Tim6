@@ -15,6 +15,8 @@ import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -24,6 +26,8 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
@@ -71,6 +75,9 @@ public class DodavanjeKlijentaRadnik {
 	public DodavanjeKlijentaRadnik(Restoran r) {
 		initialize();
 		handler = r;
+	}
+	public DodavanjeKlijentaRadnik(Gost g){
+		
 	}
 
 	/**
@@ -256,7 +263,25 @@ public class DodavanjeKlijentaRadnik {
 		);
 		getDodavanjeKlijentaRadnik().getContentPane().setLayout(groupLayout);
 		
-		
+		/*try {
+			
+			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
+			
+			
+			for(Iterator j= rezervacije.iterator(); j.hasNext();)
+			{
+				Rezervacija r =(Rezervacija)j.next();
+				if(r.getIdStola()==clickedTable.getID())
+				{
+					
+				}
+			}
+			
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
 		  
 	}
 
