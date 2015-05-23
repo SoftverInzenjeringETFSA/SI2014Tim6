@@ -6,7 +6,7 @@
     <class name="ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija" table="REZERVACIJA">
         <id name="ID" type="long">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="IdGosta" type="long">
             <column name="IDGOSTA" />
