@@ -221,9 +221,9 @@ public class RezervacijaRadnik {
 		panel.add(btnRezervacije);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setEnabled(false);
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				NapraviRezervaciju f = new NapraviRezervaciju();
 				f.getNapraviRezervaciju().setVisible(true);
 			}

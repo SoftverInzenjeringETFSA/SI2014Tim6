@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.text.ParseException;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 
 
 public class DodavanjeKlijentaRadnik {
@@ -30,16 +34,15 @@ public class DodavanjeKlijentaRadnik {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
 	JLabel lblIme = new JLabel("", alImg, SwingConstants.LEFT);
 	JLabel lblPrezime = new JLabel("", alImg, SwingConstants.LEFT);
-	JLabel lblBrTel = new JLabel("", alImg, SwingConstants.LEFT);
+	JLabel lblTel = new JLabel("", alImg, SwingConstants.LEFT);
 	JPanel pnlIme = new JPanel();
 	JPanel pnlPrezime = new JPanel();
-	JPanel pnlBrTel = new JPanel();
+	JPanel pnlTel = new JPanel();
 	
 	private Restoran handler;
 	/**
@@ -94,8 +97,15 @@ public class DodavanjeKlijentaRadnik {
 		JLabel label_2 = new JLabel("Broj telefona:");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		MaskFormatter mfTel = new MaskFormatter();
+		try {
+			mfTel = new MaskFormatter("###/###-###");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    mfTel.setPlaceholderCharacter('_');
+		final JFormattedTextField formattedTelephone = new JFormattedTextField(mfTel);
 		
 		JButton btnDodajKlijenta = new JButton("Dodaj Klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
@@ -126,20 +136,20 @@ public class DodavanjeKlijentaRadnik {
 					pnlPrezime.setVisible(false);
 				}
 				
-				if (textField_2.getText().isEmpty()) {
-					lblBrTel.setText("Popunite polje!");
-					pnlBrTel.setVisible(true);
-				} else if (!ValidacijaTelefon(textField_1.getText())) {
-					lblBrTel.setText("Nedozvoljen format!");
-					pnlBrTel.setVisible(true);
+				if(formattedTelephone.getText().equals("___/___-___"))
+				{
+					lblTel.setText("Popunite polje!");
+					pnlTel.setVisible(true);
 				}
-				else { 
-					lblBrTel.setText("");
-					pnlBrTel.setVisible(false);
+				else
+				{
+					lblTel.setText("");
+					pnlTel.setVisible(false);
 				}
 				
+				
 				try {
-					handler.DodajGosta(textField.getText(), textField_1.getText(), textField_2.getText());
+					handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -150,21 +160,28 @@ public class DodavanjeKlijentaRadnik {
 		});
 		
 		btnDodajKlijenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblIme.setForeground(Color.ORANGE);
 		
+		lblIme.setForeground(Color.ORANGE);
 		pnlIme.add( lblIme, BorderLayout.WEST );
 		pnlIme.setVisible(false);
-		lblPrezime.setForeground(Color.ORANGE);
 		
+		lblPrezime.setForeground(Color.ORANGE);
 		pnlPrezime.add( lblPrezime, BorderLayout.WEST );
 		pnlPrezime.setVisible(false);
-		lblBrTel.setForeground(Color.ORANGE);
 		
-		pnlBrTel.add( lblBrTel, BorderLayout.WEST );
-		pnlBrTel.setVisible(false);
+		lblTel.setForeground(Color.ORANGE);
+		pnlTel.add(lblTel, BorderLayout.WEST);
+		pnlTel.setVisible(false);
+		
+		
 		
 		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje Klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		
+		
+		
+
 		
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -181,19 +198,19 @@ public class DodavanjeKlijentaRadnik {
 										.addComponent(label)
 										.addComponent(label_2))
 									.addGap(22)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(pnlBrTel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+										.addComponent(formattedTelephone))))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(pnlTel, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+								.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+								.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(154)
 							.addComponent(btnDodajKlijenta)))
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addGap(13))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -201,28 +218,31 @@ public class DodavanjeKlijentaRadnik {
 					.addGap(22)
 					.addComponent(lblDodavanjeKlijenta)
 					.addGap(34)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(pnlIme, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-							.addComponent(label)))
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField_1)
+							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+							.addComponent(label))
+						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(label_1)))
 					.addGap(6)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(pnlBrTel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(pnlTel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField_2)
-							.addComponent(label_2)))
+							.addComponent(label_2)
+							.addComponent(formattedTelephone)))
 					.addGap(34)
 					.addComponent(btnDodajKlijenta)
 					.addGap(64))
 		);
 		getDodavanjeKlijentaRadnik().getContentPane().setLayout(groupLayout);
+		
+		
+		  
 	}
 
 	public JFrame getDodavanjeKlijentaRadnik() {
@@ -232,6 +252,8 @@ public class DodavanjeKlijentaRadnik {
 	public void setDodavanjeKlijentaRadnik(JFrame frame) {
 		this.frame = frame;
 	}
+	
+
 	
 	public Boolean ValidacijaImePrezime(String user) {
 		if (user.length() < 3) return false;
