@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -126,6 +127,28 @@ public class Rezervacija implements Serializable
 		VrijemeRezervacije = temp.VrijemeRezervacije;
 		TrajanjeRezervacijeMinute = temp.TrajanjeRezervacijeMinute;
 	}
+	public void promijeniStatusRezervacije(long id, String status)
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx =null;
+		try{
+			tx= session.beginTransaction();
+			Rezervacija temp = (Rezervacija) session.get(Rezervacija.class, id);
+			temp.setStatusRezervacije("OTKAZANO");
+			session.update(temp);
+			tx.commit();
+		}
+		catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+		
+		
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Rezervacija [ID=" + ID + ", IdGosta=" + IdGosta

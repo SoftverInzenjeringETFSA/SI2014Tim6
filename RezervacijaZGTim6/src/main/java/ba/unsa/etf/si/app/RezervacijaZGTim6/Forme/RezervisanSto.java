@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -39,11 +40,14 @@ public class RezervisanSto {
 	private JDateChooser dateChooser;
     private int sati;
     private int minute;
+    JLabel lbldh= new JLabel();
+    private Rezervacija clickedReservation;
     
     
     
     /**
 	 * Launch the application.
+     * @wbp.parser.entryPoint
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,11 +64,15 @@ public class RezervisanSto {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public RezervisanSto() {
 		//initialize();
 	}
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public RezervisanSto(Restoran r)
 	{
 		handler=r;
@@ -107,19 +115,39 @@ public class RezervisanSto {
 				Rezervacija r =(Rezervacija)j.next();
 				if(r.getIdStola()==clickedTable.getID())
 				{
+					clickedReservation=r;
+					Calendar currentTime= Calendar.getInstance();
+					Calendar databaseTime= Calendar.getInstance();
+					
 					Time t = r.getVrijemeRezervacije();
 					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
+					//System.out.println("Vrijeme t: "+t.getHours() +"h, "+ t.getMinutes()+"m");
 					
 					Date d = new Date();
 				    Date d1 = r.getDatumRezervacije();
-				    d1.setHours(t.getHours());
-				    d1.setMinutes(t.getMinutes());
+				    //System.out.println("Vrijeme d1: "+ d1.getHours()+"h, "+d1.getMinutes()+"m.");
 				    
-				    System.out.println("Vrijeme u bazi : sati: "+d1.getHours()+", minute: "+d1.getMinutes());
+				    
+				    databaseTime.setTime(d1);
+				    databaseTime.set(Calendar.HOUR_OF_DAY,t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
+				    databaseTime.set(Calendar.MINUTE,t.getMinutes());
+				    
+				    System.out.println("Baza vrijeme: "+ databaseTime.HOUR_OF_DAY+" sati, "+ databaseTime.MINUTE+"minuta");
+				    
+				  //  System.out.println("Vrijeme u bazi : sati: "+t.getHours()+", minute: "+t.getMinutes());
 					System.out.println("Trenutno vrijeme: sati: "+d.getHours()+", minute: "+d.getMinutes());
-					lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d1.getTime()-d.getTime()));
-				    System.out.println("Do isteka rezervacije "+ r.getVrijemeRezervacije());			
 					
+					Date d3= new Date();
+					d3.setTime(databaseTime.getTimeInMillis()-d.getTime());
+					
+					Calendar differenceTime = Calendar.getInstance();
+					differenceTime.setTime(d3);
+					
+				    System.out.println("Do isteka rezervacije "+ (d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+d3.getMinutes()+"m.");			
+				    lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
+					lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
+				    
+				    
 				}
 			}
 			*/
@@ -139,6 +167,16 @@ public class RezervisanSto {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				
+				clickedReservation.setStatusRezervacije("SLOBODNO");
+				try {
+					ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
+					clickedReservation.setStatusRezervacije("SLOBODNO");
+					clickedReservation.promijeniStatusRezervacije(clickedReservation.getID(), "SLOBODNO");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				prikazStolovaButton.setBackground(Color.green);
 				prikazStolovaButton.revalidate();
@@ -188,7 +226,6 @@ public class RezervisanSto {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(123, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblDoIstekaRezervacije)
 							.addGap(37))
@@ -196,7 +233,10 @@ public class RezervisanSto {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnOkupiranStol, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnOtkaiReyervaciju))
-							.addGap(38)))
+							.addGap(38))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(118))
 		);
 		groupLayout.setVerticalGroup(
@@ -221,7 +261,7 @@ public class RezervisanSto {
 					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		
-		JLabel lbldh = new JLabel("1d : 12h : 30m : 45s");
+		
 		lbldh.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
