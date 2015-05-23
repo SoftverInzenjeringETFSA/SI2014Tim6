@@ -339,8 +339,12 @@ public class RezervacijaRadnik {
 					}
 					else if(background==Color.orange)
 					{
+						Date d= (Date)spinner.getValue();
+						int sati = (Integer)d.getHours();
+						int minute= (Integer)d.getMinutes();
+						
 						OkupiranSto sto = new OkupiranSto();
-						sto.showWindow(number, button,panel_1);
+						sto.showWindow(handler,number, button,panel_1,dateChooser,sati,minute,stolovi.get(number-1));
 						
 					}
 							

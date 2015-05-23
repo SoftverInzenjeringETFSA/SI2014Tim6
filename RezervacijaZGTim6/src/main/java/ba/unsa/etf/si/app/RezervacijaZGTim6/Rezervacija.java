@@ -134,9 +134,10 @@ public class Rezervacija implements Serializable
 		try{
 			tx= session.beginTransaction();
 			Rezervacija temp = (Rezervacija) session.get(Rezervacija.class, id);
-			temp.setStatusRezervacije("OTKAZANO");
+			temp.setStatusRezervacije(status);
 			session.update(temp);
 			tx.commit();
+			System.out.println("Status rezervacije "+ id+ " promijenjen na "+ status);
 		}
 		catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

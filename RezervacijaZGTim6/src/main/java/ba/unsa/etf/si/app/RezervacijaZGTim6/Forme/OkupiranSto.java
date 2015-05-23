@@ -16,8 +16,16 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JButton;
+
+import com.toedter.calendar.JDateChooser;
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 
 
 public class OkupiranSto{
@@ -25,6 +33,16 @@ public class OkupiranSto{
 	private JFrame frame;
 	private JButton prikazStolovaButton;
 	private JPanel prikazStolovaPanel;
+	private Restoran handler;
+    private Sto clickedTable;
+    private Rezervacija reservation;
+	private JDateChooser dateChooser;
+    private int sati;
+    private int minute;
+    JLabel lbldh= new JLabel();
+    private Rezervacija clickedReservation;
+    
+	
 
 	/**
 	 * Launch the application.
@@ -75,6 +93,60 @@ public class OkupiranSto{
 		
 		JLabel lblDoIstekaRezervacije = new JLabel("Proteklo vremena:");
 		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
+
+		try {
+			
+			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
+			
+			
+			for(Iterator j= rezervacije.iterator(); j.hasNext();)
+			{
+				Rezervacija r =(Rezervacija)j.next();
+				if(r.getIdStola()==clickedTable.getID())
+				{
+					clickedReservation=r;
+				/*	Calendar currentTime= Calendar.getInstance();
+					Calendar databaseTime= Calendar.getInstance();
+			     		
+					Time t = r.getVrijemeRezervacije();
+					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
+					//System.out.println("Vrijeme t: "+t.getHours() +"h, "+ t.getMinutes()+"m");
+					
+					Date d = new Date();
+				    Date d1 = r.getDatumRezervacije();
+				    //System.out.println("Vrijeme d1: "+ d1.getHours()+"h, "+d1.getMinutes()+"m.");
+				    
+				    
+				    databaseTime.setTime(d1);
+				    databaseTime.set(Calendar.HOUR_OF_DAY,t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
+				    databaseTime.set(Calendar.MINUTE,t.getMinutes());
+				    
+				    System.out.println("Baza vrijeme: "+ databaseTime.HOUR_OF_DAY+" sati, "+ databaseTime.MINUTE+"minuta");
+				    
+				  //  System.out.println("Vrijeme u bazi : sati: "+t.getHours()+", minute: "+t.getMinutes());
+					System.out.println("Trenutno vrijeme: sati: "+d.getHours()+", minute: "+d.getMinutes());
+					
+					Date d3= new Date();
+					d3.setTime(databaseTime.getTimeInMillis()-d.getTime());
+					
+					Calendar differenceTime = Calendar.getInstance();
+					differenceTime.setTime(d3);
+					
+				    System.out.println("Do isteka rezervacije "+ (d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+d3.getMinutes()+"m.");			
+				    lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
+					lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
+				    
+				  */  
+				}
+			}
+			
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		
 		JButton btnOtkaiReyervaciju = new JButton("Oslobo\u0111en sto");
 		btnOtkaiReyervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -83,13 +155,22 @@ public class OkupiranSto{
 			public void actionPerformed(ActionEvent e)
 			{
 				
-				prikazStolovaButton.setBackground(Color.green);
-				prikazStolovaButton.revalidate();
-				prikazStolovaButton.repaint();
+				clickedReservation.setStatusRezervacije("SLOBODNO");
+				try {
+					ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
+					clickedReservation.setStatusRezervacije("SLOBODNO");
+					clickedReservation.promijeniStatusRezervacije(clickedReservation.getID(), "SLOBODNO");
+					prikazStolovaButton.setBackground(Color.green);
+					prikazStolovaButton.revalidate();
+					prikazStolovaButton.repaint();
+						
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				getOkupiranSto().dispose();
-				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
-				 
-				 
+				 		 
 				
 			}
 			
@@ -163,11 +244,16 @@ public class OkupiranSto{
 		getOkupiranSto().getContentPane().setLayout(groupLayout);
 	}
 	
-	public void showWindow(int tableNumber,JButton button, JPanel panel)
+	public void showWindow(Restoran r,int tableNumber,JButton button, JPanel panel,JDateChooser dateChooser,int sati,int minute, Sto s)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
+		this.handler=r;
 		this.prikazStolovaPanel=panel;
+		this.dateChooser=dateChooser;
+		this.sati=sati;
+		this.minute=minute;
+		this.clickedTable=s;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

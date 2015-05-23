@@ -110,15 +110,16 @@ public class RezervisanSto {
 			
 			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
 			
+			
 			for(Iterator j= rezervacije.iterator(); j.hasNext();)
 			{
 				Rezervacija r =(Rezervacija)j.next();
 				if(r.getIdStola()==clickedTable.getID())
 				{
 					clickedReservation=r;
-					Calendar currentTime= Calendar.getInstance();
+				/*	Calendar currentTime= Calendar.getInstance();
 					Calendar databaseTime= Calendar.getInstance();
-					
+			     		
 					Time t = r.getVrijemeRezervacije();
 					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
 					//System.out.println("Vrijeme t: "+t.getHours() +"h, "+ t.getMinutes()+"m");
@@ -147,7 +148,7 @@ public class RezervisanSto {
 				    lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
 					lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
 				    
-				    
+				  */  
 				}
 			}
 			
@@ -168,23 +169,22 @@ public class RezervisanSto {
 			public void actionPerformed(ActionEvent e)
 			{
 				
-				clickedReservation.setStatusRezervacije("SLOBODNO");
+				clickedReservation.setStatusRezervacije("OTKAZANO");
 				try {
 					ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
-					clickedReservation.setStatusRezervacije("SLOBODNO");
-					clickedReservation.promijeniStatusRezervacije(clickedReservation.getID(), "SLOBODNO");
+					clickedReservation.setStatusRezervacije("OTKAZANO");
+					clickedReservation.promijeniStatusRezervacije(clickedReservation.getID(), "OTKAZANO");
+					prikazStolovaButton.setBackground(Color.green);
+					prikazStolovaButton.revalidate();
+					prikazStolovaButton.repaint();
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-				prikazStolovaButton.setBackground(Color.green);
-				prikazStolovaButton.revalidate();
-				prikazStolovaButton.repaint();
 				getRezervisanSto().dispose();
-				//Sad bi trebalo otici u bazu putem neke klase i tamo promijeniti stanje
-				 
-				 
+				  
 				
 			}});
 		
