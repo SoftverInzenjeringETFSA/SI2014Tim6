@@ -47,6 +47,7 @@ public class KlijentiDodavanje {
     private JTextField textField;
     private JTextField textField_1;
     private Restoran handler;
+    
 
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
     

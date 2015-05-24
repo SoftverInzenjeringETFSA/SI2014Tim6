@@ -50,6 +50,7 @@ public class RadniciEditovanje {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JFrame parentFrame;
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	private long ID;
 	private Radnik radnik;
@@ -104,6 +105,11 @@ public class RadniciEditovanje {
         }
 		initialize();
 	}
+	
+	public void setParent(JFrame f)
+	{
+		parentFrame=f;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -113,6 +119,15 @@ public class RadniciEditovanje {
 		getRadniciEditovanje().setResizable(false);
 		getRadniciEditovanje().setBounds(100, 100, 451, 324);
 		getRadniciEditovanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent)
+			{
+			parentFrame.setEnabled(true);
+			parentFrame.setVisible(true);
+			}
+		});
 		
 		
 		JLabel lblNewLabel = new JLabel("Ažuriranje radnika");

@@ -47,6 +47,7 @@ public class RadniciDodavanje {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JFrame parentFrame;
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
 	JLabel lblIme_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
@@ -90,6 +91,10 @@ public class RadniciDodavanje {
 		handler = r;
 		initialize();
 	}
+	public void setParent(JFrame f)
+	{
+		parentFrame=f;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -99,6 +104,15 @@ public class RadniciDodavanje {
 		getRadniciDodavanje().setResizable(false);
 		getRadniciDodavanje().setBounds(100, 100, 451, 324);
 		getRadniciDodavanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent)
+			{
+			parentFrame.setEnabled(true);
+			parentFrame.setVisible(true);
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("Dodavanje radnika");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));

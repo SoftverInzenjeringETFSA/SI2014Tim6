@@ -101,6 +101,8 @@ public class Klijenti {
 			public void actionPerformed(ActionEvent arg0) {
 				k = new DodavanjeKlijentaSef(handler, frame);
 				k.getDodavanjeKlijentaSef().setVisible(true);
+				k.setParent(frame);
+				frame.setEnabled(false);
 			}
 		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -191,6 +193,8 @@ public class Klijenti {
 				}
 				i = new IzmjenaKlijentaSef(g, handler, frame);
 				i.getIzmjenaKlijentaSef().setVisible(true);
+				i.setParent(frame);
+				frame.setEnabled(false);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getKlijenti().getContentPane());

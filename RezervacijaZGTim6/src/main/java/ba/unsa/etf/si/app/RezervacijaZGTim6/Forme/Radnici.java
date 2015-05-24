@@ -105,6 +105,8 @@ public class Radnici {
 			public void actionPerformed(ActionEvent e) {
 				RadniciDodavanje f = new RadniciDodavanje(handler, frame);
 				f.getRadniciDodavanje().setVisible(true);
+				f.setParent(frame);
+				frame.setEnabled(false);
 			}
 		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -210,6 +212,8 @@ public class Radnici {
 				RadniciEditovanje re = new RadniciEditovanje(handler, Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString()), frame);
 				re.getRadniciEditovanje().setVisible(true);
 				// kad se doda logika za Izmijeni i Obrisi, dodat cemo pojavu errora za sl da se ne moze to izvrsiti
+				re.setParent(frame);
+				frame.setEnabled(false);
 			}
 		});
 		
@@ -364,6 +368,7 @@ public class Radnici {
 				frame.dispose();
 				Izvjestaji f = new Izvjestaji(handler);
 				f.getIzvjestaji().setVisible(true);
+				
 			}
 		});
 		btnIzvjestaji.setBounds(0, 68, 139, 34);

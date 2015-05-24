@@ -104,6 +104,8 @@ public class PregledKlijenataRadnik {
 			public void actionPerformed(ActionEvent arg0) {
 				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
+				f.setParent(frame);
+				frame.setEnabled(false);
 			}
 		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -195,6 +197,8 @@ public class PregledKlijenataRadnik {
 					k = new DodavanjeKlijentaRadnik(g, handler, frame);
 					System.out.println("Stigo!");
 					k.getDodavanjeKlijentaRadnik().setVisible(true);
+				k.setParent(frame);
+				frame.setEnabled(false);
 				}
 				else System.out.println("Nije Selektovano");
 			

@@ -60,6 +60,7 @@ public class Izvjestaji {
 	private JFrame frame;
 	private Restoran handler;
 	
+	
 	/**
 	 * @wbp.nonvisual location=428,169
 	 */
