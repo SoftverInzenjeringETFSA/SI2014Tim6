@@ -45,6 +45,7 @@ public class DodavanjeKlijentaRadnik {
 	private JTextField textField_1;
 	private GroupLayout groupL;
 	private JFrame f2;
+	private JFrame parentFrame;
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
@@ -92,6 +93,10 @@ public class DodavanjeKlijentaRadnik {
 		f2=f;
 		initialize();
 	}
+	public void setParent(JFrame f)
+	{
+		parentFrame=f;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -101,6 +106,15 @@ public class DodavanjeKlijentaRadnik {
 		getDodavanjeKlijentaRadnik().setResizable(false);
 		getDodavanjeKlijentaRadnik().setBounds(100, 100, 450, 300);
 		getDodavanjeKlijentaRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent)
+			{
+			parentFrame.setEnabled(true);
+			parentFrame.setVisible(true);
+			}
+		});
 		
 		textField = new JTextField();
 		textField.setColumns(10);
