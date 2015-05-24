@@ -238,6 +238,12 @@ public class Radnici {
 		});
 		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+		JButton btnDodajKorisnika = new JButton("Dodaj korisnika");
+		btnDodajKorisnika.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
 		
 		GroupLayout groupLayout = new GroupLayout(getRadnici().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -255,32 +261,35 @@ public class Radnici {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(pnlObrisiIzmijeni, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(pnlObrisiIzmijeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
 											.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
 											.addGap(9)
-											.addComponent(btnIzmjeni))))
+											.addComponent(btnIzmjeni)))
+									.addComponent(btnDodajKorisnika)
+									.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblIme)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+										.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
 										.addComponent(btnPretrazi))))))
 					.addGap(49))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(12)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel)
 						.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(74)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnDodajKorisnika)
+					.addGap(37)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel_1)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -290,7 +299,7 @@ public class Radnici {
 								.addComponent(btnPretrazi))
 							.addGap(2)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+					.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -338,7 +347,7 @@ public class Radnici {
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Klijenti f = new Klijenti();
+				Klijenti f = new Klijenti(handler);
 				f.getKlijenti().setVisible(true);
 			}
 		});
