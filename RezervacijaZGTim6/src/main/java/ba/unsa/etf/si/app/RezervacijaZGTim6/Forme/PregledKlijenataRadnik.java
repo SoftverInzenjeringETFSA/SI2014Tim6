@@ -28,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -54,6 +55,11 @@ public class PregledKlijenataRadnik {
 	private Restoran handler;
 	private DodavanjeKlijentaRadnik k;
 	private TableRowSorter<TableModel> rowSorter;
+	
+	ImageIcon alImg = new ImageIcon("Slike/alert.png");
+	JLabel lblIzmijeni = new JLabel("", alImg, SwingConstants.LEFT);
+	JPanel pnlIzmijeni = new JPanel();
+	
 
 	/**
 	 * Launch the application.
@@ -182,22 +188,34 @@ public class PregledKlijenataRadnik {
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+				
+				boolean rowIsSelected = table.getSelectedRowCount() > 0;
+				if (rowIsSelected) {
+					System.out.println("Selektovano");
+					long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+					
+					System.out.println(idGosta);
+					
+					Gost g = new Gost();
+					try
+					{
+						
+							g.ocitajGosta(idGosta);
+						
+					}
+					catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					k = new DodavanjeKlijentaRadnik(g, handler);
+					System.out.println("Stigo!");
+					k.getDodavanjeKlijentaRadnik().setVisible(true);
+				}
+				else System.out.println("Nije Selektovano");
 			
-				System.out.println(idGosta);
-				Gost g = new Gost();
-				try
-				{
-					g.ocitajGosta(idGosta);
-				}
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				k = new DodavanjeKlijentaRadnik(g, handler);
-				System.out.println("Stigo!");
-				k.getDodavanjeKlijentaRadnik().setVisible(true);
 			}
 		});
+		
+		JPanel pnlIzmijeni = new JPanel();
 		
 		
 		//JCheckBox chckbxPregledKlijenataRadnik = new JCheckBox("VIP klijenti");
@@ -207,7 +225,7 @@ public class PregledKlijenataRadnik {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
@@ -221,13 +239,14 @@ public class PregledKlijenataRadnik {
 											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
 										.addComponent(lblNewLabel))
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btnPretrazi))
+									.addComponent(btnPretrazi)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
 								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432))
-							.addContainerGap(14, Short.MAX_VALUE))
+							.addContainerGap(19, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(9)
 							.addComponent(btnIzmjeni)
-							.addPreferredGap(ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
 							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
 							.addGap(26))))
 		);
@@ -237,20 +256,28 @@ public class PregledKlijenataRadnik {
 					.addGap(22)
 					.addComponent(lblNewLabel)
 					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblIme)
-						.addComponent(btnPretrazi))
-					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIme)
+								.addComponent(btnPretrazi))
+							.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+							.addComponent(lblNewLabel_1))
+						.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnIzmjeni)
-						.addComponent(btnDodaj))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnIzmjeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
+		
+
+		lblIzmijeni.setForeground(Color.RED);
+		pnlIzmijeni.add(lblIzmijeni);
+		pnlIzmijeni.setVisible(false);
 		//panel.setLayout(null);
 		
 		JButton btnradnici = new JButton("Radnici");
@@ -280,5 +307,4 @@ public class PregledKlijenataRadnik {
 			}
 		});
 	}
-
 }
