@@ -75,8 +75,9 @@ public class DodavanjeKorisnika {
 	}
 	
 	public DodavanjeKorisnika(Restoran r) {
-		initialize();
 		handler = r;
+		initialize();
+		
 	}
 	
 	public DodavanjeKorisnika(Restoran r, long id) {

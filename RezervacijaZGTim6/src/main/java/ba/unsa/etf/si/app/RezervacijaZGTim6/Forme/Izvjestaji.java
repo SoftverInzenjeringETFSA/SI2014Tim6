@@ -46,15 +46,6 @@ import javax.swing.JTextArea;
 
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
 
-
-
-
-
-
-
-
-
-
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -96,6 +87,11 @@ public class Izvjestaji {
 	public Izvjestaji() {
 		initialize();
 	}
+	
+	public Izvjestaji(Restoran r) {
+		handler = r;
+		initialize();
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -116,10 +112,10 @@ public class Izvjestaji {
 		JLabel lblGenerisatiPo = new JLabel("Generisati po:");
 		lblGenerisatiPo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JRadioButton rdbtnSvimKlijentima = new JRadioButton("Klijentima");
+		final JRadioButton rdbtnSvimKlijentima = new JRadioButton("Klijentima");
 		rdbtnSvimKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
+		final JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
 		rdbtnVipKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblZaMjesec = new JLabel("Za period:");
@@ -152,7 +148,7 @@ public class Izvjestaji {
 		JButton btnGenerisi = new JButton("Generiši");
 		btnGenerisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean validna_forma = true;
+				boolean validna_forma = true, radioButton_checked = true;
 			    //Date date = new Date();
 			    final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			    Calendar now = Calendar.getInstance();
@@ -192,7 +188,7 @@ public class Izvjestaji {
 					{
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}
 					
 					
@@ -206,7 +202,7 @@ public class Izvjestaji {
 					{
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}	
 					
 				}
@@ -229,7 +225,7 @@ public class Izvjestaji {
 					{
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}
 					
 					
@@ -243,7 +239,7 @@ public class Izvjestaji {
 					{
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}
 					
 				}
@@ -322,7 +318,10 @@ public class Izvjestaji {
 					}
 				}
 				
-				if (validna_forma)
+				if (!(rdbtnSvimKlijentima.isSelected() || rdbtnVipKlijentima.isSelected()))
+					radioButton_checked = false;
+				
+				if (validna_forma && radioButton_checked)
 					System.out.println("Validna forma");
 				else
 					System.out.println("Nevalidna forma");
@@ -445,7 +444,7 @@ public class Izvjestaji {
 		btnRadnici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Radnici f = new Radnici();
+				Radnici f = new Radnici(handler);
 				f.getRadnici().setVisible(true);
 			}
 		});
@@ -457,7 +456,7 @@ public class Izvjestaji {
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Klijenti f = new Klijenti();
+				Klijenti f = new Klijenti(handler);
 				f.getKlijenti().setVisible(true);
 			}
 		});
@@ -466,6 +465,7 @@ public class Izvjestaji {
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.setEnabled(false);
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

@@ -35,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 
-public class DodavanjeKlijentaRadnik {
+public class DodavanjeKlijentaSef {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -62,8 +62,8 @@ public class DodavanjeKlijentaRadnik {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DodavanjeKlijentaRadnik window = new DodavanjeKlijentaRadnik();
-					window.getDodavanjeKlijentaRadnik().setVisible(true);
+					DodavanjeKlijentaSef window = new DodavanjeKlijentaSef();
+					window.getDodavanjeKlijentaSef().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,15 +74,15 @@ public class DodavanjeKlijentaRadnik {
 	/**
 	 * Create the application.
 	 */
-	public DodavanjeKlijentaRadnik() {
+	public DodavanjeKlijentaSef() {
 		initialize();
 	}
 	
-	public DodavanjeKlijentaRadnik(Restoran r) {
+	public DodavanjeKlijentaSef(Restoran r) {
 		initialize();
 		handler = r;
 	}
-	public DodavanjeKlijentaRadnik(Gost g, Restoran r, JFrame f){
+	public DodavanjeKlijentaSef(Gost g, Restoran r, JFrame f){
 		izmjenaGosta=true;
 		gost=g;
 		handler=r;
@@ -94,10 +94,10 @@ public class DodavanjeKlijentaRadnik {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setDodavanjeKlijentaRadnik(new JFrame());
-		getDodavanjeKlijentaRadnik().setResizable(false);
-		getDodavanjeKlijentaRadnik().setBounds(100, 100, 450, 300);
-		getDodavanjeKlijentaRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDodavanjeKlijentaSef(new JFrame());
+		getDodavanjeKlijentaSef().setResizable(false);
+		getDodavanjeKlijentaSef().setBounds(100, 100, 450, 300);
+		getDodavanjeKlijentaSef().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -245,7 +245,7 @@ public class DodavanjeKlijentaRadnik {
 		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaRadnik().getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaSef().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -301,17 +301,17 @@ public class DodavanjeKlijentaRadnik {
 					.addComponent(btnDodajKlijenta)
 					.addGap(64))
 		);
-		getDodavanjeKlijentaRadnik().getContentPane().setLayout(groupLayout);
+		getDodavanjeKlijentaSef().getContentPane().setLayout(groupLayout);
 		
 		
 		  
 	}
 
-	public JFrame getDodavanjeKlijentaRadnik() {
+	public JFrame getDodavanjeKlijentaSef() {
 		return frame;
 	}
 
-	public void setDodavanjeKlijentaRadnik(JFrame frame) {
+	public void setDodavanjeKlijentaSef(JFrame frame) {
 		this.frame = frame;
 	}
 	

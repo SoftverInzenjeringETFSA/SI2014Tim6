@@ -99,22 +99,22 @@ public class LoginScreen {
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				
-				// validacija
-				if (txtUsername.getText().isEmpty()) {
-					lblUsr.setText("Popunite polje!");
-					pnlUsername.setVisible(true);
-				} else if (!ValidacijaUserPass(txtUsername.getText())) {
-					lblUsr.setText("Nedozvoljen format!");
-					pnlUsername.setVisible(true);
-				}
-				else { 
-					lblUsr.setText("");
-					pnlUsername.setVisible(false);
-				}
+				
 				
 				boolean dobri_podaci = false;
 				 try 
-				 {
+				 { // validacija
+						if (txtUsername.getText().isEmpty()) {
+							lblUsr.setText("Popunite polje!");
+							pnlUsername.setVisible(true);
+						} else if (!ValidacijaUserPass(txtUsername.getText())) {
+							lblUsr.setText("Nedozvoljen format!");
+							pnlUsername.setVisible(true);
+						}
+						else { 
+							lblUsr.setText("");
+							pnlUsername.setVisible(false);
+						}
 					char[] pass = txtPassword.getPassword();
 					String passString = new String(pass);
 					
@@ -158,12 +158,13 @@ public class LoginScreen {
 					 }
 					 else //error cudna greska
 					 {
-
+                           System.out.print("Neispravni podaci");
 					 }
 				 }
 				 else
 				 {
 					 //Iskoci error
+					 System.out.print("Neispravni podaci");
 				 }
 				 
 		}
@@ -176,23 +177,25 @@ public class LoginScreen {
 			public void keyPressed(KeyEvent arg0) {
 				
 				if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
-					// validacija
-					if (txtUsername.getText().isEmpty()) {
-						lblUsr.setText("Popunite polje!");
-						pnlUsername.setVisible(true);
-					} else if (!ValidacijaUserPass(txtUsername.getText())) {
-						lblUsr.setText("Nedozvoljen format!");
-						pnlUsername.setVisible(true);
-					}
-					else { 
-						lblUsr.setText("");
-						pnlUsername.setVisible(false);
-					}
+					
 					
 					boolean dobri_podaci = false;
 					 try 
 					 {
-						char[] pass = txtPassword.getPassword();
+					
+						// validacija
+							if (txtUsername.getText().isEmpty()) {
+								lblUsr.setText("Popunite polje!");
+								pnlUsername.setVisible(true);
+							} else if (!ValidacijaUserPass(txtUsername.getText())) {
+								lblUsr.setText("Nedozvoljen format!");
+								pnlUsername.setVisible(true);
+							}
+							else { 
+								lblUsr.setText("");
+								pnlUsername.setVisible(false);
+							}
+						 char[] pass = txtPassword.getPassword();
 						String passString = new String(pass);
 						
 						// validacija
@@ -235,12 +238,13 @@ public class LoginScreen {
 						 }
 						 else //error cudna greska
 						 {
-
+                                 System.out.print("Neispravni podaci");
 						 }
 					 }
 					 else
 					 {
 						 //Iskoci error
+						 System.out.print("Neispravni podaci");
 					 }
 			       
 			    }
@@ -255,22 +259,23 @@ public class LoginScreen {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
-					// validacija
-					if (txtUsername.getText().isEmpty()) {
-						lblUsr.setText("Popunite polje!");
-						pnlUsername.setVisible(true);
-					} else if (!ValidacijaUserPass(txtUsername.getText())) {
-						lblUsr.setText("Nedozvoljen format!");
-						pnlUsername.setVisible(true);
-					}
-					else { 
-						lblUsr.setText("");
-						pnlUsername.setVisible(false);
-					}
+					
 					
 					boolean dobri_podaci = false;
 					 try 
 					 {
+						// validacija
+							if (txtUsername.getText().isEmpty()) {
+								lblUsr.setText("Popunite polje!");
+								pnlUsername.setVisible(true);
+							} else if (!ValidacijaUserPass(txtUsername.getText())) {
+								lblUsr.setText("Nedozvoljen format!");
+								pnlUsername.setVisible(true);
+							}
+							else { 
+								lblUsr.setText("");
+								pnlUsername.setVisible(false);
+							}
 						char[] pass = txtPassword.getPassword();
 						String passString = new String(pass);
 						
@@ -314,12 +319,13 @@ public class LoginScreen {
 						 }
 						 else //error cudna greska
 						 {
-
+                                 System.out.print("Neispravni podaci");
 						 }
 					 }
 					 else
 					 {
 						 //Iskoci error
+						 System.out.print("Neispravni podaci");
 					 }
 			       
 			    }
