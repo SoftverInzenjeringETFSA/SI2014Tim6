@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
@@ -19,7 +20,9 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 import java.awt.Font;
+
 import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -152,7 +155,7 @@ public class DodavanjeKlijentaRadnik {
 				else { 
 					lblIme.setText("");
 					pnlIme.setVisible(false);
-					validna_forma = true;
+				//	validna_forma = true;
 				}
 				
 				if (textField_1.getText().isEmpty()) {
@@ -167,7 +170,7 @@ public class DodavanjeKlijentaRadnik {
 				else { 
 					lblPrezime.setText("");
 					pnlPrezime.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				if(formattedTelephone.getText().equals("___/___-___"))
@@ -180,7 +183,7 @@ public class DodavanjeKlijentaRadnik {
 				{
 					lblTel.setText("");
 					pnlTel.setVisible(false);
-					validna_forma = true;
+				//	validna_forma = true;
 				}
 				
 				try {
@@ -213,6 +216,7 @@ public class DodavanjeKlijentaRadnik {
 						}
 					}
 					else{
+						JOptionPane.showMessageDialog(null, "Ispravite greške");
 						System.out.println("nisam dodo!");
 					}
 				} catch (Exception e1) {
