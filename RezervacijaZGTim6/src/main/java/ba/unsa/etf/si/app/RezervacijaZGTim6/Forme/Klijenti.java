@@ -33,6 +33,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 public class Klijenti {
 
@@ -62,6 +64,10 @@ public class Klijenti {
 	public Klijenti() {
 		initialize();
 	}
+	
+	public Klijenti(Restoran r){
+		
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -69,7 +75,7 @@ public class Klijenti {
 	private void initialize() {
 		setKlijenti(new JFrame());
 		getKlijenti().setResizable(false);
-		getKlijenti().setBounds(100, 100, 624, 427);
+		getKlijenti().setBounds(100, 100, 624, 386);
 		getKlijenti().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -78,7 +84,7 @@ public class Klijenti {
 		JLabel lblNewLabel = new JLabel("Pregled klijenata");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
-		JButton btnDodaj = new JButton("Dodaj klijenta");
+		JButton btnDodaj = new JButton("Dodaj novog klijenta");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				KlijentiDodavanje f = new KlijentiDodavanje();
@@ -120,18 +126,12 @@ public class Klijenti {
 			}
 		));
 		
-		JButton btnIzmjeni = new JButton("Izmijeni");
+		JButton btnIzmjeni = new JButton("Izmijeni klijenta");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		
-		JButton btnObrisi = new JButton("Obriši");
-		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		JCheckBox chckbxVipKlijenti = new JCheckBox("VIP klijenti");
-		chckbxVipKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(getKlijenti().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -139,24 +139,23 @@ public class Klijenti {
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnPretrazi)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblIme)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_1)
-							.addPreferredGap(ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-							.addComponent(chckbxVipKlijenti))
 						.addComponent(table, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel)
-							.addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-							.addGap(9)
-							.addComponent(btnIzmjeni)))
+							.addComponent(lblIme)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(236)
+									.addComponent(lblNewLabel_1))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btnPretrazi))))
+						.addComponent(lblNewLabel)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(btnIzmjeni)
+							.addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -164,26 +163,21 @@ public class Klijenti {
 				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(22)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel))
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblIme)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnPretrazi))
-						.addComponent(chckbxVipKlijenti)
-						.addComponent(lblNewLabel_1))
+					.addComponent(lblNewLabel)
 					.addGap(28)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnIzmjeni)
-						.addComponent(btnObrisi))
-					.addContainerGap(93, Short.MAX_VALUE))
+						.addComponent(lblIme)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnPretrazi))
+					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnIzmjeni))
+					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		
@@ -197,7 +191,7 @@ public class Klijenti {
 		});
 		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(10, 328, 119, 23);
+		btnOdjava.setBounds(10, 321, 119, 25);
 		panel.add(btnOdjava);
 		
 		JButton btnKlijenti = new JButton("Klijenti");

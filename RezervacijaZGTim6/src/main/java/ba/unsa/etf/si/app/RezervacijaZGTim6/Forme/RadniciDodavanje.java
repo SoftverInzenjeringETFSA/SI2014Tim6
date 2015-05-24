@@ -196,10 +196,10 @@ public class RadniciDodavanje {
 					f.printStackTrace();
 				}
 				
-				if (validna_forma)
+			/*	if (validna_forma)
 					System.out.println("Validna forma");
 				else
-					System.out.println("Nevalidna forma");
+					System.out.println("Nevalidna forma");*/
 			}
 		});
 		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -318,10 +318,10 @@ public class RadniciDodavanje {
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
-		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				//frame.dispose();
 				Radnici f = new Radnici();
 				f.getRadnici().setVisible(true);
 			}
@@ -330,7 +330,7 @@ public class RadniciDodavanje {
 		panel.add(btnRadnici);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
-		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -341,8 +341,8 @@ public class RadniciDodavanje {
 		btnKlijenti.setBounds(0, 34, 139, 34);
 		panel.add(btnKlijenti);
 		
-		JButton btnIzvjestaji = new JButton("Izvjestaji");
-		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -365,12 +365,12 @@ public class RadniciDodavanje {
 	
 	public Boolean ValidacijaImePrezime(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
 	
 	public Boolean ValidacijaUserPass(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z0-9]+$");
+        return user.matches("^[a-zA-Z0-9\u0161\u0111\u010D\u0107\u017E]+$");
     }
 
 }

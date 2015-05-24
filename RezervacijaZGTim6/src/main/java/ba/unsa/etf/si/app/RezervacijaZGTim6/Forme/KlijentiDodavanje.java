@@ -362,7 +362,7 @@ public class KlijentiDodavanje {
     
     public Boolean ValidacijaImePrezime(String user) {
         if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
     
 }

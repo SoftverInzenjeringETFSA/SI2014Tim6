@@ -97,7 +97,7 @@ public class PregledKlijenataRadnik {
 		JButton btnDodaj = new JButton("Dodaj novog klijenta");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik();
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
 			}
 		});

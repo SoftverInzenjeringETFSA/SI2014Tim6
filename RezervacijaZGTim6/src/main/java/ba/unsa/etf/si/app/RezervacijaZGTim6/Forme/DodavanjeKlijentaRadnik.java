@@ -119,7 +119,17 @@ public class DodavanjeKlijentaRadnik {
 	    mfTel.setPlaceholderCharacter('_');
 		final JFormattedTextField formattedTelephone = new JFormattedTextField(mfTel);
 		
-		JButton btnDodajKlijenta = new JButton("Dodaj Klijenta");
+		String NazivDugmeta;
+		String NazivForme;
+		if(izmjenaGosta){
+			NazivDugmeta = "Promijeni Klijenta";
+			NazivForme = "Izmjena Klijenta";
+		} else {
+			NazivDugmeta = "Dodaj Klijenta";
+			NazivForme = "Dodavanje Klijenta";
+		}
+		
+		final JButton btnDodajKlijenta = new JButton(NazivDugmeta);
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -195,9 +205,6 @@ public class DodavanjeKlijentaRadnik {
 							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						}
 					}
-					else if(validna_forma && izmjenaGosta){
-						
-					}
 					else{
 						System.out.println("nisam dodo!");
 					}
@@ -227,16 +234,9 @@ public class DodavanjeKlijentaRadnik {
 		lblTel.setForeground(Color.RED);
 		pnlTel.add(lblTel, BorderLayout.WEST);
 		pnlTel.setVisible(false);
-		
-		
-		
-		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje Klijenta");
-		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
-		
-		
-		
-		
 
+		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
+		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -310,7 +310,7 @@ public class DodavanjeKlijentaRadnik {
 	
 	public Boolean ValidacijaImePrezime(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
 	
 }
