@@ -129,18 +129,8 @@ public class IzmjenaKlijentaSef {
 		
 		String NazivDugmeta;
 		String NazivForme;
-		if(izmjenaGosta){
-			NazivDugmeta = "Promijeni Klijenta";
-			NazivForme = "Izmjena Klijenta";
-			textField.setText(gost.getIme());
-			textField_1.setText(gost.getPrezime());
-			formattedTelephone.setText(gost.getBrojTelefona());
-		} else {
-			NazivDugmeta = "Dodaj Klijenta";
-			NazivForme = "Dodavanje Klijenta";
-		}
 		
-		JButton btnDodajKlijenta = new JButton(NazivDugmeta);
+		JButton btnDodajKlijenta = new JButton("Promijeni klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -248,7 +238,7 @@ public class IzmjenaKlijentaSef {
 		pnlTel.add(lblTel, BorderLayout.WEST);
 		pnlTel.setVisible(false);
 
-		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
+		JLabel lblDodavanjeKlijenta = new JLabel("Izmjena Klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		GroupLayout groupLayout = new GroupLayout(getIzmjenaKlijentaSef().getContentPane());

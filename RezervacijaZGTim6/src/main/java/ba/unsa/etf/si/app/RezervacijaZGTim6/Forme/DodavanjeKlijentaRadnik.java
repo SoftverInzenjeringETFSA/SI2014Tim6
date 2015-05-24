@@ -111,8 +111,8 @@ public class DodavanjeKlijentaRadnik {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent)
 			{
-			parentFrame.setEnabled(true);
-			parentFrame.setVisible(true);
+				parentFrame.setEnabled(true);
+				parentFrame.setVisible(true);
 			}
 		});
 		
@@ -143,18 +143,9 @@ public class DodavanjeKlijentaRadnik {
 		
 		String NazivDugmeta;
 		String NazivForme;
-		if(izmjenaGosta){
-			NazivDugmeta = "Promijeni Klijenta";
-			NazivForme = "Izmjena Klijenta";
-			textField.setText(gost.getIme());
-			textField_1.setText(gost.getPrezime());
-			formattedTelephone.setText(gost.getBrojTelefona());
-		} else {
-			NazivDugmeta = "Dodaj Klijenta";
-			NazivForme = "Dodavanje Klijenta";
-		}
 		
-		final JButton btnDodajKlijenta = new JButton(NazivDugmeta);
+		
+		final JButton btnDodajKlijenta = new JButton("Dodaj klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -205,28 +196,7 @@ public class DodavanjeKlijentaRadnik {
 				
 				try {
 					if(validna_forma) {
-						if(izmjenaGosta){
-							try {
-								Gost g;
-								ArrayList<Gost> gosti= handler.DajGoste();
-								
-								for(Iterator j= gosti.iterator(); j.hasNext();)
-								{
-									g = (Gost)j.next();
-									if(g.getID()==gost.getID())
-									{
-										g.setIme(textField.getText());
-										g.setPrezime(textField_1.getText());
-										gost.updateGosta(g.getID(), g);
-									}
-								}
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
-						}
-						else{
-							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
-						}
+						handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						f2.dispose();
 						PregledKlijenataRadnik pkr = new PregledKlijenataRadnik();
 						pkr.showWindow(handler);
@@ -262,7 +232,7 @@ public class DodavanjeKlijentaRadnik {
 		pnlTel.add(lblTel, BorderLayout.WEST);
 		pnlTel.setVisible(false);
 
-		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
+		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaRadnik().getContentPane());
