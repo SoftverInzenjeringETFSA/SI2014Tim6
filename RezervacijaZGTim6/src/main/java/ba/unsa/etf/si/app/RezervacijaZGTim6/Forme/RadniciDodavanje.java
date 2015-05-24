@@ -251,7 +251,7 @@ public class RadniciDodavanje {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
+							.addGap(73)
 							.addComponent(lblNewLabel)))
 					.addContainerGap())
 		);

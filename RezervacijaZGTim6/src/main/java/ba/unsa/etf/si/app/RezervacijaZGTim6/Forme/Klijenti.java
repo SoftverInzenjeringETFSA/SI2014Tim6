@@ -247,7 +247,7 @@ public class Klijenti {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen f = new LoginScreen();
+				LoginScreen f = new LoginScreen(handler);
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});

@@ -325,8 +325,9 @@ public class Radnici {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen f = new LoginScreen();
-				f.getFrmPrijavaKorisnika().setVisible(true);
+				LoginScreen window = new LoginScreen(handler);
+				window.getFrmPrijavaKorisnika().setVisible(true);
+
 			}
 		});
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));

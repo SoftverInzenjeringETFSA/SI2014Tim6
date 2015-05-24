@@ -113,12 +113,12 @@ public class AzurirajRadnika {
 		frame.getContentPane().add(textField_3);
 		
 		JLabel lblOpisPosla = new JLabel("Opis posla:");
-		lblOpisPosla.setBounds(99, 195, 58, 14);
+		lblOpisPosla.setBounds(99, 187, 58, 14);
 		frame.getContentPane().add(lblOpisPosla);
 		
 		
 		JButton btnOdustani = new JButton("Odustani");
-		btnOdustani.setBounds(228, 248, 89, 23);
+		btnOdustani.setBounds(263, 248, 89, 23);
 		frame.getContentPane().add(btnOdustani);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -147,7 +147,7 @@ public class AzurirajRadnika {
 				frame.dispose();
 			}
 		});
-		btnSpremi.setBounds(99, 248, 89, 23);
+		btnSpremi.setBounds(164, 248, 89, 23);
 		frame.getContentPane().add(btnSpremi);
 	}
 }
