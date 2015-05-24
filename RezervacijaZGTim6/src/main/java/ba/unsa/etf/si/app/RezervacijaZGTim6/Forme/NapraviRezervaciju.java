@@ -83,6 +83,7 @@ public class NapraviRezervaciju {
     private Sto sto;
     private TableRowSorter<TableModel> rowSorter;
     private JSpinner spinner;
+    JScrollPane scrollPane=null;
     
     
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
@@ -109,7 +110,7 @@ public class NapraviRezervaciju {
 	 * Create the application.
 	 */
 	public NapraviRezervaciju() {
-		initialize();
+		//initialize();
 	}
 	
 	public NapraviRezervaciju(Restoran r) {
@@ -322,7 +323,7 @@ public class NapraviRezervaciju {
 		
 		table.setModel(tableModel);
 
-		JScrollPane scrollPane = new JScrollPane(table);
+		 scrollPane = new JScrollPane(table);
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
 		JLabel lblIme = new JLabel("Pretraga: ");
@@ -354,6 +355,7 @@ public class NapraviRezervaciju {
 		//KRAJ RADA SA TABELOM I PRETRAGOM KORISNIKA
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		
 		GroupLayout button_panel = new GroupLayout(pnlButton);
 		GroupLayout space_panel = new GroupLayout(pnlSpace);
 		gl_panel_1.setHorizontalGroup(
