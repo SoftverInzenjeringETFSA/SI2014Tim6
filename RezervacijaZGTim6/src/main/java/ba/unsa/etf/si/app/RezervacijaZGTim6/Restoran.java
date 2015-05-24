@@ -90,7 +90,7 @@ public class Restoran
 	
 	public void azurirajRadnika(Radnik r) throws Exception
 	{
-		r.azurirajRadnika();;
+		r.azurirajRadnika();
 	}
 	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
