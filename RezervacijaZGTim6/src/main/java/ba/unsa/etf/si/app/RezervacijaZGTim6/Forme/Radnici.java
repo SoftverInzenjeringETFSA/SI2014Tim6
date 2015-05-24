@@ -241,6 +241,8 @@ public class Radnici {
 		JButton btnDodajKorisnika = new JButton("Dodaj korisnika");
 		btnDodajKorisnika.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				DodavanjeKorisnika dk = new DodavanjeKorisnika(handler);
+				dk.getDodavanjeKorisnika().setVisible(true);
 			}
 		});
 		
