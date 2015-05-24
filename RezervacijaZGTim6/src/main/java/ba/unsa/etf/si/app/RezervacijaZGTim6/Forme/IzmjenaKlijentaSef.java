@@ -163,7 +163,7 @@ public class IzmjenaKlijentaSef {
 				else { 
 					lblIme.setText("");
 					pnlIme.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				if (textField_1.getText().isEmpty()) {
@@ -178,7 +178,7 @@ public class IzmjenaKlijentaSef {
 				else { 
 					lblPrezime.setText("");
 					pnlPrezime.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				if(formattedTelephone.getText().equals("___/___-___"))
@@ -191,7 +191,7 @@ public class IzmjenaKlijentaSef {
 				{
 					lblTel.setText("");
 					pnlTel.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				try {
