@@ -19,6 +19,7 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 import java.awt.Font;
+import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 
@@ -38,6 +40,8 @@ public class DodavanjeKlijentaRadnik {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private GroupLayout groupL;
+	private JFrame f2;
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
@@ -78,10 +82,11 @@ public class DodavanjeKlijentaRadnik {
 		initialize();
 		handler = r;
 	}
-	public DodavanjeKlijentaRadnik(Gost g, Restoran r){
+	public DodavanjeKlijentaRadnik(Gost g, Restoran r, JFrame f){
 		izmjenaGosta=true;
 		gost=g;
 		handler=r;
+		f2=f;
 		initialize();
 	}
 
@@ -195,8 +200,6 @@ public class DodavanjeKlijentaRadnik {
 										gost.updateGosta(g.getID(), g);
 									}
 								}
-								
-								
 							} catch (Exception e1) {
 								e1.printStackTrace();
 							}

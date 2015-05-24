@@ -189,7 +189,7 @@ public class Klijenti {
 				catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				k = new DodavanjeKlijentaRadnik(g, handler);
+				k = new DodavanjeKlijentaRadnik(g, handler, frame);
 				System.out.println("Stigo!");
 				k.getDodavanjeKlijentaRadnik().setVisible(true);
 			}
