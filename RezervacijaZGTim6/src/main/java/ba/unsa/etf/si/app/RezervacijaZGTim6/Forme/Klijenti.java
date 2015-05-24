@@ -247,7 +247,7 @@ public class Klijenti {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen f = new LoginScreen();
+				LoginScreen f = new LoginScreen(handler);
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
@@ -257,6 +257,11 @@ public class Klijenti {
 		panel.add(btnOdjava);
 		
 		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.setEnabled(false);
+		btnKlijenti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnKlijenti.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnKlijenti.setBounds(0, 0, 139, 34);
 		panel.add(btnKlijenti);
@@ -269,7 +274,7 @@ public class Klijenti {
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Izvjestaji f = new Izvjestaji();
+				Izvjestaji f = new Izvjestaji(handler);
 				f.getIzvjestaji().setVisible(true);
 			}
 		});

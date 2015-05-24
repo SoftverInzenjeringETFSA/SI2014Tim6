@@ -82,6 +82,19 @@ public class Restoran
 		radnici.add(r);
 	}
 	
+	public void DodajKorisnika(long idKorisnika, String username, String password)
+	{
+		String hash = new String();
+		try {
+			hash = Password.getSaltedHash(password);
+			Korisnik k = new Korisnik(idKorisnika, username, hash, 2);
+			k.dodajKorisnika();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
 	public void obrisiRadnika(Radnik r) throws Exception
 	{
 		r.obrisiRadnika();
@@ -92,6 +105,7 @@ public class Restoran
 	{
 		r.azurirajRadnika();
 	}
+
 	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
 	{

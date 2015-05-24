@@ -151,11 +151,15 @@ public class NapraviRezervaciju {
 		JButton btnDodajRezervaciju = new JButton("Dodaj rezervaciju");
 		btnDodajRezervaciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getNapraviRezervaciju().dispose();
+		
 			    
+				boolean validna_forma = true;
 				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
 				//referenci za button i panel promijenit boju stola koji je kliknut
+				if (table.getSelectedRow() == -1)
+					validna_forma= false;
 				
+<<<<<<< HEAD
 				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
 				Time vrijeme = new Time(hours, minutes, 0);
 				Integer trajanje = (Integer)spinner.getValue();
@@ -173,16 +177,42 @@ public class NapraviRezervaciju {
 						else{
 							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
 									sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
+=======
+				if(validna_forma)
+				{
+					System.out.println("validna forma");
+					
+					long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+					Time vrijeme = new Time(hours, minutes, 0);
+					Integer trajanje = (Integer)spinner.getValue();
+					Long ms = date.getDate().getTime();
+					java.sql.Date sqldate = new java.sql.Date(ms);
+				
+					try {
+						if(trajanje == 0) trajanje = 180;
+						if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
+							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
+							
+>>>>>>> origin/master
 							prikazStolovaButton.setBackground(Color.red);
 							prikazStolovaPanel.revalidate();
 							prikazStolovaPanel.repaint();
 						}
+<<<<<<< HEAD
+=======
+					} catch (NumberFormatException e1) {
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+>>>>>>> origin/master
 					}
-				} catch (NumberFormatException e1) {
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					e1.printStackTrace();
+					getNapraviRezervaciju().dispose();
 				}
+<<<<<<< HEAD
+=======
+				else
+					System.out.println("odaberite klijenta");				
+>>>>>>> origin/master
 			}
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
