@@ -260,7 +260,7 @@ public class NapraviRezervaciju {
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(lblTrajanje)
-					.addComponent(spinner, 5, 50, 150)
+					.addComponent(spinner, 5, 20, 20)
 					//.addComponent(pnlTrajanje, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(15)
 					.addComponent(btnDodajRezervaciju)
