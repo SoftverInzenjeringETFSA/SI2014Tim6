@@ -305,7 +305,7 @@ public class KlijentiDodavanje {
         btnOdjava.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                LoginScreen f = new LoginScreen();
+                LoginScreen f = new LoginScreen(handler);
                 f.getFrmPrijavaKorisnika().setVisible(true);
             }
         });
@@ -362,7 +362,7 @@ public class KlijentiDodavanje {
     
     public Boolean ValidacijaImePrezime(String user) {
         if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
     
 }

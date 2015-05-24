@@ -23,16 +23,24 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Radnik;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
@@ -47,6 +55,7 @@ public class Radnici {
 	JLabel lblObrisiIzmijeni = new JLabel("", alImg, SwingConstants.LEFT);
 	JPanel pnlRadnik = new JPanel();
 	JPanel pnlObrisiIzmijeni = new JPanel();
+	private TableRowSorter<TableModel> rowSorter;
 
 	/**
 	 * Launch the application.
@@ -72,8 +81,8 @@ public class Radnici {
 	}
 	
 	public Radnici(Restoran r) {
-		initialize();
 		handler = r;
+		initialize();
 	}
 
 	/**
@@ -94,7 +103,7 @@ public class Radnici {
 		JButton btnDodaj = new JButton("Dodaj radnika");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRadnici().dispose();
+				//getRadnici().dispose();
 				RadniciDodavanje f = new RadniciDodavanje();
 				f.getRadniciDodavanje().setVisible(true);
 			}
@@ -109,6 +118,52 @@ public class Radnici {
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setColumns(10);
 		
+				
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
+		
+		table = new JTable();
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
+		table.setBackground(SystemColor.inactiveCaptionBorder);
+		table.setForeground(Color.BLACK);
+		
+		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
+				"ID", "Ime", "Prezime", "Naziv posla", "Datum zaposlenja"
+			}, 0){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		ArrayList<Radnik> radnici;
+		radnici=handler.DajRadnike();
+		
+		
+		for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
+        {
+           Radnik r = (Radnik)iterator1.next(); 
+           long idRadnika = r.getId();
+           String Ime = r.getIme();
+           String Prezime = r.getPrezime();
+           String posao = r.getNazivPosla(); 
+           String datumZap = r.getDatumZaposlenja().toLocaleString();
+           
+           Object[] data = {idRadnika, Ime, Prezime, posao, datumZap};
+           System.out.println(r);
+           tableModel.addRow(data);
+        }
+		
+		table.setModel(tableModel);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		rowSorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(rowSorter);
+		
 		JButton btnPretrazi = new JButton("Pretraži");
 		btnPretrazi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,31 +171,26 @@ public class Radnici {
 				 boolean validna_forma = true;
 	                
 	                // validacija
-	                if (textField.getText().isEmpty()) {
-	                    lblRadnik.setText("Popunite polje!");
-	                    pnlRadnik.setVisible(true);
-	                    validna_forma = false;
-	                } else if (!ValidacijaImePrezime(textField.getText())) {
+	                if (!ValidacijaImePrezime(textField.getText())) {
 	                    lblRadnik.setText("Nedozvoljen format!");
 	                    pnlRadnik.setVisible(true);
 	                    validna_forma = false;
-	                } else if (textField.getText().equals("anesa")) {
-	                	// ovdje dodati za npr ako ne postoji radnik da izbaci error sa tekstom
-                		lblRadnik.setText("Radnik ne postoji!");
-	                    pnlRadnik.setVisible(true);
-	                    validna_forma = false;
-                	}
+	                }
 	                else { 
 	                    lblRadnik.setText("");
 	                    pnlRadnik.setVisible(false);
 	                    validna_forma = true;
 	                }
 	                
-	                
 	                try {
 	                    if(validna_forma) {
-	                    	// logika za pretrazivanje radnika
-	                      	
+	                    	String text = textField.getText();
+
+	                        if (text.trim().length() == 0) {
+	                            rowSorter.setRowFilter(null);
+	                        } else {
+	                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+	                        }
 	                    }
 	                } catch (Exception e1) {
 	                    e1.printStackTrace();
@@ -154,29 +204,6 @@ public class Radnici {
 			
 		});
 		
-		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
-		
-		table = new JTable();
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
-		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setForeground(Color.LIGHT_GRAY);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
-			}
-		));
-		
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
@@ -189,9 +216,33 @@ public class Radnici {
 		JButton btnObrisi = new JButton("Obriši");
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRowCount() == 1){
+					long idRadnika = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+					ArrayList<Radnik> radnici = handler.DajRadnike();
+					 Radnik r = new Radnik();
+					for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
+			        {
+			          Radnik temp = (Radnik)iterator1.next(); 
+			           if(temp.getId() == idRadnika)
+						r = temp;
+			        }
+					try {
+						handler.obrisiRadnika(r);
+						((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JButton btnDodajKorisnika = new JButton("Dodaj korisnika");
+		btnDodajKorisnika.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		
 		
 		GroupLayout groupLayout = new GroupLayout(getRadnici().getContentPane());
@@ -209,33 +260,36 @@ public class Radnici {
 							.addGap(45)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addComponent(table, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(pnlObrisiIzmijeni, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(pnlObrisiIzmijeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
 											.addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
 											.addGap(9)
-											.addComponent(btnIzmjeni))))
+											.addComponent(btnIzmjeni)))
+									.addComponent(btnDodajKorisnika)
+									.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblIme)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+										.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
 										.addComponent(btnPretrazi))))))
 					.addGap(49))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(12)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel)
 						.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(74)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnDodajKorisnika)
+					.addGap(37)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel_1)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -245,9 +299,9 @@ public class Radnici {
 								.addComponent(btnPretrazi))
 							.addGap(2)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+					.addComponent(pnlRadnik, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnIzmjeni)
@@ -271,8 +325,9 @@ public class Radnici {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen f = new LoginScreen();
-				f.getFrmPrijavaKorisnika().setVisible(true);
+				LoginScreen window = new LoginScreen(handler);
+				window.getFrmPrijavaKorisnika().setVisible(true);
+
 			}
 		});
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
@@ -293,7 +348,7 @@ public class Radnici {
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Klijenti f = new Klijenti();
+				Klijenti f = new Klijenti(handler);
 				f.getKlijenti().setVisible(true);
 			}
 		});
@@ -323,7 +378,6 @@ public class Radnici {
 	}
 	
 	public Boolean ValidacijaImePrezime(String user) {
-        if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E ]*");
     }
 }

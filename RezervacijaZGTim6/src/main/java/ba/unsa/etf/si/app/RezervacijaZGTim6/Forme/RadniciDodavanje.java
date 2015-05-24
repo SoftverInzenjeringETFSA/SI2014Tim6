@@ -83,11 +83,8 @@ public class RadniciDodavanje {
 	private void initialize() {
 		setRadniciDodavanje(new JFrame());
 		getRadniciDodavanje().setResizable(false);
-		getRadniciDodavanje().setBounds(100, 100, 624, 427);
-		getRadniciDodavanje().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
+		getRadniciDodavanje().setBounds(100, 100, 451, 324);
+		getRadniciDodavanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("A\u017Euriranje / Dodavanje radnika");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
@@ -196,10 +193,10 @@ public class RadniciDodavanje {
 					f.printStackTrace();
 				}
 				
-				if (validna_forma)
+			/*	if (validna_forma)
 					System.out.println("Validna forma");
 				else
-					System.out.println("Nevalidna forma");
+					System.out.println("Nevalidna forma");*/
 			}
 		});
 		btnSpasi.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -220,70 +217,76 @@ public class RadniciDodavanje {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPassword)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblIme)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPrezime)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblUsername)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnSpasi))
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-					.addGap(18))
+							.addGap(103)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnSpasi)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblPassword)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblIme)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblPrezime)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblUsername)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(pnlPrezime, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(5)
+									.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(73)
+							.addComponent(lblNewLabel)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel)
-					.addGap(96)
+					.addGap(65)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblIme)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblPrezime)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblUsername)
-							.addComponent(textField_2)))
+							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblPassword)))
-					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+					.addGap(18)
 					.addComponent(btnSpasi)
-					.addContainerGap(116, Short.MAX_VALUE))
+					.addGap(46))
 		);
 		lblUsr.setForeground(Color.RED);
 		
@@ -297,56 +300,6 @@ public class RadniciDodavanje {
 		lblPsw.setForeground(Color.RED);
 		
 		pnlPassword.add(lblPsw);
-		panel.setLayout(null);
-		
-		JButton btnOdjava = new JButton("Odjavi se");
-		btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnOdjava.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				LoginScreen f = new LoginScreen();
-				f.getFrmPrijavaKorisnika().setVisible(true);
-			}
-		});
-		btnOdjava.setBackground(UIManager.getColor("Button.background"));
-		btnOdjava.setBounds(10, 329, 119, 23);
-		panel.add(btnOdjava);
-		
-		JButton btnRadnici = new JButton("Radnici");
-		btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnRadnici.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				Radnici f = new Radnici();
-				f.getRadnici().setVisible(true);
-			}
-		});
-		btnRadnici.setBounds(0, 0, 139, 34);
-		panel.add(btnRadnici);
-		
-		JButton btnKlijenti = new JButton("Klijenti");
-		btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnKlijenti.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				Klijenti f = new Klijenti();
-				f.getKlijenti().setVisible(true);
-			}
-		});
-		btnKlijenti.setBounds(0, 34, 139, 34);
-		panel.add(btnKlijenti);
-		
-		JButton btnIzvjestaji = new JButton("Izvjestaji");
-		btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnIzvjestaji.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				Izvjestaji f = new Izvjestaji();
-				f.getIzvjestaji().setVisible(true);
-			}
-		});
-		btnIzvjestaji.setBounds(0, 68, 139, 34);
-		panel.add(btnIzvjestaji);
 		getRadniciDodavanje().getContentPane().setLayout(groupLayout);
 	}
 
@@ -360,12 +313,12 @@ public class RadniciDodavanje {
 	
 	public Boolean ValidacijaImePrezime(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
 	
 	public Boolean ValidacijaUserPass(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z0-9]+$");
+        return user.matches("^[a-zA-Z0-9\u0161\u0111\u010D\u0107\u017E]+$");
     }
 
 }

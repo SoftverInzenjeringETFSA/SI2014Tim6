@@ -54,6 +54,9 @@ import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache
 
 
 
+
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JDateChooser;
 
@@ -64,6 +67,7 @@ import javax.swing.SwingConstants;
 public class Izvjestaji {
 
 	private JFrame frame;
+	private Restoran handler;
 	
 	/**
 	 * @wbp.nonvisual location=428,169
@@ -428,7 +432,7 @@ public class Izvjestaji {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen f = new LoginScreen();
+				LoginScreen f = new LoginScreen(handler);
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
