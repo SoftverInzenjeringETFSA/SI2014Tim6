@@ -400,6 +400,7 @@ public class LoginScreen {
 	
 	public Boolean ValidacijaUserPass(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z0-9]+$");
+        return user.matches("^[a-zA-Z0-9\u0161\u0111\u010D\u0107\u017E]+$");
+       
     }
 }
