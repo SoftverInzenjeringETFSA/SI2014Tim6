@@ -210,25 +210,32 @@ public class PregledKlijenataRadnik {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(btnIzmjeni)
+							.addPreferredGap(ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+							.addGap(26))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(155)
-									.addComponent(lblNewLabel_1))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblIme)
+											.addGap(155)
+											.addComponent(lblNewLabel_1))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(lblIme)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+												.addComponent(lblNewLabel))
 											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblNewLabel))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btnPretrazi)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432))
-							.addContainerGap(19, Short.MAX_VALUE))
+											.addComponent(btnPretrazi)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432))
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addGroup(groupLayout.createSequentialGroup()
 										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -240,12 +247,8 @@ public class PregledKlijenataRadnik {
 										.addPreferredGap(ComponentPlacement.UNRELATED)
 										.addComponent(btnPretrazi))
 									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432)))
-							.addContainerGap(17, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnIzmjeni)
-							.addPreferredGap(ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
-							.addGap(26)));
+							.addContainerGap(30, Short.MAX_VALUE))))
+		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -260,12 +263,12 @@ public class PregledKlijenataRadnik {
 								.addComponent(btnPretrazi))
 							.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
 							.addComponent(lblNewLabel_1))
-						.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnDodaj)
 						.addComponent(btnIzmjeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
@@ -276,26 +279,9 @@ public class PregledKlijenataRadnik {
 		pnlIzmijeni.setVisible(false);
 		//panel.setLayout(null);
 		
+		JButton btnradnici = new JButton("Radnici");
 		getPregledKlijenataRadnik().getContentPane().setLayout(groupLayout);
 		
-		btnIzmjeni.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
-			
-				System.out.println(idGosta);
-				Gost g = new Gost();
-				try
-				{
-					g.ocitajGosta(idGosta);
-				}
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				k = new DodavanjeKlijentaRadnik(g, handler, frame);
-				System.out.println("Stigo!");
-				k.getDodavanjeKlijentaRadnik().setVisible(true);
-			}
-		});
 	}
 	
 	public DefaultTableModel getModel(){
