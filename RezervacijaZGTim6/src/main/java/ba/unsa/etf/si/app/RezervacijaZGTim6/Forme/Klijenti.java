@@ -23,16 +23,23 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
@@ -41,6 +48,9 @@ public class Klijenti {
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
+	private Restoran handler;
+	private TableRowSorter<TableModel> rowSorter;
+	private DodavanjeKlijentaRadnik k;
 
 	/**
 	 * Launch the application.
@@ -66,7 +76,8 @@ public class Klijenti {
 	}
 	
 	public Klijenti(Restoran r){
-		
+		handler=r;
+		initialize();
 	}
 
 	/**
@@ -102,34 +113,85 @@ public class Klijenti {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JButton btnPretrazi = new JButton("Pretraži");
-		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
+		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
+				"ID", "Ime", "Prezime", "VIP"
+			}, 0){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		ArrayList<Gost> gosti;
+		gosti=handler.DajGoste();
+		
+		
+		for (Iterator iterator1 = gosti.iterator(); iterator1.hasNext();)
+        {
+           Gost g = (Gost)iterator1.next();
+           String Ime = g.getIme();
+           String Prezime = g.getPrezime();
+           boolean IsVip = g.getVIP();
+           long Id = g.getID();
+           String Vip;
+           if (IsVip) Vip="DA";
+           else Vip = "NE";
+           
+           Object[] data = {Id, Ime, Prezime, Vip};
+           System.out.println(data);
+           tableModel.addRow(data);
+        }
+		
 		table = new JTable();
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setForeground(Color.LIGHT_GRAY);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
+		table.setForeground(Color.BLACK);
+		table.setModel(tableModel);
+		JScrollPane scrollPane = new JScrollPane(table);
+		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		rowSorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(rowSorter);
+		
+		JButton btnPretrazi = new JButton("Pretraži");
+		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		btnPretrazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String text = textField.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
 			}
-		));
+		});
 		
 		JButton btnIzmjeni = new JButton("Izmijeni klijenta");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+				
+				System.out.println(idGosta);
+				Gost g = new Gost();
+				try
+				{
+					g.ocitajGosta(idGosta);
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				k = new DodavanjeKlijentaRadnik(g, handler);
+				System.out.println("Stigo!");
+				k.getDodavanjeKlijentaRadnik().setVisible(true);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getKlijenti().getContentPane());
@@ -139,7 +201,7 @@ public class Klijenti {
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(table, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblIme)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -172,7 +234,7 @@ public class Klijenti {
 					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnDodaj, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -219,7 +281,7 @@ public class Klijenti {
 		btnRadnici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Radnici f = new Radnici();
+				Radnici f = new Radnici(handler);
 				f.getRadnici().setVisible(true);
 			}
 		});
