@@ -211,6 +211,7 @@ public class DodavanjeKlijentaSef {
 						else{
 							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						}
+						
 					}
 					else{
 						System.out.println("nisam dodo!");
