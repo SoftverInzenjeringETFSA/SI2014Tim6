@@ -202,6 +202,8 @@ public class DodavanjeKlijentaSef {
 				if (validna_forma) {
 					System.out.println("Validna forma");
 					frame.dispose();
+					parentFrame.setEnabled(true);
+					parentFrame.setVisible(true);
 				} else
 					System.out.println("Nevalidna forma");
 				// zakomentarisano zbog testa validacije
