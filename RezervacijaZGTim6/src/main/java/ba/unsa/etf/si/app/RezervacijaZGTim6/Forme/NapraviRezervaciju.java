@@ -103,7 +103,7 @@ public class NapraviRezervaciju {
 	 * Create the application.
 	 */
 	public NapraviRezervaciju() {
-		//initialize();
+		initialize();
 	}
 	
 	public NapraviRezervaciju(Restoran r) {
@@ -151,33 +151,12 @@ public class NapraviRezervaciju {
 		JButton btnDodajRezervaciju = new JButton("Dodaj rezervaciju");
 		btnDodajRezervaciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
-			    
 				boolean validna_forma = true;
 				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
 				//referenci za button i panel promijenit boju stola koji je kliknut
 				if (table.getSelectedRow() == -1)
 					validna_forma= false;
 				
-<<<<<<< HEAD
-				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
-				Time vrijeme = new Time(hours, minutes, 0);
-				Integer trajanje = (Integer)spinner.getValue();
-				Long ms = date.getDate().getTime();
-				java.sql.Date sqldate = new java.sql.Date(ms);
-				Gost g = new Gost();
-				
-				try {
-					g.ocitajGosta(idGosta);
-					if(trajanje == 0) trajanje = 180;
-					if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
-						if(!g.getVIP() && sto.getVIP()){
-							System.out.println("Obicni gost ne moze rezervisati VIP sto");
-						}
-						else{
-							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
-									sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
-=======
 				if(validna_forma)
 				{
 					System.out.println("validna forma");
@@ -191,28 +170,25 @@ public class NapraviRezervaciju {
 					try {
 						if(trajanje == 0) trajanje = 180;
 						if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
-							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
-							
->>>>>>> origin/master
+							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
+									sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
 							prikazStolovaButton.setBackground(Color.red);
 							prikazStolovaPanel.revalidate();
 							prikazStolovaPanel.repaint();
 						}
-<<<<<<< HEAD
-=======
+
 					} catch (NumberFormatException e1) {
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						e1.printStackTrace();
->>>>>>> origin/master
+
 					}
 					getNapraviRezervaciju().dispose();
 				}
-<<<<<<< HEAD
-=======
+
 				else
 					System.out.println("odaberite klijenta");				
->>>>>>> origin/master
+
 			}
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -399,7 +375,7 @@ public class NapraviRezervaciju {
 	public void setNapraviRezervaciju(JFrame frame) {
 		this.frame = frame;
 	}
-	public void showWindow(Restoran r,int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,Sto sto)
+	public void showWindow(Restoran r, int tableNumber, JButton button, JPanel panel, JDateChooser date, Integer sati, Integer minute,Sto sto)
 	{
 		System.out.println("Stol "+tableNumber);
 		this.prikazStolovaButton=button;
