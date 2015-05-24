@@ -216,6 +216,24 @@ public class Radnici {
 		JButton btnObrisi = new JButton("Obriši");
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRowCount() == 1){
+					long idRadnika = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+					ArrayList<Radnik> radnici = handler.DajRadnike();
+					 Radnik r = new Radnik();
+					for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
+			        {
+			          Radnik temp = (Radnik)iterator1.next(); 
+			           if(temp.getId() == idRadnika)
+						r = temp;
+			        }
+					try {
+						handler.obrisiRadnika(r);
+						((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
