@@ -44,6 +44,7 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 public class RadniciEditovanje {
 
 	private JFrame frame;
+	private JFrame f2;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -89,8 +90,9 @@ public class RadniciEditovanje {
 		initialize();
 	}
 	
-	public RadniciEditovanje(Restoran r, long id) {
+	public RadniciEditovanje(Restoran r, long id, JFrame f) {
 		ID = id;
+		f2=f;
 		handler = r;
 		ArrayList<Radnik> radnici = handler.DajRadnike();
 		radnik = new Radnik();
@@ -234,6 +236,8 @@ public class RadniciEditovanje {
 						
 						handler.azurirajRadnika(radnik);
 						frame.dispose();
+						Radnici r = new Radnici(handler);
+						r.getRadnici().setVisible(true);
 					}
 					
 				} catch (Exception f) {

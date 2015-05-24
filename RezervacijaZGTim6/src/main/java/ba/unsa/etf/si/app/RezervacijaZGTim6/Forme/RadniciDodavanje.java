@@ -41,6 +41,7 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 public class RadniciDodavanje {
 
 	private JFrame frame;
+	private JFrame f2;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -84,7 +85,8 @@ public class RadniciDodavanje {
 		initialize();
 	}
 	
-	public RadniciDodavanje(Restoran r) {
+	public RadniciDodavanje(Restoran r, JFrame f) {
+		f2=f;
 		handler = r;
 		initialize();
 	}
@@ -98,7 +100,7 @@ public class RadniciDodavanje {
 		getRadniciDodavanje().setBounds(100, 100, 451, 324);
 		getRadniciDodavanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("A\u017Euriranje / Dodavanje radnika");
+		JLabel lblNewLabel = new JLabel("Dodavanje radnika");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		textField = new JTextField();
@@ -208,6 +210,9 @@ public class RadniciDodavanje {
 						System.out.println("Validna forma");
 						handler.DodajRadnika(textField.getText(), textField_1.getText(), new java.sql.Date((new Date()).getTime()), textField_4.getText(), textField_2.getText(), textField_3.getText(), handler.getKorisnik().getID());
 						frame.dispose();
+						f2.dispose();
+						Radnici r = new Radnici(handler);
+						r.getRadnici().setVisible(true);
 					}
 					
 				} catch (Exception f) {
