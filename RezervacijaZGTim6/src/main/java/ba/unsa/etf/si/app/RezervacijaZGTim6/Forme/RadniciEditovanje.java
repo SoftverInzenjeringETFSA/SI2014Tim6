@@ -30,15 +30,18 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Radnik;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
-public class RadniciDodavanje {
+public class RadniciEditovanje {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -47,6 +50,8 @@ public class RadniciDodavanje {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
+	private long ID;
+	private Radnik radnik;
 	
 	JLabel lblIme_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
 	JLabel lblPrezime_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
@@ -68,8 +73,8 @@ public class RadniciDodavanje {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RadniciDodavanje window = new RadniciDodavanje();
-					window.getRadniciDodavanje().setVisible(true);
+					RadniciEditovanje window = new RadniciEditovanje();
+					window.getRadniciEditovanje().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,12 +85,21 @@ public class RadniciDodavanje {
 	/**
 	 * Create the application.
 	 */
-	public RadniciDodavanje() {
+	public RadniciEditovanje() {
 		initialize();
 	}
 	
-	public RadniciDodavanje(Restoran r) {
+	public RadniciEditovanje(Restoran r, long id) {
+		ID = id;
 		handler = r;
+		ArrayList<Radnik> radnici = handler.DajRadnike();
+		radnik = new Radnik();
+		for (Iterator iterator1 = radnici.iterator(); iterator1.hasNext();)
+        {
+          Radnik temp = (Radnik)iterator1.next(); 
+           if(temp.getId() == ID)
+			radnik = temp;
+        }
 		initialize();
 	}
 
@@ -93,33 +107,39 @@ public class RadniciDodavanje {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setRadniciDodavanje(new JFrame());
-		getRadniciDodavanje().setResizable(false);
-		getRadniciDodavanje().setBounds(100, 100, 451, 324);
-		getRadniciDodavanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setRadniciEditovanje(new JFrame());
+		getRadniciEditovanje().setResizable(false);
+		getRadniciEditovanje().setBounds(100, 100, 451, 324);
+		getRadniciEditovanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("A\u017Euriranje / Dodavanje radnika");
+		
+		JLabel lblNewLabel = new JLabel("Ažuriranje klijenata");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setColumns(10);
+		textField.setText(radnik.getIme());
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_1.setColumns(10);
+		textField_1.setText(radnik.getPrezime());
 		
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_2.setColumns(10);
-		
+		textField_2.setText(radnik.getNazivPosla());
+				
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_3.setColumns(10);
+		textField_3.setText(radnik.getOpisPosla());
 		
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_4.setColumns(10);
+		textField_4.setText(radnik.getJMBG());
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -205,8 +225,14 @@ public class RadniciDodavanje {
 								
 				try {
 					if(validna_forma) {
-						System.out.println("Validna forma");
-						handler.DodajRadnika(textField.getText(), textField_1.getText(), new java.sql.Date((new Date()).getTime()), textField_4.getText(), textField_2.getText(), textField_3.getText(), handler.getKorisnik().getID());
+						
+						radnik.setIme(textField.getText());
+						radnik.setPrezime(textField_1.getText());
+						radnik.setNazivPosla(textField_2.getText());
+						radnik.setOpisPosla(textField_3.getText());
+						radnik.setJMBG(textField_4.getText());
+						
+						handler.azurirajRadnika(radnik);
 						frame.dispose();
 					}
 					
@@ -237,7 +263,7 @@ public class RadniciDodavanje {
 		JLabel lblJmbg = new JLabel("JMBG:");
 		lblJmbg.setFont(new Font("Dialog", Font.PLAIN, 12));
 		
-		GroupLayout groupLayout = new GroupLayout(getRadniciDodavanje().getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getRadniciEditovanje().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -293,25 +319,25 @@ public class RadniciDodavanje {
 					.addComponent(lblNewLabel)
 					.addGap(65)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblIme)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblPrezime)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblUsername)
 							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblPassword)))
@@ -335,14 +361,14 @@ public class RadniciDodavanje {
 		lblPsw.setForeground(Color.RED);
 		
 		pnlPassword.add(lblPsw);
-		getRadniciDodavanje().getContentPane().setLayout(groupLayout);
+		getRadniciEditovanje().getContentPane().setLayout(groupLayout);
 	}
 
-	public JFrame getRadniciDodavanje() {
+	public JFrame getRadniciEditovanje() {
 		return frame;
 	}
 
-	public void setRadniciDodavanje(JFrame frame) {
+	public void setRadniciEditovanje(JFrame frame) {
 		this.frame = frame;
 	}
 	

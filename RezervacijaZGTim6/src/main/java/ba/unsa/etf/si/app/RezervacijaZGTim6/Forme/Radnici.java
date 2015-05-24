@@ -103,8 +103,7 @@ public class Radnici {
 		JButton btnDodaj = new JButton("Dodaj radnika");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRadnici().dispose();
-				RadniciDodavanje f = new RadniciDodavanje();
+				RadniciDodavanje f = new RadniciDodavanje(handler);
 				f.getRadniciDodavanje().setVisible(true);
 			}
 		});
@@ -208,7 +207,8 @@ public class Radnici {
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				RadniciEditovanje re = new RadniciEditovanje(handler, Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString()));
+				re.getRadniciEditovanje().setVisible(true);
 				// kad se doda logika za Izmijeni i Obrisi, dodat cemo pojavu errora za sl da se ne moze to izvrsiti
 			}
 		});

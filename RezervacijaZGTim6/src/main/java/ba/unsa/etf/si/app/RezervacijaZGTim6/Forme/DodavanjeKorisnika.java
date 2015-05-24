@@ -35,6 +35,7 @@ import javax.swing.text.MaskFormatter;
 
 public class DodavanjeKorisnika {
 
+
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
