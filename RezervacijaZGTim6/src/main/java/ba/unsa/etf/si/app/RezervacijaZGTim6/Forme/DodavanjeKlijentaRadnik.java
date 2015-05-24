@@ -18,6 +18,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 
 import java.awt.Font;
 
@@ -37,13 +38,14 @@ import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import com.toedter.calendar.JDateChooser;
+
 
 public class DodavanjeKlijentaRadnik {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	private GroupLayout groupL;
 	private JFrame f2;
 	private JFrame parentFrame;
 	
@@ -56,9 +58,17 @@ public class DodavanjeKlijentaRadnik {
 	JPanel pnlPrezime = new JPanel();
 	JPanel pnlTel = new JPanel();
 	boolean izmjenaGosta = false;
+	boolean dosoSaRez = false;
 	
 	private Gost gost;
 	private Restoran handler;
+	private JButton prikazStolovaButton;
+	private JPanel prikazStolovaPanel;
+	private JDateChooser date;
+	private Integer hours;
+	private Integer minutes;
+	private int clickedTableNumber;
+	private Sto sto;
 	/**
 	 * Launch the application.
 	 */
@@ -82,17 +92,37 @@ public class DodavanjeKlijentaRadnik {
 		initialize();
 	}
 	
-	public DodavanjeKlijentaRadnik(Restoran r) {
-		initialize();
+	public DodavanjeKlijentaRadnik(Restoran r, JFrame f, int tableNumber, JButton button, JPanel panel, 
+			JDateChooser date, Integer sati, Integer minute,Sto sto) {
+		
+		System.out.println("Stol "+tableNumber);
+		this.prikazStolovaButton=button;
+		this.prikazStolovaPanel=panel;
+		this.date=date;
+		this.hours=sati;
+		clickedTableNumber=tableNumber;
+		this.minutes=minute;
+		this.sto=sto;
+		dosoSaRez = true;
 		handler = r;
+		f2=f;
+		initialize();
+	}
+	public DodavanjeKlijentaRadnik(Restoran r, JFrame f)
+	{
+		handler=r;
+		f2=f;
+		initialize();
 	}
 	public DodavanjeKlijentaRadnik(Gost g, Restoran r, JFrame f){
+		
 		izmjenaGosta=true;
 		gost=g;
 		handler=r;
 		f2=f;
 		initialize();
 	}
+	//public DodavanjeKlijentaRadnik(Restoran r, JFrame f){}
 	public void setParent(JFrame f)
 	{
 		parentFrame=f;
@@ -229,8 +259,16 @@ public class DodavanjeKlijentaRadnik {
 							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						}
 						f2.dispose();
-						PregledKlijenataRadnik pkr = new PregledKlijenataRadnik();
-						pkr.showWindow(handler);
+						if(!dosoSaRez) {
+							PregledKlijenataRadnik pkr = new PregledKlijenataRadnik();
+							pkr.showWindow(handler);
+						}
+						else{
+							NapraviRezervaciju nr = new NapraviRezervaciju();
+							nr.showWindow(handler, clickedTableNumber, prikazStolovaButton,
+									prikazStolovaPanel, date, hours, minutes, sto);
+						}
+						
 					}
 					else{
 						JOptionPane.showMessageDialog(null, "Ispravite greške");
@@ -244,7 +282,7 @@ public class DodavanjeKlijentaRadnik {
 					System.out.println("Validna forma");
 					frame.dispose();
 					parentFrame.setEnabled(true);
-					parentFrame.setVisible(true);
+					//parentFrame.setVisible(true);
 				} else
 					System.out.println("Nevalidna forma");
 				// zakomentarisano zbog testa validacije
