@@ -166,15 +166,24 @@ public class NapraviRezervaciju {
 					Integer trajanje = (Integer)spinner.getValue();
 					Long ms = date.getDate().getTime();
 					java.sql.Date sqldate = new java.sql.Date(ms);
+					Gost g = new Gost();
 				
 					try {
+						g.ocitajGosta(idGosta);
 						if(trajanje == 0) trajanje = 180;
 						if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
-							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
-									sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
-							prikazStolovaButton.setBackground(Color.red);
-							prikazStolovaPanel.revalidate();
-							prikazStolovaPanel.repaint();
+							if(!g.getVIP() && sto.getVIP()){
+								System.out.println("Ne moze obicni klijent rezervisati VIP sto");
+								//logika za error providere
+							}
+							else{
+								handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
+										sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
+								prikazStolovaButton.setBackground(Color.red);
+								prikazStolovaPanel.revalidate();
+								prikazStolovaPanel.repaint();
+							}
+							
 						}
 
 					} catch (NumberFormatException e1) {
