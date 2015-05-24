@@ -228,6 +228,8 @@ public class DodavanjeKlijentaRadnik {
 							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						}
 						f2.dispose();
+						PregledKlijenataRadnik pkr = new PregledKlijenataRadnik();
+						pkr.showWindow(handler);
 					}
 					else{
 						JOptionPane.showMessageDialog(null, "Ispravite greške");
