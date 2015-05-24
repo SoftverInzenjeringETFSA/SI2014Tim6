@@ -250,6 +250,8 @@ public class DodavanjeKlijentaSef {
 		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
+		JCheckBox VIPCheckBox = new JCheckBox("VIP klijent");
+		
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaSef().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -268,7 +270,8 @@ public class DodavanjeKlijentaSef {
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
 										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-										.addComponent(formattedTelephone))))
+										.addComponent(formattedTelephone)
+										.addComponent(VIPCheckBox))))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(pnlTel, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
@@ -301,8 +304,10 @@ public class DodavanjeKlijentaSef {
 						.addComponent(pnlTel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(label_2)
-							.addComponent(formattedTelephone)))
-					.addGap(34)
+							.addComponent(formattedTelephone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(VIPCheckBox)
+					.addGap(4)
 					.addComponent(btnDodajKlijenta)
 					.addGap(64))
 		);
@@ -324,5 +329,4 @@ public class DodavanjeKlijentaSef {
 		if (user.length() < 3) return false;
         return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
-	
 }
