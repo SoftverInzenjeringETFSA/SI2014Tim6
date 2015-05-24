@@ -188,7 +188,7 @@ public class Izvjestaji {
 					{
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}
 					
 					
@@ -202,7 +202,7 @@ public class Izvjestaji {
 					{
 						pnlDo.setVisible(false);
 						lbl_Do.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}	
 					
 				}
@@ -225,7 +225,7 @@ public class Izvjestaji {
 					{
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}
 					
 					
@@ -239,7 +239,7 @@ public class Izvjestaji {
 					{
 						pnlOd.setVisible(false);
 						lbl_Od.setText("");
-						validna_forma = true;
+						//validna_forma = true;
 					}
 					
 				}
