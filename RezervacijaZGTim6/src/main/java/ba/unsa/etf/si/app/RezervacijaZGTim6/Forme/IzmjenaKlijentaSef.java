@@ -127,8 +127,10 @@ public class IzmjenaKlijentaSef {
 	    mfTel.setPlaceholderCharacter('_');
 		final JFormattedTextField formattedTelephone = new JFormattedTextField(mfTel);
 		
-		String NazivDugmeta;
-		String NazivForme;
+		textField.setText(gost.getIme());
+		textField_1.setText(gost.getPrezime());
+		formattedTelephone.setText(gost.getBrojTelefona());
+		VIPCheckBox.setSelected(gost.getVIP());
 		
 		JButton btnDodajKlijenta = new JButton("Promijeni klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
@@ -196,8 +198,9 @@ public class IzmjenaKlijentaSef {
 									{
 										g.setIme(textField.getText());
 										g.setPrezime(textField_1.getText());
+										g.setBrojTelefona(formattedTelephone.getText());
 										g.setVIP(VIPCheckBox.isSelected());
-										gost.updateGosta(g.getID(), g);
+										g.updateGosta(g.getID(), g);
 									}
 								}
 							} catch (Exception e1) {

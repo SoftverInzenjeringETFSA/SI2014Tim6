@@ -69,6 +69,8 @@ public class Gost implements Serializable
 			Gost temp = (Gost) session.get(Gost.class, id);
 			temp.setIme(g.getIme());
 			temp.setPrezime(g.getPrezime());
+			temp.setBrojTelefona(g.getBrojTelefona());
+			temp.setVIP(g.getVIP());
 			session.update(temp);
 			tx.commit();
 			System.out.println("Gost "+ id + " promijenjen na "+ temp.getIme()+ " " + temp.getPrezime());

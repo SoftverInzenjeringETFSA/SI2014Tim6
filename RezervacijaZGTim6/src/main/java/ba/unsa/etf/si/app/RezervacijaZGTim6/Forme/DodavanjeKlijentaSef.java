@@ -53,7 +53,6 @@ public class DodavanjeKlijentaSef {
 	JPanel pnlTel = new JPanel();
 	boolean izmjenaGosta = false;
 	
-	private Gost gost;
 	private Restoran handler;
 	/**
 	 * Launch the application.
@@ -82,9 +81,7 @@ public class DodavanjeKlijentaSef {
 		initialize();
 		handler = r;
 	}
-	public DodavanjeKlijentaSef(Gost g, Restoran r, JFrame f){
-		izmjenaGosta=true;
-		gost=g;
+	public DodavanjeKlijentaSef(Restoran r, JFrame f){
 		handler=r;
 		f2=f;
 		initialize();
@@ -124,20 +121,7 @@ public class DodavanjeKlijentaSef {
 	    mfTel.setPlaceholderCharacter('_');
 		final JFormattedTextField formattedTelephone = new JFormattedTextField(mfTel);
 		
-		String NazivDugmeta;
-		String NazivForme;
-		if(izmjenaGosta){
-			NazivDugmeta = "Promijeni Klijenta";
-			NazivForme = "Izmjena Klijenta";
-			textField.setText(gost.getIme());
-			textField_1.setText(gost.getPrezime());
-			formattedTelephone.setText(gost.getBrojTelefona());
-		} else {
-			NazivDugmeta = "Dodaj Klijenta";
-			NazivForme = "Dodavanje Klijenta";
-		}
-		
-		JButton btnDodajKlijenta = new JButton(NazivDugmeta);
+		JButton btnDodajKlijenta = new JButton("Dodaj Klijenta");
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -190,29 +174,7 @@ public class DodavanjeKlijentaSef {
 					if(validna_forma) System.out.println("Validna forma");
 					else System.out.println("Nije validna forma");
 					if(validna_forma) {
-						if(izmjenaGosta){
-							System.out.println("Stigo do izmjene!");
-							try {
-								Gost g;
-								ArrayList<Gost> gosti= handler.DajGoste();
-								
-								for(Iterator j= gosti.iterator(); j.hasNext();)
-								{
-									g = (Gost)j.next();
-									if(g.getID()==gost.getID())
-									{
-										g.setIme(textField.getText());
-										g.setPrezime(textField_1.getText());
-										gost.updateGosta(g.getID(), g);
-									}
-								}
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
-						}
-						else{
-							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
-						}
+						handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						f2.dispose();
 						Klijenti k = new Klijenti(handler);
 						k.getKlijenti().setVisible(true);
@@ -247,10 +209,10 @@ public class DodavanjeKlijentaSef {
 		pnlTel.add(lblTel, BorderLayout.WEST);
 		pnlTel.setVisible(false);
 
-		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
+		JLabel lblDodavanjeKlijenta = new JLabel("Dodavanje klijenta");
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JCheckBox VIPCheckBox = new JCheckBox("VIP klijent");
+		//JCheckBox VIPCheckBox = new JCheckBox("VIP klijent");
 		
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKlijentaSef().getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -270,8 +232,7 @@ public class DodavanjeKlijentaSef {
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
 										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-										.addComponent(formattedTelephone)
-										.addComponent(VIPCheckBox))))
+										.addComponent(formattedTelephone))))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(pnlTel, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
@@ -306,7 +267,6 @@ public class DodavanjeKlijentaSef {
 							.addComponent(label_2)
 							.addComponent(formattedTelephone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(VIPCheckBox)
 					.addGap(4)
 					.addComponent(btnDodajKlijenta)
 					.addGap(64))

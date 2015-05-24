@@ -117,7 +117,7 @@ public class PregledKlijenataRadnik {
 		JLabel lblNewLabel_1 = new JLabel("");	
 		
 		tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime"
+				"ID", "Ime", "Prezime", "Br Telefona"
 			}, 0){
 			private static final long serialVersionUID = 1L;
 
@@ -135,9 +135,10 @@ public class PregledKlijenataRadnik {
            Gost g = (Gost)iterator1.next();
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
+           String brTel = g.getBrojTelefona();
            long Id = g.getID();
            
-           Object[] data = {Id, Ime, Prezime};
+           Object[] data = {Id, Ime, Prezime, brTel};
            System.out.println(data);
            tableModel.addRow(data);
         }
@@ -186,9 +187,7 @@ public class PregledKlijenataRadnik {
 					Gost g = new Gost();
 					try
 					{
-						
-							g.ocitajGosta(idGosta);
-						
+						g.ocitajGosta(idGosta);
 					}
 					catch (Exception e1) {
 						e1.printStackTrace();

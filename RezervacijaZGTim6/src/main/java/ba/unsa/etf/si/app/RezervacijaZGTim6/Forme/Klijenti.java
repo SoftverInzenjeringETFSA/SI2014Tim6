@@ -99,10 +99,8 @@ public class Klijenti {
 		JButton btnDodaj = new JButton("Dodaj novog klijenta");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				KlijentiDodavanje f = new KlijentiDodavanje();
-				f.getKlijentiDodavanje().setVisible(true);
-				
-				
+				k = new DodavanjeKlijentaSef(handler, frame);
+				k.getDodavanjeKlijentaSef().setVisible(true);
 			}
 		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -119,7 +117,7 @@ public class Klijenti {
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime", "VIP"
+				"ID", "Ime", "Prezime", "Br Telefona", "VIP"
 			}, 0){
 			private static final long serialVersionUID = 1L;
 
@@ -138,13 +136,14 @@ public class Klijenti {
            Gost g = (Gost)iterator1.next();
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
+           String brTel = g.getBrojTelefona();
            boolean IsVip = g.getVIP();
            long Id = g.getID();
            String Vip;
            if (IsVip) Vip="DA";
            else Vip = "NE";
            
-           Object[] data = {Id, Ime, Prezime, Vip};
+           Object[] data = {Id, Ime, Prezime, brTel, Vip};
            System.out.println(data);
            tableModel.addRow(data);
         }
