@@ -254,6 +254,7 @@ public class NapraviRezervaciju {
 		int maxVal = 5;
 		if(hours >= 18)
 			maxVal = 23 - hours;
+		if(maxVal < 1) maxVal = 1;
 		SpinnerModel sm = new SpinnerNumberModel(1,1,maxVal,1);
 		spinner = new JSpinner(sm);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));

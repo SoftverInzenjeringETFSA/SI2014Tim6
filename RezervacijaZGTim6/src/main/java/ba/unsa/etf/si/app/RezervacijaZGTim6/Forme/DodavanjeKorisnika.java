@@ -137,7 +137,7 @@ public class DodavanjeKorisnika {
 					lblIme.setText("Popunite polje!");
 					pnlIme.setVisible(true);
 					validna_forma = false;
-				} else if (!ValidacijaImePrezime(textField.getText())) {
+				} else if (!ValidacijaUsername(textField.getText())) {
 					lblIme.setText("Nedozvoljen format!");
 					pnlIme.setVisible(true);
 					validna_forma = false;
@@ -263,9 +263,9 @@ public class DodavanjeKorisnika {
 		this.frame = frame;
 	}
 	
-	public Boolean ValidacijaImePrezime(String user) {
+	public Boolean ValidacijaUsername(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
+        return user.matches("^[a-z]+$");
     }
 	
 	public Boolean ValidacijaPassword(String pw)
