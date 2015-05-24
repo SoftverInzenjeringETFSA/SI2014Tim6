@@ -119,6 +119,12 @@ public class NapraviRezervaciju {
 		handler = r;
 		initialize();
 	}
+	
+	public NapraviRezervaciju(Restoran r, Integer hours) {
+		handler = r;
+		this.hours = hours;
+		initialize();
+	}
 
 
 	/**
@@ -244,7 +250,10 @@ public class NapraviRezervaciju {
 		JLabel lblTrajanje = new JLabel("Trajanje: ");
 		lblTrajanje.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		SpinnerModel sm = new SpinnerNumberModel(1,1,5,1);
+		int maxVal = 5;
+		if(hours >= 18)
+			maxVal = 23 - hours;
+		SpinnerModel sm = new SpinnerNumberModel(1,1,maxVal,1);
 		spinner = new JSpinner(sm);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
