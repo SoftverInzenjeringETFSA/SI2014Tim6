@@ -18,6 +18,7 @@ import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
@@ -83,6 +84,10 @@ public class NapraviRezervaciju {
     private TableRowSorter<TableModel> rowSorter;
     private JSpinner spinner;
     
+    ImageIcon alImg = new ImageIcon("Slike/alert.png");
+    JLabel lblRezervacija = new JLabel("", alImg, SwingConstants.LEFT);
+    JPanel pnlRezervacija = new JPanel();
+    
 	/**
 	 * Launch the application.
 	 */
@@ -118,7 +123,7 @@ public class NapraviRezervaciju {
 	private void initialize() {
 		setNapraviRezervaciju(new JFrame());
 		getNapraviRezervaciju().setResizable(false);
-		getNapraviRezervaciju().setBounds(100, 100, 624, 440);
+		getNapraviRezervaciju().setBounds(100, 100, 624, 470);
 		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -151,7 +156,7 @@ public class NapraviRezervaciju {
 		JButton btnDodajRezervaciju = new JButton("Dodaj rezervaciju");
 		btnDodajRezervaciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean validna_forma = true;
+				boolean validna_forma = true, VIP = true;
 				//Ovdje slijedi logika za dodavanje rezervacije u bazu podataka, te ako je uspjesna rezervacija, da putem
 				//referenci za button i panel promijenit boju stola koji je kliknut
 				if (table.getSelectedRow() == -1)
@@ -159,8 +164,7 @@ public class NapraviRezervaciju {
 				
 				if(validna_forma)
 				{
-					System.out.println("validna forma");
-					
+			
 					long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
 					Time vrijeme = new Time(hours, minutes, 0);
 					Integer trajanje = (Integer)spinner.getValue();
@@ -175,6 +179,9 @@ public class NapraviRezervaciju {
 							if(!g.getVIP() && sto.getVIP()){
 								System.out.println("Ne moze obicni klijent rezervisati VIP sto");
 								//logika za error providere
+								lblRezervacija.setText("Nije VIP klijent");
+								pnlRezervacija.setVisible(true);
+								VIP = false;
 							}
 							else{
 								handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
@@ -192,12 +199,16 @@ public class NapraviRezervaciju {
 						e1.printStackTrace();
 
 					}
-					getNapraviRezervaciju().dispose();
+					if (VIP)
+						getNapraviRezervaciju().dispose();
 				}
 
 				else
-					System.out.println("odaberite klijenta");				
-
+				{
+					System.out.println("odaberite klijenta");	
+					lblRezervacija.setText("Odaberite klijenta");
+					pnlRezervacija.setVisible(true);
+				}
 			}
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -224,7 +235,9 @@ public class NapraviRezervaciju {
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE)
 						.addComponent(spinner, 5, 50, 150)
 						.addComponent(lblTrajanje)
+						//.addComponent(pnlTrajanje, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDodajRezervaciju)
+						.addComponent(pnlRezervacija, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED))
 						.addComponent(reservationText, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
@@ -248,10 +261,19 @@ public class NapraviRezervaciju {
 					.addGap(18)
 					.addComponent(lblTrajanje)
 					.addComponent(spinner, 5, 50, 150)
+					//.addComponent(pnlTrajanje, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(15)
 					.addComponent(btnDodajRezervaciju)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+					.addComponent(pnlRezervacija, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE))
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
+		
+        lblRezervacija.setForeground(Color.RED);
+        lblRezervacija.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        pnlRezervacija.add(lblRezervacija);
+        pnlRezervacija.setVisible(false);
 		
 		//RAD SA TABELOM I PRETRAGA KORISNIKA
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
