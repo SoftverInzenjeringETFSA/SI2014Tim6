@@ -55,16 +55,13 @@ public class PregledKlijenataRadnik {
 	private Restoran handler;
 	private DodavanjeKlijentaRadnik k;
 	private TableRowSorter<TableModel> rowSorter;
-<<<<<<< HEAD
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	JLabel lblIzmijeni = new JLabel("", alImg, SwingConstants.LEFT);
 	JPanel pnlIzmijeni = new JPanel();
 	
-=======
 	private DefaultTableModel tableModel;
 	private JScrollPane scrollPane;
->>>>>>> 25c5b7a44091edfa0da3ce9d3561d4496ccdd6e0
 
 	/**
 	 * Launch the application.
@@ -176,7 +173,6 @@ public class PregledKlijenataRadnik {
 		
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
-<<<<<<< HEAD
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -197,7 +193,7 @@ public class PregledKlijenataRadnik {
 					catch (Exception e1) {
 						e1.printStackTrace();
 					}
-					k = new DodavanjeKlijentaRadnik(g, handler);
+					k = new DodavanjeKlijentaRadnik(g, handler, frame);
 					System.out.println("Stigo!");
 					k.getDodavanjeKlijentaRadnik().setVisible(true);
 				}
@@ -205,8 +201,6 @@ public class PregledKlijenataRadnik {
 			
 			}
 		});
-=======
->>>>>>> 25c5b7a44091edfa0da3ce9d3561d4496ccdd6e0
 		
 		JPanel pnlIzmijeni = new JPanel();
 		
@@ -222,7 +216,6 @@ public class PregledKlijenataRadnik {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(155)
 									.addComponent(lblNewLabel_1))
-<<<<<<< HEAD
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addGroup(groupLayout.createSequentialGroup()
@@ -236,7 +229,6 @@ public class PregledKlijenataRadnik {
 									.addComponent(pnlIzmijeni, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
 								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432))
 							.addContainerGap(19, Short.MAX_VALUE))
-=======
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addGroup(groupLayout.createSequentialGroup()
 										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -249,17 +241,11 @@ public class PregledKlijenataRadnik {
 										.addComponent(btnPretrazi))
 									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432)))
 							.addContainerGap(17, Short.MAX_VALUE))
->>>>>>> 25c5b7a44091edfa0da3ce9d3561d4496ccdd6e0
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnIzmjeni)
-<<<<<<< HEAD
 							.addPreferredGap(ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-=======
-							.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
->>>>>>> 25c5b7a44091edfa0da3ce9d3561d4496ccdd6e0
 							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
-							.addGap(26))))
-		);
+							.addGap(26)));
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -283,15 +269,12 @@ public class PregledKlijenataRadnik {
 						.addComponent(btnIzmjeni, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
-<<<<<<< HEAD
 		
 
 		lblIzmijeni.setForeground(Color.RED);
 		pnlIzmijeni.add(lblIzmijeni);
 		pnlIzmijeni.setVisible(false);
 		//panel.setLayout(null);
-=======
->>>>>>> 25c5b7a44091edfa0da3ce9d3561d4496ccdd6e0
 		
 		getPregledKlijenataRadnik().getContentPane().setLayout(groupLayout);
 		
