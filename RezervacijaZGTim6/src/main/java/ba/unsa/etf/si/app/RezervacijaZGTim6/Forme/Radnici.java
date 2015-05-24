@@ -26,8 +26,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.SystemColor;
 import java.util.ArrayList;
@@ -52,6 +55,7 @@ public class Radnici {
 	JLabel lblObrisiIzmijeni = new JLabel("", alImg, SwingConstants.LEFT);
 	JPanel pnlRadnik = new JPanel();
 	JPanel pnlObrisiIzmijeni = new JPanel();
+	private TableRowSorter<TableModel> rowSorter;
 
 	/**
 	 * Launch the application.
@@ -114,53 +118,7 @@ public class Radnici {
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setColumns(10);
 		
-		JButton btnPretrazi = new JButton("Pretraži");
-		btnPretrazi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				
-				 boolean validna_forma = true;
-	                
-	                // validacija
-	                if (textField.getText().isEmpty()) {
-	                    lblRadnik.setText("Popunite polje!");
-	                    pnlRadnik.setVisible(true);
-	                    validna_forma = false;
-	                } else if (!ValidacijaImePrezime(textField.getText())) {
-	                    lblRadnik.setText("Nedozvoljen format!");
-	                    pnlRadnik.setVisible(true);
-	                    validna_forma = false;
-	                } else if (textField.getText().equals("anesa")) {
-	                	// ovdje dodati za npr ako ne postoji radnik da izbaci error sa tekstom
-                		lblRadnik.setText("Radnik ne postoji!");
-	                    pnlRadnik.setVisible(true);
-	                    validna_forma = false;
-                	}
-	                else { 
-	                    lblRadnik.setText("");
-	                    pnlRadnik.setVisible(false);
-	                    validna_forma = true;
-	                }
-	                
-	                
-	                try {
-	                    if(validna_forma) {
-	                    	// logika za pretrazivanje radnika
-	                      	
-	                    }
-	                } catch (Exception e1) {
-	                    e1.printStackTrace();
-	                }
-	                
-	                if (validna_forma) {
-	                    System.out.println("Validna forma");
-	                } else
-	                    System.out.println("Nevalidna forma");               
-	            }
-			
-		});
-		
-		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\LavaGolem\\Downloads\\1430011618_698627-icon-111-search-16.png"));
 		
@@ -202,6 +160,49 @@ public class Radnici {
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		rowSorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(rowSorter);
+		
+		JButton btnPretrazi = new JButton("Pretraži");
+		btnPretrazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 boolean validna_forma = true;
+	                
+	                // validacija
+	                if (!ValidacijaImePrezime(textField.getText())) {
+	                    lblRadnik.setText("Nedozvoljen format!");
+	                    pnlRadnik.setVisible(true);
+	                    validna_forma = false;
+	                }
+	                else { 
+	                    lblRadnik.setText("");
+	                    pnlRadnik.setVisible(false);
+	                    validna_forma = true;
+	                }
+	                
+	                try {
+	                    if(validna_forma) {
+	                    	String text = textField.getText();
+
+	                        if (text.trim().length() == 0) {
+	                            rowSorter.setRowFilter(null);
+	                        } else {
+	                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+	                        }
+	                    }
+	                } catch (Exception e1) {
+	                    e1.printStackTrace();
+	                }
+	                
+	                if (validna_forma) {
+	                    System.out.println("Validna forma");
+	                } else
+	                    System.out.println("Nevalidna forma");               
+	            }
+			
+		});
 		
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -349,7 +350,6 @@ public class Radnici {
 	}
 	
 	public Boolean ValidacijaImePrezime(String user) {
-        if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z ]+");
+        return user.matches("^[a-zA-Z ]*");
     }
 }

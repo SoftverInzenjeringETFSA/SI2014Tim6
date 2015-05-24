@@ -27,7 +27,7 @@ public class GostTest extends TestCase {
 	public void testToString() {
 		try {
 			Gost g = new Gost("Test", "Testic", "061/061-061");
-			assertEquals("Gost [ID=0, Ime=Test, Prezime=Testic, BrojTelefona=061/061-061, VIP=null]", (String)g.toString());
+			assertEquals("Gost [ID=0, Ime=Test, Prezime=Testic, BrojTelefona=061/061-061, VIP=false]", (String)g.toString());
 		} catch (Exception e) {
 			fail("Bacen izuzetak");
 		}
