@@ -81,6 +81,10 @@ public class Restoran
 		radnici.add(r);
 	}
 	
+
+	
+	
+	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
 	{
 		Sto s = new Sto();

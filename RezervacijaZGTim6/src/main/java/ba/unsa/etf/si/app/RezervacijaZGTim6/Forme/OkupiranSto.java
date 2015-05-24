@@ -16,13 +16,21 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.swing.JButton;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 import com.toedter.calendar.JDateChooser;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
@@ -41,6 +49,8 @@ public class OkupiranSto{
     private int minute;
     JLabel lbldh= new JLabel();
     private Rezervacija clickedReservation;
+    JLabel label = new JLabel();
+    JLabel lblKlijentKlijentic = new JLabel();
     
 	
 
@@ -79,13 +89,13 @@ public class OkupiranSto{
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblKlijentKlijentic = new JLabel("Klijent Klijentic");
+	
 		lblKlijentKlijentic.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblTermin = new JLabel("Zauzet od:");
 		lblTermin.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel label = new JLabel("15:00 12/12/2012");
+		
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel panel = new JPanel();
@@ -94,10 +104,11 @@ public class OkupiranSto{
 		JLabel lblDoIstekaRezervacije = new JLabel("Proteklo vremena:");
 		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
 
-		try {
+try {
 			
 			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
-			
+           ArrayList<Gost> gosti= handler.DajGoste();
+           Gost gost =null;
 			
 			for(Iterator j= rezervacije.iterator(); j.hasNext();)
 			{
@@ -105,47 +116,77 @@ public class OkupiranSto{
 				if(r.getIdStola()==clickedTable.getID())
 				{
 					clickedReservation=r;
-				/*	Calendar currentTime= Calendar.getInstance();
-					Calendar databaseTime= Calendar.getInstance();
-			     		
-					Time t = r.getVrijemeRezervacije();
-					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-					//System.out.println("Vrijeme t: "+t.getHours() +"h, "+ t.getMinutes()+"m");
-					
-					Date d = new Date();
-				    Date d1 = r.getDatumRezervacije();
-				    //System.out.println("Vrijeme d1: "+ d1.getHours()+"h, "+d1.getMinutes()+"m.");
-				    
-				    
-				    databaseTime.setTime(d1);
-				    databaseTime.set(Calendar.HOUR_OF_DAY,t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-				    databaseTime.set(Calendar.MINUTE,t.getMinutes());
-				    
-				    System.out.println("Baza vrijeme: "+ databaseTime.HOUR_OF_DAY+" sati, "+ databaseTime.MINUTE+"minuta");
-				    
-				  //  System.out.println("Vrijeme u bazi : sati: "+t.getHours()+", minute: "+t.getMinutes());
-					System.out.println("Trenutno vrijeme: sati: "+d.getHours()+", minute: "+d.getMinutes());
-					
-					Date d3= new Date();
-					d3.setTime(databaseTime.getTimeInMillis()-d.getTime());
-					
-					Calendar differenceTime = Calendar.getInstance();
-					differenceTime.setTime(d3);
-					
-				    System.out.println("Do isteka rezervacije "+ (d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+d3.getMinutes()+"m.");			
-				    lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
-					lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
-				    
-				  */  
 				}
+				}
+			
+			if(clickedReservation!=null)
+			{
+				for(Iterator j= gosti.iterator(); j.hasNext();)
+				{
+					Gost r =(Gost)j.next();
+					if(clickedReservation.getIdGosta()==r.getID())
+					{
+						gost= r;
+					}
+					}
 			}
+			
+					if(clickedReservation!=null && gost!=null)
+					{
+					Date date1= new java.util.Date(clickedReservation.getDatumRezervacije().getTime());
+					Time time1=clickedReservation.getVrijemeRezervacije();
+					time1.setHours(time1.getHours()+clickedReservation.getTrajanjeRezervacijeMinute()/60);
+					
+                    String myDate1= date1+" "+time1;
+                   
+					java.util.Date utilDate = new java.util.Date();
+					
+					java.util.Date utilDate1 =new java.util.Date();
+					utilDate1.setYear(clickedReservation.getDatumRezervacije().getYear());
+					utilDate1.setMonth(clickedReservation.getDatumRezervacije().getMonth());
+					utilDate1.setHours(time1.getHours());
+					utilDate1.setMinutes(time1.getMinutes());
+				    utilDate1.setDate(clickedReservation.getDatumRezervacije().getDate());
+					
+					DateTime dateTimeNow = new DateTime(utilDate); 
+					DateTime dateTimeDatabase = new DateTime(utilDate1);
+					System.out.println("Trenutno: "+dateTimeNow.toString());
+					System.out.println("Iz baze: "+dateTimeDatabase.toString());
+					
+					String datum = dateTimeDatabase.getDayOfMonth()+". "+dateTimeDatabase.getMonthOfYear()+". "+dateTimeDatabase.getYear()+" "+clickedReservation.getVrijemeRezervacije();
+					
+					label= new JLabel(datum);
+					
+					Period p= new Period(dateTimeNow,dateTimeDatabase);
+					PeriodFormatter daysHoursMinutes = new PeriodFormatterBuilder()
+				    .appendDays()
+				    .appendSuffix(" dan", " dana")
+				    .appendSeparator(" , ")
+				    .appendHours()
+				    .appendSuffix(" sati"," sati")
+				    .appendSeparator(" i ")
+				    .appendMinutes()
+				    .appendSuffix(" minute", " minuta")
+				    .appendSeparator(" i ")
+				    .appendSeconds()
+				    .appendSuffix(" sekundi", " sekundi")
+				    .toFormatter();
+					
+					System.out.println("Do isteka rezervacije "+daysHoursMinutes.print(p));	
+					
+					if(dateTimeDatabase.isBefore(dateTimeNow)) lbldh = new JLabel("Rezervacija istekla");
+					else
+					lbldh = new JLabel(daysHoursMinutes.print(p));
+					lblKlijentKlijentic=new JLabel(gost.getIme()+" "+gost.getPrezime());
+					}
+				
+			
 			
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 		
 		
 		JButton btnOtkaiReyervaciju = new JButton("Oslobo\u0111en sto");
@@ -223,7 +264,7 @@ public class OkupiranSto{
 					.addContainerGap(54, Short.MAX_VALUE))
 		);
 		
-		JLabel lbldh = new JLabel("1d : 12h : 30m : 45s");
+		
 		lbldh.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

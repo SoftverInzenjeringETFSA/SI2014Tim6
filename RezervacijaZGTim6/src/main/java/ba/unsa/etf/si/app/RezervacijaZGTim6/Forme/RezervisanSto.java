@@ -34,6 +34,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import com.toedter.calendar.JDateChooser;
 
 import freemarker.core.ParseException;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
@@ -51,6 +52,8 @@ public class RezervisanSto {
     private int minute;
     JLabel lbldh= new JLabel();
     private Rezervacija clickedReservation;
+    JLabel label = new JLabel();
+    JLabel lblKlijentKlijentic = new JLabel();
     
     
     
@@ -101,13 +104,13 @@ public class RezervisanSto {
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblKlijentKlijentic = new JLabel("Klijent Klijentic");
+		
 		lblKlijentKlijentic.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblTermin = new JLabel("Termin:");
 		lblTermin.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel label = new JLabel("15:00 12/12/2012");
+		 
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel panel = new JPanel();
@@ -118,7 +121,8 @@ public class RezervisanSto {
 		try {
 			
 			ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
-
+           ArrayList<Gost> gosti= handler.DajGoste();
+           Gost gost =null;
 			
 			for(Iterator j= rezervacije.iterator(); j.hasNext();)
 			{
@@ -126,83 +130,71 @@ public class RezervisanSto {
 				if(r.getIdStola()==clickedTable.getID())
 				{
 					clickedReservation=r;
-					//Time t = r.getVrijemeRezervacije();
-					//t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-					
-					//System.out.println("Vrijeme t: "+ t.getHours()+"h, "+t.getMinutes()+"m.");
-					
-				   /* Calendar currentTime= Calendar.getInstance();
-					Calendar databaseTime= Calendar.getInstance();
-			     		
-					Time t = r.getVrijemeRezervacije();
-					t.setHours(t.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-					
-					System.out.println("Vrijeme t: "+ t.getHours()+"h, "+t.getMinutes()+"m.");
-					
-				    Date d1 = r.getDatumRezervacije();
-				    Calendar databaseDate = Calendar.getInstance();
-				    databaseDate.setTime(d1);
-				    databaseTime.setTime(t);
-				    
-				    databaseDate.set(Calendar.HOUR_OF_DAY, databaseTime.get(Calendar.HOUR_OF_DAY));
-				    databaseDate.set(Calendar.MINUTE, databaseTime.get(Calendar.MINUTE));
-				    
-				    
-				    System.out.println("Baza vrijeme: "+ databaseDate.HOUR_OF_DAY+" sati, "+ databaseDate.MINUTE+" minuta");
-				    
-					System.out.println("Trenutno vrijeme: sati: "+currentTime.HOUR_OF_DAY+", minute: "+currentTime.MINUTE);
-					*/
-					Date date = new Date(System.currentTimeMillis()); // Prints 2013-03-08
-					Time time = new Time(System.currentTimeMillis()); // Prints 15:40:33
-                    
-					Date date1= new java.util.Date(r.getDatumRezervacije().getTime());
-					Time time1=r.getVrijemeRezervacije();
-					time1.setHours(time1.getHours()+r.getTrajanjeRezervacijeMinute()/60);
-					
-					String myDate = date + " " + time;
-					
+				}
+				}
+			
+			if(clickedReservation!=null)
+			{
+				for(Iterator j= gosti.iterator(); j.hasNext();)
+				{
+					Gost r =(Gost)j.next();
+					if(clickedReservation.getIdGosta()==r.getID())
+					{
+						gost= r;
+					}
+					}
+			}
+			
+					if(clickedReservation!=null && gost!=null)
+					{
+					Date date1= new java.util.Date(clickedReservation.getDatumRezervacije().getTime());
+					Time time1=clickedReservation.getVrijemeRezervacije();
+					time1.setHours(time1.getHours()+clickedReservation.getTrajanjeRezervacijeMinute()/60);
 					
                     String myDate1= date1+" "+time1;
-                    System.out.println(myDate + " trenutno");
-                    System.out.println(myDate1 + " baza");
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                   
 					java.util.Date utilDate = new java.util.Date();
-					//java.util.Date utilDate1 = new java.util.Date(r.getDatumRezervacije().getTime());
-					java.util.Date utilDate1 = new java.util.Date();
-					//utilDate1.setHours(r.getVrijemeRezervacije().getHours()+2);
-					//utilDate1.setMinutes(r.getVrijemeRezervacije().getMinutes());
-					try {
-					    utilDate = sdf.parse(myDate); 
-					    utilDate1 = sdf.parse(myDate1); 
-					    
-					} catch (Exception pe) {
-					   // TODO something.
-					}
-                      Date d= new Date();
-					DateTime dateTimeNow = new DateTime(d); 
+					
+					java.util.Date utilDate1 =new java.util.Date();
+					utilDate1.setYear(clickedReservation.getDatumRezervacije().getYear());
+					utilDate1.setMonth(clickedReservation.getDatumRezervacije().getMonth());
+					utilDate1.setHours(time1.getHours());
+					utilDate1.setMinutes(time1.getMinutes());
+				    utilDate1.setDate(clickedReservation.getDatumRezervacije().getDate());
+					
+					DateTime dateTimeNow = new DateTime(utilDate); 
 					DateTime dateTimeDatabase = new DateTime(utilDate1);
+					System.out.println("Trenutno: "+dateTimeNow.toString());
 					System.out.println("Iz baze: "+dateTimeDatabase.toString());
+					
+					String datum = dateTimeDatabase.getDayOfMonth()+". "+dateTimeDatabase.getMonthOfYear()+". "+dateTimeDatabase.getYear()+" "+clickedReservation.getVrijemeRezervacije();
+					
+					label= new JLabel(datum);
+					
 					Period p= new Period(dateTimeNow,dateTimeDatabase);
 					PeriodFormatter daysHoursMinutes = new PeriodFormatterBuilder()
 				    .appendDays()
-				    .appendSuffix(" day", " dana")
+				    .appendSuffix(" dan", " dana")
+				    .appendSeparator(" , ")
+				    .appendHours()
+				    .appendSuffix(" sati"," sati")
 				    .appendSeparator(" i ")
 				    .appendMinutes()
 				    .appendSuffix(" minute", " minuta")
 				    .appendSeparator(" i ")
 				    .appendSeconds()
-				    .appendSuffix(" second", " sekundi")
+				    .appendSuffix(" sekundi", " sekundi")
 				    .toFormatter();
 					
-					System.out.println("Do isteka rezervacije "+daysHoursMinutes.print(p.normalizedStandard()));			
-					   
-				   // System.out.println("Do isteka rezervacije "+ (d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+d3.getMinutes()+"m.");			
-				   // lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: " +(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+"h, "+ d3.getMinutes()+"m.");
-					//lbldh= new JLabel(""+d3.getDay()+" dana, "+(d3.getHours()-r.getTrajanjeRezervacijeMinute()/60)+" sati, "+d3.getMinutes()+" minuta.");
-				    
-				   
-				}
-			}
+					System.out.println("Do isteka rezervacije "+daysHoursMinutes.print(p));	
+					
+					if(dateTimeDatabase.isBefore(dateTimeNow)) lbldh = new JLabel("Rezervacija istekla");
+					else
+					lbldh = new JLabel(daysHoursMinutes.print(p));
+					lblKlijentKlijentic=new JLabel(gost.getIme()+" "+gost.getPrezime());
+					}
+				
+			
 			
 			
 		} catch (Exception e1) {
@@ -272,21 +264,9 @@ public class RezervisanSto {
 		
 		GroupLayout groupLayout = new GroupLayout(getRezervisanSto().getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblTermin)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblKlijent)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblKlijentKlijentic)))
-					.addContainerGap(218, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(123, Short.MAX_VALUE)
+					.addContainerGap(88, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblDoIstekaRezervacije)
@@ -300,6 +280,16 @@ public class RezervisanSto {
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(118))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblTermin)
+						.addComponent(lblKlijent))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblKlijentKlijentic)
+						.addComponent(label, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -309,17 +299,18 @@ public class RezervisanSto {
 						.addComponent(lblKlijent)
 						.addComponent(lblKlijentKlijentic))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTermin, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label))
-					.addGap(34)
-					.addComponent(lblDoIstekaRezervacije)
-					.addGap(11)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnOtkaiReyervaciju)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnOkupiranStol, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+							.addGap(34)
+							.addComponent(lblDoIstekaRezervacije)
+							.addGap(11)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnOtkaiReyervaciju)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnOkupiranStol, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblTermin, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		
