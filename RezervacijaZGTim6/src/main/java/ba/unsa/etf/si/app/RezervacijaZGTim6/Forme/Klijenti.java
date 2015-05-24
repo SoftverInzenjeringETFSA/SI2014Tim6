@@ -50,7 +50,7 @@ public class Klijenti {
 	private JTable table;
 	private Restoran handler;
 	private TableRowSorter<TableModel> rowSorter;
-	private DodavanjeKlijentaRadnik k;
+	private DodavanjeKlijentaSef k;
 
 	/**
 	 * Launch the application.
@@ -189,9 +189,9 @@ public class Klijenti {
 				catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				k = new DodavanjeKlijentaRadnik(g, handler, frame);
+				k = new DodavanjeKlijentaSef(g, handler, frame);
 				System.out.println("Stigo!");
-				k.getDodavanjeKlijentaRadnik().setVisible(true);
+				k.getDodavanjeKlijentaSef().setVisible(true);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getKlijenti().getContentPane());
