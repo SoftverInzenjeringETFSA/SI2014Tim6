@@ -49,6 +49,7 @@ public class DodavanjeKorisnika {
 	
 	private Gost gost;
 	private Restoran handler;
+	private long ID;
 	/**
 	 * Launch the application.
 	 */
@@ -77,6 +78,13 @@ public class DodavanjeKorisnika {
 		initialize();
 		
 	}
+	
+	public DodavanjeKorisnika(Restoran r, long id) {
+		handler = r;
+		this.ID = id;
+		initialize();
+	}
+	
 	public DodavanjeKorisnika(Gost g, Restoran r){
 		izmjenaGosta=true;
 		gost=g;
@@ -143,7 +151,7 @@ public class DodavanjeKorisnika {
 					lblPrezime.setText("Popunite polje!");
 					pnlPrezime.setVisible(true);
 					validna_forma = false;
-				} else if (!ValidacijaImePrezime(textField_1.getText())) {
+				} else if (!ValidacijaPassword(textField_1.getText())) {
 					lblPrezime.setText("Nedozvoljen format!");
 					pnlPrezime.setVisible(true);
 					validna_forma = false;
@@ -157,27 +165,12 @@ public class DodavanjeKorisnika {
 				
 				try {
 					if(validna_forma) {
-						if(izmjenaGosta){
-							try {
-								Gost g;
-								ArrayList<Gost> gosti= handler.DajGoste();
-								
-								for(Iterator j= gosti.iterator(); j.hasNext();)
-								{
-									g = (Gost)j.next();
-									if(g.getID()==gost.getID())
-									{
-										g.setIme(textField.getText());
-										g.setPrezime(textField_1.getText());
-										gost.updateGosta(g.getID(), g);
-									}
-								}
-								
-								
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
+						try {
+							handler.DodajKorisnika(ID, textField.getText(), textField_1.getText());
+						} catch (Exception e1) {
+							e1.printStackTrace();
 						}
+						
 					}
 					else{
 						System.out.println("nisam dodo!");
@@ -273,5 +266,11 @@ public class DodavanjeKorisnika {
 		if (user.length() < 3) return false;
         return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
     }
+	
+	public Boolean ValidacijaPassword(String pw)
+	{
+		if(pw.length() < 5) return false;
+		return pw.matches("[0-9]+[A-Z]+[a-z]+");
+	}
 	
 }

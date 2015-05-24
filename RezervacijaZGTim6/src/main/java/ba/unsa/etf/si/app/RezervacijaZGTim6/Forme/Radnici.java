@@ -103,7 +103,7 @@ public class Radnici {
 		JButton btnDodaj = new JButton("Dodaj radnika");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//getRadnici().dispose();
+				getRadnici().dispose();
 				RadniciDodavanje f = new RadniciDodavanje();
 				f.getRadniciDodavanje().setVisible(true);
 			}
@@ -241,7 +241,7 @@ public class Radnici {
 		JButton btnDodajKorisnika = new JButton("Dodaj korisnika");
 		btnDodajKorisnika.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DodavanjeKorisnika dk = new DodavanjeKorisnika(handler);
+				DodavanjeKorisnika dk = new DodavanjeKorisnika(handler, Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString()));
 				dk.getDodavanjeKorisnika().setVisible(true);
 			}
 		});
@@ -327,9 +327,8 @@ public class Radnici {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen window = new LoginScreen(handler);
-				window.getFrmPrijavaKorisnika().setVisible(true);
-
+				LoginScreen f = new LoginScreen();
+				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));
