@@ -112,10 +112,10 @@ public class Izvjestaji {
 		JLabel lblGenerisatiPo = new JLabel("Generisati po:");
 		lblGenerisatiPo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JRadioButton rdbtnSvimKlijentima = new JRadioButton("Klijentima");
+		final JRadioButton rdbtnSvimKlijentima = new JRadioButton("Klijentima");
 		rdbtnSvimKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
+		final JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
 		rdbtnVipKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblZaMjesec = new JLabel("Za period:");
@@ -148,7 +148,7 @@ public class Izvjestaji {
 		JButton btnGenerisi = new JButton("Generiši");
 		btnGenerisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean validna_forma = true;
+				boolean validna_forma = true, radioButton_checked = true;
 			    //Date date = new Date();
 			    final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			    Calendar now = Calendar.getInstance();
@@ -318,7 +318,10 @@ public class Izvjestaji {
 					}
 				}
 				
-				if (validna_forma)
+				if (!(rdbtnSvimKlijentima.isSelected() || rdbtnVipKlijentima.isSelected()))
+					radioButton_checked = false;
+				
+				if (validna_forma && radioButton_checked)
 					System.out.println("Validna forma");
 				else
 					System.out.println("Nevalidna forma");
