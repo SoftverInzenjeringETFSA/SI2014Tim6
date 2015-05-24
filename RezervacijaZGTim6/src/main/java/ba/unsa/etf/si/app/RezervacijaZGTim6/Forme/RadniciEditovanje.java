@@ -113,7 +113,7 @@ public class RadniciEditovanje {
 		getRadniciEditovanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
-		JLabel lblNewLabel = new JLabel("Ažuriranje klijenata");
+		JLabel lblNewLabel = new JLabel("Ažuriranje radnika");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
 		textField = new JTextField();
