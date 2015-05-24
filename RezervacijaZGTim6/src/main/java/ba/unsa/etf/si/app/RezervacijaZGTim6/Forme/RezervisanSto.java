@@ -149,9 +149,13 @@ public class RezervisanSto {
 					{
 					Date date1= new java.util.Date(clickedReservation.getDatumRezervacije().getTime());
 					Time time1=clickedReservation.getVrijemeRezervacije();
+					
+					 String myTime= time1.toString();
+					 System.out.println(myTime);
+					
 					time1.setHours(time1.getHours()+clickedReservation.getTrajanjeRezervacijeMinute()/60);
 					
-                    String myDate1= date1+" "+time1;
+                   
                    
 					java.util.Date utilDate = new java.util.Date();
 					
@@ -167,7 +171,7 @@ public class RezervisanSto {
 					System.out.println("Trenutno: "+dateTimeNow.toString());
 					System.out.println("Iz baze: "+dateTimeDatabase.toString());
 					
-					String datum = dateTimeDatabase.getDayOfMonth()+". "+dateTimeDatabase.getMonthOfYear()+". "+dateTimeDatabase.getYear()+" "+clickedReservation.getVrijemeRezervacije();
+					String datum = dateTimeDatabase.getDayOfMonth()+". "+dateTimeDatabase.getMonthOfYear()+". "+dateTimeDatabase.getYear()+" "+myTime;
 					
 					label= new JLabel(datum);
 					

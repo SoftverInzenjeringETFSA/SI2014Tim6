@@ -135,10 +135,13 @@ try {
 					{
 					Date date1= new java.util.Date(clickedReservation.getDatumRezervacije().getTime());
 					Time time1=clickedReservation.getVrijemeRezervacije();
+					
+					String myTime= time1.toString();
+	                   
+					
 					time1.setHours(time1.getHours()+clickedReservation.getTrajanjeRezervacijeMinute()/60);
 					
-                    String myDate1= date1+" "+time1;
-                   
+                    
 					java.util.Date utilDate = new java.util.Date();
 					
 					java.util.Date utilDate1 =new java.util.Date();
@@ -153,7 +156,7 @@ try {
 					System.out.println("Trenutno: "+dateTimeNow.toString());
 					System.out.println("Iz baze: "+dateTimeDatabase.toString());
 					
-					String datum = dateTimeDatabase.getDayOfMonth()+". "+dateTimeDatabase.getMonthOfYear()+". "+dateTimeDatabase.getYear()+" "+clickedReservation.getVrijemeRezervacije();
+					String datum = dateTimeDatabase.getDayOfMonth()+". "+dateTimeDatabase.getMonthOfYear()+". "+dateTimeDatabase.getYear()+" "+myTime;
 					
 					label= new JLabel(datum);
 					

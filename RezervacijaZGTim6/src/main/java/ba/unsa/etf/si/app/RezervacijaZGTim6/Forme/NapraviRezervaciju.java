@@ -65,6 +65,8 @@ import com.toedter.components.JSpinField;
 import javax.swing.JSpinner;
 import javax.swing.JFormattedTextField;
 
+import org.joda.time.DateTime;
+
 
 public class NapraviRezervaciju {
 
@@ -190,7 +192,29 @@ public class NapraviRezervaciju {
 							else{
 								handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
 										sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
-								prikazStolovaButton.setBackground(Color.red);
+								
+								Date date1= new java.util.Date(sqldate.getTime());
+								Time time1=vrijeme;
+								time1.setHours(time1.getHours());
+								
+				                String myDate1= date1+" "+time1;
+				               
+								java.util.Date utilDate = new java.util.Date();
+								
+								java.util.Date utilDate1 =new java.util.Date();
+								utilDate1.setYear(sqldate.getYear());
+								utilDate1.setMonth(sqldate.getMonth());
+								utilDate1.setHours(time1.getHours());
+								utilDate1.setMinutes(time1.getMinutes());
+							    utilDate1.setDate(sqldate.getDate());
+								
+								DateTime dateTimeNow = new DateTime(utilDate); 
+								DateTime dateTimeDatabase = new DateTime(utilDate1);
+								
+								if(dateTimeDatabase.isBefore(dateTimeNow)) prikazStolovaButton.setBackground(Color.blue);
+								else prikazStolovaButton.setBackground(Color.red);
+								
+								
 								prikazStolovaPanel.revalidate();
 								prikazStolovaPanel.repaint();
 							}
