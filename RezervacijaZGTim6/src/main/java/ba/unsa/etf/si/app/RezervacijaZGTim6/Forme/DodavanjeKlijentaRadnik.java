@@ -91,7 +91,14 @@ public class DodavanjeKlijentaRadnik {
 	public DodavanjeKlijentaRadnik() {
 		initialize();
 	}
-	
+	/*
+		Konstruktor dodan zbog toga, da ako dolazimo sa 
+		NapraviRezervaciju forma, moramo mu proslijediti sve potrebne podatke
+		za pravljenje rezervacije, tako da kada budemo opet
+		instancirali objekat tipa NapraviRezervaciju
+		i kliknuli na showWindow mogli vratiti ove iste podatke
+		potrebni da bi se jedna rezervacija napravila
+	*/
 	public DodavanjeKlijentaRadnik(Restoran r, JFrame f, int tableNumber, JButton button, JPanel panel, 
 			JDateChooser date, Integer sati, Integer minute,Sto sto) {
 		
@@ -265,6 +272,11 @@ public class DodavanjeKlijentaRadnik {
 						}
 						else{
 							NapraviRezervaciju nr = new NapraviRezervaciju();
+							/*
+							 * Upravo mjesto gdje se vracaju oni podaci
+							 * iz konstruktora nazad u formu
+							 * NapraviRezervaciju
+							 */
 							nr.showWindow(handler, clickedTableNumber, prikazStolovaButton,
 									prikazStolovaPanel, date, hours, minutes, sto);
 						}
