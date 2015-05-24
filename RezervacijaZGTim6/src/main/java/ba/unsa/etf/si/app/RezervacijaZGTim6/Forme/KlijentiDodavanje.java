@@ -93,11 +93,8 @@ public class KlijentiDodavanje {
     private void initialize() {
         setKlijentiDodavanje(new JFrame());
         getKlijentiDodavanje().setResizable(false);
-        getKlijentiDodavanje().setBounds(100, 100, 624, 427);
+        getKlijentiDodavanje().setBounds(100, 100, 471, 342);
         getKlijentiDodavanje().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.LIGHT_GRAY);
         
         JLabel lblNewLabel = new JLabel("A\u017Euriranje / Dodavanje klijenta");
         lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
@@ -222,70 +219,65 @@ public class KlijentiDodavanje {
         
         GroupLayout groupLayout = new GroupLayout(getKlijentiDodavanje().getContentPane());
         groupLayout.setHorizontalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addGap(18)
-                            .addComponent(lblNewLabel))
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addGap(87)
-                            .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                .addComponent(lblIme)
-                                .addComponent(lblPrezime)
-                                .addComponent(lblUsername))
-                            .addGap(10)
-                            .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                .addGroup(groupLayout.createSequentialGroup()
-                                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                                        .addGroup(groupLayout.createSequentialGroup()
-                                            .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                                .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btnSpasi))
-                                            .addPreferredGap(ComponentPlacement.UNRELATED)
-                                            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                .addComponent(pnlTelefon, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                                .addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(groupLayout.createSequentialGroup()
-                                            .addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(ComponentPlacement.UNRELATED)
-                                            .addComponent(pnlIme, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(ComponentPlacement.RELATED))
-                                .addComponent(chckbxVipKlijent, Alignment.LEADING))
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGap(23))
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(90)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(lblIme)
+        						.addComponent(lblPrezime)
+        						.addComponent(lblUsername))
+        					.addGap(10)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        							.addGroup(groupLayout.createSequentialGroup()
+        								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(btnSpasi))
+        								.addPreferredGap(ComponentPlacement.UNRELATED)
+        								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        									.addComponent(pnlTelefon, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        									.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        							.addGroup(groupLayout.createSequentialGroup()
+        								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.UNRELATED)
+        								.addComponent(pnlIme, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+        						.addComponent(chckbxVipKlijent, Alignment.LEADING)))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(74)
+        					.addComponent(lblNewLabel)))
+        			.addContainerGap(97, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addComponent(panel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(22)
-                    .addComponent(lblNewLabel)
-                    .addGap(64)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-                        .addComponent(pnlIme, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.BASELINE)
-                            .addComponent(textField)
-                            .addComponent(lblIme)))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                        .addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                            .addComponent(textField_1)
-                            .addComponent(lblPrezime)))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                        .addComponent(pnlTelefon, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                            .addComponent(textField_2)
-                            .addComponent(lblUsername)))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addComponent(chckbxVipKlijent)
-                    .addGap(18)
-                    .addComponent(btnSpasi)
-                    .addContainerGap(131, Short.MAX_VALUE))
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lblNewLabel)
+        			.addGap(74)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(lblIme)))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(lblPrezime)))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(pnlTelefon, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(lblUsername)))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(chckbxVipKlijent)
+        			.addGap(18)
+        			.addComponent(btnSpasi)
+        			.addContainerGap(247, Short.MAX_VALUE))
         );
         
         lblTelefon_Validacija.setForeground(Color.RED);
@@ -299,56 +291,6 @@ public class KlijentiDodavanje {
         lblIme_Validacija.setForeground(Color.RED);
         pnlIme.add(lblIme_Validacija);
         pnlIme.setVisible(false);
-        panel.setLayout(null);
-        
-        JButton btnOdjava = new JButton("Odjavi se");
-        btnOdjava.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                LoginScreen f = new LoginScreen(handler);
-                f.getFrmPrijavaKorisnika().setVisible(true);
-            }
-        });
-        btnOdjava.setFont(new Font("Tahoma", Font.BOLD, 13));
-        btnOdjava.setBackground(UIManager.getColor("Button.background"));
-        btnOdjava.setBounds(10, 328, 119, 23);
-        panel.add(btnOdjava);
-        
-        JButton btnRadnici = new JButton("Radnici");
-        btnRadnici.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                frame.dispose();
-                Radnici f = new Radnici();
-                f.getRadnici().setVisible(true);
-            }
-        });
-        btnRadnici.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        btnRadnici.setBounds(0, 0, 139, 34);
-        panel.add(btnRadnici);
-        
-        JButton btnKlijenti = new JButton("Klijenti");
-        btnKlijenti.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                Klijenti f = new Klijenti();
-                f.getKlijenti().setVisible(true);
-            }
-        });
-        btnKlijenti.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        btnKlijenti.setBounds(0, 34, 139, 34);
-        panel.add(btnKlijenti);
-        
-        JButton btnIzvjestaji = new JButton("Izvještaji");
-        btnIzvjestaji.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                Izvjestaji f = new Izvjestaji();
-                f.getIzvjestaji().setVisible(true);
-            }
-        });
-        btnIzvjestaji.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        btnIzvjestaji.setBounds(0, 68, 139, 34);
-        panel.add(btnIzvjestaji);
         getKlijentiDodavanje().getContentPane().setLayout(groupLayout);
     }
 
