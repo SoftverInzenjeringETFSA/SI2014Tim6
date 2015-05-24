@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
@@ -121,12 +122,9 @@ public class NapraviRezervaciju {
 		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		//panel.setBackground(Color.LIGHT_GRAY);
-		// stavili smo default boju
-		
 		
 		if(clickedTableNumber==null)
-		 reservationText = new JLabel("Napravi rezervaciju");
+			reservationText = new JLabel("Napravi rezervaciju");
 		else
 			reservationText=new JLabel("Napravi rezervaciju za stol "+ clickedTableNumber);
 		
@@ -145,9 +143,7 @@ public class NapraviRezervaciju {
 		panel_1.setBackground(Color.WHITE);
 		
 		JPanel pnlButton = new JPanel();
-
 		JPanel pnlSpace = new JPanel();
-		
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -165,25 +161,28 @@ public class NapraviRezervaciju {
 				Integer trajanje = (Integer)spinner.getValue();
 				Long ms = date.getDate().getTime();
 				java.sql.Date sqldate = new java.sql.Date(ms);
+				Gost g = new Gost();
 				
 				try {
+					g.ocitajGosta(idGosta);
 					if(trajanje == 0) trajanje = 180;
 					if(idGosta != 0 && trajanje < 1440 && table.getSelectedRowCount() == 1){
-						handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
-						
-						prikazStolovaButton.setBackground(Color.red);
-						prikazStolovaPanel.revalidate();
-						prikazStolovaPanel.repaint();
+						if(!g.getVIP() && sto.getVIP()){
+							System.out.println("Obicni gost ne moze rezervisati VIP sto");
+						}
+						else{
+							handler.NapraviRezervaciju(idGosta, handler.getKorisnik().getID(), sto.getID(), 
+									sto.getKapacitet(), "REZERVISANO", sqldate, vrijeme, trajanje*60);
+							prikazStolovaButton.setBackground(Color.red);
+							prikazStolovaPanel.revalidate();
+							prikazStolovaPanel.repaint();
+						}
 					}
 				} catch (NumberFormatException e1) {
 					e1.printStackTrace();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
-				
-				
-				
 			}
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -238,8 +237,8 @@ public class NapraviRezervaciju {
 					.addComponent(btnDodajRezervaciju)
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
-		//RAD SA TABELOM I PRETRAGA KORISNIKA
 		
+		//RAD SA TABELOM I PRETRAGA KORISNIKA
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
 				"ID", "Ime", "Prezime", "Br. telefona", "VIP"
 			}, 0){
@@ -285,16 +284,12 @@ public class NapraviRezervaciju {
 		
 		JLabel lblIme = new JLabel("Pretraga: ");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		
-		
+			
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		
-		
+		JLabel lblNewLabel_1 = new JLabel("");		
 		
 		rowSorter = new TableRowSorter<TableModel>(table.getModel());
 		table.setRowSorter(rowSorter);
@@ -312,17 +307,9 @@ public class NapraviRezervaciju {
                     rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                 }
 			}
-		});
-		
-		
-		
-		
+		});	
 		//KRAJ RADA SA TABELOM I PRETRAGOM KORISNIKA
-		
-		
-		
-		
-		
+
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		GroupLayout button_panel = new GroupLayout(pnlButton);
 		GroupLayout space_panel = new GroupLayout(pnlSpace);
@@ -373,22 +360,15 @@ public class NapraviRezervaciju {
 				f.getFrmPrijavaKorisnika().setVisible(true);
 			}
 		});
-		
-		
 		getNapraviRezervaciju().getContentPane().setLayout(groupLayout);
-		
-		
 	}
 
 	public JFrame getNapraviRezervaciju() {
 		return frame;
 	}
-	
-	
 	public void setNapraviRezervaciju(JFrame frame) {
 		this.frame = frame;
 	}
-	
 	public void showWindow(Restoran r,int tableNumber,JButton button, JPanel panel,JDateChooser date, Integer sati,Integer minute,Sto sto)
 	{
 		System.out.println("Stol "+tableNumber);
@@ -411,6 +391,5 @@ public class NapraviRezervaciju {
 				}
 			}
 		});
-	
 	}
 }

@@ -54,6 +54,8 @@ public class PregledKlijenataRadnik {
 	private Restoran handler;
 	private DodavanjeKlijentaRadnik k;
 	private TableRowSorter<TableModel> rowSorter;
+	private DefaultTableModel tableModel;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -88,9 +90,6 @@ public class PregledKlijenataRadnik {
 		getPregledKlijenataRadnik().setBounds(100, 100, 473, 390);
 		getPregledKlijenataRadnik().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		//JPanel panel = new JPanel();
-		//panel.setBackground(Color.LIGHT_GRAY);
-		
 		JLabel lblNewLabel = new JLabel("Pregled klijenata");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
@@ -109,11 +108,9 @@ public class PregledKlijenataRadnik {
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+		JLabel lblNewLabel_1 = new JLabel("");	
 		
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		
-		DefaultTableModel tableModel = new DefaultTableModel(new String[] {
+		tableModel = new DefaultTableModel(new String[] {
 				"ID", "Ime", "Prezime"
 			}, 0){
 			private static final long serialVersionUID = 1L;
@@ -126,7 +123,6 @@ public class PregledKlijenataRadnik {
 		};
 		ArrayList<Gost> gosti;
 		gosti=handler.DajGoste();
-		
 		
 		for (Iterator iterator1 = gosti.iterator(); iterator1.hasNext();)
         {
@@ -144,16 +140,15 @@ public class PregledKlijenataRadnik {
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(180, 180, 180), null, SystemColor.activeCaptionBorder, null));
 		table.setBackground(SystemColor.inactiveCaptionBorder);
 		table.setForeground(Color.BLACK);
-		
-		
-		
+	
 		table.setModel(tableModel);
-
-		JScrollPane scrollPane = new JScrollPane(table);
+		
+		scrollPane = new JScrollPane(table);
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
 		rowSorter = new TableRowSorter<TableModel>(table.getModel());
 		table.setRowSorter(rowSorter);
+				
 		
 		JButton btnPretrazi = new JButton("Pretraži");
 		btnPretrazi.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -170,38 +165,10 @@ public class PregledKlijenataRadnik {
 			}
 		});
 		
-		/*int rowIndex = 20;
-		int columnIndex = 0;
-		boolean includeSpacing = true;
-		 
-		Rectangle cellRect = table.getCellRect(rowIndex, columnIndex, includeSpacing);
-		 
-		table.scrollRectToVisible(cellRect);*/
-		
 		JButton btnIzmjeni = new JButton("Izmijeni");
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnIzmjeni.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
-			
-				System.out.println(idGosta);
-				Gost g = new Gost();
-				try
-				{
-					g.ocitajGosta(idGosta);
-				}
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				k = new DodavanjeKlijentaRadnik(g, handler);
-				System.out.println("Stigo!");
-				k.getDodavanjeKlijentaRadnik().setVisible(true);
-			}
-		});
 		
 		
-		//JCheckBox chckbxPregledKlijenataRadnik = new JCheckBox("VIP klijenti");
-		//chckbxPregledKlijenataRadnik.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(getPregledKlijenataRadnik().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -213,21 +180,22 @@ public class PregledKlijenataRadnik {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(155)
 									.addComponent(lblNewLabel_1))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblIme)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblNewLabel))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btnPretrazi))
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432))
-							.addContainerGap(14, Short.MAX_VALUE))
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+											.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(lblIme)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+											.addComponent(lblNewLabel))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(btnPretrazi))
+									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 432, 432)))
+							.addContainerGap(17, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(9)
 							.addComponent(btnIzmjeni)
-							.addPreferredGap(ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
 							.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
 							.addGap(26))))
 		);
@@ -251,12 +219,33 @@ public class PregledKlijenataRadnik {
 						.addComponent(btnDodaj))
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
-		//panel.setLayout(null);
 		
-		JButton btnradnici = new JButton("Radnici");
 		getPregledKlijenataRadnik().getContentPane().setLayout(groupLayout);
+		
+		btnIzmjeni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+			
+				System.out.println(idGosta);
+				Gost g = new Gost();
+				try
+				{
+					g.ocitajGosta(idGosta);
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				k = new DodavanjeKlijentaRadnik(g, handler, frame);
+				System.out.println("Stigo!");
+				k.getDodavanjeKlijentaRadnik().setVisible(true);
+			}
+		});
 	}
-
+	
+	public DefaultTableModel getModel(){
+		return tableModel;
+	}
+	
 	public JFrame getPregledKlijenataRadnik() {
 		return frame;
 	}
@@ -264,7 +253,11 @@ public class PregledKlijenataRadnik {
 	public void setPregledKlijenataRadnik(JFrame frame) {
 		this.frame = frame;
 	}
-
+	
+	public void loadClients(){
+		
+	}
+	
 	public void showWindow(Restoran handler) {
 		
 		this.handler=handler;
@@ -280,5 +273,4 @@ public class PregledKlijenataRadnik {
 			}
 		});
 	}
-
 }

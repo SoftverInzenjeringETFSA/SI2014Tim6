@@ -84,13 +84,13 @@ public class Gost implements Serializable
 	}
 	public void ocitajGosta(long id) throws Exception 
 	{
-		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Gost temp = (Gost) session.get(Gost.class, id);
 		ID = temp.ID;
 		Ime = temp.Ime;
 		Prezime = temp.Prezime; 
 		BrojTelefona = temp.BrojTelefona;
+		VIP = temp.VIP;
 		session.close();
 	}
 	
