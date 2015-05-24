@@ -46,15 +46,6 @@ import javax.swing.JTextArea;
 
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
 
-
-
-
-
-
-
-
-
-
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -94,6 +85,11 @@ public class Izvjestaji {
 	 * Create the application.
 	 */
 	public Izvjestaji() {
+		initialize();
+	}
+	
+	public Izvjestaji(Restoran r) {
+		handler = r;
 		initialize();
 	}
 
@@ -445,7 +441,7 @@ public class Izvjestaji {
 		btnRadnici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Radnici f = new Radnici();
+				Radnici f = new Radnici(handler);
 				f.getRadnici().setVisible(true);
 			}
 		});
@@ -457,7 +453,7 @@ public class Izvjestaji {
 		btnKlijenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Klijenti f = new Klijenti();
+				Klijenti f = new Klijenti(handler);
 				f.getKlijenti().setVisible(true);
 			}
 		});
@@ -466,6 +462,7 @@ public class Izvjestaji {
 		panel.add(btnKlijenti);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.setEnabled(false);
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

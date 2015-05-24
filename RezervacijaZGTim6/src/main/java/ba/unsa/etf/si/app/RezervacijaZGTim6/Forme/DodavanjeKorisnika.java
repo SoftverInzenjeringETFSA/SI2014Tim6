@@ -73,8 +73,9 @@ public class DodavanjeKorisnika {
 	}
 	
 	public DodavanjeKorisnika(Restoran r) {
-		initialize();
 		handler = r;
+		initialize();
+		
 	}
 	public DodavanjeKorisnika(Gost g, Restoran r){
 		izmjenaGosta=true;

@@ -337,6 +337,7 @@ public class Radnici {
 		panel.add(btnOdjava);
 		
 		JButton btnRadnici = new JButton("Radnici");
+		btnRadnici.setEnabled(false);
 		btnRadnici.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRadnici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -362,7 +363,7 @@ public class Radnici {
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Izvjestaji f = new Izvjestaji();
+				Izvjestaji f = new Izvjestaji(handler);
 				f.getIzvjestaji().setVisible(true);
 			}
 		});
