@@ -103,7 +103,7 @@ public class Radnici {
 		JButton btnDodaj = new JButton("Dodaj radnika");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRadnici().dispose();
+				//getRadnici().dispose();
 				RadniciDodavanje f = new RadniciDodavanje();
 				f.getRadniciDodavanje().setVisible(true);
 			}
