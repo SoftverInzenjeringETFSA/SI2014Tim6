@@ -101,7 +101,7 @@ public class OkupiranSto{
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.ORANGE);
 		
-		JLabel lblDoIstekaRezervacije = new JLabel("Proteklo vremena:");
+		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije:");
 		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));
 
 try {

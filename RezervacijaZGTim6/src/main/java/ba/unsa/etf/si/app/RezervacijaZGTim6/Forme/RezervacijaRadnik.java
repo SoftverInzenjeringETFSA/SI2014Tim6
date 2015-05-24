@@ -44,6 +44,7 @@ import javax.swing.UIManager;
 import java.awt.List;
 import java.io.File;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -134,6 +135,7 @@ public class RezervacijaRadnik {
 		 dateChooser = new JDateChooser();
 		 dateChooser.getJCalendar().setMinSelectableDate(new Date());
 		 dateChooser.setDate(new Date());
+		 dateChooser.getDateEditor().setEnabled(false);
 		 spinner = new JSpinner( new SpinnerDateModel() );
 		 spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		 JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
@@ -244,10 +246,6 @@ public class RezervacijaRadnik {
 	
 	public void loadButtons()
 	{
-		// Ideja je da se ovdje pozove klasa koja ce iz baze dobaviti stolove kao listu klasa
-		//Dalje se na osnovu broja stolova i njihovog stanja dinamicki kreiraju buttoni, text buttona
-		// je redni broj stola, a boja se postavlja ovisno od trenutnog stanja stola
-		//Ispod je hardcoded primjer
 		
 		Date d =(Date)spinner.getValue();
 		rezervacije = new ArrayList<Rezervacija>();
@@ -305,12 +303,33 @@ public class RezervacijaRadnik {
 			else if(details.equals("REZERVISANO")) b.setBackground(Color.red); // stol je rezervisan
 			else b.setBackground(Color.orange); // stol je okupiran
 			
+			
+			
+			URL url = getClass().getResource("Slike/noSmoking.png");
+			System.out.println(url);
+			
 			String html =
 		            "<html><body>" +
-		            "<p>Broj mjesta: " + s.getKapacitet() + "</p>";
+			       "<img src='"+ url + "' width='180' height='120'>"+
+		            " <p>Broj mjesta: " + s.getKapacitet() + "</p>";
+			if(s.getVIP())
+			{
+				html =
+			            "<html><body>" +
+				       "<img src='"+ getClass().getResource("Slike/VIPSto.png") + "' width='180' height='120'>"+
+			            " <p>Broj mjesta: " + s.getKapacitet() + "</p>";
+				b.setToolTipText(html +"<p> Stol za pušače </p> </body> </html>" );
+			}
 		            	
-			if(s.getZaPusace())
+			else if(s.getZaPusace() && !s.getVIP())
+			{
+				html =
+			            "<html><body>" +
+				       "<img src='"+ getClass().getResource("Slike/stol.png") + "' width='180' height='120'>"+
+			            " <p>Broj mjesta: " + s.getKapacitet() + "</p>";
 			b.setToolTipText(html +"<p> Stol za pušače </p> </body> </html>" );
+			
+			}
 			else 
 				b.setToolTipText(html + "<p>Stol za nepušače </p> </body> </html>");
 			b.addActionListener(new ActionListener()

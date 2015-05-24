@@ -142,6 +142,7 @@ public class Restoran
            od_r = (java.util.Date)datum.clone();
            od_r.setHours(r.getVrijemeRezervacije().getHours());
            od_r.setMinutes(r.getVrijemeRezervacije().getMinutes());
+           od_r.setSeconds(1);
            
            r_do = (java.util.Date)datum.clone();
            r_do.setHours(r.getVrijemeRezervacije().getHours() + r.getTrajanjeRezervacijeMinute() / 60);
