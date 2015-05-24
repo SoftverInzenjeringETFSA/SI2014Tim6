@@ -188,7 +188,7 @@ public class RadniciEditovanje {
 				else { 
 					lblIme_Validacija.setText("");
 					pnlIme.setVisible(false);
-					validna_forma = true;
+				//	validna_forma = true;
 				}
 				
 				if (textField_1.getText().isEmpty()) {
@@ -203,7 +203,7 @@ public class RadniciEditovanje {
 				else { 
 					lblPrezime_Validacija.setText("");
 					pnlPrezime.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				if(textField_2.getText().isEmpty()) {
@@ -213,7 +213,7 @@ public class RadniciEditovanje {
 				} else {
 					lblUsr.setText("");
 					pnlUsername.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				if(textField_3.getText().isEmpty()) {
@@ -223,7 +223,7 @@ public class RadniciEditovanje {
 				} else {
 					lblPsw.setText("");
 					pnlPassword.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 				
 				if(textField_4.getText().isEmpty()) {
@@ -237,7 +237,7 @@ public class RadniciEditovanje {
 				} else {
 					lblPsw.setText("");
 					pnlPassword.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
 				}
 								
 				try {
