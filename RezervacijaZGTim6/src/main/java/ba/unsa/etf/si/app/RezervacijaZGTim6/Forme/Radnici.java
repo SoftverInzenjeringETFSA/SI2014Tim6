@@ -103,7 +103,7 @@ public class Radnici {
 		JButton btnDodaj = new JButton("Dodaj radnika");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRadnici().dispose();
+				//getRadnici().dispose();
 				RadniciDodavanje f = new RadniciDodavanje();
 				f.getRadniciDodavanje().setVisible(true);
 			}
@@ -327,8 +327,9 @@ public class Radnici {
 		btnOdjava.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				LoginScreen f = new LoginScreen();
-				f.getFrmPrijavaKorisnika().setVisible(true);
+				LoginScreen window = new LoginScreen(handler);
+				window.getFrmPrijavaKorisnika().setVisible(true);
+
 			}
 		});
 		btnOdjava.setBackground(UIManager.getColor("Button.background"));

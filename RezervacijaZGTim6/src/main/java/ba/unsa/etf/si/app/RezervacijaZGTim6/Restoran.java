@@ -105,6 +105,7 @@ public class Restoran
 	{
 		r.azurirajRadnika();
 	}
+
 	
 	public void NapraviRezervaciju(long idgosta, long idradnika, long idstola ,Integer brojgostiju, String status, Date datum, Time vrijeme, Integer trajanje) throws Exception
 	{
