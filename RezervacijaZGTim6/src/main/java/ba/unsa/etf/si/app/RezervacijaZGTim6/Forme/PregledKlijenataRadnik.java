@@ -103,7 +103,7 @@ public class PregledKlijenataRadnik {
 		JButton btnDodaj = new JButton("Dodaj novog klijenta");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler, frame);
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
 				f.setParent(frame);
 				frame.setEnabled(false);
@@ -120,7 +120,7 @@ public class PregledKlijenataRadnik {
 		JLabel lblNewLabel_1 = new JLabel("");	
 		
 		tableModel = new DefaultTableModel(new String[] {
-				"ID", "Ime", "Prezime", "Br Telefona"
+				"ID", "Ime", "Prezime", "Br Telefona", "VIP"
 			}, 0){
 			private static final long serialVersionUID = 1L;
 
@@ -139,9 +139,13 @@ public class PregledKlijenataRadnik {
            String Ime = g.getIme();
            String Prezime = g.getPrezime();
            String brTel = g.getBrojTelefona();
+           String Vip;
+           boolean IsVip = g.getVIP();
+           if (IsVip) Vip="DA";
+           else Vip="NE";
            long Id = g.getID();
            
-           Object[] data = {Id, Ime, Prezime, brTel};
+           Object[] data = {Id, Ime, Prezime, brTel, Vip};
            System.out.println(data);
            tableModel.addRow(data);
         }

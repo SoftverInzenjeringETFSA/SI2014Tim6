@@ -142,7 +142,8 @@ public class NapraviRezervaciju {
 		JButton btnDodajKl = new JButton("Dodaj klijenta");
 		btnDodajKl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
+				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler, frame, clickedTableNumber, prikazStolovaButton,
+						prikazStolovaPanel, date, hours, minutes, sto);
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
 				f.setParent(frame);
 				frame.setEnabled(false);
@@ -448,6 +449,21 @@ public class NapraviRezervaciju {
 		clickedTableNumber=tableNumber;
 		this.minutes=minute;
 		this.sto=sto;
+		this.handler = r;
+	
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					initialize();
+					getNapraviRezervaciju().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	public void showWindow(Restoran r)
+	{
 		this.handler = r;
 	
 		EventQueue.invokeLater(new Runnable() {
