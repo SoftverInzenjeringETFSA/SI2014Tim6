@@ -141,6 +141,8 @@ public class NapraviRezervaciju {
 			public void actionPerformed(ActionEvent e) {
 				DodavanjeKlijentaRadnik f = new DodavanjeKlijentaRadnik(handler);
 				f.getDodavanjeKlijentaRadnik().setVisible(true);
+				f.setParent(frame);
+				frame.setEnabled(false);
 			}
 		});
 		btnDodajKl.setFont(new Font("Tahoma", Font.PLAIN, 13));
