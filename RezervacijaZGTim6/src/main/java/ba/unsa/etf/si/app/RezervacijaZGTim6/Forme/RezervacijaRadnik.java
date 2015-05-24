@@ -45,6 +45,7 @@ import java.awt.List;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -58,6 +59,8 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JSpinner;
+
+import org.joda.time.DateTime;
 
 
 public class RezervacijaRadnik {
@@ -283,6 +286,9 @@ public class RezervacijaRadnik {
 		for(Iterator i =stolovi.iterator();i.hasNext();)
 		{
 			Sto s = (Sto)i.next();
+			Rezervacija odabrana=null;
+			
+		
 			String details=null;
 			JButton b = new JButton("" +(s.getID()));
 			b.setPreferredSize(new Dimension(70, 60));
@@ -292,7 +298,10 @@ public class RezervacijaRadnik {
 				if(r.getIdStola()==s.getID())
 				{
 					if(r.getStatusRezervacije().equals("REZERVISANO"))
+					{
 						details="REZERVISANO";
+						odabrana=r;
+					}
 					else if(r.getStatusRezervacije().equals("OKUPIRANO"))
 						details="OKUPIRANO";
 				}
@@ -300,8 +309,33 @@ public class RezervacijaRadnik {
 			}
 			
 			if(details==null) b.setBackground(Color.green); // nije nasao rezervaciju za taj stol po proslijedjenim parametrima
-			else if(details.equals("REZERVISANO")) b.setBackground(Color.red); // stol je rezervisan
-			else b.setBackground(Color.orange); // stol je okupiran
+			else if(details.equals("REZERVISANO"))
+			{
+				
+				Date date1= new java.util.Date(odabrana.getDatumRezervacije().getTime());
+				Time time1=odabrana.getVrijemeRezervacije();
+				time1.setHours(time1.getHours());
+				
+                String myDate1= date1+" "+time1;
+               
+				java.util.Date utilDate = new java.util.Date();
+				
+				java.util.Date utilDate1 =new java.util.Date();
+				utilDate1.setYear(odabrana.getDatumRezervacije().getYear());
+				utilDate1.setMonth(odabrana.getDatumRezervacije().getMonth());
+				utilDate1.setHours(time1.getHours());
+				utilDate1.setMinutes(time1.getMinutes());
+			    utilDate1.setDate(odabrana.getDatumRezervacije().getDate());
+				
+				DateTime dateTimeNow = new DateTime(utilDate); 
+				DateTime dateTimeDatabase = new DateTime(utilDate1);
+				
+				if(dateTimeDatabase.isBefore(dateTimeNow)) b.setBackground(Color.blue);
+				else b.setBackground(Color.red); // stol je rezervisan
+				
+			}
+				
+				else b.setBackground(Color.orange); // stol je okupiran
 			
 			
 			
@@ -340,7 +374,7 @@ public class RezervacijaRadnik {
 					Color background= button.getBackground();
 					int number= Integer.parseInt(button.getText());
 
-					if(background==Color.red)
+					if(background==Color.red || background==Color.blue)
 					{
 						
 						Date d= (Date)spinner.getValue();
