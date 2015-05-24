@@ -151,7 +151,7 @@
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
 		<queryString>
-			<![CDATA[select count(*) "Broj uspjesnih rezervacija", (select count(*) from Rezervacija x where x.StatusRezervacije = 'NEUSPJESNA' and x.DatumRezervacije >= $P{P_DATUM_OD_TABELA} and x.DatumRezervacije <= $P{P_DATUM_DO_TABELA}) "Broj neuspjesnih rezervacija" from Rezervacija where StatusRezervacije = 'USPJESNA' and DatumRezervacije >= $P{P_DATUM_OD_TABELA} and DatumRezervacije <= $P{P_DATUM_DO_TABELA}]]>
+			<![CDATA[select count(*) "Broj uspjesnih rezervacija", (select count(*) from Rezervacija x where x.StatusRezervacije = 'OTKAZANO' and x.DatumRezervacije >= $P{P_DATUM_OD_TABELA} and x.DatumRezervacije <= $P{P_DATUM_DO_TABELA}) "Broj neuspjesnih rezervacija" from Rezervacija where StatusRezervacije = 'SLOBODNO' and DatumRezervacije >= $P{P_DATUM_OD_TABELA} and DatumRezervacije <= $P{P_DATUM_DO_TABELA}]]>
 		</queryString>
 		<field name="Broj uspjesnih rezervacija" class="java.lang.Long"/>
 		<field name="Broj neuspjesnih rezervacija" class="java.lang.Long"/>

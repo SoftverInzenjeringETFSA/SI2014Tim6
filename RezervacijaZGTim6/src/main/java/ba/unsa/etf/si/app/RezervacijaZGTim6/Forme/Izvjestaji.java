@@ -46,7 +46,9 @@ import javax.swing.JTextArea;
 
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
 
+import ba.unsa.etf.si.app.RezervacijaZGTim6.IzvjestajiPDF;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JDateChooser;
@@ -59,6 +61,7 @@ public class Izvjestaji {
 
 	private JFrame frame;
 	private Restoran handler;
+	JList list_1 = new JList();
 	
 	
 	/**
@@ -110,16 +113,10 @@ public class Izvjestaji {
 		JLabel lblNewLabel = new JLabel("Izvje\u0161taji");
 		lblNewLabel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
 		
-		JLabel lblGenerisatiPo = new JLabel("Generisati po:");
+		JLabel lblGenerisatiPo = new JLabel("Generisati izvještaje za:");
 		lblGenerisatiPo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		final JRadioButton rdbtnSvimKlijentima = new JRadioButton("Klijentima");
-		rdbtnSvimKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		final JRadioButton rdbtnVipKlijentima = new JRadioButton("VIP klijentima");
-		rdbtnVipKlijentima.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		JLabel lblZaMjesec = new JLabel("Za period:");
+		JLabel lblZaMjesec = new JLabel("Period:");
 		lblZaMjesec.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		final JDateChooser dateChooser = new JDateChooser();
@@ -326,12 +323,20 @@ public class Izvjestaji {
 					}
 				}
 				
-				if (!(rdbtnSvimKlijentima.isSelected() || rdbtnVipKlijentima.isSelected()))
-					radioButton_checked = false;
 				
-				if (validna_forma && radioButton_checked)
+				
+				if (validna_forma)
+				{
 					System.out.println("Validna forma");
-				else
+	                IzvjestajiPDF p = new IzvjestajiPDF();
+	                try{
+	                p.NapraviIzvjestaj(d, dt, (Integer)(list_1.getSelectedIndex()+1));
+	                }catch(Exception e)
+	                {
+	                	e.printStackTrace();
+	                }
+				}
+					else
 					System.out.println("Nevalidna forma");
 			}
 		});
@@ -342,9 +347,6 @@ public class Izvjestaji {
 		//validacija radioButtona-ButtonGroup
 
 			ButtonGroup bg1 = new ButtonGroup( );
-
-			bg1.add(rdbtnVipKlijentima);
-			bg1.add(rdbtnSvimKlijentima);
 		
 
 				
@@ -353,6 +355,20 @@ public class Izvjestaji {
 		
 		JLabel lblDo = new JLabel("Do:");
 		lblDo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JList list = new JList();
+		
+		list_1 = new JList();
+		list_1.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Statistika", "Broj gostiju po danima", "Broj rezervacija po gostima"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list_1.setSelectedIndex(0);
 		
 		
 		
@@ -367,11 +383,12 @@ public class Izvjestaji {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(rdbtnVipKlijentima)
-										.addComponent(rdbtnSvimKlijentima)
-										.addComponent(lblGenerisatiPo))
+									.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblGenerisatiPo))
+									.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
 											.addGap(95)
@@ -390,7 +407,7 @@ public class Izvjestaji {
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 												.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(pnlOd, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))))))
-							.addContainerGap(121, Short.MAX_VALUE))
+							.addContainerGap(50, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblDatumOd)
@@ -403,35 +420,34 @@ public class Izvjestaji {
 					.addGap(22)
 					.addComponent(lblNewLabel)
 					.addGap(53)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblZaMjesec)
+						.addComponent(lblGenerisatiPo))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblGenerisatiPo)
-							.addGap(7))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblZaMjesec)
-							.addPreferredGap(ComponentPlacement.UNRELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(rdbtnSvimKlijentima)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(pnlOd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(dateChooser, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGap(8)
+									.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblOd))
+							.addGap(22)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblDo)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 							.addGap(26)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(rdbtnVipKlijentima)
-								.addComponent(lblDo)))
+							.addComponent(btnGenerisi)
+							.addGap(47)
+							.addComponent(lblDatumOd))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(pnlOd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(dateChooser, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(31)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-					.addGap(26)
-					.addComponent(btnGenerisi)
-					.addGap(47)
-					.addComponent(lblDatumOd)
-					.addContainerGap(102, Short.MAX_VALUE))
+							.addGap(18)
+							.addComponent(list_1)))
+					.addContainerGap(103, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
 		
