@@ -84,6 +84,7 @@ public class NapraviRezervaciju {
     private TableRowSorter<TableModel> rowSorter;
     private JSpinner spinner;
     
+    
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
     JLabel lblRezervacija = new JLabel("", alImg, SwingConstants.LEFT);
     JPanel pnlRezervacija = new JPanel();
@@ -219,6 +220,9 @@ public class NapraviRezervaciju {
 		SpinnerModel sm = new SpinnerNumberModel(1,1,5,1);
 		spinner = new JSpinner(sm);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
+		
+		
 		
 		groupLayout = new GroupLayout(getNapraviRezervaciju().getContentPane());
 		groupLayout.setHorizontalGroup(
