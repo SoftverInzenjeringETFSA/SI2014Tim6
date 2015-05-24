@@ -129,12 +129,15 @@ public class DodavanjeKlijentaSef {
 		if(izmjenaGosta){
 			NazivDugmeta = "Promijeni Klijenta";
 			NazivForme = "Izmjena Klijenta";
+			textField.setText(gost.getIme());
+			textField_1.setText(gost.getPrezime());
+			formattedTelephone.setText(gost.getBrojTelefona());
 		} else {
 			NazivDugmeta = "Dodaj Klijenta";
 			NazivForme = "Dodavanje Klijenta";
 		}
 		
-		final JButton btnDodajKlijenta = new JButton(NazivDugmeta);
+		JButton btnDodajKlijenta = new JButton(NazivDugmeta);
 		btnDodajKlijenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -184,12 +187,11 @@ public class DodavanjeKlijentaSef {
 				}
 				
 				try {
+					if(validna_forma) System.out.println("Validna forma");
+					else System.out.println("Nije validna forma");
 					if(validna_forma) {
 						if(izmjenaGosta){
-							textField.setText(gost.getIme());
-							textField_1.setText(gost.getPrezime());
-							formattedTelephone.setText(gost.getBrojTelefona());
-							
+							System.out.println("Stigo do izmjene!");
 							try {
 								Gost g;
 								ArrayList<Gost> gosti= handler.DajGoste();
@@ -211,7 +213,9 @@ public class DodavanjeKlijentaSef {
 						else{
 							handler.DodajGosta(textField.getText(), textField_1.getText(), formattedTelephone.getText());
 						}
-						
+						f2.dispose();
+						Klijenti k = new Klijenti(handler);
+						k.getKlijenti().setVisible(true);
 					}
 					else{
 						System.out.println("nisam dodo!");

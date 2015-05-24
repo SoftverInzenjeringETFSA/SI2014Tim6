@@ -146,6 +146,9 @@ public class DodavanjeKlijentaRadnik {
 		if(izmjenaGosta){
 			NazivDugmeta = "Promijeni Klijenta";
 			NazivForme = "Izmjena Klijenta";
+			textField.setText(gost.getIme());
+			textField_1.setText(gost.getPrezime());
+			formattedTelephone.setText(gost.getBrojTelefona());
 		} else {
 			NazivDugmeta = "Dodaj Klijenta";
 			NazivForme = "Dodavanje Klijenta";
@@ -203,10 +206,6 @@ public class DodavanjeKlijentaRadnik {
 				try {
 					if(validna_forma) {
 						if(izmjenaGosta){
-							textField.setText(gost.getIme());
-							textField_1.setText(gost.getPrezime());
-							formattedTelephone.setText(gost.getBrojTelefona());
-							
 							try {
 								Gost g;
 								ArrayList<Gost> gosti= handler.DajGoste();

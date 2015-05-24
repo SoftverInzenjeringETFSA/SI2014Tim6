@@ -190,7 +190,6 @@ public class Klijenti {
 					e1.printStackTrace();
 				}
 				k = new DodavanjeKlijentaSef(g, handler, frame);
-				System.out.println("Stigo!");
 				k.getDodavanjeKlijentaSef().setVisible(true);
 			}
 		});
