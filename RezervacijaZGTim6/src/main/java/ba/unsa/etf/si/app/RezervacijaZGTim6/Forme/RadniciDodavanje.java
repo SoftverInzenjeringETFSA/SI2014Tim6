@@ -54,10 +54,12 @@ public class RadniciDodavanje {
 	JLabel lblPrezime_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
 	JLabel lblUsr = new JLabel("", alImg, SwingConstants.LEFT);
 	JLabel lblPsw = new JLabel("", alImg, SwingConstants.LEFT);
+	JLabel lbl_jmbg = new JLabel("", alImg, SwingConstants.LEFT);
 	JPanel pnlIme = new JPanel();
 	JPanel pnlPrezime = new JPanel();
 	JPanel pnlUsername = new JPanel();
 	JPanel pnlPassword = new JPanel();
+	JPanel pnlJmbg = new JPanel();
 	
 	private Restoran handler;
 	
@@ -102,7 +104,7 @@ public class RadniciDodavanje {
 	private void initialize() {
 		setRadniciDodavanje(new JFrame());
 		getRadniciDodavanje().setResizable(false);
-		getRadniciDodavanje().setBounds(100, 100, 451, 324);
+		getRadniciDodavanje().setBounds(100, 100, 431, 338);
 		getRadniciDodavanje().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -206,16 +208,16 @@ public class RadniciDodavanje {
 				}
 				
 				if(textField_4.getText().isEmpty()) {
-					lblPsw.setText("Popunite polje!");
-					pnlPassword.setVisible(true);
+					lbl_jmbg.setText("Popunite polje!");
+					pnlJmbg.setVisible(true);
 					validna_forma = false;
 				} else if (!ValidacijaJMBG(textField_4.getText())) {
-					lblPsw.setText("Nedozvoljen format!");
-					pnlPassword.setVisible(true);
+					lbl_jmbg.setText("Nedozvoljen format!");
+					pnlJmbg.setVisible(true);
 					validna_forma = false;
 				} else {
-					lblPsw.setText("");
-					pnlPassword.setVisible(false);
+					lbl_jmbg.setText("");
+					pnlJmbg.setVisible(false);
 					validna_forma = true;
 				}
 								
@@ -253,94 +255,96 @@ public class RadniciDodavanje {
 		pnlUsername.add( lblUsr, BorderLayout.WEST );
 		pnlUsername.setVisible(false);
 		
+		pnlJmbg.add( lbl_jmbg, BorderLayout.WEST );
+		pnlJmbg.setVisible(false);
+		
 		JLabel lblJmbg = new JLabel("JMBG:");
 		lblJmbg.setFont(new Font("Dialog", Font.PLAIN, 12));
+		
+		
 		
 		GroupLayout groupLayout = new GroupLayout(getRadniciDodavanje().getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(61)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnSpasi)
+						.addComponent(lblNewLabel)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblIme)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblPrezime)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblUsername)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblJmbg)
+								.addComponent(lblPassword))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(textField_4)
+								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(73)
-							.addComponent(lblNewLabel))
-						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(130)
-									.addComponent(lblJmbg)
-									.addGap(34)
-									.addComponent(textField_4, 0, 0, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(103)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblIme)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblPrezime)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblUsername)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-										.addComponent(btnSpasi)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblPassword)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))))
+								.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(pnlPrezime, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(pnlPrezime, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(5)
-									.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))))
-					.addContainerGap())
+								.addComponent(pnlJmbg, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+								.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
+					.addGap(22))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel)
-					.addGap(65)
+					.addGap(51)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblIme)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblPrezime)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlUsername, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblUsername)
 							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(pnlPassword, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblPassword)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pnlJmbg, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(textField_4)
+						.addComponent(lblJmbg))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblJmbg)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(22)
 					.addComponent(btnSpasi)
-					.addGap(31))
+					.addGap(34))
 		);
 		lblUsr.setForeground(Color.RED);
 		
@@ -355,6 +359,9 @@ public class RadniciDodavanje {
 		
 		pnlPassword.add(lblPsw);
 		getRadniciDodavanje().getContentPane().setLayout(groupLayout);
+		
+		lbl_jmbg.setForeground(Color.RED);
+		pnlJmbg.add(lbl_jmbg);
 	}
 
 	public JFrame getRadniciDodavanje() {

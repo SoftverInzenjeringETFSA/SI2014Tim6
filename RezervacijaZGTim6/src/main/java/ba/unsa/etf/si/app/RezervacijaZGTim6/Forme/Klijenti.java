@@ -23,6 +23,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
@@ -180,21 +181,34 @@ public class Klijenti {
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+				boolean validno = true;
 				
-				System.out.println(idGosta);
-				Gost g = new Gost();
-				try
+				if(table.getSelectedRow() == -1)
+					validno = false;
+				
+				if(validno)
 				{
-					g.ocitajGosta(idGosta);
+					if(table.getSelectedRowCount() == 1)
+					{
+						long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+						
+						System.out.println(idGosta);
+						Gost g = new Gost();
+						try
+						{
+							g.ocitajGosta(idGosta);
+						}
+						catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						i = new IzmjenaKlijentaSef(g, handler, frame);
+						i.getIzmjenaKlijentaSef().setVisible(true);
+						i.setParent(frame);
+						frame.setEnabled(false);
+					}
 				}
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				i = new IzmjenaKlijentaSef(g, handler, frame);
-				i.getIzmjenaKlijentaSef().setVisible(true);
-				i.setParent(frame);
-				frame.setEnabled(false);
+				else
+					JOptionPane.showMessageDialog(null, "Odaberite klijenta");
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getKlijenti().getContentPane());
