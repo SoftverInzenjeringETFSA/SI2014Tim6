@@ -277,7 +277,7 @@ public class Izvjestaji {
 					}
 					else
 					{
-						if (sqldate.after(TODAY_DATE) && sqldate_1.after(TODAY_DATE))
+						if (sqldate.after(TODAY_DATE) && sqldate_1.after(TODAY_DATE) && sqldate.getDate() != TODAY_DATE.getDate() && sqldate_1.getDate() != TODAY_DATE.getDate())
 						{
 							pnlOd.setVisible(true);
 							lbl_Od.setText("Budući datum");
@@ -285,7 +285,7 @@ public class Izvjestaji {
 							lbl_Do.setText("Budući datum");
 							validna_forma = false;
 						}
-						else if (sqldate.after(TODAY_DATE))
+						else if (sqldate.after(TODAY_DATE) && sqldate.getDate() != TODAY_DATE.getDate())
 						{
 							pnlDo.setVisible(false);
 							lbl_Do.setText("");
@@ -293,7 +293,7 @@ public class Izvjestaji {
 							lbl_Od.setText("Budući datum");
 							validna_forma = false;
 						}
-						else if (sqldate_1.after(TODAY_DATE))
+						else if (sqldate_1.after(TODAY_DATE) && sqldate_1.getDate() != TODAY_DATE.getDate())
 						{
 							pnlOd.setVisible(false);
 							lbl_Od.setText("");
@@ -303,7 +303,14 @@ public class Izvjestaji {
 						}
 						else
 						{
-							if(sqldate_1.before(sqldate))
+							if (sqldate.getDate() == sqldate_1.getDate())
+							{
+								pnlDo.setVisible(true);
+								lbl_Do.setText("Nevalidan opseg");
+								validna_forma = false;
+							}
+							
+							else if(sqldate_1.before(sqldate))
 							{
 								pnlDo.setVisible(true);
 								lbl_Do.setText("Nevalidan opseg");
@@ -314,7 +321,7 @@ public class Izvjestaji {
 								pnlDo.setVisible(false);
 								validna_forma = true;
 							}
-						
+	
 						}
 					}
 				}
