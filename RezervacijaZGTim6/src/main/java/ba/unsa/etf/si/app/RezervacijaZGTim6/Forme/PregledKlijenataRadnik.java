@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -178,30 +179,39 @@ public class PregledKlijenataRadnik {
 		btnIzmjeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmjeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean validno = true;
 				
-				boolean rowIsSelected = table.getSelectedRowCount() > 0;
-				if (rowIsSelected) {
-					System.out.println("Selektovano");
-					long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
-					
-					System.out.println(idGosta);
-					
-					Gost g = new Gost();
-					try
+				if (table.getSelectedRow() == -1)
+					validno = false;
+				
+				if(validno)
+				{
+					if(table.getSelectedRowCount() == 1)
 					{
-						g.ocitajGosta(idGosta);
+						System.out.println("Selektovano");
+						long idGosta = Long.parseLong(table.getValueAt(table.getSelectedRow(), 0).toString());
+						
+						System.out.println(idGosta);
+						
+						Gost g = new Gost();
+						try
+						{
+							g.ocitajGosta(idGosta);
+						}
+						catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						k = new DodavanjeKlijentaRadnik(g, handler, frame);
+						System.out.println("Stigo!");
+						k.getDodavanjeKlijentaRadnik().setVisible(true);
+						k.setParent(frame);
+						frame.setEnabled(false);
 					}
-					catch (Exception e1) {
-						e1.printStackTrace();
-					}
-					k = new DodavanjeKlijentaRadnik(g, handler, frame);
-					System.out.println("Stigo!");
-					k.getDodavanjeKlijentaRadnik().setVisible(true);
-				k.setParent(frame);
-				frame.setEnabled(false);
+					else
+						JOptionPane.showMessageDialog(null, "Odaberite samo jednog klijenta");
 				}
-				else System.out.println("Nije Selektovano");
-			
+				else
+					JOptionPane.showMessageDialog(null, "Odaberite klijenta");			
 			}
 		});
 		
