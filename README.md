@@ -2,7 +2,7 @@
 ## SI2014Tim6
 
 Postavljanje okruženja za testiranje:
-* Kreirajte praznu bazu podataka sa nazivom 'Tim6'
+* Kreirajte praznu bazu podataka sa nazivom 'Tim6' (collation utf8_slovenian_ci")
 * Skinite file sa podacima koji su potrebni za nesmetan rad aplikacije (url)
 * Navigirajte do skinutog fajla (tim6.sql) kroz terminal/cmd
 * Izvršite sljedeću naredbu "mysql -u EtfSI2014 -p Tim6 < tim6.sql" (pretpostavlja se da imate kreiranog usera EtfSI2014 sa odgovarajućim passwordom 2014SIEtf - ukoliko ne: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql)
