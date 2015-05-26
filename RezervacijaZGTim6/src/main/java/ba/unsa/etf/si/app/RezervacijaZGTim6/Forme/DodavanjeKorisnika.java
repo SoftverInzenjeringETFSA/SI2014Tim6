@@ -31,6 +31,7 @@ import java.util.Iterator;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
+import javax.swing.JPasswordField;
 
 
 public class DodavanjeKorisnika {
@@ -38,7 +39,6 @@ public class DodavanjeKorisnika {
 
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField textField_1;
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
@@ -51,6 +51,7 @@ public class DodavanjeKorisnika {
 	private Gost gost;
 	private Restoran handler;
 	private long ID;
+	private JPasswordField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -99,7 +100,7 @@ public class DodavanjeKorisnika {
 	private void initialize() {
 		setDodavanjeKorisnika(new JFrame());
 		getDodavanjeKorisnika().setResizable(false);
-		getDodavanjeKorisnika().setBounds(100, 100, 450, 300);
+		getDodavanjeKorisnika().setBounds(100, 100, 500, 300);
 		getDodavanjeKorisnika().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		textField = new JTextField();
@@ -110,9 +111,6 @@ public class DodavanjeKorisnika {
 		
 		JLabel lblifra = new JLabel("Šifra:");
 		lblifra.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
 		
 		MaskFormatter mfTel = new MaskFormatter();
 		try {
@@ -139,13 +137,15 @@ public class DodavanjeKorisnika {
 					validna_forma = false;
 				} else if (!ValidacijaUsername(textField.getText())) {
 					lblIme.setText("Nedozvoljen format!");
+					//lblIme.setVisible(true);
 					pnlIme.setVisible(true);
 					validna_forma = false;
 				}
 				else { 
 					lblIme.setText("");
 					pnlIme.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
+					//lblIme.setVisible(false);
 				}
 				
 				if (textField_1.getText().isEmpty()) {
@@ -154,13 +154,15 @@ public class DodavanjeKorisnika {
 					validna_forma = false;
 				} else if (!ValidacijaPassword(textField_1.getText())) {
 					lblPrezime.setText("Nedozvoljen format!");
+					//lblIme.setVisible(true);
 					pnlPrezime.setVisible(true);
 					validna_forma = false;
 				}
 				else { 
 					lblPrezime.setText("");
 					pnlPrezime.setVisible(false);
-					validna_forma = true;
+					//validna_forma = true;
+					//lblIme.setVisible(false);
 				}
 				
 				
@@ -202,12 +204,22 @@ public class DodavanjeKorisnika {
 		JLabel lblDodavanjeKlijenta = new JLabel(NazivForme);
 		lblDodavanjeKlijenta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
+		JLabel lblNewLabel = new JLabel("<html>Ispravan format:"
+				                       + "<br>Korisničko ime: Samo mala slova i veće od 5 znakova!</br>"
+				                       + "<br> Šifra: 1 broj, 1 veliko, 1 malo slovo i veće od 5 znakova!</br> </html>");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		
+		textField_1 = new JPasswordField();
+		
 		GroupLayout groupLayout = new GroupLayout(getDodavanjeKorisnika().getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnDodajKlijenta))
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 							.addGap(71)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblDodavanjeKlijenta)
@@ -216,17 +228,19 @@ public class DodavanjeKorisnika {
 										.addComponent(lblifra)
 										.addComponent(lblKorisnickoIme))
 									.addGap(22)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-								.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(154)
-							.addComponent(btnDodajKlijenta)))
-					.addGap(13))
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+								.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+							.addGap(13))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -238,16 +252,18 @@ public class DodavanjeKorisnika {
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
 							.addComponent(lblKorisnickoIme))
-						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+						.addComponent(pnlIme, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(pnlPrezime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblifra)))
-					.addGap(50)
+							.addComponent(lblifra)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(18)
+					.addComponent(lblNewLabel)
+					.addGap(7)
 					.addComponent(btnDodajKlijenta)
-					.addGap(64))
+					.addGap(44))
 		);
 		getDodavanjeKorisnika().getContentPane().setLayout(groupLayout);
 		
@@ -264,7 +280,7 @@ public class DodavanjeKorisnika {
 	}
 	
 	public Boolean ValidacijaUsername(String user) {
-		if (user.length() < 3) return false;
+		if (user.length() < 5) return false;
         return user.matches("^[a-z]+$");
     }
 	
@@ -273,5 +289,4 @@ public class DodavanjeKorisnika {
 		if(pw.length() < 5) return false;
 		return pw.matches("[0-9]+[A-Z]+[a-z]+");
 	}
-	
 }

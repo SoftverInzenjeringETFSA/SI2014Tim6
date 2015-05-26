@@ -359,6 +359,7 @@ public class Izvjestaji {
 		JList list = new JList();
 		
 		list_1 = new JList();
+		list_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		list_1.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Statistika", "Broj gostiju po danima", "Broj rezervacija po gostima"};
 			public int getSize() {
@@ -386,8 +387,8 @@ public class Izvjestaji {
 									.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblGenerisatiPo))
+										.addComponent(lblGenerisatiPo)
+										.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
@@ -424,7 +425,7 @@ public class Izvjestaji {
 						.addComponent(lblZaMjesec)
 						.addComponent(lblGenerisatiPo))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
@@ -439,14 +440,14 @@ public class Izvjestaji {
 								.addComponent(lblDo)
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 									.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-							.addGap(26)
-							.addComponent(btnGenerisi)
-							.addGap(47)
-							.addComponent(lblDatumOd))
+									.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(18)
-							.addComponent(list_1)))
+							.addComponent(list_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGap(26)
+					.addComponent(btnGenerisi)
+					.addGap(47)
+					.addComponent(lblDatumOd)
 					.addContainerGap(103, Short.MAX_VALUE))
 		);
 		panel.setLayout(null);
@@ -508,5 +509,6 @@ public class Izvjestaji {
 
 	public void setIzvjestaji(JFrame frame) {
 		this.frame = frame;
+		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 10));
 	}
 }
