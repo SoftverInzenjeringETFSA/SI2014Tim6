@@ -9,12 +9,12 @@
   <property name="hibernate.connection.password">2014SIEtf</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/Gost.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/Korisnik.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/LogKorisnik.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/Radnik.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/Rezervacija.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/Sto.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/app/RezervacijaZGTim6/ZauzetiSto.hbm.xml"/>
+  <mapping resource="Gost.hbm.xml"/>
+  <mapping resource="Korisnik.hbm.xml"/>
+  <mapping resource="LogKorisnik.hbm.xml"/>
+  <mapping resource="Radnik.hbm.xml"/>
+  <mapping resource="Rezervacija.hbm.xml"/>
+  <mapping resource="Sto.hbm.xml"/>
+  <mapping resource="ZauzetiSto.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
