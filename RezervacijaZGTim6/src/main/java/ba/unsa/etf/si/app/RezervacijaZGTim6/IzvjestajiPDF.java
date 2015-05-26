@@ -77,7 +77,7 @@ public class IzvjestajiPDF {
 			parametri.put("P_DATUM_OD", p_datum_od);//eventualno formatirati datum
 			parametri.put("P_DATUM_DO", p_datum_do);
 			Date d = new Date();
-			JasperReport jr = JasperCompileManager.compileReport("Izvjestaji/" + s + ".jrxml");
+			JasperReport jr = JasperCompileManager.compileReport(s + ".jrxml");
 			Connection dbcon = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/restoran", "root", "root");
 			JasperPrint jp = JasperFillManager.fillReport(jr, parametri, dbcon);
 			JasperExportManager.exportReportToPdfFile(jp, put + "\\" + s + "_" + d.hashCode() + ".pdf"); //dodati da se kreira jedinstven naziv
