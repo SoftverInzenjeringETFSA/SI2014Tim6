@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,8 +13,6 @@ import java.util.logging.Level;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-
-import org.omg.CORBA.portable.InputStream;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
