@@ -80,7 +80,7 @@ public class IzvjestajiPDF {
 			Date d = new Date();
 			InputStream inputstream = (InputStream) ClassLoader.getSystemResourceAsStream(s + ".jrxml");
 			JasperReport jr = JasperCompileManager.compileReport(inputstream);
-			Connection dbcon = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/restoran", "root", "root");
+			Connection dbcon = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/tim6", "EtfSI2014", "2014SIEtf");
 			JasperPrint jp = JasperFillManager.fillReport(jr, parametri, dbcon);
 			JasperExportManager.exportReportToPdfFile(jp, put + "\\" + s + "_" + d.hashCode() + ".pdf"); //dodati da se kreira jedinstven naziv
 			JasperViewer.viewReport(jp, false);
