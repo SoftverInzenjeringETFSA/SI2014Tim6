@@ -114,7 +114,7 @@ public class RezervisanSto {
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 0, 0));
+		panel.setBackground(Color.ORANGE);
 		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije: ");
 	    
 		
@@ -249,7 +249,7 @@ public class RezervisanSto {
 					ArrayList<Rezervacija> rezervacije= handler.ListaRezervacija(dateChooser.getDate(), sati, minute);
 					clickedReservation.setStatusRezervacije("OKUPIRANO");
 					clickedReservation.promijeniStatusRezervacije(clickedReservation.getID(), "OKUPIRANO");
-					prikazStolovaButton.setBackground(Color.orange);
+					prikazStolovaButton.setBackground(Color.red);
 					prikazStolovaButton.revalidate();
 					prikazStolovaButton.repaint();
 					

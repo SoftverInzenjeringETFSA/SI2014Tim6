@@ -99,7 +99,7 @@ public class OkupiranSto{
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.ORANGE);
+		panel.setBackground(Color.RED);
 		
 		JLabel lblDoIstekaRezervacije = new JLabel("Do isteka rezervacije:");
 		lblDoIstekaRezervacije.setFont(new Font("Tahoma", Font.BOLD, 13));

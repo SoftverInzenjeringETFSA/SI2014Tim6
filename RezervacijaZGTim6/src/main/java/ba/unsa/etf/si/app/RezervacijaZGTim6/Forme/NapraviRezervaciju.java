@@ -219,7 +219,7 @@ public class NapraviRezervaciju {
 								DateTime dateTimeDatabase = new DateTime(utilDate1);
 								
 								if(dateTimeDatabase.isBefore(dateTimeNow)) prikazStolovaButton.setBackground(Color.blue);
-								else prikazStolovaButton.setBackground(Color.red);
+								else prikazStolovaButton.setBackground(Color.orange);
 								
 								
 								prikazStolovaPanel.revalidate();

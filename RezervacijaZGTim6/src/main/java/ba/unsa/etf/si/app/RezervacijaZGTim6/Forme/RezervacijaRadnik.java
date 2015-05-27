@@ -331,11 +331,11 @@ public class RezervacijaRadnik {
 				DateTime dateTimeDatabase = new DateTime(utilDate1);
 				
 				if(dateTimeDatabase.isBefore(dateTimeNow)) b.setBackground(Color.blue);
-				else b.setBackground(Color.red); // stol je rezervisan
+				else b.setBackground(Color.orange); // stol je rezervisan
 				
 			}
 				
-				else b.setBackground(Color.orange); // stol je okupiran
+				else b.setBackground(Color.red); // stol je okupiran
 			
 			
 			
@@ -374,7 +374,7 @@ public class RezervacijaRadnik {
 					Color background= button.getBackground();
 					int number= Integer.parseInt(button.getText());
 
-					if(background==Color.red || background==Color.blue)
+					if(background==Color.orange || background==Color.blue)
 					{
 						
 						Date d= (Date)spinner.getValue();
@@ -393,7 +393,7 @@ public class RezervacijaRadnik {
 					   r.showWindow(handler, number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
 						   
 					}
-					else if(background==Color.orange)
+					else if(background==Color.red)
 					{
 						Date d= (Date)spinner.getValue();
 						int sati = (Integer)d.getHours();
