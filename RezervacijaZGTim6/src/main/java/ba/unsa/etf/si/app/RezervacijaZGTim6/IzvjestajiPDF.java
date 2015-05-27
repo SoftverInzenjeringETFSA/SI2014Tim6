@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
+import org.omg.CORBA.portable.InputStream;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -77,7 +79,8 @@ public class IzvjestajiPDF {
 			parametri.put("P_DATUM_OD", p_datum_od);//eventualno formatirati datum
 			parametri.put("P_DATUM_DO", p_datum_do);
 			Date d = new Date();
-			JasperReport jr = JasperCompileManager.compileReport(s + ".jrxml");
+			InputStream inputstream = (InputStream) ClassLoader.getSystemResourceAsStream(s + ".jrxml");
+			JasperReport jr = JasperCompileManager.compileReport(inputstream);
 			Connection dbcon = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/restoran", "root", "root");
 			JasperPrint jp = JasperFillManager.fillReport(jr, parametri, dbcon);
 			JasperExportManager.exportReportToPdfFile(jp, put + "\\" + s + "_" + d.hashCode() + ".pdf"); //dodati da se kreira jedinstven naziv
