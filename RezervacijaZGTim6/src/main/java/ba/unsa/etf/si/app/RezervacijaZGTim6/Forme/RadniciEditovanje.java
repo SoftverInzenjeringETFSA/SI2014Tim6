@@ -393,12 +393,12 @@ public class RadniciEditovanje {
 	
 	public Boolean ValidacijaImePrezime(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E-]+$");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E\u0160\u0110\u010C\u0106\u017D-]+$");
     }
 	
 	public Boolean ValidacijaUserPass(String user) {
 		if (user.length() < 3) return false;
-        return user.matches("^[a-zA-Z0-9\u0161\u0111\u010D\u0107\u017E]+$");
+        return user.matches("^[a-zA-Z\u0161\u0111\u010D\u0107\u017E\u0160\u0110\u010C\u0106\u017D-]+$");
     }
 	
 	public Boolean ValidacijaJMBG(String jmbg){
