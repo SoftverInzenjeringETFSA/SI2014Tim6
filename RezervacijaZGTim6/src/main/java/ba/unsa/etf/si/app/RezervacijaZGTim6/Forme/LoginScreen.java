@@ -122,7 +122,7 @@ public class LoginScreen {
 					if(passString.equals("")) {
 						lblPsw.setText("Popunite polje!");
 						pnlPassword.setVisible(true);
-					} else if (!ValidacijaUserPass(passString)) {
+					} else if (!ValidacijaPassworda(passString)) {
 						lblPsw.setText("Nedozvoljen format!");
 						pnlPassword.setVisible(true);
 					} else if(!handler.PrijavaKorisnika(txtUsername.getText(), passString)){
@@ -202,7 +202,7 @@ public class LoginScreen {
 						if(passString.equals("")) {
 							lblPsw.setText("Popunite polje!");
 							pnlPassword.setVisible(true);
-						} else if (!ValidacijaUserPass(passString)) {
+						} else if (!ValidacijaPassworda(passString)) {
 							lblPsw.setText("Nedozvoljen format!");
 							pnlPassword.setVisible(true);
 						} else if(!handler.PrijavaKorisnika(txtUsername.getText(), passString)){
@@ -283,7 +283,7 @@ public class LoginScreen {
 						if(passString.equals("")) {
 							lblPsw.setText("Popunite polje!");
 							pnlPassword.setVisible(true);
-						} else if (!ValidacijaUserPass(passString)) {
+						} else if (!ValidacijaPassworda(passString)) {
 							lblPsw.setText("Nedozvoljen format!");
 							pnlPassword.setVisible(true);
 						} else if(!handler.PrijavaKorisnika(txtUsername.getText(), passString)){
@@ -412,7 +412,9 @@ public class LoginScreen {
 	
 	public Boolean ValidacijaPassworda(String user) {
 		if(user.length() < 5) return false;
-		return user.matches("[0-9]+[A-Z]+[a-z]+");
+		String pattern = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=\\S+$).{5,})";
+
+        return user.matches(pattern);
        
     }
 	

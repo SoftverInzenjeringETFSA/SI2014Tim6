@@ -284,9 +284,11 @@ public class DodavanjeKorisnika {
         return user.matches("^[a-z]+$");
     }
 	
-	public Boolean ValidacijaPassword(String pw)
+	public Boolean ValidacijaPassword(String user)
 	{
-		if(pw.length() < 5) return false;
-		return pw.matches("[0-9]+[A-Z]+[a-z]+");
+		if(user.length() < 5) return false;
+		String pattern = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=\\S+$).{5,})";
+
+        return user.matches(pattern);
 	}
 }
