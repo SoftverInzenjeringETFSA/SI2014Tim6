@@ -248,7 +248,7 @@ public class NapraviRezervaciju {
 		});
 		btnDodajRezervaciju.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel lblTrajanje = new JLabel("Trajanje: ");
+		JLabel lblTrajanje = new JLabel("Trajanje u satima (h): ");
 		lblTrajanje.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		int maxVal = 5;
