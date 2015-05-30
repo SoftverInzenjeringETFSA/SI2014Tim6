@@ -250,9 +250,7 @@ public class Radnici {
 				else
 					JOptionPane.showMessageDialog(null, "Odaberite radnika");
 				
-				frame.dispose();
-				Radnici r = new Radnici(handler);
-				r.getRadnici().setVisible(true);
+				
 			}
 		});
 		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));

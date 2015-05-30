@@ -30,7 +30,9 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
@@ -388,7 +390,42 @@ public class RadniciDodavanje {
         return user.matches("^[a-zA-Z0-9\u0161\u0111\u010D\u0107\u017E\u0160\u0110\u010C\u0106\u017D]+$");
     }
 	
+	public static Boolean Cifra(String broj)
+    {
+        Boolean validno = false;
+        
+        char[] charovi = broj.toCharArray();
+        for (int i = 0; i < charovi.length; i++)
+        {
+            validno = false;
+            if (((charovi[i] >= '0') && (charovi[i] <= '9')))
+                validno = true;
+        }
+        return validno;
+    }
+	
 	public Boolean ValidacijaJMBG(String jmbg){
-		return jmbg.matches("^[0-9]{13}$");
+		List<Integer> lista = new ArrayList<Integer>();
+		if(Cifra(jmbg))
+		{
+			for(char ch : jmbg.toCharArray())
+			{
+				lista.add( Integer.valueOf(String.valueOf(ch)));
+			}
+		
+			if (lista.size()!= 13)
+	            return false;
+	
+	        else
+	        {
+	            Double eval = 0.0;
+	            for (int i = 0; i < 6; i++)
+	            {
+	                eval += (7 - i) * (lista.get(i) + lista.get(i + 6));
+	            }
+	            return lista.get(12) == 11 - eval % 11;
+	        }
+		}
+		else return false;
 	}
 }
