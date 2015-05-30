@@ -162,9 +162,9 @@ public class Izvjestaji {
 				if (d == null && dt == null)
 				{
 					pnlOd.setVisible(true);
-					lbl_Od.setText("Popunite prazna mjesta");
+					lbl_Od.setText("Popunite polje!");
 					pnlDo.setVisible(true);
-					lbl_Do.setText("Popunite prazna mjesta");
+					lbl_Do.setText("Popunite polje!");
 					validna_forma = false;
 				}
 				else if (d == null && dt != null)
@@ -173,7 +173,7 @@ public class Izvjestaji {
 					sqldate_1 = new java.sql.Date(dt.getTime());
 					
 					pnlOd.setVisible(true);
-					lbl_Od.setText("Popunite prazna mjesta");
+					lbl_Od.setText("Popunite polje!");
 					validna_forma = false;
 					
 					if (sqldate_1.before(MIN_DATUM))
@@ -210,7 +210,7 @@ public class Izvjestaji {
 					sqldate = new java.sql.Date(d.getTime());
 					
 					pnlDo.setVisible(true);
-					lbl_Do.setText("Popunite prazna mjesta");
+					lbl_Do.setText("Popunite polje!");
 					validna_forma = false;
 					
 					if (sqldate.before(MIN_DATUM))
@@ -378,39 +378,43 @@ public class Izvjestaji {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblNewLabel)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblGenerisatiPo)
-										.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(95)
+											.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblGenerisatiPo)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+													.addGap(18)
+													.addComponent(lblDo)))
+											.addGap(2))
+										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+											.addComponent(lblOd)
+											.addPreferredGap(ComponentPlacement.RELATED)))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(50)
 											.addComponent(lblZaMjesec))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(57)
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addComponent(lblOd)
-												.addComponent(lblDo))
+										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+											.addGap(4)
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(dateChooser, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(dateChooser_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+												.addComponent(btnGenerisi))
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-												.addComponent(btnGenerisi, Alignment.TRAILING))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 												.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(pnlOd, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))))))
-							.addContainerGap(50, Short.MAX_VALUE))
+												.addComponent(pnlOd, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+											.addPreferredGap(ComponentPlacement.RELATED)))))
+							.addGap(66))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblDatumOd)
 							.addGap(210))))
 		);
@@ -422,33 +426,36 @@ public class Izvjestaji {
 					.addComponent(lblNewLabel)
 					.addGap(53)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblZaMjesec)
-						.addComponent(lblGenerisatiPo))
+						.addComponent(lblGenerisatiPo)
+						.addComponent(lblZaMjesec))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblOd)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(pnlOd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(dateChooser, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-									.addGap(8)
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblOd))
-							.addGap(22)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblDo)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addComponent(list_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addGap(26)
-					.addComponent(btnGenerisi)
-					.addGap(47)
-					.addComponent(lblDatumOd)
-					.addContainerGap(103, Short.MAX_VALUE))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(pnlOd, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+											.addGroup(groupLayout.createSequentialGroup()
+												.addGap(18)
+												.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE))
+											.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+									.addGap(27)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(pnlDo, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+										.addComponent(dateChooser_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblDo)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(18)
+									.addComponent(list_1, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
+							.addGap(27)
+							.addComponent(btnGenerisi)
+							.addGap(46)
+							.addComponent(lblDatumOd)
+							.addGap(107))))
 		);
 		panel.setLayout(null);
 		
