@@ -191,7 +191,13 @@ public class RadniciDodavanje {
 					lblUsr.setText("Popunite polje!");
 					pnlUsername.setVisible(true);
 					validna_forma = false;
-				} else {
+				} 
+				else if (!ValidacijaImePrezime(textField_2.getText())) {
+					lblUsr.setText("Nedozvoljen format!");
+					pnlUsername.setVisible(true);
+					validna_forma = false;
+				}
+				else {
 					lblUsr.setText("");
 					pnlUsername.setVisible(false);
 					
