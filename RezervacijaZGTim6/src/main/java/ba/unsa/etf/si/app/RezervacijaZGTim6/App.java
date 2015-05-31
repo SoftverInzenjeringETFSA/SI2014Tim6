@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
-
+import org.apache.log4j.Logger;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 
@@ -21,7 +21,7 @@ public class App {
 	private static File f;
 	private static FileChannel channel;
 	private static FileLock lock;
-	
+	final static Logger logger = Logger.getLogger(App.class);
 public static void main(String[] args)
 {
 	try {
@@ -57,7 +57,7 @@ public static void main(String[] args)
 					LoginScreen window = new LoginScreen(ZmajevoGnijezdo);
 					window.getFrmPrijavaKorisnika().setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error("Greska!", e);
 				}
 			}
 		});
@@ -65,7 +65,7 @@ public static void main(String[] args)
 	catch (Exception e)
 	{
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		logger.error("Greska!", e);
 	}
 }
 
@@ -77,7 +77,7 @@ public static void unlockFile() {
 	    channel.close();
 	    f.delete();
 	  } catch(IOException e) {
-	    e.printStackTrace();
+		  logger.error("Greska!", e);
 	  }
 	}
 
