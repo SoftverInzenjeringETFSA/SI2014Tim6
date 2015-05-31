@@ -8,11 +8,12 @@
             <column name="ID" />
             <generator class="native" />
         </id>
-        <property name="IdRezervacije" type="long">
+        <property name="IdRezervacije" type="java.lang.Integer">
             <column name="IDREZERVACIJE" />
         </property>
-        <property name="IdStola" type="long">
+        <property name="IdStola" type="java.lang.Integer">
             <column name="IDSTOLA" />
         </property>
+        
     </class>
 </hibernate-mapping>
