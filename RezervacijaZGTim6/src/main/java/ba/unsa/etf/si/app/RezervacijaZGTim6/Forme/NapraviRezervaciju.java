@@ -86,6 +86,7 @@ public class NapraviRezervaciju {
     private TableRowSorter<TableModel> rowSorter;
     private JSpinner spinner;
     JScrollPane scrollPane=null;
+    private JFrame parentFrame;
     
     
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
@@ -126,7 +127,10 @@ public class NapraviRezervaciju {
 		initialize();
 	}
 
-
+	public void setParent(JFrame f)
+	{
+		parentFrame=f;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -135,6 +139,16 @@ public class NapraviRezervaciju {
 		getNapraviRezervaciju().setResizable(false);
 		getNapraviRezervaciju().setBounds(100, 100, 624, 470);
 		getNapraviRezervaciju().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent)
+			{
+			parentFrame.setEnabled(true);
+			parentFrame.setVisible(true);
+			}
+		});
+		
 		
 		JPanel panel = new JPanel();
 		
@@ -154,6 +168,7 @@ public class NapraviRezervaciju {
 				f.setParent(frame);
 				frame.setEnabled(false);
 			}
+			
 		});
 		btnDodajKl.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
@@ -225,6 +240,11 @@ public class NapraviRezervaciju {
 								prikazStolovaPanel.revalidate();
 								prikazStolovaPanel.repaint();
 							}
+							
+							frame.setVisible(false);
+							 frame.dispose();
+							 parentFrame.setEnabled(true);
+						     parentFrame.setVisible(true);
 							
 						}
 

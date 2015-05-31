@@ -54,6 +54,7 @@ public class RezervisanSto {
     private Rezervacija clickedReservation;
     JLabel label = new JLabel();
     JLabel lblKlijentKlijentic = new JLabel();
+    private JFrame parentFrame;
     
     
     
@@ -91,7 +92,10 @@ public class RezervisanSto {
 		initialize();
 	}
 	
-
+	public void setParent(JFrame f)
+	{
+		parentFrame=f;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -101,6 +105,14 @@ public class RezervisanSto {
 		getRezervisanSto().setBounds(100, 100, 451, 303);
 		getRezervisanSto().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent)
+			{
+			parentFrame.setEnabled(true);
+			parentFrame.setVisible(true);
+			}
+		});
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
@@ -232,7 +244,10 @@ public class RezervisanSto {
 				}
 				
 				getRezervisanSto().dispose();
-				  
+				frame.setVisible(false);
+				 frame.dispose();
+				 parentFrame.setEnabled(true);
+			     parentFrame.setVisible(true);
 				
 			}});
 		
@@ -261,7 +276,10 @@ public class RezervisanSto {
 				getRezervisanSto().dispose();
 				 
 				 
-				
+				frame.setVisible(false);
+				 frame.dispose();
+				 parentFrame.setEnabled(true);
+			     parentFrame.setVisible(true);
 			}});
 		
 		

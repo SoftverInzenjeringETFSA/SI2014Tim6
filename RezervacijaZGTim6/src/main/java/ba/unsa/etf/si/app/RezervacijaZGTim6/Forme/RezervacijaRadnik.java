@@ -369,7 +369,7 @@ public class RezervacijaRadnik {
 			b.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
-				{
+				{ 	
 					JButton button = (JButton)e.getSource();
 					Color background= button.getBackground();
 					int number= Integer.parseInt(button.getText());
@@ -382,6 +382,8 @@ public class RezervacijaRadnik {
 						int minute= (Integer)d.getMinutes();
 					 RezervisanSto sto= new RezervisanSto();
 					 sto.showWindow(handler,number,button, panel_1,dateChooser,sati,minute,stolovi.get(number-1));
+					 sto.setParent(frame);	   
+						frame.setEnabled(false);
 					}
 					else if(background==Color.green)
 					{
@@ -391,7 +393,9 @@ public class RezervacijaRadnik {
 						
 					   NapraviRezervaciju r = new NapraviRezervaciju(handler, sati);
 					   r.showWindow(handler, number, button, panel_1, dateChooser, sati, minute,stolovi.get(number-1)); 
-						   
+					  
+						r.setParent(frame);	   
+						frame.setEnabled(false);
 					}
 					else if(background==Color.red)
 					{
@@ -401,9 +405,11 @@ public class RezervacijaRadnik {
 						
 						OkupiranSto sto = new OkupiranSto();
 						sto.showWindow(handler,number, button,panel_1,dateChooser,sati,minute,stolovi.get(number-1));
+						sto.setParent(frame);	   
+						frame.setEnabled(false);
 						
 					}
-							
+					
 				}
 				
 			});

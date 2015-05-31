@@ -106,7 +106,7 @@ public class DodavanjeKorisnika {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JLabel lblKorisnickoIme = new JLabel("Korisnicko ime:");
+		JLabel lblKorisnickoIme = new JLabel("Korisničko ime:");
 		lblKorisnickoIme.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblifra = new JLabel("Šifra:");
