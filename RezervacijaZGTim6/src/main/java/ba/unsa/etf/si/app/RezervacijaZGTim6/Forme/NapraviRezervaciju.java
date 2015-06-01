@@ -128,9 +128,10 @@ public class NapraviRezervaciju {
 		initialize();
 	}
 	
-	public NapraviRezervaciju(Restoran r, Integer hours) {
+	public NapraviRezervaciju(Restoran r, Integer hours, Integer minutes) {
 		handler = r;
 		this.hours = hours;
+		this.minutes = minutes;
 		initialize();
 	}
 
