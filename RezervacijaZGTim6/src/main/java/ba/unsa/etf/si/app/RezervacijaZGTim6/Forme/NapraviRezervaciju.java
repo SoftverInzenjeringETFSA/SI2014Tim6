@@ -48,6 +48,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 
@@ -87,7 +88,8 @@ public class NapraviRezervaciju {
     private JSpinner spinner;
     JScrollPane scrollPane=null;
     private JFrame parentFrame;
-    
+    private ArrayList<Rezervacija> rezervacije;
+    private int maxTrajanje;
     
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
     JLabel lblRezervacija = new JLabel("", alImg, SwingConstants.LEFT);
@@ -180,6 +182,32 @@ public class NapraviRezervaciju {
 		
 		JLabel lblKlijent = new JLabel("Klijent:");
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		/* MaxTrajanje  pocetak bloka*/
+		Time vrijeme = new Time(hours, minutes, 0);
+		Time time1=vrijeme;
+		Long ms = date.getDate().getTime();
+		java.sql.Date sqldate = new java.sql.Date(ms);
+		java.util.Date utilDate1 =new java.util.Date();
+		utilDate1.setYear(sqldate.getYear());
+		utilDate1.setMonth(sqldate.getMonth());
+		utilDate1.setHours(time1.getHours());
+		utilDate1.setMinutes(time1.getMinutes());
+	    utilDate1.setDate(sqldate.getDate());
+	    
+		try {
+			rezervacije = handler.ListaRezervacija(date.getDate(), hours, minutes);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		
+		try {
+			maxTrajanje = handler.MaxTrajanje(utilDate1, rezervacije, sto);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		
+		/* Kraj bloka za trazenje max trajanja rezervacije */
 		
 		JButton btnDodajRezervaciju = new JButton("Dodaj rezervaciju");
 		btnDodajRezervaciju.addActionListener(new ActionListener() {
@@ -275,7 +303,7 @@ public class NapraviRezervaciju {
 		if(hours >= 18)
 			maxVal = 23 - hours;
 		if(maxVal < 1) maxVal = 1;
-		SpinnerModel sm = new SpinnerNumberModel(1,1,maxVal,1);
+		SpinnerModel sm = new SpinnerNumberModel(1,1,maxTrajanje,1);
 		spinner = new JSpinner(sm);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
