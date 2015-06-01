@@ -159,6 +159,23 @@ public class Restoran
         }	
 		return uOpsegu;
 	}
+	
+	public static Integer MaxTrajanje(java.util.Date datum, ArrayList<Rezervacija> rezerv, Sto s) throws Exception
+	{
+		Integer max = 0;
+		
+		for (Iterator iterator1 = rezerv.iterator(); iterator1.hasNext();)
+        {
+           Rezervacija r = (Rezervacija)iterator1.next();
+           if(r.getIdStola() == s.getID())
+           {
+	           Integer temp = datum.getHours() + r.getDatumRezervacije().getHours(); 
+	           if(temp > max) max = temp;
+           }
+        }	
+		return max;
+	}
+
 
 	
 	public Integer getPristup()
