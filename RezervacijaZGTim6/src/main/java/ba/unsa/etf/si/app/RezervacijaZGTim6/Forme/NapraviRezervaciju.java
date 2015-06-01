@@ -128,11 +128,12 @@ public class NapraviRezervaciju {
 		initialize();
 	}
 	
-	public NapraviRezervaciju(Restoran r, Integer hours, Integer minutes, Sto sto) {
+	public NapraviRezervaciju(Restoran r, Integer hours, Integer minutes, Sto sto, JDateChooser date) {
 		handler = r;
 		this.hours = hours;
 		this.minutes = minutes;
 		this.sto=sto;
+		this.date =date;
 		initialize();
 	}
 
