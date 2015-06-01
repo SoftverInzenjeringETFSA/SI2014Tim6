@@ -209,11 +209,9 @@ public class NapraviRezervaciju {
 			e2.printStackTrace();
 		}
 		
-		try {
-			maxTrajanje = handler.MaxTrajanje(utilDateZaMax, rezervacije, sto);
-		} catch (Exception e2) {
-			e2.printStackTrace();
-		}
+		
+		maxTrajanje = handler.MaxTrajanje(utilDateZaMax, rezervacije, sto);
+		
 		
 		/* Kraj bloka za trazenje max trajanja rezervacije */
 		

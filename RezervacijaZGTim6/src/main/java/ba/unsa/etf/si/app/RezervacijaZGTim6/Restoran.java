@@ -160,7 +160,7 @@ public class Restoran
 		return uOpsegu;
 	}
 	
-	public static Integer MaxTrajanje(java.util.Date datum, ArrayList<Rezervacija> rezerv, Sto s) throws Exception
+	public static Integer MaxTrajanje(java.util.Date datum, ArrayList<Rezervacija> rezerv, Sto s) 
 	{
 		Integer max = 0;
 		
