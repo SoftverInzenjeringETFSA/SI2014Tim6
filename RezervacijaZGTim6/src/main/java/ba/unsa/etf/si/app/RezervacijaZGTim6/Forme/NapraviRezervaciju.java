@@ -204,12 +204,12 @@ public class NapraviRezervaciju {
 	    utilDateZaMax.setDate(sqldateZaMax.getDate());
 	    
 		try {
-			rezervacije = handler.ListaRezervacija(date.getDate(), hours, minutes);
+			rezervacije = Rezervacija.listaRezervacijaDatum(date.getDate());			System.out.println(rezervacije.size());
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
 		
-		
+		System.out.println(utilDateZaMax);
 		maxTrajanje = handler.MaxTrajanje(utilDateZaMax, rezervacije, sto);
 		
 		
@@ -305,10 +305,19 @@ public class NapraviRezervaciju {
 		JLabel lblTrajanje = new JLabel("Trajanje u satima (h): ");
 		lblTrajanje.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+		boolean is_false_init = false;
 		int maxVal = 5;
 		if(hours >= 18)
 			maxVal = 23 - hours;
 		if(maxVal < 1) maxVal = 1;
+		System.out.println(maxTrajanje);
+		if(maxTrajanje == 0)
+		{
+			lblRezervacija.setText("Nemoguca rezervacija!");
+			maxTrajanje = 1;
+			btnDodajRezervaciju.setEnabled(false);
+			is_false_init = true;
+		}
 		SpinnerModel sm = new SpinnerNumberModel(1,1,maxTrajanje,1);
 		spinner = new JSpinner(sm);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -333,7 +342,7 @@ public class NapraviRezervaciju {
 						.addComponent(lblTrajanje)
 						//.addComponent(pnlTrajanje, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDodajRezervaciju)
-						.addComponent(pnlRezervacija, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+						.addComponent(pnlRezervacija, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED))
 						.addComponent(reservationText, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
@@ -369,7 +378,7 @@ public class NapraviRezervaciju {
         lblRezervacija.setForeground(Color.RED);
         lblRezervacija.setFont(new Font("Tahoma", Font.PLAIN, 13));
         pnlRezervacija.add(lblRezervacija);
-        pnlRezervacija.setVisible(false);
+        pnlRezervacija.setVisible(is_false_init);
 		
 		//RAD SA TABELOM I PRETRAGA KORISNIKA
 		DefaultTableModel tableModel = new DefaultTableModel(new String[] {

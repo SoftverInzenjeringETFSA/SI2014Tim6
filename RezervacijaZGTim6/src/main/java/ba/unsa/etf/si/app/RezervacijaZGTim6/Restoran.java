@@ -169,10 +169,22 @@ public class Restoran
            Rezervacija r = (Rezervacija)iterator1.next();
            if(r.getIdStola() == s.getID())
            {
-	           Integer temp = datum.getHours() + r.getDatumRezervacije().getHours(); 
+        	   Integer dodatak = datum.getHours();
+        	   if(datum.getMinutes() > 0)  dodatak = dodatak + 1;
+	           Integer temp = r.getVrijemeRezervacije().getHours() - dodatak; 
 	           if(temp > max) max = temp;
+	           System.out.println("a" + max);
            }
-        }	
+        }
+		
+ 	   Integer dodatak = datum.getHours();
+ 	   if(datum.getMinutes() > 0)  dodatak = dodatak + 1;
+ 	   
+ 	   dodatak = 23 - dodatak; 
+		
+		if(max.equals(0)) max = 5;
+		if(max > dodatak) max = dodatak;
+		if(max < 0) max = 0;
 		return max;
 	}
 
