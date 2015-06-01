@@ -169,7 +169,13 @@ public class DodavanjeKorisnika {
 				try {
 					if(validna_forma) {
 						try {
-							handler.DodajKorisnika(ID, textField.getText(), textField_1.getText());
+							if(!handler.DodajKorisnika(ID, textField.getText(), textField_1.getText()))
+							{
+								lblIme.setText("Korisnicko ime je zauzeto!");
+								//lblIme.setVisible(true);
+								pnlIme.setVisible(true);
+								validna_forma = false;
+							}
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}

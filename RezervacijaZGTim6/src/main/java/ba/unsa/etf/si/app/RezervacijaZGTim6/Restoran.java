@@ -82,17 +82,17 @@ public class Restoran
 		radnici.add(r);
 	}
 	
-	public void DodajKorisnika(long idKorisnika, String username, String password)
+	public boolean DodajKorisnika(long idKorisnika, String username, String password) throws Exception
 	{
 		String hash = new String();
-		try {
-			hash = Password.getSaltedHash(password);
+		hash = Password.getSaltedHash(password);
+		if(Korisnik.provjeriKorisnka(username))
+		{
 			Korisnik k = new Korisnik(idKorisnika, username, hash, 2);
 			k.dodajKorisnika();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+			return true;
+		}
+		return false;
 	}
 	
 	public void obrisiRadnika(Radnik r) throws Exception

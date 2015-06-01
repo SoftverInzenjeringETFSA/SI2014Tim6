@@ -92,6 +92,21 @@ public class Korisnik implements Serializable
 		
 		session.close();
 	}
+	
+	public static boolean provjeriKorisnka(String user) throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM Korisnik K WHERE K.KorisnickoIme = :user";
+		Query query = session.createQuery(hql);
+		query.setParameter("user", user);
+		Korisnik temp = (Korisnik)query.uniqueResult();
+		
+		if(temp == null) return true;
+		session.close();
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return "Korisnik [ID=" + ID + ", IdRadnika=" + IdRadnika
