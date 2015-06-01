@@ -90,6 +90,11 @@ public class NapraviRezervaciju {
     private JFrame parentFrame;
     private ArrayList<Rezervacija> rezervacije;
     private int maxTrajanje;
+    private Time vrijemeZaMax;
+    private Time timeZaMax;
+    private java.sql.Date sqldateZaMax;
+    private java.util.Date utilDateZaMax;
+    private Long ms;
     
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
     JLabel lblRezervacija = new JLabel("", alImg, SwingConstants.LEFT);
@@ -184,16 +189,16 @@ public class NapraviRezervaciju {
 		lblKlijent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		/* MaxTrajanje  pocetak bloka*/
-		Time vrijeme = new Time(hours, minutes, 0);
-		Time time1=vrijeme;
-		Long ms = date.getDate().getTime();
-		java.sql.Date sqldate = new java.sql.Date(ms);
-		java.util.Date utilDate1 =new java.util.Date();
-		utilDate1.setYear(sqldate.getYear());
-		utilDate1.setMonth(sqldate.getMonth());
-		utilDate1.setHours(time1.getHours());
-		utilDate1.setMinutes(time1.getMinutes());
-	    utilDate1.setDate(sqldate.getDate());
+		vrijemeZaMax = new Time(hours, minutes, 0);
+		timeZaMax=vrijemeZaMax;
+		ms = date.getDate().getTime();
+		sqldateZaMax = new java.sql.Date(ms);
+		utilDateZaMax =new java.util.Date();
+		utilDateZaMax.setYear(sqldateZaMax.getYear());
+		utilDateZaMax.setMonth(sqldateZaMax.getMonth());
+		utilDateZaMax.setHours(timeZaMax.getHours());
+		utilDateZaMax.setMinutes(timeZaMax.getMinutes());
+	    utilDateZaMax.setDate(sqldateZaMax.getDate());
 	    
 		try {
 			rezervacije = handler.ListaRezervacija(date.getDate(), hours, minutes);
@@ -202,7 +207,7 @@ public class NapraviRezervaciju {
 		}
 		
 		try {
-			maxTrajanje = handler.MaxTrajanje(utilDate1, rezervacije, sto);
+			maxTrajanje = handler.MaxTrajanje(utilDateZaMax, rezervacije, sto);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
