@@ -98,6 +98,9 @@ public class Restoran
 	public void obrisiRadnika(Radnik r) throws Exception
 	{
 		r.obrisiRadnika();
+		Korisnik k = new Korisnik();
+		k.ocitajKorisnkaRadnik(r.ID);
+		k.obrisiKorisnika();
 		radnici.remove(r);
 	}
 	

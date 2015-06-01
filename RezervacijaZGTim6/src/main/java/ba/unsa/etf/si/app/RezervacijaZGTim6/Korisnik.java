@@ -72,6 +72,29 @@ public class Korisnik implements Serializable
 		session.close();
 	}
 	
+	public boolean ocitajKorisnkaRadnik(long id) throws Exception 
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM Korisnik K WHERE K.IdRadnika = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		Korisnik temp = (Korisnik)query.uniqueResult();
+		
+		if(temp != null)
+		{
+			ID = temp.ID;
+			IdRadnika = temp.IdRadnika;
+			KorisnickoIme = temp.KorisnickoIme;
+			HashSifre = temp.HashSifre;
+			StepenPristupa = temp.StepenPristupa;
+			return true;
+		}
+			
+		session.close();
+		return false;
+	}
+	
+	
 	public void ocitajKorisnka(String user) throws Exception 
 	{
 		
@@ -106,6 +129,17 @@ public class Korisnik implements Serializable
 		session.close();
 		return false;
 	}
+	
+	public void obrisiKorisnika() throws Exception 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		session.delete(this);
+		t.commit();
+		session.close();
+	}
+	
 	
 	@Override
 	public String toString() {
