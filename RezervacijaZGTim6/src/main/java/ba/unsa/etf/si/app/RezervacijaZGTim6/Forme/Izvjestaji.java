@@ -44,10 +44,12 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 
+import org.apache.log4j.Logger;
 import org.apache.tools.ant.types.selectors.modifiedselector.PropertiesfileCache;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.IzvjestajiPDF;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
+
 
 
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -58,7 +60,7 @@ import javax.swing.SwingConstants;
 
 
 public class Izvjestaji {
-
+	final static Logger logger = Logger.getLogger(Izvjestaji.class);
 	private JFrame frame;
 	private Restoran handler;
 	JList list_1 = new JList();
@@ -79,6 +81,7 @@ public class Izvjestaji {
 					Izvjestaji window = new Izvjestaji();
 					window.getIzvjestaji().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -333,6 +336,7 @@ public class Izvjestaji {
 	                p.NapraviIzvjestaj(d, dt, (Integer)(list_1.getSelectedIndex()+1));
 	                }catch(Exception e)
 	                {
+	                	logger.info(e.getMessage());
 	                	e.printStackTrace();
 	                }
 				}

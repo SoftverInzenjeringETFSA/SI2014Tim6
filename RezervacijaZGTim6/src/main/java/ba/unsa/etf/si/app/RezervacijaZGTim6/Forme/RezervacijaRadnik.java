@@ -60,11 +60,13 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JSpinner;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
 
 public class RezervacijaRadnik {
 
+	final static Logger logger = Logger.getLogger(RezervacijaRadnik.class);
 	private JFrame frame;
 	private JPanel panel_1;
 	private Restoran handler;
@@ -82,6 +84,7 @@ public class RezervacijaRadnik {
 					RezervacijaRadnik window = new RezervacijaRadnik();
 					window.getRezervacijaRadnik().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -262,6 +265,7 @@ public class RezervacijaRadnik {
 			
 		}catch(Exception e)
 		{
+		  logger.info(e.getMessage());
 		  System.out.println(e.getMessage());	
 		}
 		JLabel label1 = new JLabel("Obični stolovi");

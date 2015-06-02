@@ -19,7 +19,9 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 import java.awt.Font;
+
 import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -34,8 +36,11 @@ import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import org.apache.log4j.Logger;
+
 
 public class IzmjenaKlijentaSef {
+	final static Logger logger = Logger.getLogger(IzmjenaKlijentaSef.class);
 
 	private JFrame frame;
 	private JCheckBox VIPCheckBox;
@@ -66,6 +71,7 @@ public class IzmjenaKlijentaSef {
 					IzmjenaKlijentaSef window = new IzmjenaKlijentaSef();
 					window.getIzmjenaKlijentaSef().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -134,7 +140,7 @@ public class IzmjenaKlijentaSef {
 		try {
 			mfTel = new MaskFormatter("###/###-###");
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			logger.info(e1.getMessage());
 			e1.printStackTrace();
 		}
 	    mfTel.setPlaceholderCharacter('_');
@@ -217,6 +223,7 @@ public class IzmjenaKlijentaSef {
 									}
 								}
 							} catch (Exception e1) {
+								logger.info(e1.getMessage());
 								e1.printStackTrace();
 							}
 						}
@@ -228,6 +235,7 @@ public class IzmjenaKlijentaSef {
 						System.out.println("nisam dodo!");
 					}
 				} catch (Exception e1) {
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				

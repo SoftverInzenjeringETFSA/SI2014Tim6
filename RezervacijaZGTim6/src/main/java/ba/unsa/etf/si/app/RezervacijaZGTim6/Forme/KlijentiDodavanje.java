@@ -38,6 +38,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import org.apache.log4j.Logger;
+
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
@@ -48,7 +50,7 @@ public class KlijentiDodavanje {
     private JTextField textField_1;
     private Restoran handler;
     
-
+    final static Logger logger = Logger.getLogger(KlijentiDodavanje.class);
     ImageIcon alImg = new ImageIcon("Slike/alert.png");
     
     JLabel lblIme_Validacija = new JLabel("", alImg, SwingConstants.LEFT);
@@ -70,6 +72,7 @@ public class KlijentiDodavanje {
                     KlijentiDodavanje window = new KlijentiDodavanje();
                     window.getKlijentiDodavanje().setVisible(true);
                 } catch (Exception e) {
+                	logger.info(e.getMessage());
                     e.printStackTrace();
                 }
             }
@@ -110,7 +113,7 @@ public class KlijentiDodavanje {
         try {
             mfTel = new MaskFormatter("###/###-###");
         } catch (ParseException e1) {
-            // TODO Auto-generated catch block
+        	logger.info(e1.getMessage());
             e1.printStackTrace();
         }
         mfTel.setPlaceholderCharacter('_');
@@ -203,6 +206,7 @@ public class KlijentiDodavanje {
                         //handler.DodajGosta("Nesto", "Proba", "061/859-785");
                     }
                 } catch (Exception e1) {
+                	logger.info(e1.getMessage());
                     e1.printStackTrace();
                 }
                 

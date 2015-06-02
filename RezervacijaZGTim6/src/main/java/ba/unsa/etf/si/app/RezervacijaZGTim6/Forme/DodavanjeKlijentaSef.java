@@ -19,7 +19,9 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 import java.awt.Font;
+
 import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -34,6 +36,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import org.apache.log4j.Logger;
+
 
 public class DodavanjeKlijentaSef {
 
@@ -43,6 +47,8 @@ public class DodavanjeKlijentaSef {
 	private GroupLayout groupL;
 	private JFrame f2;
 	private JFrame parentFrame;
+	
+	final static Logger logger = Logger.getLogger(DodavanjeKlijentaSef.class);
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
@@ -65,6 +71,7 @@ public class DodavanjeKlijentaSef {
 					DodavanjeKlijentaSef window = new DodavanjeKlijentaSef();
 					window.getDodavanjeKlijentaSef().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -128,7 +135,7 @@ public class DodavanjeKlijentaSef {
 		try {
 			mfTel = new MaskFormatter("###/###-###");
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			logger.info(e1.getMessage());
 			e1.printStackTrace();
 		}
 	    mfTel.setPlaceholderCharacter('_');
@@ -196,6 +203,7 @@ public class DodavanjeKlijentaSef {
 						System.out.println("nisam dodo!");
 					}
 				} catch (Exception e1) {
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				

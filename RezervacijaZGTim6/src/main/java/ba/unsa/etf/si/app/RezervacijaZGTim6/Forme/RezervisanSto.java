@@ -24,6 +24,7 @@ import java.util.Iterator;
 
 import javax.swing.JButton;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -40,7 +41,8 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Rezervacija;
 
 public class RezervisanSto {
-
+	
+	final static Logger logger = Logger.getLogger(RezervisanSto.class);
 	private JFrame frame;
 	private JButton prikazStolovaButton;
 	private JPanel prikazStolovaPanel;
@@ -69,6 +71,7 @@ public class RezervisanSto {
 					RezervisanSto window = new RezervisanSto();
 					window.getRezervisanSto().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -214,7 +217,7 @@ public class RezervisanSto {
 			
 			
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			logger.info(e1.getMessage());
 			e1.printStackTrace();
 		}
 		
@@ -239,7 +242,7 @@ public class RezervisanSto {
 					prikazStolovaButton.repaint();
 					
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				
@@ -269,7 +272,7 @@ public class RezervisanSto {
 					prikazStolovaButton.repaint();
 					
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				
@@ -381,6 +384,7 @@ public class RezervisanSto {
 					initialize();
 					getRezervisanSto().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}

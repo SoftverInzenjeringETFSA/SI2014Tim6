@@ -28,14 +28,20 @@ import java.util.Iterator;
 import java.awt.Color;
 
 import javax.swing.JPanel;
+
 import java.awt.LayoutManager;
+
 import javax.swing.SwingConstants;
+
+import org.apache.log4j.Logger;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 
 public class LoginScreen {
-
+	
+	final static Logger logger = Logger.getLogger(LoginScreen.class);
 	private JFrame frmPrijavaKorisnika;
 	private JPasswordField txtPassword;
 	private JTextField txtUsername;
@@ -58,6 +64,7 @@ public class LoginScreen {
 					LoginScreen window = new LoginScreen();
 					window.getFrmPrijavaKorisnika().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -136,7 +143,7 @@ public class LoginScreen {
 					dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), passString);
 					
 				 } catch (Exception e) {
-
+					 logger.info(e.getMessage());
 					 e.printStackTrace();
 				 }
 				 
@@ -216,7 +223,7 @@ public class LoginScreen {
 						dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), passString);
 						
 					 } catch (Exception e) {
-
+						 logger.info(e.getMessage());
 						 e.printStackTrace();
 					 }
 					 
@@ -297,7 +304,7 @@ public class LoginScreen {
 						dobri_podaci = handler.PrijavaKorisnika(txtUsername.getText(), passString);
 						
 					 } catch (Exception e) {
-
+						 logger.info(e.getMessage());
 						 e.printStackTrace();
 					 }
 					 

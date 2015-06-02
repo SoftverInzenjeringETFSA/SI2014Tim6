@@ -38,6 +38,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import org.apache.log4j.Logger;
+
 import com.toedter.calendar.JDateChooser;
 
 
@@ -48,6 +50,8 @@ public class DodavanjeKlijentaRadnik {
 	private JTextField textField_1;
 	private JFrame f2;
 	private JFrame parentFrame;
+	
+	final static Logger logger = Logger.getLogger(DodavanjeKlijentaRadnik.class);
 	
 	ImageIcon alImg = new ImageIcon("Slike/alert.png");
 	
@@ -80,6 +84,7 @@ public class DodavanjeKlijentaRadnik {
 					window.getDodavanjeKlijentaRadnik().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.info(e.getMessage());
 				}
 			}
 		});
@@ -172,7 +177,7 @@ public class DodavanjeKlijentaRadnik {
 		try {
 			mfTel = new MaskFormatter("###/###-###");
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			logger.info(e1.getMessage());
 			e1.printStackTrace();
 		}
 	    mfTel.setPlaceholderCharacter('_');
@@ -259,6 +264,7 @@ public class DodavanjeKlijentaRadnik {
 									}
 								}
 							} catch (Exception e1) {
+								logger.info(e1.getMessage());
 								e1.printStackTrace();
 							}
 						}
@@ -287,6 +293,7 @@ public class DodavanjeKlijentaRadnik {
 						System.out.println("nisam dodo!");
 					}
 				} catch (Exception e1) {
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				

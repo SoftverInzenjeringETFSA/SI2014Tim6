@@ -40,6 +40,8 @@ import java.util.Iterator;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
+import org.apache.log4j.Logger;
+
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Radnik;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
@@ -47,6 +49,7 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 public class Radnici {
 
+	final static Logger logger = Logger.getLogger(Radnici.class);
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
@@ -64,6 +67,7 @@ public class Radnici {
 					Radnici window = new Radnici();
 					window.getRadnici().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -182,6 +186,7 @@ public class Radnici {
 				} 
 				catch (Exception e1) 
 				{
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 			}
@@ -240,7 +245,7 @@ public class Radnici {
 							handler.obrisiRadnika(r);
 							((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
+							logger.info(e1.getMessage());
 							e1.printStackTrace();
 						}
 					}

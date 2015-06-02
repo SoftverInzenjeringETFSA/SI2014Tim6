@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,6 +22,8 @@ public class Radnik implements Serializable
 	String JMBG;
 	String NazivPosla, OpisPosla;
 	long Nadredjeni;
+	
+	final static Logger logger = Logger.getLogger(Radnik.class);
 	
 	//Konstruktori
 	public Radnik() {}
@@ -143,6 +146,7 @@ public class Radnik implements Serializable
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
+	         logger.info(e.getMessage());
 	         e.printStackTrace(); 
 	      }finally {
 	         session.close(); 

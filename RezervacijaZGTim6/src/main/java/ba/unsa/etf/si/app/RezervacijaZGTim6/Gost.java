@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,6 +19,8 @@ public class Gost implements Serializable
 	String Ime, Prezime;
 	String BrojTelefona;
 	Boolean VIP;
+	
+	final static Logger logger = Logger.getLogger(Gost.class);
 	
 	//Konstruktor bez parametara potreban zbog Serializable
 	public Gost() {}
@@ -77,6 +80,7 @@ public class Gost implements Serializable
 		}
 		catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
+	         logger.info(e.getMessage());
 	         e.printStackTrace(); 
 	    }
 		finally 
@@ -113,6 +117,7 @@ public class Gost implements Serializable
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
+	         logger.info(e.getMessage());
 	         e.printStackTrace(); 
 	      }finally {
 	         session.close(); 

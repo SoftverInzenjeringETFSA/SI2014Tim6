@@ -66,10 +66,13 @@ import com.toedter.components.JSpinField;
 import javax.swing.JSpinner;
 import javax.swing.JFormattedTextField;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
 
 public class NapraviRezervaciju {
+	
+	final static Logger logger = Logger.getLogger(NapraviRezervaciju.class);
 
 	private JFrame frame;
 	private JTextField textField;
@@ -110,6 +113,7 @@ public class NapraviRezervaciju {
 					NapraviRezervaciju window = new NapraviRezervaciju();
 					window.getNapraviRezervaciju().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -206,6 +210,7 @@ public class NapraviRezervaciju {
 		try {
 			rezervacije = Rezervacija.listaRezervacijaDatum(date.getDate());			System.out.println(rezervacije.size());
 		} catch (Exception e2) {
+			logger.info(e2.getMessage());
 			e2.printStackTrace();
 		}
 		
@@ -283,8 +288,10 @@ public class NapraviRezervaciju {
 						}
 
 					} catch (NumberFormatException e1) {
+						logger.info(e1.getMessage());
 						e1.printStackTrace();
 					} catch (Exception e1) {
+						logger.info(e1.getMessage());
 						e1.printStackTrace();
 
 					}
@@ -530,6 +537,7 @@ public class NapraviRezervaciju {
 					initialize();
 					getNapraviRezervaciju().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -545,6 +553,7 @@ public class NapraviRezervaciju {
 					initialize();
 					getNapraviRezervaciju().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}

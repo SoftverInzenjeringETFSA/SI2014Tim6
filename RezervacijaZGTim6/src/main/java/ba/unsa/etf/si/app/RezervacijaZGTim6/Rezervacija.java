@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,6 +26,8 @@ public class Rezervacija implements Serializable
 	Date DatumRezervacije;
 	Time VrijemeRezervacije;
 	Integer TrajanjeRezervacijeMinute;
+	
+	final static Logger logger = Logger.getLogger(Rezervacija.class);
 	
 	//Konstruktori
 	public Rezervacija() {}
@@ -141,6 +144,7 @@ public class Rezervacija implements Serializable
 		}
 		catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
+	         logger.info(e.getMessage());
 	         e.printStackTrace(); 
 	      }finally {
 	         session.close(); 

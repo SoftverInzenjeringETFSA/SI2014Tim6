@@ -33,10 +33,12 @@ import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JPasswordField;
 
+import org.apache.log4j.Logger;
+
 
 public class DodavanjeKorisnika {
 
-
+	final static Logger logger = Logger.getLogger(DodavanjeKorisnika.class);
 	private JFrame frame;
 	private JTextField textField;
 	
@@ -62,6 +64,7 @@ public class DodavanjeKorisnika {
 					DodavanjeKorisnika window = new DodavanjeKorisnika();
 					window.getDodavanjeKorisnika().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -116,7 +119,7 @@ public class DodavanjeKorisnika {
 		try {
 			mfTel = new MaskFormatter("###/###-###");
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			logger.info(e1.getMessage());
 			e1.printStackTrace();
 		}
 	    mfTel.setPlaceholderCharacter('_');
@@ -177,6 +180,7 @@ public class DodavanjeKorisnika {
 								validna_forma = false;
 							}
 						} catch (Exception e1) {
+							logger.info(e1.getMessage());
 							e1.printStackTrace();
 						}
 						
@@ -185,6 +189,7 @@ public class DodavanjeKorisnika {
 						System.out.println("nisam dodo!");
 					}
 				} catch (Exception e1) {
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				

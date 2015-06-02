@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,6 +19,8 @@ public class Sto implements Serializable
 	Integer Kapacitet;
 	String OpisMjesta;
 	Boolean ZaPusace, VIP;
+	
+	final static Logger logger = Logger.getLogger(Sto.class);
 	
 	//Konstruktori
 	public Sto() {}
@@ -92,6 +95,7 @@ public class Sto implements Serializable
          tx.commit();
       }catch (HibernateException e) {
          if (tx!=null) tx.rollback();
+         logger.info(e.getMessage());
          e.printStackTrace(); 
       }finally {
          session.close(); 

@@ -40,11 +40,14 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import org.apache.log4j.Logger;
+
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
 public class Klijenti {
+	final static Logger logger = Logger.getLogger(Klijenti.class);
 
 	private JFrame frame;
 	private JTextField textField;
@@ -64,6 +67,7 @@ public class Klijenti {
 					Klijenti window = new Klijenti();
 					window.getKlijenti().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -199,6 +203,7 @@ public class Klijenti {
 							g.ocitajGosta(idGosta);
 						}
 						catch (Exception e1) {
+							logger.info(e1.getMessage());
 							e1.printStackTrace();
 						}
 						i = new IzmjenaKlijentaSef(g, handler, frame);

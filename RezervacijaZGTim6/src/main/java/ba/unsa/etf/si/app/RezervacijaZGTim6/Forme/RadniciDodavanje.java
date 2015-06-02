@@ -37,11 +37,14 @@ import java.util.List;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
+import org.apache.log4j.Logger;
+
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
 public class RadniciDodavanje {
-
+	
+	final static Logger logger = Logger.getLogger(RadniciDodavanje.class);
 	private JFrame frame;
 	private JFrame f2;
 	private JTextField textField;
@@ -77,6 +80,7 @@ public class RadniciDodavanje {
 					RadniciDodavanje window = new RadniciDodavanje();
 					window.getRadniciDodavanje().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -240,6 +244,7 @@ public class RadniciDodavanje {
 					}
 					
 				} catch (Exception f) {
+					logger.info(f.getMessage());
 					f.printStackTrace();
 				}
 				

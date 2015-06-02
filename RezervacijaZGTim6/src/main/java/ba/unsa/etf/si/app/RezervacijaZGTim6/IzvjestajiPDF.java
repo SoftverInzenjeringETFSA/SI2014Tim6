@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
+import org.apache.log4j.Logger;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -25,16 +27,18 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class IzvjestajiPDF {
 	
+	final static Logger logger = Logger.getLogger(IzvjestajiPDF.class);
+	
 	public static void main(String[] args)
 	{
 		IzvjestajiPDF i = new IzvjestajiPDF();
 		try {
 			i.NapraviIzvjestaj(new Date(), new Date(), 3);
 		} catch (JRException e) {
-			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
 			e.printStackTrace();
 		}
 	}

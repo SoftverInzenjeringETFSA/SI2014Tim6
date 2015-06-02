@@ -42,6 +42,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Gost;
@@ -50,6 +51,7 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 public class PregledKlijenataRadnik {
 
+	final static Logger logger = Logger.getLogger(PregledKlijenataRadnik.class);
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
@@ -74,6 +76,7 @@ public class PregledKlijenataRadnik {
 					PregledKlijenataRadnik window = new PregledKlijenataRadnik();
 					window.getPregledKlijenataRadnik().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -203,6 +206,7 @@ public class PregledKlijenataRadnik {
 							g.ocitajGosta(idGosta);
 						}
 						catch (Exception e1) {
+							logger.info(e1.getMessage());
 							e1.printStackTrace();
 						}
 						k = new DodavanjeKlijentaRadnik(g, handler, frame);
@@ -327,6 +331,7 @@ public class PregledKlijenataRadnik {
 					initialize();
 					getPregledKlijenataRadnik().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}

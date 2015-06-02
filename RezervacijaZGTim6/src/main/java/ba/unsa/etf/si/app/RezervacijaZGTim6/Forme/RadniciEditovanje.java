@@ -37,12 +37,15 @@ import java.util.Iterator;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 
+import org.apache.log4j.Logger;
+
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Radnik;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
 
 
 public class RadniciEditovanje {
-
+	
+	final static Logger logger = Logger.getLogger(RadniciEditovanje.class);
 	private JFrame frame;
 	private JFrame f2;
 	private JTextField textField;
@@ -78,6 +81,7 @@ public class RadniciEditovanje {
 					RadniciEditovanje window = new RadniciEditovanje();
 					window.getRadniciEditovanje().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -256,6 +260,7 @@ public class RadniciEditovanje {
 					}
 					
 				} catch (Exception f) {
+					logger.info(f.getMessage());
 					f.printStackTrace();
 				}
 				

@@ -23,6 +23,7 @@ import java.util.Iterator;
 
 import javax.swing.JButton;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
@@ -37,7 +38,8 @@ import ba.unsa.etf.si.app.RezervacijaZGTim6.Sto;
 
 
 public class OkupiranSto{
-
+	
+	final static Logger logger = Logger.getLogger(OkupiranSto.class);
 	private JFrame frame;
 	private JButton prikazStolovaButton;
 	private JPanel prikazStolovaPanel;
@@ -65,6 +67,7 @@ public class OkupiranSto{
 					OkupiranSto window = new OkupiranSto();
 					window.getOkupiranSto().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -201,7 +204,7 @@ try {
 			
 			
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			logger.info(e1.getMessage());
 			e1.printStackTrace();
 		}
 		
@@ -223,7 +226,7 @@ try {
 					prikazStolovaButton.repaint();
 						
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					logger.info(e1.getMessage());
 					e1.printStackTrace();
 				}
 				
@@ -321,6 +324,7 @@ try {
 					initialize();
 					getOkupiranSto().setVisible(true);
 				} catch (Exception e) {
+					logger.info(e.getMessage());
 					e.printStackTrace();
 				}
 			}
