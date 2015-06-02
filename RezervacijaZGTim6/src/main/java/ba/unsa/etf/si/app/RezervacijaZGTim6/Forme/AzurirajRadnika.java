@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import org.apache.log4j.Logger;
 
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Radnik;
 import ba.unsa.etf.si.app.RezervacijaZGTim6.Restoran;
@@ -18,6 +19,8 @@ import javax.swing.JScrollPane;
 
 
 public class AzurirajRadnika {
+	
+	final static Logger logger = Logger.getLogger(AzurirajRadnika.class);
 
 	private JFrame frame;
 	public JFrame getFrame() {
@@ -46,6 +49,7 @@ public class AzurirajRadnika {
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.info(e.getMessage());
 				}
 			}
 		});
@@ -143,6 +147,7 @@ public class AzurirajRadnika {
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					logger.info(e1.getMessage());
 				}
 				frame.dispose();
 			}
