@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 25, 2015 at 11:53 AM
+-- Generation Time: Jun 02, 2015 at 09:53 PM
 -- Server version: 5.6.24-0ubuntu2
 -- PHP Version: 5.6.4-4ubuntu6
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   `KORISNICKOIME` varchar(255) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `HASHSIFRE` varchar(255) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `STEPENPRISTUPA` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 --
 -- Dumping data for table `korisnik`
@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 
 INSERT INTO `korisnik` (`ID`, `IDRADNIKA`, `KORISNICKOIME`, `HASHSIFRE`, `STEPENPRISTUPA`) VALUES
 (1, 1, 'sefic', 'cnsjKC3fY1fmt0ObspDsc1vTav8TxbLHTLQANU7ymC4=$Tz2BAB6c44V1RZ7P1LjheLMHJmqDby2TX9CG4rmqNzI=\r\n', 1),
-(3, 1, 'imenko', 'cnsjKC3fY1fmt0ObspDsc1vTav8TxbLHTLQANU7ymC4=$Tz2BAB6c44V1RZ7P1LjheLMHJmqDby2TX9CG4rmqNzI=', 2),
 (4, 2, 'radnik', 'i5qicQwA4Rp/kCZ07GVyagNFyj8HxJvYlgv+6mViVDc=\r\n$3oM3GSnEw7o4TuaV7EIwODqZVuiSYfzxCS6guIA+HR0=\r\n', 2);
 
 -- --------------------------------------------------------
@@ -95,7 +94,6 @@ CREATE TABLE IF NOT EXISTS `radnik` (
 --
 
 INSERT INTO `radnik` (`ID`, `IME`, `PREZIME`, `DATUMZAPOSLENJA`, `JMBG`, `NAZIVPOSLA`, `OPISPOSLA`, `NADREDJENI`) VALUES
-(1, 'Imenko', 'Prezimenko', '2015-05-25', '1901994172183', 'Rezervacije', 'Vrsenje rezervacija', 1),
 (2, 'Radnik', 'Radisa', '2015-05-25', '1901994172184', 'Rezervacije', 'Vrsenje rezervacija', 1);
 
 -- --------------------------------------------------------
@@ -268,7 +266,7 @@ MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `korisnik`
 --
 ALTER TABLE `korisnik`
-MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `logkorisnik`
 --

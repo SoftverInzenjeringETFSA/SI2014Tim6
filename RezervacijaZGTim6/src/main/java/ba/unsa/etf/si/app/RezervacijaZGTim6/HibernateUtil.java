@@ -1,5 +1,8 @@
 package ba.unsa.etf.si.app.RezervacijaZGTim6;
 
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -13,8 +16,11 @@ public class HibernateUtil {
 	static {
 
 		try {
+			java.util.Properties properties = new Properties();
+			properties.load(new FileInputStream("db.properties"));
+			
 		    Configuration configuration = new Configuration();
-		    configuration.configure();
+		    configuration.configure().addProperties(properties);
 		    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 		            configuration.getProperties()).build();
 		    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
